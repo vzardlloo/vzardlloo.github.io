@@ -87,34 +87,49 @@
 
 
 
-<meta name="description" content="今天接到做一个移动端应用的任务，这是我之前没有接触过的，不过这种情况也不是第一次了，所以心态还是比较淡定。关于这个移动端应用开始能够想到的解决方案有3种：
+<meta name="description" content="这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。  首先我们要明确几个最近的概念：
 
-采用原生APP的制作方式
-采用H5App来快速开发
-开发微信小程序
+数据库：保持表和其他相关SQL结构的容器。
+表：数据库中包含数据的结构，由行和列组成。
+列：存储表中的一块数据。
+行：一组能够描述某个事物的列的集合。
+下面是基本语法：
 
-然后逐一对三种方案进行分析，原生APP性能方面应该更优，但是开发成本难度应该更大，开发周期也更长。H5App性能方面应该略差一点，但开发难度应该更低，开发时间也更短。微信小">
+
+
+显示数据库：SHOW DATABASES;
+指明使用某个数据库：USE">
 <meta property="og:type" content="article">
-<meta property="og:title" content="新的任务">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/03/15/新的任务/index.html">
+<meta property="og:title" content="SQL入门（一）">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/index.html">
 <meta property="og:site_name" content="我要我的自定义">
-<meta property="og:description" content="今天接到做一个移动端应用的任务，这是我之前没有接触过的，不过这种情况也不是第一次了，所以心态还是比较淡定。关于这个移动端应用开始能够想到的解决方案有3种：
+<meta property="og:description" content="这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。  首先我们要明确几个最近的概念：
 
-采用原生APP的制作方式
-采用H5App来快速开发
-开发微信小程序
+数据库：保持表和其他相关SQL结构的容器。
+表：数据库中包含数据的结构，由行和列组成。
+列：存储表中的一块数据。
+行：一组能够描述某个事物的列的集合。
+下面是基本语法：
 
-然后逐一对三种方案进行分析，原生APP性能方面应该更优，但是开发成本难度应该更大，开发周期也更长。H5App性能方面应该略差一点，但开发难度应该更低，开发时间也更短。微信小">
-<meta property="og:updated_time" content="2017-03-15T14:41:24.681Z">
+
+
+显示数据库：SHOW DATABASES;
+指明使用某个数据库：USE">
+<meta property="og:updated_time" content="2017-03-20T14:53:30.311Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="新的任务">
-<meta name="twitter:description" content="今天接到做一个移动端应用的任务，这是我之前没有接触过的，不过这种情况也不是第一次了，所以心态还是比较淡定。关于这个移动端应用开始能够想到的解决方案有3种：
+<meta name="twitter:title" content="SQL入门（一）">
+<meta name="twitter:description" content="这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。  首先我们要明确几个最近的概念：
 
-采用原生APP的制作方式
-采用H5App来快速开发
-开发微信小程序
+数据库：保持表和其他相关SQL结构的容器。
+表：数据库中包含数据的结构，由行和列组成。
+列：存储表中的一块数据。
+行：一组能够描述某个事物的列的集合。
+下面是基本语法：
 
-然后逐一对三种方案进行分析，原生APP性能方面应该更优，但是开发成本难度应该更大，开发周期也更长。H5App性能方面应该略差一点，但开发难度应该更低，开发时间也更短。微信小">
+
+
+显示数据库：SHOW DATABASES;
+指明使用某个数据库：USE">
 
 
 
@@ -142,14 +157,14 @@
 
 
 
-  <link rel="canonical" href="http://vzardlloo.github.io/2017/03/15/新的任务/"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/"/>
 
 
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
-  <title> 新的任务 | 我要我的自定义 </title>
+  <title> SQL入门（一） | 我要我的自定义 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -309,7 +324,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/03/15/新的任务/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -330,7 +345,7 @@
             
             
               
-                新的任务
+                SQL入门（一）
               
             
           </h1>
@@ -345,8 +360,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-15T22:21:39+08:00">
-                2017-03-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T22:33:27+08:00">
+                2017-03-20
               </time>
             
 
@@ -368,8 +383,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/SQL/" itemprop="url" rel="index">
+                    <span itemprop="name">SQL</span>
                   </a>
                 </span>
 
@@ -386,8 +401,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/15/新的任务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/15/新的任务/" itemprop="commentCount"></span>
+                <a href="/2017/03/20/SQL入门（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/20/SQL入门（一）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -418,13 +433,24 @@
       
 
       
-        <p>今天接到做一个移动端应用的任务，这是我之前没有接触过的，不过这种情况也不是第一次了，所以心态还是比较淡定。关于这个移动端应用开始能够想到的解决方案有3种：</p>
+        <p>  这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。<br>  首先我们要明确几个最近的概念：</p>
 <ul>
-<li>采用原生APP的制作方式</li>
-<li>采用H5App来快速开发</li>
-<li>开发微信小程序</li>
+<li>数据库：保持表和其他相关SQL结构的容器。</li>
+<li>表：数据库中包含数据的结构，由行和列组成。</li>
+<li>列：存储表中的一块数据。</li>
+<li><p>行：一组能够描述某个事物的列的集合。</p>
+<p>下面是基本语法：</p>
+</li>
 </ul>
-<p>然后逐一对三种方案进行分析，原生APP性能方面应该更优，但是开发成本难度应该更大，开发周期也更长。H5App性能方面应该略差一点，但开发难度应该更低，开发时间也更短。微信小程序需要通过企业认证才可以进行开发，暂时不了解。考虑到该项目对性能要求不高，所以排除采用原生APP的方案，对于H5开发暂时决定采用APICloud进行开发，下面开始着手学习相关文档。微信小程序先尝试解决企业认证问题，不过感觉坑略多。<br>加油！</p>
+<ol>
+<li>显示数据库：<code>SHOW DATABASES;</code></li>
+<li>指明使用某个数据库：<code>USE database_name;</code></li>
+<li>显示数据库中的表：<code>SHOW TABLES;</code></li>
+<li>创建一个数据库：<code>CREATE DATABASE database_name;</code></li>
+<li>创建一个数据表：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABALE table_name(</div><div class="line">        [column_name_1]  datatype_1,</div><div class="line">        [column_name_2]  datatype_2,</div><div class="line">        ...</div><div class="line">        [column_name_n]  datatype_n</div><div class="line">    );</div></pre></td></tr></table></figure>
+</code></pre></li>
+</ol>
+<p>  下一篇介绍数据库的基本数据类型和基本的增删改查。</p>
 
       
     </div>
@@ -455,8 +481,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/13/windows向linux服务器传送文件的一种解决方案/" rel="next" title="windows向linux服务器传送文件的一种解决方案">
-                <i class="fa fa-chevron-left"></i> windows向linux服务器传送文件的一种解决方案
+              <a href="/2017/03/15/新的任务/" rel="next" title="新的任务">
+                <i class="fa fa-chevron-left"></i> 新的任务
               </a>
             
           </div>
@@ -464,10 +490,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/20/SQL入门（一）/" rel="prev" title="SQL入门（一）">
-                SQL入门（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -493,8 +515,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/15/新的任务/"
-           data-title="新的任务" data-url="http://vzardlloo.github.io/2017/03/15/新的任务/">
+      <div class="ds-thread" data-thread-key="2017/03/20/SQL入门（一）/"
+           data-title="SQL入门（一）" data-url="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/">
       </div>
     
   </div>
