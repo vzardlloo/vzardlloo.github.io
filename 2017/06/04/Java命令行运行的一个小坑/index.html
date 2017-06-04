@@ -87,49 +87,28 @@
 
 
 
-<meta name="description" content="这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。  首先我们要明确几个最近的概念：
+<meta name="description" content="当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:
 
-数据库：保持表和其他相关SQL结构的容器。
-表：数据库中包含数据的结构，由行和列组成。
-列：存储表中的一块数据。
-行：一组能够描述某个事物的列的集合。
-下面是基本语法：
-
-
-
-显示数据库：SHOW DATABASES;
-指明使用某个数据库：USE">
+JAVA_HOME—&amp;gt;JDK安装根目录
+PATH增加%JAVA_HOME%\bin
+CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有这样的程序：1234567891011">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL入门（一）">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/index.html">
+<meta property="og:title" content="Java命令行运行的一个小坑">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/index.html">
 <meta property="og:site_name" content="我要我的自定义">
-<meta property="og:description" content="这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。  首先我们要明确几个最近的概念：
+<meta property="og:description" content="当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:
 
-数据库：保持表和其他相关SQL结构的容器。
-表：数据库中包含数据的结构，由行和列组成。
-列：存储表中的一块数据。
-行：一组能够描述某个事物的列的集合。
-下面是基本语法：
-
-
-
-显示数据库：SHOW DATABASES;
-指明使用某个数据库：USE">
-<meta property="og:updated_time" content="2017-03-20T14:53:30.311Z">
+JAVA_HOME—&amp;gt;JDK安装根目录
+PATH增加%JAVA_HOME%\bin
+CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有这样的程序：1234567891011">
+<meta property="og:updated_time" content="2017-06-04T09:58:13.899Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SQL入门（一）">
-<meta name="twitter:description" content="这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。  首先我们要明确几个最近的概念：
+<meta name="twitter:title" content="Java命令行运行的一个小坑">
+<meta name="twitter:description" content="当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:
 
-数据库：保持表和其他相关SQL结构的容器。
-表：数据库中包含数据的结构，由行和列组成。
-列：存储表中的一块数据。
-行：一组能够描述某个事物的列的集合。
-下面是基本语法：
-
-
-
-显示数据库：SHOW DATABASES;
-指明使用某个数据库：USE">
+JAVA_HOME—&amp;gt;JDK安装根目录
+PATH增加%JAVA_HOME%\bin
+CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有这样的程序：1234567891011">
 
 
 
@@ -157,14 +136,14 @@
 
 
 
-  <link rel="canonical" href="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/"/>
 
 
 
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
-  <title> SQL入门（一） | 我要我的自定义 </title>
+  <title> Java命令行运行的一个小坑 | 我要我的自定义 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -304,7 +283,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -325,7 +304,7 @@
             
             
               
-                SQL入门（一）
+                Java命令行运行的一个小坑
               
             
           </h1>
@@ -340,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T22:33:27+08:00">
-                2017-03-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T16:57:38+08:00">
+                2017-06-04
               </time>
             
 
@@ -363,8 +342,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL/" itemprop="url" rel="index">
-                    <span itemprop="name">SQL</span>
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
                   </a>
                 </span>
 
@@ -381,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/20/SQL入门（一）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/20/SQL入门（一）/" itemprop="commentCount"></span>
+                <a href="/2017/06/04/Java命令行运行的一个小坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/04/Java命令行运行的一个小坑/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -413,24 +392,19 @@
       
 
       
-        <p>  这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。<br>  首先我们要明确几个最近的概念：</p>
+        <p>当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:</p>
 <ul>
-<li>数据库：保持表和其他相关SQL结构的容器。</li>
-<li>表：数据库中包含数据的结构，由行和列组成。</li>
-<li>列：存储表中的一块数据。</li>
-<li><p>行：一组能够描述某个事物的列的集合。</p>
-<p>下面是基本语法：</p>
+<li>JAVA_HOME—&gt;JDK安装根目录</li>
+<li>PATH增加%JAVA_HOME%\bin</li>
+<li>CLASS_PATH—&gt;%JAVA_HOME%\lib<br>但是这样是有问题的，比如你有这样的程序：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">package org.net;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by V-zar on 2017/5/22.</div><div class="line"> */</div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line"></div><div class="line">        System.out.print(&quot;HelloWorld&quot;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<ol>
-<li>显示数据库：<code>SHOW DATABASES;</code></li>
-<li>指明使用某个数据库：<code>USE database_name;</code></li>
-<li>显示数据库中的表：<code>SHOW TABLES;</code></li>
-<li>创建一个数据库：<code>CREATE DATABASE database_name;</code></li>
-<li>创建一个数据表：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABALE table_name(</div><div class="line">        [column_name_1]  datatype_1,</div><div class="line">        [column_name_2]  datatype_2,</div><div class="line">        ...</div><div class="line">        [column_name_n]  datatype_n</div><div class="line">    );</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ol>
-<p>  下一篇介绍数据库的基本数据类型和基本的增删改查。</p>
+<p>当你在某个目录编译<code>javac Test.java</code>后，试图用java命令<code>java Test</code>运行的时候,会发现报错<code>找不到或无法加载主类</code>。这是因为按照很多资料那样来配置的时候CLASS_PATH是错误的，解决的办法有两个：</p>
+<ul>
+<li>运行时加入参数<code>java -cp . Test</code> (运行时指定classpath为当前路径)。</li>
+<li>在环境变量CLASS_PATH中加入<code>.</code>,表示当前路径，Java解释器将在当前路径搜索class<br>文件，如果CLASS_PATH中有多个路径值，建议将<code>.</code>置顶。（一劳永逸的方法）。</li>
+</ul>
+<p>另外，如果你是用Eclipse或者IDEA编辑程序的话，一般会在程序开头加入包的信息，如<br><code>package org.net;</code>,这同样会导致错误，所以如果是用Eclipse或者IDEA编辑程序并且试图在命令行运行程序的话，最好检查一下程序开头有没有包的信息，有的话需要删掉:-).</p>
 
       
     </div>
@@ -461,8 +435,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/15/新的任务/" rel="next" title="新的任务">
-                <i class="fa fa-chevron-left"></i> 新的任务
+              <a href="/2017/05/15/Java类加载器小结/" rel="next" title="Java类加载器小结">
+                <i class="fa fa-chevron-left"></i> Java类加载器小结
               </a>
             
           </div>
@@ -470,10 +444,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/22/SQl学习（二）/" rel="prev" title="SQl学习（二）">
-                SQl学习（二） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -499,8 +469,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/20/SQL入门（一）/"
-           data-title="SQL入门（一）" data-url="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/">
+      <div class="ds-thread" data-thread-key="2017/06/04/Java命令行运行的一个小坑/"
+           data-title="Java命令行运行的一个小坑" data-url="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/">
       </div>
     
   </div>
