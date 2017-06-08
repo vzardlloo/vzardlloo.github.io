@@ -13,6 +13,12 @@
 
 
 
+
+
+
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
@@ -68,7 +74,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -80,7 +86,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -134,7 +140,7 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
 <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
 </script>
-  <title> Java知识点整理（一） | 我要我的自定义 </title>
+  <title>Java知识点整理（一） | 我要我的自定义</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,12 +160,13 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
 
 
+
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -206,7 +213,7 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
       
         
         <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+          <a href="/categories/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -215,22 +222,22 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
         </li>
       
         
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
           </a>
         </li>
       
@@ -291,14 +298,7 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Java知识点整理（一）
-              
-            
-          </h1>
+          <h1 class="post-title" itemprop="name headline">Java知识点整理（一）</h1>
         
 
         <div class="post-meta">
@@ -376,7 +376,6 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
       </header>
     
 
-
     <div class="post-body" itemprop="articleBody">
 
       
@@ -405,12 +404,18 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
       
     </div>
 
+    <div>
+      
+        
+
+      
+    </div>
 
     <footer class="post-footer">
       
 
       
-        
+      
       
 
       
@@ -447,7 +452,7 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
     </div>
   </div>
 
-          
+
           </div>
           
 
@@ -495,7 +500,7 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives">
+              <a href="/archives/">
                 <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">日志</span>
               </a>
@@ -583,21 +588,25 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
 
         
-
 <div class="busuanzi-count">
-
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
   
 
   
-    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
-  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
   
 </div>
-
 
 
         
@@ -610,7 +619,7 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
         
       </div>
     
-    
+
   </div>
 
   
@@ -630,6 +639,14 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
 
   
+
+
+
+
+
+
+
+
 
 
 
@@ -656,32 +673,32 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
 
 
 
@@ -723,10 +740,29 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
 
 
-  
-  
 
   
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt3j71i0';
+      var conf = '1a63751a48441be5eec38e447367bf66';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
 
   
 
@@ -749,6 +785,9 @@ HttpServlet是GenericServlet的子类。GenericServlet是个抽象类，必须�
 
   
 
+  
+
+  
 
   
 
