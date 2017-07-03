@@ -1075,7 +1075,7 @@
           
             <ul>
 <li>getParameter()是获取POST/GET传递的参数值；<br>getInitParameter获取Tomcat的server.xml中设置Context的初始化参数<br>getAttribute()是获取对象容器中的数据值；<br>getRequestDispatcher是请求转发。</li>
-<li>HttpServlet是GenericServlet的子类。<br>GenericServlet是个抽象类，必须给出子类才能实例化。它给 出了设计servlet的一些骨架，定义了servlet生命周期，还有一些得到名字、配置、初始化参数的方法，其设计的是和应用层协议无关的，也就是说 你有可能用非http协议实现它。<br>HttpServlet是子类，当然就具有GenericServlet的一切特性，还添加了doGet, doPost, doDelete, doPut, doTrace等方法对应处理http协议里的命令的请求响应过程。<br>一般没有特殊需要，自己写的Servlet都扩展HttpServlet 。 </li>
+<li>HttpServlet是GenericServlet的子类。<br>GenericServlet是个抽象类，必须给出子类才能实例化。它给 出了设计servlet的一些骨架，定义了servlet生命周期，还有一些得到名字、配置、初始化参数的方法，其设计的是和应用层协议无关的，也就是说 你有可能用非http协议实现它。<br>HttpServlet是子类，当然就具有GenericServlet的一切特性，还添加了doGet, doPost, doDelete, doPut, doTrace等方法对应处理http协议里的命令的请求响应过程。<br>一般没有特殊需要，自己写的Servlet都扩展HttpServlet 。</li>
 </ul>
 
           
@@ -1373,7 +1373,7 @@
 </ul>
 <p>整个java的垃圾回收是新生代和年老代的协作，这种叫做分代回收。</p>
 <p>P.S：Serial New收集器是针对新生代的收集器:采用的是复制算法<br>Parallel New（并行）收集器:新生代采用复制算法，老年代采用标记整理<br>Parallel Scavenge（并行）收集器:针对新生代，采用复制收集算法<br>Serial Old（串行）收集器:新生代采用复制，老年代采用标记整理<br>Parallel Old（并行）收集器:针对老年代，标记整理<br>CMS收集器:基于标记清理<br>G1收集器：整体上是基于标记 整理 ，局部采用复制</p>
-<h3 id="综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。"><a href="#综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。" class="headerlink" title="综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。"></a>综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。</h3>
+<h3 id="综上新生代基本采用复制算法老年代采用标记整理算法-cms采用标记清理"><a href="#综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。" class="headerlink" title="综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。"></a>综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。</h3>
           
         
       
@@ -1736,7 +1736,7 @@
       
         
           
-            <p>  这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。<br>  首先我们要明确几个最近的概念：</p>
+            <p>这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。<br>  首先我们要明确几个最近的概念：</p>
 <ul>
 <li>数据库：保持表和其他相关SQL结构的容器。</li>
 <li>表：数据库中包含数据的结构，由行和列组成。</li>
