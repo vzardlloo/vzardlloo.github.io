@@ -320,6 +320,194 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/07/15/JVM内存模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vzardlloo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vzard's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/07/15/JVM内存模型/" itemprop="url">JVM内存模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-15T09:45:23+08:00">
+                2017-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/15/JVM内存模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/15/JVM内存模型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>这篇博客主要讲一下JVM的内存模型。话不多说先上一张概览图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jvm.png" alt="JVM内存模型"><br>下面我们主要通过<code>作用</code>、<code>线程私有情况</code>、<code>异常情况</code>、<code>补充说明</code>这四个情况来介绍和说明各个内存区域的情况。</p>
+<blockquote>
+<p>1、程序计数器：</p>
+<ul>
+<li><code>作用</code>：程序计数器可以当做当前线程执行的字节码指示器，记录当前执行到那一条指令字节码解释器在工作时就是通过改变这个计数器的值选取下一条需要执行的字节码指令，分支、循环、跳转等基础功能都需要依靠这个计数器来完成。</li>
+<li><code>线程私有情况</code>：线程私有，因为Java虚拟机的多线程机制是通过抢占时间片的形式来实现的，就是说在一个确定的时刻，一个处理器只会处理一个线程，那么这就涉及到线程恢复的问题，比如某个线程的执行完第n条指令后，失去了对处理的占用，为了在它抢占到处理器时可以恢复到正确的执行位置（即第n+1条指令处），每个线程必须维护一个独立的程序计数器，不允许被其他线程篡改。所以程序计数器必须是线程私有的。</li>
+<li><code>异常情况</code>：它是JAVA虚拟机规范中唯一一个没有规定任何OutOfMemoryError情况的区域</li>
+<li><code>补充说明</code>：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。</li>
+</ul>
+<p>2、Java虚拟机栈</p>
+<ul>
+<li><code>作用</code>：在每个方法执行的时候会创建一个帧栈用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用的执行结束的过程就对应一个帧栈在虚拟机栈中入栈到出栈的过程。</li>
+<li><code>线程私有情况</code>：线程私有。</li>
+<li><code>异常情况</code>：有两种异常：1、当线程请求的栈的深度大于虚拟机栈所允许的深度，将会抛出StackOverflowError异常。2、如果虚拟机栈可以动态拓展，如果在动态拓展时无法申请到足够的内存时会抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法所需要的内存大小是完全确定的。在方法运行期间不会改变局部变量表的大小。</li>
+</ul>
+<p>3、Java堆</p>
+<ul>
+<li><code>作用</code>：存放对象实例。</li>
+<li><code>线程私有情况</code>：线程共享。因为所有线程创建的对象实例几乎都在Java堆上分配内存，所以必然要线程共享。</li>
+<li><code>异常情况</code>：Java堆可以通过-Xms和-Xmx来分配Java堆的大小，当堆中没有内存完成实例分配，而且堆中也无法拓展时，将会抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将导致一些变化的发生，将不会把所有的对象都分配在对象上了。</li>
+</ul>
+<p>4、方法区</p>
+<ul>
+<li><code>作用</code>：用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器后的代码等数据。</li>
+<li><code>线程私有情况</code>：线程共享。</li>
+<li><code>异常情况</code>：当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：Java虚拟机对方法区的实现要求比较宽松，可以实现垃圾回收也可以不实现垃圾回收，因为这里垃圾回收的效率非常低，但有些事实表明这里实现垃圾回收是十分必要的。</li>
+</ul>
+<p>5、运行时常量池</p>
+<ul>
+<li><code>作用</code>：运行时常量池时方法区的一部分，在Class文件中有专门一个字段来描述这个部分，用于存放编译区生成的各种字面量和符号引用。</li>
+<li><code>线程私有情况</code>：线程共享</li>
+<li><code>异常情况</code>：常量池无法申请到内存时抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：常量池中常量不一定只在编译器产生，运行期也可以将新的常量加入常量池中。典型的例子的是：String类的intern()方法。</li>
+</ul>
+<p>6、直接内存</p>
+<ul>
+<li><code>作用</code>：从某种程度上说这并不是JVM的内存区域。但是Java程序可以使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆里的DirectByteBuffer对象作为这块内存的引用进行操作。=，可以避免在Java堆和Native堆中来回数据，可以显著提高性能。</li>
+<li><code>线程私有情况</code>：虚拟机外内存，线程共享。</li>
+<li><code>异常情况</code>：受到本机物理内存的限制，当无法满足内存分配需求的时候会抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：直接内存不是Java虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但这部分内存也被频繁的使用。</li>
+</ul>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/07/11/JAVA基础回顾-自定义注解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1832,167 +2020,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/03/20/SQL入门（一）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vzardlloo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vzard's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/20/SQL入门（一）/" itemprop="url">SQL入门（一）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-20T22:33:27+08:00">
-                2017-03-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SQL/" itemprop="url" rel="index">
-                    <span itemprop="name">SQL</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/03/20/SQL入门（一）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/20/SQL入门（一）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。<br>  首先我们要明确几个最近的概念：</p>
-<ul>
-<li>数据库：保持表和其他相关SQL结构的容器。</li>
-<li>表：数据库中包含数据的结构，由行和列组成。</li>
-<li>列：存储表中的一块数据。</li>
-<li><p>行：一组能够描述某个事物的列的集合。</p>
-<p>下面是基本语法：</p>
-</li>
-</ul>
-<ol>
-<li>显示数据库：<code>SHOW DATABASES;</code></li>
-<li>指明使用某个数据库：<code>USE database_name;</code></li>
-<li>显示数据库中的表：<code>SHOW TABLES;</code></li>
-<li>创建一个数据库：<code>CREATE DATABASE database_name;</code></li>
-<li>创建一个数据表：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABALE table_name(</div><div class="line">        [column_name_1]  datatype_1,</div><div class="line">        [column_name_2]  datatype_2,</div><div class="line">        ...</div><div class="line">        [column_name_n]  datatype_n</div><div class="line">    );</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ol>
-<p>  下一篇介绍数据库的基本数据类型和基本的增删改查。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2042,7 +2069,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2064,7 +2091,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
