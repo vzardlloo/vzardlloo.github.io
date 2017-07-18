@@ -407,7 +407,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2017/06/28/springboot学习之HelloWorld篇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/28/springboot学习之HelloWorld篇/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/06/28/springboot学习之HelloWorld篇/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -471,6 +472,21 @@
     <div>
       
         
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+      <strong>本文作者：</strong>
+      vzardlloo
+    </li>
+    <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/" title="springboot学习之HelloWorld篇">http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong>
+      本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+
 
       
     </div>
@@ -524,8 +540,11 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/06/28/springboot学习之HelloWorld篇/"
-           data-title="springboot学习之HelloWorld篇" data-url="http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -786,52 +805,38 @@
 
   
 
+
   
+
     
-  
+      <script id="dsq-count-scr" src="https://vzardlloo.disqus.com/count.js" async></script>
+    
 
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"vzard"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/';
+          this.page.identifier = '2017/06/28/springboot学习之HelloWorld篇/';
+          this.page.title = 'springboot学习之HelloWorld篇';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://vzardlloo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
 
   
-    <script type="text/javascript">
-    (function(){
-      var appid = 'cyt3j71i0';
-      var conf = '1a63751a48441be5eec38e447367bf66';
-      var width = window.innerWidth || document.documentElement.clientWidth;
-      if (width < 960) {
-      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
-        window.changyan.api.config({appid:appid,conf:conf})});
-      }
-    })();
-    </script>
-    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
-  
+
+
+
+
+
+
+
+
+
+
 
 
 
