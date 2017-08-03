@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>vzard&#39;s blog</title>
+  <subtitle>just do it</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://vzardlloo.github.io/"/>
+  <updated>2017-07-17T13:43:25.909Z</updated>
+  <id>http://vzardlloo.github.io/</id>
+  
+  <author>
+    <name>vzardlloo</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JVM内存模型</title>
+    <link href="http://vzardlloo.github.io/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://vzardlloo.github.io/2017/07/15/JVM内存模型/</id>
+    <published>2017-07-15T01:45:23.000Z</published>
+    <updated>2017-07-17T13:43:25.909Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇博客主要讲一下JVM的内存模型。话不多说先上一张概览图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jvm.png" alt="JVM内存模型"><br>下面我们主要通过<code>作用</code>、<code>线程私有情况</code>、<code>异常情况</code>、<code>补充说明</code>这四个情况来介绍和说明各个内存区域的情况。</p>
+<blockquote>
+<p>1、程序计数器：</p>
+<ul>
+<li><code>作用</code>：程序计数器可以当做当前线程执行的字节码指示器，记录当前执行到那一条指令字节码解释器在工作时就是通过改变这个计数器的值选取下一条需要执行的字节码指令，分支、循环、跳转等基础功能都需要依靠这个计数器来完成。</li>
+<li><code>线程私有情况</code>：线程私有，因为Java虚拟机的多线程机制是通过抢占时间片的形式来实现的，就是说在一个确定的时刻，一个处理器只会处理一个线程，那么这就涉及到线程恢复的问题，比如某个线程的执行完第n条指令后，失去了对处理的占用，为了在它抢占到处理器时可以恢复到正确的执行位置（即第n+1条指令处），每个线程必须维护一个独立的程序计数器，不允许被其他线程篡改。所以程序计数器必须是线程私有的。</li>
+<li><code>异常情况</code>：它是JAVA虚拟机规范中唯一一个没有规定任何OutOfMemoryError情况的区域</li>
+<li><code>补充说明</code>：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。<a id="more"></a>
+</li>
+</ul>
+<p>2、Java虚拟机栈</p>
+<ul>
+<li><code>作用</code>：在每个方法执行的时候会创建一个帧栈用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用的执行结束的过程就对应一个帧栈在虚拟机栈中入栈到出栈的过程。</li>
+<li><code>线程私有情况</code>：线程私有。</li>
+<li><code>异常情况</code>：有两种异常：1、当线程请求的栈的深度大于虚拟机栈所允许的深度，将会抛出StackOverflowError异常。2、如果虚拟机栈可以动态拓展，如果在动态拓展时无法申请到足够的内存时会抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法所需要的内存大小是完全确定的。在方法运行期间不会改变局部变量表的大小。</li>
+</ul>
+<p>3、Java堆</p>
+<ul>
+<li><code>作用</code>：存放对象实例。</li>
+<li><code>线程私有情况</code>：线程共享。因为所有线程创建的对象实例几乎都在Java堆上分配内存，所以必然要线程共享。</li>
+<li><code>异常情况</code>：Java堆可以通过-Xms和-Xmx来分配Java堆的大小，当堆中没有内存完成实例分配，而且堆中也无法拓展时，将会抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将导致一些变化的发生，将不会把所有的对象都分配在对象上了。</li>
+</ul>
+<p>4、方法区</p>
+<ul>
+<li><code>作用</code>：用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器后的代码等数据。</li>
+<li><code>线程私有情况</code>：线程共享。</li>
+<li><code>异常情况</code>：当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：Java虚拟机对方法区的实现要求比较宽松，可以实现垃圾回收也可以不实现垃圾回收，因为这里垃圾回收的效率非常低，但有些事实表明这里实现垃圾回收是十分必要的。</li>
+</ul>
+<p>5、运行时常量池</p>
+<ul>
+<li><code>作用</code>：运行时常量池时方法区的一部分，在Class文件中有专门一个字段来描述这个部分，用于存放编译区生成的各种字面量和符号引用。</li>
+<li><code>线程私有情况</code>：线程共享</li>
+<li><code>异常情况</code>：常量池无法申请到内存时抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：常量池中常量不一定只在编译器产生，运行期也可以将新的常量加入常量池中。典型的例子的是：String类的intern()方法。</li>
+</ul>
+<p>6、直接内存</p>
+<ul>
+<li><code>作用</code>：从某种程度上说这并不是JVM的内存区域。但是Java程序可以使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆里的DirectByteBuffer对象作为这块内存的引用进行操作。=，可以避免在Java堆和Native堆中来回数据，可以显著提高性能。</li>
+<li><code>线程私有情况</code>：虚拟机外内存，线程共享。</li>
+<li><code>异常情况</code>：受到本机物理内存的限制，当无法满足内存分配需求的时候会抛出OutOfMemoryError异常。</li>
+<li><code>补充说明</code>：直接内存不是Java虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但这部分内存也被频繁的使用。</li>
+</ul>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇博客主要讲一下JVM的内存模型。话不多说先上一张概览图：&lt;br&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/jvm.png&quot; alt=&quot;JVM内存模型&quot;&gt;&lt;br&gt;下面我们主要通过&lt;code&gt;作用&lt;/code&gt;、&lt;code&gt;线程私有情况&lt;/code&gt;、&lt;code&gt;异常情况&lt;/code&gt;、&lt;code&gt;补充说明&lt;/code&gt;这四个情况来介绍和说明各个内存区域的情况。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1、程序计数器：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;作用&lt;/code&gt;：程序计数器可以当做当前线程执行的字节码指示器，记录当前执行到那一条指令字节码解释器在工作时就是通过改变这个计数器的值选取下一条需要执行的字节码指令，分支、循环、跳转等基础功能都需要依靠这个计数器来完成。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;线程私有情况&lt;/code&gt;：线程私有，因为Java虚拟机的多线程机制是通过抢占时间片的形式来实现的，就是说在一个确定的时刻，一个处理器只会处理一个线程，那么这就涉及到线程恢复的问题，比如某个线程的执行完第n条指令后，失去了对处理的占用，为了在它抢占到处理器时可以恢复到正确的执行位置（即第n+1条指令处），每个线程必须维护一个独立的程序计数器，不允许被其他线程篡改。所以程序计数器必须是线程私有的。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;异常情况&lt;/code&gt;：它是JAVA虚拟机规范中唯一一个没有规定任何OutOfMemoryError情况的区域&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;补充说明&lt;/code&gt;：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
+    
+    
+      <category term="jvm" scheme="http://vzardlloo.github.io/tags/jvm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JAVA基础回顾-自定义注解</title>
+    <link href="http://vzardlloo.github.io/2017/07/11/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
+    <id>http://vzardlloo.github.io/2017/07/11/JAVA基础回顾-自定义注解/</id>
+    <published>2017-07-11T12:18:00.000Z</published>
+    <updated>2017-07-17T13:46:38.377Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇博客我们来回顾一下Java基础中的注解，主要通过来自定义一套注解来回顾一下这块的知识。</p>
+<blockquote>
+<p>下面先回顾一下基础知识：</p>
+</blockquote>
+<p>四个元注解：</p>
+<ul>
+<li>@Target</li>
+<li>@Retention</li>
+<li>@Documented</li>
+<li>@Inherited</li>
+</ul>
+<p><em>具体说明: </em>   </p>
+<ul>
+<li>@Target<br>@Target说明了Annotation所修饰的对象范围：Annotation可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）。在Annotation类型的声明中使用了target可更加明晰其修饰的目标。</li>
+</ul>
+<blockquote>
+<p>作用：用于描述注解的使用范围（即：被描述的注解可以用在什么地方）</p>
+</blockquote>
+<p>  取值(ElementType)有：<br>　　1. CONSTRUCTOR:用于描述构造器<br>　　2. FIELD:用于描述域<br>　　3. LOCAL_VARIABLE:用于描述局部变量<br>　　4. METHOD:用于描述方法<br>　　5. PACKAGE:用于描述包<br>　　6. PARAMETER:用于描述参数<br>　　7. TYPE:用于描述类、接口(包括注解类型) 或enum声明<br><a id="more"></a>　　　　</p>
+<ul>
+<li>@Retention<br>@Retention定义了该Annotation被保留的时间长短：某些Annotation仅出现在源代码中，而被编译器丢弃；而另一些却被编译在class文件中；编译在class文件中的Annotation可能会被虚拟机忽略，而另一些在class被装载时将被读取（请注意并不影响class的执行，因为Annotation与class在使用上是被分离的）。使用这个meta-Annotation可以对 Annotation的“生命周期”限制。</li>
+</ul>
+<blockquote>
+<p>作用：表示需要在什么级别保存该注释信息，用于描述注解的生命周期（即：被描述的注解在什么范围内有效）</p>
+</blockquote>
+<p>取值（RetentionPoicy）有：<br>　　1. SOURCE:在源文件中有效（即源文件保留）<br>　　2. CLASS:在class文件中有效（即class保留）<br>　　3. RUNTIME:在运行时有效（即运行时保留）</p>
+<ul>
+<li><p>@Docmented<br>@Documented用于描述其它类型的annotation应该被作为被标注的程序成员的公共API，因此可以被例如javadoc此类的工具文档化。Documented是一个标记注解，没有成员。</p>
+</li>
+<li><p>Inherited<br>@Inherited 元注解是一个标记注解，@Inherited阐述了某个被标注的类型是被继承的。如果一个使用了@Inherited修饰的annotation类型被用于一个class，则这个annotation将被用于该class的子类。<br>　　注意：@Inherited annotation类型是被标注过的class的子类所继承。类并不从它所实现的接口继承annotation，方法并不从它所重载的方法继承annotation。<br>　　当@Inherited annotation类型标注的annotation的Retention是RetentionPolicy.RUNTIME，则反射API增强了这种继承性。如果我们使用java.lang.reflect去查询一个@Inherited annotation类型的annotation时，反射代码检查将展开工作：检查class和其父类，直到发现指定的annotation类型被发现，或者到达类继承结构的顶层。</p>
+</li>
+</ul>
+<blockquote>
+<p>自定义一套注解：</p>
+</blockquote>
+<p>我们的目的是定义一套注解，可以通过注解来配置人的个人信息，包括姓名，性别，年龄。</p>
+<ul>
+<li>首先定义@Name，@Gender,@Age三个标签:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义<span class="doctag">@Name</span>注解</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Name &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义<span class="doctag">@Gender</span>注解</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Inherited</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Gender &#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Sex&#123;MALE,FEMALE&#125;;</div><div class="line"></div><div class="line">    <span class="function">Sex <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> Sex.MALE</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义<span class="doctag">@Age</span>注解</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Age &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>其次定义一个注解处理类，不然注解不会比注释更有用:-)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.reflect.Field;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义注解处理类</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonInfoUtil</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getPersonInfo</span><span class="params">(Class&lt;?&gt; clazz)</span></span>&#123;</div><div class="line">        String strPersonName = <span class="string">"姓名："</span>;</div><div class="line">        String strPersonSex = <span class="string">"性别："</span>;</div><div class="line">        String strPersonAge = <span class="string">"年龄："</span>;</div><div class="line"></div><div class="line">        Field[] fileds = clazz.getDeclaredFields();</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (Field filed : fileds)&#123;</div><div class="line">            <span class="keyword">if</span>(filed.isAnnotationPresent(Name.class))&#123;</div><div class="line">                Name name = (Name) filed.getAnnotation(Name.class);</div><div class="line">                System.out.println(strPersonName+name.value()+<span class="string">"\n"</span>);</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(filed.isAnnotationPresent(Gender.class))&#123;</div><div class="line">                Gender sex = (Gender) filed.getAnnotation(Gender.class);</div><div class="line">                System.out.println(strPersonSex+sex.value()+<span class="string">"\n"</span>);</div><div class="line"></div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(filed.isAnnotationPresent(Age.class))&#123;</div><div class="line">                Age age = (Age) filed.getAnnotation(Age.class);</div><div class="line">                System.out.println(strPersonAge+age.value()+<span class="string">"\n"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>定义一个人物类来测试注解：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义人物类</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Name</span>(<span class="string">"Jack"</span>)</div><div class="line">    <span class="keyword">private</span> String Name;</div><div class="line">    <span class="meta">@Gender</span>(Gender.Sex.MALE)</div><div class="line">    <span class="keyword">private</span> String Sex;</div><div class="line">    <span class="meta">@Age</span>(<span class="number">23</span>)</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> Age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>运行测试主函数：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 测试用主函数</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        PersonInfoUtil.getPersonInfo(Person.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>运行结果：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">姓名：Jack</div><div class="line"></div><div class="line">性别：MALE</div><div class="line"></div><div class="line">年龄：23</div><div class="line"></div><div class="line"></div><div class="line">Process finished with exit code 0</div></pre></td></tr></table></figure>
+<blockquote>
+<p>自定义注解成功！</p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇博客我们来回顾一下Java基础中的注解，主要通过来自定义一套注解来回顾一下这块的知识。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;下面先回顾一下基础知识：&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;四个元注解：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;@Target&lt;/li&gt;
+&lt;li&gt;@Retention&lt;/li&gt;
+&lt;li&gt;@Documented&lt;/li&gt;
+&lt;li&gt;@Inherited&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;具体说明: &lt;/em&gt;   &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;@Target&lt;br&gt;@Target说明了Annotation所修饰的对象范围：Annotation可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）。在Annotation类型的声明中使用了target可更加明晰其修饰的目标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;作用：用于描述注解的使用范围（即：被描述的注解可以用在什么地方）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;  取值(ElementType)有：&lt;br&gt;　　1. CONSTRUCTOR:用于描述构造器&lt;br&gt;　　2. FIELD:用于描述域&lt;br&gt;　　3. LOCAL_VARIABLE:用于描述局部变量&lt;br&gt;　　4. METHOD:用于描述方法&lt;br&gt;　　5. PACKAGE:用于描述包&lt;br&gt;　　6. PARAMETER:用于描述参数&lt;br&gt;　　7. TYPE:用于描述类、接口(包括注解类型) 或enum声明&lt;br&gt;
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
+    
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>springboot学习之RESTful</title>
+    <link href="http://vzardlloo.github.io/2017/07/03/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BRESTful/"/>
+    <id>http://vzardlloo.github.io/2017/07/03/springboot学习之RESTful/</id>
+    <published>2017-07-03T11:09:56.000Z</published>
+    <updated>2017-07-17T13:46:33.309Z</updated>
+    
+    <content type="html"><![CDATA[<p>在学习HelloWorld之后，我们来尝试构建一个RESTful工程。</p>
+<ul>
+<li>什么是REST?<br>首先，REST是Web自身的架构风格。REST也是Web之所以取得成功的技术架构方面因素的总结。REST是世界上最成功的分布式应用架构风格（成功案例：Web，还不够吗？）。它是为 运行在互联网环境 的 分布式 超媒体系统量身定制的。互联网环境与企业内网环境有非常大的差别，最主要的差别是两个方面：<br>可伸缩性需求无法控制：并发访问量可能会暴涨，也可能会暴跌。<br>安全性需求无法控制：无法控制客户端发来的请求的格式，很可能会是恶意的请求。<br>而所谓的“超媒体系统”，即，使用了超文本的系统。可以把“超媒体”理解为超文本+媒体内容。<br>REST是HTTP/1.1协议等Web规范的设计指导原则，HTTP/1.1协议正是为实现REST风格的架构而设计的。新的Web规范，其设计必须符合REST的要求，否则整个Web的体系架构会因为引入严重矛盾而崩溃。这句话不是危言耸听，做个类比，假如苏州市政府同意在市区著名园林的附近大型土木，建造大量具有后现代风格的摩天大楼，那么不久之后世界闻名的苏州园林美景将不复存在。<br>上述这些关于“REST是什么”的描述，可以总结为一句话：REST是所有Web应用都应该遵守的架构设计指导原则。当然，REST并不是法律，违反了REST的指导原则，仍然能够实现应用的功能。但是违反了REST的指导原则，会付出很多代价，特别是对于大流量的网站而言。<a id="more"></a></li>
+<li>REST的关键词<ol>
+<li>资源（Resource）</li>
+<li>资源的表述（Representation）</li>
+<li>状态转移（State Transfer）</li>
+<li>统一接口（Uniform Interface）</li>
+<li>超文本驱动（Hypertext Driven）</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>REST的特征<ol>
+<li>面向资源（Resource Oriented）</li>
+<li>可寻址（Addressability）</li>
+<li>连通性（Connectedness）</li>
+<li>无状态（Statelessness）</li>
+<li>统一接口（Uniform Interface）</li>
+<li>超文本驱动（Hypertext Driven）</li>
+</ol>
+</li>
+</ul>
+<p>更多可以参考：<a href="http://www.infoq.com/cn/articles/understanding-restful-style" target="_blank" rel="external">理解本真的REST架构风格</a></p>
+<ul>
+<li>开始创建RESTful工程<br>我们依旧使用IDEA作为开发工具，首先依旧是新建一个SpringInitializr项目，这里和前面的HelloWorld程序一样，但是在勾选Dependensencise时需要额外勾上MySQL和MyBaties.<br><img src="http://oo3aq3ac8.bkt.clouddn.com/007.png" alt="勾选Dependensencise"></li>
+<li><p>创建数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`city`</span>;</div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`city`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT <span class="keyword">COMMENT</span> <span class="string">'城市编号'</span>,</div><div class="line">  <span class="string">`province_id`</span> <span class="built_in">int</span>(<span class="number">10</span>) <span class="keyword">unsigned</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'省份编号'</span>,</div><div class="line">  <span class="string">`city_name`</span> <span class="built_in">varchar</span>(<span class="number">25</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'城市名称'</span>,</div><div class="line">  <span class="string">`description`</span> <span class="built_in">varchar</span>(<span class="number">25</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'描述'</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</div><div class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">4</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建工程目录如下<br><img src="http://oo3aq3ac8.bkt.clouddn.com/008.png" alt="创建工程目录"></p>
+</li>
+</ul>
+<p>Controller包里存放控制器：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.controller;</div><div class="line"></div><div class="line"><span class="keyword">import</span> jdk.nashorn.internal.ir.RuntimeNode;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</div><div class="line"><span class="keyword">import</span> org.vzard.springboot.domain.City;</div><div class="line"><span class="keyword">import</span> org.vzard.springboot.service.CityService;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by V-zar on 2017/7/2.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CityRestController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> CityService cityService;</div><div class="line"></div><div class="line">    </div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/vzard/city/&#123;id&#125;"</span>,method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> City <span class="title">findOneCity</span><span class="params">(@PathVariable Long id)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> cityService.findCityById(id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/vzard/city"</span>,method = RequestMethod.GET)</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;City&gt; <span class="title">findAllCity</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> cityService.findAllCity();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/vzard/city"</span>,method = RequestMethod.POST)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createCity</span><span class="params">(@RequestBody City city)</span></span>&#123;</div><div class="line">        cityService.saveCity(city);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/vzard/city"</span>,method = RequestMethod.PUT)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modifyCity</span><span class="params">(@RequestBody City city)</span></span>&#123;</div><div class="line">        cityService.updateCity(city);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/vzard/city/&#123;id&#125;"</span>,method = RequestMethod.DELETE)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">modifyCity</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id)</span>&#123;</div><div class="line">        cityService.deleteCity(id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>dao包存放接口类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.dao;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Param;</div><div class="line"><span class="keyword">import</span> org.vzard.springboot.domain.City;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 城市DAO接口类</div><div class="line"> *</div><div class="line"> * Created by V-zar on 2017/7/2.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CityDao</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取城市信息列表</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">List&lt;City&gt; <span class="title">findAllCity</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据id获取城市信息</div><div class="line">     * <span class="doctag">@param</span> id</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">City <span class="title">findById</span><span class="params">(@Param(<span class="string">"id"</span>)</span> Long id)</span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 保存城市信息</div><div class="line">     * <span class="doctag">@param</span> city</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Long <span class="title">saveCity</span><span class="params">(City city)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 更新城市信息</div><div class="line">     * <span class="doctag">@param</span> city</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Long <span class="title">updateCity</span><span class="params">(City city)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 删除城市信息</div><div class="line">     * <span class="doctag">@param</span> id</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Long <span class="title">deleteCity</span><span class="params">(Long id)</span></span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>domain包存放实体类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.domain;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 城市实体类</div><div class="line"> *</div><div class="line"> * Created by V-zar on 2017/7/2.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">City</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 城市id</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 省份id</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> Long provinceId;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 城市名称</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String cityName;</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 描述</div><div class="line">     */</div><div class="line">    <span class="keyword">private</span> String description;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(Long id)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.id = id;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getProvinceId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> provinceId;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProvinceId</span><span class="params">(Long provinceId)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.provinceId = provinceId;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getCityName</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCityName</span><span class="params">(String cityName)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.cityName = cityName;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getDescription</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> description;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDescription</span><span class="params">(String description)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.description = description;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>service包里存放服务接口及其实现<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.service;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.vzard.springboot.domain.City;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 城市业务逻辑接口</div><div class="line"> *</div><div class="line"> * Created by V-zar on 2017/7/2.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CityService</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 获取城市列表</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">List&lt;City&gt; <span class="title">findAllCity</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 根据城市id寻找城市</div><div class="line">     * <span class="doctag">@param</span> id</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">City <span class="title">findCityById</span><span class="params">(Long id)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 保存城市信息</div><div class="line">     * <span class="doctag">@param</span> city</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Long <span class="title">saveCity</span><span class="params">(City city)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 更新城市信息</div><div class="line">     * <span class="doctag">@param</span> city</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Long <span class="title">updateCity</span><span class="params">(City city)</span></span>;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * 删除城市信息</div><div class="line">     * <span class="doctag">@param</span> id</div><div class="line">     * <span class="doctag">@return</span></div><div class="line">     */</div><div class="line">    <span class="function">Long <span class="title">deleteCity</span><span class="params">(Long id)</span></span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.service.impl;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</div><div class="line"><span class="keyword">import</span> org.vzard.springboot.dao.CityDao;</div><div class="line"><span class="keyword">import</span> org.vzard.springboot.domain.City;</div><div class="line"><span class="keyword">import</span> org.vzard.springboot.service.CityService;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by V-zar on 2017/7/2.</div><div class="line"> */</div><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CityServiceImpl</span> <span class="keyword">implements</span> <span class="title">CityService</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> CityDao cityDao;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;City&gt; <span class="title">findAllCity</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityDao.findAllCity();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> City <span class="title">findCityById</span><span class="params">(Long id)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityDao.findById(id);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">saveCity</span><span class="params">(City city)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityDao.saveCity(city);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">updateCity</span><span class="params">(City city)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityDao.updateCity(city);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">deleteCity</span><span class="params">(Long id)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> cityDao.deleteCity(id);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>程序入口类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.mybatis.spring.annotation.MapperScan;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</div><div class="line"></div><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="meta">@MapperScan</span>(<span class="string">"org.vzard.springboot.dao"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringbootApplication</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        SpringApplication.run(SpringbootApplication.class, args);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>数据源&amp;MyBaties&amp;端口配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">#数据源配置</div><div class="line">spring.datasource.url=jdbc:mysql://localhost:3306/springbootdb?useUnicode=true&amp;characterEncoding=utf8</div><div class="line">spring.datasource.username=root</div><div class="line">spring.datasource.password=5432</div><div class="line">spring.datasource.dbcp2.driver-class-name=com.mysql.jdbc.Driver</div><div class="line"></div><div class="line">#Mybatis 配置</div><div class="line">mybatis.typeAliasesPackage=org.vzard.springboot.domain</div><div class="line">mybatis.mapperLocations=classpath:mapper/*.xml</div><div class="line"></div><div class="line">#配置端口</div><div class="line">server.port=$&#123;port:8009&#125;</div></pre></td></tr></table></figure></p>
+<p>Mybaties映射文件<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8" ?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" &gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"org.vzard.springboot.dao.CityDao"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">"BaseResultMap"</span> <span class="attr">type</span>=<span class="string">"org.vzard.springboot.domain.City"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"id"</span> <span class="attr">property</span>=<span class="string">"id"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"province_id"</span> <span class="attr">property</span>=<span class="string">"provinceId"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"city_name"</span> <span class="attr">property</span>=<span class="string">"cityName"</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"description"</span> <span class="attr">property</span>=<span class="string">"description"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">parameterMap</span> <span class="attr">id</span>=<span class="string">"City"</span> <span class="attr">type</span>=<span class="string">"org.vzard.springboot.domain.City"</span>/&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">sql</span> <span class="attr">id</span>=<span class="string">"Base_Column_List"</span>&gt;</span></div><div class="line">        id, province_id, city_name, description</div><div class="line">    <span class="tag">&lt;/<span class="name">sql</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findById"</span> <span class="attr">resultMap</span>=<span class="string">"BaseResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Long"</span>&gt;</span></div><div class="line">        select</div><div class="line">        <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span> /&gt;</span></div><div class="line">        from city</div><div class="line">        where id = #&#123;id&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"findAllCity"</span> <span class="attr">resultMap</span>=<span class="string">"BaseResultMap"</span> &gt;</span></div><div class="line">        select</div><div class="line">        <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span> /&gt;</span></div><div class="line">        from city</div><div class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"saveCity"</span> <span class="attr">parameterMap</span>=<span class="string">"City"</span> <span class="attr">useGeneratedKeys</span>=<span class="string">"true"</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span>&gt;</span></div><div class="line">        insert into</div><div class="line">        city(id,province_id,city_name,description)</div><div class="line">        values</div><div class="line">        (#&#123;id&#125;,#&#123;provinceId&#125;,#&#123;cityName&#125;,#&#123;description&#125;)</div><div class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateCity"</span> <span class="attr">parameterMap</span>=<span class="string">"City"</span>&gt;</span></div><div class="line">        update</div><div class="line">        city</div><div class="line">        set</div><div class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"provinceId!=null"</span>&gt;</span></div><div class="line">            province_id = #&#123;provinceId&#125;,</div><div class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"cityName!=null"</span>&gt;</span></div><div class="line">            city_name = #&#123;cityName&#125;,</div><div class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"description!=null"</span>&gt;</span></div><div class="line">            description = #&#123;description&#125;</div><div class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></div><div class="line">        where</div><div class="line">        id = #&#123;id&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">"deleteCity"</span> <span class="attr">parameterType</span>=<span class="string">"java.lang.Long"</span>&gt;</span></div><div class="line">        delete from</div><div class="line">        city</div><div class="line">        where</div><div class="line">        id = #&#123;id&#125;</div><div class="line">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>到此工程创建完毕运行程序入口类启动项目：</p>
+<ul>
+<li><p>插入记录，URL：<a href="http://127.0.0.1:8009/vzard/city" target="_blank" rel="external">http://127.0.0.1:8009/vzard/city</a><br><img src="http://oo3aq3ac8.bkt.clouddn.com/009.png" alt="插入记录"></p>
+</li>
+<li><p>更改记录，URL:<a href="http://127.0.0.1:8009/vzard/city" target="_blank" rel="external">http://127.0.0.1:8009/vzard/city</a><br><img src="http://oo3aq3ac8.bkt.clouddn.com/010.png" alt="更改记录"></p>
+</li>
+<li><p>删除记录，URL:<a href="http://127.0.0.1:8009/vzard/city/2" target="_blank" rel="external">http://127.0.0.1:8009/vzard/city/2</a><br><img src="http://oo3aq3ac8.bkt.clouddn.com/014.png" alt="删除记录"></p>
+</li>
+<li><p>查询记录<br><img src="http://oo3aq3ac8.bkt.clouddn.com/013.png" alt="查询记录"></p>
+</li>
+</ul>
+<p><em>表单提交的测试工具为Chrome的插件PostMan,很强大</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在学习HelloWorld之后，我们来尝试构建一个RESTful工程。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;什么是REST?&lt;br&gt;首先，REST是Web自身的架构风格。REST也是Web之所以取得成功的技术架构方面因素的总结。REST是世界上最成功的分布式应用架构风格（成功案例：Web，还不够吗？）。它是为 运行在互联网环境 的 分布式 超媒体系统量身定制的。互联网环境与企业内网环境有非常大的差别，最主要的差别是两个方面：&lt;br&gt;可伸缩性需求无法控制：并发访问量可能会暴涨，也可能会暴跌。&lt;br&gt;安全性需求无法控制：无法控制客户端发来的请求的格式，很可能会是恶意的请求。&lt;br&gt;而所谓的“超媒体系统”，即，使用了超文本的系统。可以把“超媒体”理解为超文本+媒体内容。&lt;br&gt;REST是HTTP/1.1协议等Web规范的设计指导原则，HTTP/1.1协议正是为实现REST风格的架构而设计的。新的Web规范，其设计必须符合REST的要求，否则整个Web的体系架构会因为引入严重矛盾而崩溃。这句话不是危言耸听，做个类比，假如苏州市政府同意在市区著名园林的附近大型土木，建造大量具有后现代风格的摩天大楼，那么不久之后世界闻名的苏州园林美景将不复存在。&lt;br&gt;上述这些关于“REST是什么”的描述，可以总结为一句话：REST是所有Web应用都应该遵守的架构设计指导原则。当然，REST并不是法律，违反了REST的指导原则，仍然能够实现应用的功能。但是违反了REST的指导原则，会付出很多代价，特别是对于大流量的网站而言。
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://vzardlloo.github.io/categories/springboot/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>springboot学习之HelloWorld篇</title>
+    <link href="http://vzardlloo.github.io/2017/06/28/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BHelloWorld%E7%AF%87/"/>
+    <id>http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/</id>
+    <published>2017-06-28T15:22:23.000Z</published>
+    <updated>2017-06-28T15:34:08.376Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近开始学习springboot,然后将在博客上记录和总结学习的过程。这篇主要是讲如何搭建springboot的开发环境，并且完成HelloWorld程序，使用的开发工具是IDEA.<br>  springboot官网上对springboot的介绍如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Spring Boot makes it easy to create stand-alone, production-grade Spring </div><div class="line">based Applications that you can &quot;just run&quot;. We take an opinionated view </div><div class="line">of the Spring platform and third-party libraries so you can get started </div><div class="line">withminimum fuss. Most Spring Boot applications need very little Spring </div><div class="line">configuration.</div></pre></td></tr></table></figure></p>
+<p>主要意思就是说springboot只需要很少的配置便可以创建可“运行”的独立的、生产级的基于Spring的应用程序。<br>springboot的主要特征为：</p>
+<ul>
+<li>创建独立的Spring应用程序</li>
+<li>直接嵌入Tomcat，Jetty或Undertow（不需要部署WAR文件）</li>
+<li>提供有意思的“启动”POM来简化您的Maven配置</li>
+<li>尽可能自动配置</li>
+<li>提供生产就绪功能，如指标，运行状况检查和外部化配置</li>
+<li>绝对没有代码生成，也不需要XML配置</li>
+</ul>
+<p>下面我们开始写第一个springboot的HelloWorld程序：<br>一、新建一个Spring Initializr项目<br><img src="http://oo3aq3ac8.bkt.clouddn.com/001.png" alt="新建一个Spring Initializr项目"><br>二、填写Group和Artifact名称<br><img src="http://oo3aq3ac8.bkt.clouddn.com/002.png" alt="填写Group和Artifact名称"><br>三、在Dependensencise里勾选上Web<br>    在HelloWorld阶段只需勾选Web,之后还需增加别的依赖<br><img src="http://oo3aq3ac8.bkt.clouddn.com/003.png" alt="勾选上Web"><br>然后一直点下一步，会自动生成项目初始的结构，如下图所示：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/004.png" alt=""><br>然后新建一个包，可以命名为web,用来放置控制器，编写HelloWorldController，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.web;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by V-zar on 2017/6/28.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldController</span> </span>&#123;</div><div class="line">    <span class="meta">@RequestMapping</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"HelloWorld"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最终结构如图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/005.png" alt=""><br>然后点击运行，等待运行成功，打开浏览器输入<code>http://localhost:8080</code>，如果看到如下图所示，即表明成功：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/006.png" alt=""></p>
+<p><em>注：如果失败，可以查看代码及依赖是否有误，和8080端口是否被占用，具体其他问题查看报错信息分析。</em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近开始学习springboot,然后将在博客上记录和总结学习的过程。这篇主要是讲如何搭建springboot的开发环境，并且完成HelloWorld程序，使用的开发工具是IDEA.&lt;br&gt;  springboot官网上对springboot的介绍如下：&lt;br&gt;&lt;figur
+    
+    </summary>
+    
+      <category term="springboot" scheme="http://vzardlloo.github.io/categories/springboot/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java命令行运行的一个小坑</title>
+    <link href="http://vzardlloo.github.io/2017/06/04/Java%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91/"/>
+    <id>http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/</id>
+    <published>2017-06-04T08:57:38.000Z</published>
+    <updated>2017-06-04T09:58:13.899Z</updated>
+    
+    <content type="html"><![CDATA[<p>当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:</p>
+<ul>
+<li>JAVA_HOME—&gt;JDK安装根目录</li>
+<li>PATH增加%JAVA_HOME%\bin</li>
+<li>CLASS_PATH—&gt;%JAVA_HOME%\lib<br>但是这样是有问题的，比如你有这样的程序：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">package org.net;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by V-zar on 2017/5/22.</div><div class="line"> */</div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line"></div><div class="line">        System.out.print(&quot;HelloWorld&quot;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当你在某个目录编译<code>javac Test.java</code>后，试图用java命令<code>java Test</code>运行的时候,会发现报错<code>找不到或无法加载主类</code>。这是因为按照很多资料那样来配置的时候CLASS_PATH是错误的，解决的办法有两个：</p>
+<ul>
+<li>运行时加入参数<code>java -cp . Test</code> (运行时指定classpath为当前路径)。</li>
+<li>在环境变量CLASS_PATH中加入<code>.</code>,表示当前路径，Java解释器将在当前路径搜索class<br>文件，如果CLASS_PATH中有多个路径值，建议将<code>.</code>置顶。（一劳永逸的方法）。</li>
+</ul>
+<p>另外，如果你是用Eclipse或者IDEA编辑程序的话，一般会在程序开头加入包的信息，如<br><code>package org.net;</code>,这同样会导致错误，所以如果是用Eclipse或者IDEA编辑程序并且试图在命令行运行程序的话，最好检查一下程序开头有没有包的信息，有的话需要删掉:-).</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JAVA_HOME—&amp;gt;JDK安装根目录&lt;/li&gt;
+&lt;li&gt;P
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java类加载器小结</title>
+    <link href="http://vzardlloo.github.io/2017/05/15/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%B0%8F%E7%BB%93/"/>
+    <id>http://vzardlloo.github.io/2017/05/15/Java类加载器小结/</id>
+    <published>2017-05-15T15:49:16.000Z</published>
+    <updated>2017-06-09T14:38:19.790Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">1. Bootstrap ClassLoader</div><div class="line"> </div><div class="line">负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类</div><div class="line"> </div><div class="line">2. Extension ClassLoader</div><div class="line"> </div><div class="line">负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包</div><div class="line"> </div><div class="line">3. App ClassLoader</div><div class="line"> </div><div class="line">负责记载classpath中指定的jar包及目录中class</div><div class="line"> </div><div class="line">4. Custom ClassLoader</div><div class="line"> </div><div class="line">属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader</div><div class="line"> </div><div class="line">加载过程中会先检查类是否被已加载，检查顺序是自底向上，从Custom ClassLoader到BootStrap ClassLoader逐层检查，只要某个classloader已加载就视为已加载此类，保证此类只所有ClassLoader加载一次。而加载的顺序是自顶向下，也就是由上层来逐层尝试加载此类。</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/di
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Java知识点整理（一）</title>
+    <link href="http://vzardlloo.github.io/2017/05/09/Java%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://vzardlloo.github.io/2017/05/09/Java知识点整理（一）/</id>
+    <published>2017-05-09T15:33:56.000Z</published>
+    <updated>2017-06-09T14:38:19.684Z</updated>
+    
+    <content type="html"><![CDATA[<ul>
+<li>getParameter()是获取POST/GET传递的参数值；<br>getInitParameter获取Tomcat的server.xml中设置Context的初始化参数<br>getAttribute()是获取对象容器中的数据值；<br>getRequestDispatcher是请求转发。</li>
+<li>HttpServlet是GenericServlet的子类。<br>GenericServlet是个抽象类，必须给出子类才能实例化。它给 出了设计servlet的一些骨架，定义了servlet生命周期，还有一些得到名字、配置、初始化参数的方法，其设计的是和应用层协议无关的，也就是说 你有可能用非http协议实现它。<br>HttpServlet是子类，当然就具有GenericServlet的一切特性，还添加了doGet, doPost, doDelete, doPut, doTrace等方法对应处理http协议里的命令的请求响应过程。<br>一般没有特殊需要，自己写的Servlet都扩展HttpServlet 。</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ul&gt;
+&lt;li&gt;getParameter()是获取POST/GET传递的参数值；&lt;br&gt;getInitParameter获取Tomcat的server.xml中设置Context的初始化参数&lt;br&gt;getAttribute()是获取对象容器中的数据值；&lt;br&gt;getReques
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>图床测试</title>
+    <link href="http://vzardlloo.github.io/2017/04/08/%E5%9B%BE%E5%BA%8A%E6%B5%8B%E8%AF%95/"/>
+    <id>http://vzardlloo.github.io/2017/04/08/图床测试/</id>
+    <published>2017-04-08T12:07:20.000Z</published>
+    <updated>2017-04-08T12:19:13.532Z</updated>
+    
+    <content type="html"><![CDATA[<p>图床测试：这是一张图片</p>
+<p><img src="http://oo3aq3ac8.bkt.clouddn.com/58836065_p0.png" alt=""></p>
+<p><img src="http://oo3aq3ac8.bkt.clouddn.com/002.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;图床测试：这是一张图片&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/58836065_p0.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java垃圾回收算法小结</title>
+    <link href="http://vzardlloo.github.io/2017/04/02/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93/"/>
+    <id>http://vzardlloo.github.io/2017/04/02/java垃圾回收算法小结/</id>
+    <published>2017-04-02T13:57:37.000Z</published>
+    <updated>2017-04-02T14:05:34.268Z</updated>
+    
+    <content type="html"><![CDATA[<p>两个最基本的java回收算法：复制算法和标记清理算法<br><code>复制算法</code>：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法<br><code>标记清理</code>：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出<br><code>标记-整理算法</code>：多了碎片整理，整理出更大的内存放更大的对象<br><code>两个概念</code>：新生代和年老代</p>
+<ul>
+<li>新生代：初始对象，生命周期短的</li>
+<li>永久代：长时间存在的对象</li>
+</ul>
+<p>整个java的垃圾回收是新生代和年老代的协作，这种叫做分代回收。</p>
+<p>P.S：Serial New收集器是针对新生代的收集器:采用的是复制算法<br>Parallel New（并行）收集器:新生代采用复制算法，老年代采用标记整理<br>Parallel Scavenge（并行）收集器:针对新生代，采用复制收集算法<br>Serial Old（串行）收集器:新生代采用复制，老年代采用标记整理<br>Parallel Old（并行）收集器:针对老年代，标记整理<br>CMS收集器:基于标记清理<br>G1收集器：整体上是基于标记 整理 ，局部采用复制</p>
+<h3 id="综上新生代基本采用复制算法老年代采用标记整理算法-cms采用标记清理"><a href="#综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。" class="headerlink" title="综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。"></a>综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。</h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;两个最基本的java回收算法：复制算法和标记清理算法&lt;br&gt;&lt;code&gt;复制算法&lt;/code&gt;：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法&lt;br&gt;&lt;code&gt;标记清理&lt;/code&gt;：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那
+    
+    </summary>
+    
+      <category term="jvm" scheme="http://vzardlloo.github.io/categories/jvm/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SQl学习（二）</title>
+    <link href="http://vzardlloo.github.io/2017/03/22/SQl%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>http://vzardlloo.github.io/2017/03/22/SQl学习（二）/</id>
+    <published>2017-03-22T12:28:27.000Z</published>
+    <updated>2017-03-22T14:19:06.695Z</updated>
+    
+    <content type="html"><![CDATA[<p>这篇介绍数据库的基本数据类型和基本的增删改查：</p>
+<p>基本数据类型：（MySQL）</p>
+<ol>
+<li><p>整数类型：</p>
+<ul>
+<li><code>TINYINT</code> : 占用1个字节</li>
+<li><code>SMALLINT</code>　：占用2个字节</li>
+<li><code>MEDIUMINT</code> : 占用3个字节</li>
+<li><code>INT</code> : 占用4个字节</li>
+<li><code>BIGINT</code> :　占用８个字节</li>
+</ul>
+</li>
+<li><p>浮点类型：</p>
+<ul>
+<li><code>FLOAT</code> : 占用4个字节</li>
+<li><code>DOUBLE</code> : 占用8个字节</li>
+<li><code>DECIMAL(M,D)</code> :　M+2</li>
+</ul>
+</li>
+<li><p>日期与时间:</p>
+<ul>
+<li><code>YEAR</code> : 1901~2155    YYYY</li>
+<li><code>DATE</code> : 1000-01-01~9999—12-3     YYYY-MM-DD</li>
+<li><code>TIME</code> : -838:59:59~838:59:59     HH:MM:SS</li>
+<li><code>DATETIME</code> : 1000-01-01 00:00:00~9999-12-31 23:59:59  YYYY-MM-DD HH:MM:SS</li>
+<li><code>TIMESTAMP</code> :　1970-01-01 00:00:01~2038-01-19 03:14:07     YYYY-MM-DD </li>
+</ul>
+</li>
+<li><p>字符串&amp;二进制:</p>
+<ul>
+<li><code>CHAR</code> : 表示长度固定的字符串</li>
+<li><code>VARCHAR</code> :　表示可变长度的字符串</li>
+<li><code>BINARY</code> : 表示固定长度的二进制数据</li>
+<li><code>VARBINARY</code> :　表示可变长度的二进制数据</li>
+<li><code>BLOB</code> :　表示二进制大数据</li>
+<li><code>TEXT</code> :　用于表示大文本数据</li>
+<li><code>ENUM</code> :　用于枚举类型，只能存储一个枚举类型的值</li>
+<li><code>SET</code> : 表示字符串对象</li>
+<li><code>BIT</code> : 表示位字段类型</li>
+</ul>
+</li>
+</ol>
+<p>基本增删改查：</p>
+<ol>
+<li><p>INSERT（增）：</p>
+<ul>
+<li><p>插入一条记录：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INSERT INTO table_name ([column_1],[column_2],...[column_n])</div><div class="line">VALUES(values_1,values_2,...,values_n);</div></pre></td></tr></table></figure>
+<p>  需要注意[column_x] 与 values_x 的对应关系。可以省略<code>[column_x]</code>列表，<br>  但是此时必须将<code>values_x</code>写全并与表中的列对应。也可以省略部分，省略的列将由<code>NULL</code>填充。</p>
+</li>
+</ul>
+</li>
+<li><p>DELETE(删):</p>
+<ul>
+<li>删除表中全部数据：<code>DELETE FROM table_name</code>。</li>
+<li>删除表中指定数据：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DELETE FROM table_name WHERE &quot;XXX&quot;=&quot;xxx&quot; [AND] &quot;YYY&quot; = &quot;yyy&quot; [OR]</div><div class="line">&quot;ZZZ&quot; = &quot;zzz&quot;;</div></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+<li><p>UPDATE(改)：</p>
+<ul>
+<li><p>改变表中指定记录：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE FROM table_name SET　&quot;XXX&quot; = &quot;xxx&quot;　WHERE &quot;XXX&quot; = &quot;yyy&quot; ;</div></pre></td></tr></table></figure>
+</code></pre></li>
+<li><p>同时改变多条记录：</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">UPDATE FROM table_name SET [column_1] = &apos;new_1&apos; , </div><div class="line">                           [column_2] = &apos;new_2&apos; ,</div><div class="line">                           ...</div><div class="line">                           [column_n] = &apos;new_3&apos; ;</div><div class="line">               WHERE [column_1] = &apos;old_1&apos; AND &apos;old_2&apos;...AND &apos;old_n&apos;;</div></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+<li><p>SELECT(查)：</p>
+<ul>
+<li>查看表中所有数据：<code>SELECT * FROM　table_name;</code></li>
+<li>查看表中指定数据：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT [column_1],[column_2]...[column_x] FROM table_name </div><div class="line">WHERE</div><div class="line">  [column_y] = &quot;something&quot; [AND] ... [OR] ...[BETWEEN]...</div></pre></td></tr></table></figure>
+</code></pre></li>
+</ul>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这篇介绍数据库的基本数据类型和基本的增删改查：&lt;/p&gt;
+&lt;p&gt;基本数据类型：（MySQL）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;整数类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;TINYINT&lt;/code&gt; : 占用1个字节&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SMALLINT&lt;/c
+    
+    </summary>
+    
+      <category term="SQL" scheme="http://vzardlloo.github.io/categories/SQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SQL入门（一）</title>
+    <link href="http://vzardlloo.github.io/2017/03/20/SQL%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://vzardlloo.github.io/2017/03/20/SQL入门（一）/</id>
+    <published>2017-03-20T14:33:27.000Z</published>
+    <updated>2017-03-20T14:53:30.311Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。<br>  首先我们要明确几个最近的概念：</p>
+<ul>
+<li>数据库：保持表和其他相关SQL结构的容器。</li>
+<li>表：数据库中包含数据的结构，由行和列组成。</li>
+<li>列：存储表中的一块数据。</li>
+<li><p>行：一组能够描述某个事物的列的集合。</p>
+<p>下面是基本语法：</p>
+</li>
+</ul>
+<ol>
+<li>显示数据库：<code>SHOW DATABASES;</code></li>
+<li>指明使用某个数据库：<code>USE database_name;</code></li>
+<li>显示数据库中的表：<code>SHOW TABLES;</code></li>
+<li>创建一个数据库：<code>CREATE DATABASE database_name;</code></li>
+<li>创建一个数据表：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">CREATE TABALE table_name(</div><div class="line">        [column_name_1]  datatype_1,</div><div class="line">        [column_name_2]  datatype_2,</div><div class="line">        ...</div><div class="line">        [column_name_n]  datatype_n</div><div class="line">    );</div></pre></td></tr></table></figure>
+</code></pre></li>
+</ol>
+<p>  下一篇介绍数据库的基本数据类型和基本的增删改查。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是我记录和梳理自己学习SQL的系列文章的第一篇。这系列文章主要以MySQL为学习对象，但其他数据库也基本适用。&lt;br&gt;  首先我们要明确几个最近的概念：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据库：保持表和其他相关SQL结构的容器。&lt;/li&gt;
+&lt;li&gt;表：数据库中包含数据的结构，由
+    
+    </summary>
+    
+      <category term="SQL" scheme="http://vzardlloo.github.io/categories/SQL/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>新的任务</title>
+    <link href="http://vzardlloo.github.io/2017/03/15/%E6%96%B0%E7%9A%84%E4%BB%BB%E5%8A%A1/"/>
+    <id>http://vzardlloo.github.io/2017/03/15/新的任务/</id>
+    <published>2017-03-15T14:21:39.000Z</published>
+    <updated>2017-03-15T14:41:24.681Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天接到做一个移动端应用的任务，这是我之前没有接触过的，不过这种情况也不是第一次了，所以心态还是比较淡定。关于这个移动端应用开始能够想到的解决方案有3种：</p>
+<ul>
+<li>采用原生APP的制作方式</li>
+<li>采用H5App来快速开发</li>
+<li>开发微信小程序</li>
+</ul>
+<p>然后逐一对三种方案进行分析，原生APP性能方面应该更优，但是开发成本难度应该更大，开发周期也更长。H5App性能方面应该略差一点，但开发难度应该更低，开发时间也更短。微信小程序需要通过企业认证才可以进行开发，暂时不了解。考虑到该项目对性能要求不高，所以排除采用原生APP的方案，对于H5开发暂时决定采用APICloud进行开发，下面开始着手学习相关文档。微信小程序先尝试解决企业认证问题，不过感觉坑略多。<br>加油！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天接到做一个移动端应用的任务，这是我之前没有接触过的，不过这种情况也不是第一次了，所以心态还是比较淡定。关于这个移动端应用开始能够想到的解决方案有3种：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;采用原生APP的制作方式&lt;/li&gt;
+&lt;li&gt;采用H5App来快速开发&lt;/li&gt;
+&lt;li&gt;开发
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>第一篇博客</title>
+    <link href="http://vzardlloo.github.io/2017/03/07/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://vzardlloo.github.io/2017/03/07/第一篇博客/</id>
+    <published>2017-03-07T11:59:26.000Z</published>
+    <updated>2017-03-12T09:25:21.648Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是我的个人博客里发布的第一篇博客，在过去的几天里我抽空采用GitHubPage+Hexo初步搭建了一个人博客。为什么要搭建一个个人博客呢？原因主要有下面几个：</p>
+<p>1.一些网站提供给用户的自由度太低，不能满足自己想随心所欲地折腾的愿望，在这里不会有发帖审查，不会有删帖，基本完全属于自己。<br>2.感觉经常总结和保持向外输出是一种比较高效的学习方式，所以博客里会写一些平时学习的总结。<br>3.老早就知道GitHub有提供这个平台，一直想尝试一下，同时也可以当做自己的一个名片或简历。<br>4.我就是爱折腾……</p>
+<p>博客以后还会不断完善，增加功能，欢迎大家关注捧场。有搭建个人博客意向但没有相关经验的同学可以私下交流，QQ:2942708438</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是我的个人博客里发布的第一篇博客，在过去的几天里我抽空采用GitHubPage+Hexo初步搭建了一个人博客。为什么要搭建一个个人博客呢？原因主要有下面几个：&lt;/p&gt;
+&lt;p&gt;1.一些网站提供给用户的自由度太低，不能满足自己想随心所欲地折腾的愿望，在这里不会有发帖审查，不会
+    
+    </summary>
+    
+      <category term="杂谈" scheme="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
+    
+    
+  </entry>
+  
+</feed>
