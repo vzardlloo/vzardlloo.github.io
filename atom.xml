@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-07-17T13:43:25.909Z</updated>
+  <updated>2017-08-12T14:24:04.085Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,107 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>JAVA基础回顾-字节码指令</title>
+    <link href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/"/>
+    <id>http://vzardlloo.github.io/2017/08/10/JAVA基础回顾-字节码指令/</id>
+    <published>2017-08-10T08:34:19.000Z</published>
+    <updated>2017-08-12T14:24:04.085Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘和类比两者之间的关系。<br>本着这样的思想，我们进行Java字节码指令的学习。JAVA字节码在JAVA虚拟机中的地位相当于实体机的机器码，一切在Java虚拟机上运行的程序都要被解释或编译成字节码，一切在实体机上运行的程序最后也都要编译成机器码。Java字节码指令可以对字节码进行操作，在实体机中对机器码进行操作的是汇编语言。所以Java字节码指令对应汇编语言，Java字节码指令集对应汇编指令集。</p>
+<h4 id="字节码简介"><a href="#字节码简介" class="headerlink" title="字节码简介"></a>字节码简介</h4><p>Java字节码指令由<em>一个</em>字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。<br><a id="more"></a></p>
+<h4 id="字节码与数据类型"><a href="#字节码与数据类型" class="headerlink" title="字节码与数据类型"></a>字节码与数据类型</h4><p>在字节码指令集中，大多数指令都对应的其操作所对应的数据类型信息，比如iload表示从局部变量表中加载int型的数据到操作栈中，fload从局部变量表中加载float型的数据到操作栈中…但是由于Java字节码的操作码只有一个字节（即0~255），这意味着指令集的操作码总数不可能超过256条。所以如果要求Java运行时所有的数据类型都有对应的与数据类型相关的指令去支持的话，操作码的总数将超过256条。所以JAVA字节码指令集被设计为Not Orthogonal（非完全独立）,即并非每种数据类型和每种操作都有对应的指令，有一些指令可以在必要的时候将一些不被支持的数据类型转换为被支持的数据类型。我们可以以数据类型为列，操作指令为行制作一张表，其中为空的项即说明虚拟机不支持对这种数据类型进行这项操作。<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG" alt=""></p>
+<h4 id="加载和存储指令"><a href="#加载和存储指令" class="headerlink" title="加载和存储指令"></a>加载和存储指令</h4><p>加载和存储指令用于将数据在帧栈中的局部变量表和操作数栈之间传输。</p>
+<ul>
+<li>将一个局部变量表加载到操作数栈：<br>iload、<code>iload_&lt;n&gt;</code>、lload、lload<em><n>、fload、fload</n></em><n>、dload、<code>dload_&lt;n&gt;</code>、aload、<code>aload_&lt;n&gt;</code>。</n></li>
+<li>将一个数值从操作数栈储存到局部变量表：<br>istore,<code>istore_&lt;n&gt;</code>,lstore,<code>lstore_&lt;n&gt;</code>,fstore,<code>fstore_&lt;n&gt;</code>,dstore,<code>dstore_&lt;n&gt;</code>,astore,<code>astore_&lt;n&gt;</code>。</li>
+<li><p>将一个常量加载到操作数栈：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bipush,sipush,lde,lde_w,ldc2_w,aconst_null,iconst_ml,iconst_&lt;i&gt;,lconst_&lt;i&gt;,fconst_&lt;i&gt;,dconst_&lt;i&gt;。</div></pre></td></tr></table></figure>
+</li>
+<li><p>拓充局部变量表的访问引索的指令：wide</p>
+</li>
+</ul>
+<h4 id="运算指令"><a href="#运算指令" class="headerlink" title="运算指令"></a>运算指令</h4><p>运算指令用于对操作数栈上的值进行某种特定的运算。</p>
+<ul>
+<li>加法运算：iadd,ladd,fadd,dadd。</li>
+<li>减法运算：isub,lsub,fsub,dsub。</li>
+<li>乘法运算：imul,lmul,fmul,dmul。</li>
+<li>除法运算：idiv,ldiv,fdiv,ddiv。</li>
+<li>求余指令：irem,lrem,frem,drem。</li>
+<li>取反指令：imeg,lmeg,fmeg,dmeg。</li>
+<li>位移指令：ishl,ishr,iushr,lshl,lshr,lushr。</li>
+<li>按位或指令：ior,lor。</li>
+<li>按位与指令：iand,land。</li>
+<li>按位异或指令：ixor,lxor。</li>
+<li>局部变量自增指令：iinc。</li>
+<li>比较指令：dcmpg,dcmpl,fcmpg,fcmpl,lcmp。<br><em>注：只有在除法指令（idiv,ldiv)和求余指令（irem,lrem)当出现除数为零时会导致虚拟机抛出AirtmeticException异常，其余整形和浮点型运算场景都不会抛出异常</em></li>
+</ul>
+<h4 id="类型转换指令"><a href="#类型转换指令" class="headerlink" title="类型转换指令"></a>类型转换指令</h4><p>类型转换指令可以将两种不同数值类型进行相互转换。<br>Java虚拟机天然支持基本数据类型的宽化类型转换，例如int到long、flost、double等。<br>对于窄化数据类型转化则必须用显示的转换指令：</p>
+<ul>
+<li>i2b(int -&gt; boolean)</li>
+<li>i2c(int -&gt; char)</li>
+<li>i2s(int -&gt; short)</li>
+<li>l2i(long -&gt; int)</li>
+<li>f2i(float -&gt; int)</li>
+<li>f2l(float -&gt; long)</li>
+<li>d2i(double -&gt; int)</li>
+<li>d2l(double -&gt; long)</li>
+<li>d2f(double -&gt; float)<br><em>几点说明：</em></li>
+<li>int/long 类型窄化转换为整数类型T时，转换过程为丢弃除最低位N（T的数据类型长度）个字节以外的内容。</li>
+<li>浮点值窄化转换为整数类型T（int/long)时：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if(浮点值==NaN)&#123;</div><div class="line">    result = 0;</div><div class="line">&#125;else&#123;</div><div class="line">    value = [浮点值];  //向下取整</div><div class="line">    if(T.min &lt;= value &lt;= T.max)&#123;    //value在T的表示范围内</div><div class="line">        result = value;</div><div class="line">    &#125;else&#123;</div><div class="line">        if(value &gt; 0) result = T.max;</div><div class="line">        if(value &lt; 0) result = T.min;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="对象创建与访问指令"><a href="#对象创建与访问指令" class="headerlink" title="对象创建与访问指令"></a>对象创建与访问指令</h4><ul>
+<li>创建类实例的指令：new</li>
+<li>创建数组的指令：newarray,anewarray,multianewarray</li>
+<li>访问类字段（static字段）和实例字段（非static字段）的指令：getfield,putfield,getstatic,putstatic</li>
+<li>将一个数组元素加载到操作数栈的指令:<br>baload,caload,saload,iaload,faload,daload,aaload</li>
+<li>将一个操作数栈的值存储到数组元素中的指令：<br>bastore,castore,iastore,sastore,fastore,fastore,dastore,aastore</li>
+<li>取数组长度的指令：arraylength</li>
+<li>检查类实例类型的指令：instanceof,checkcast</li>
+</ul>
+<h4 id="操作数栈管理指令"><a href="#操作数栈管理指令" class="headerlink" title="操作数栈管理指令"></a>操作数栈管理指令</h4><ul>
+<li>将一个操作数栈的栈顶一个或两个元素出栈：pop、pop2。</li>
+<li>复制栈顶一个或两个数值并将复制值或双份的复制值重新压入栈顶：dup、dup2、dup_x1,dup2_x1,dup_x2,dup2_x2。</li>
+<li>将栈顶端的两个数值交换：swap。</li>
+</ul>
+<h4 id="控制转移指令"><a href="#控制转移指令" class="headerlink" title="控制转移指令"></a>控制转移指令</h4><p>控制转移指令可以让Java虚拟机有条件或者无条件的从指定的位置而不是控制转移指令的下一条指令继续执行程序。</p>
+<ul>
+<li>条件分支：<br>ifeq,ifit,ifle,ifgt,ifnull,ifnonnull,if_icmpeq,if_icmpne,if_icmplt,if_icmpgt,if_icmple,if_icmpge,if_acmpeq,if_acmpne。</li>
+<li>复合条件分支：tableswitch,lookupswitch。</li>
+<li>无条件分支：gosto,goto_w,jsr,jsr_w,ret。</li>
+</ul>
+<h4 id="方法调用和返回指令"><a href="#方法调用和返回指令" class="headerlink" title="方法调用和返回指令"></a>方法调用和返回指令</h4><ul>
+<li>invokevirtual:用于调用对象的实例方法，根据对象的实际类型进行分派（虚方法分派）。</li>
+<li>invokeinterface:用于调用接口方法，它在运行时搜索一个实现了这个接口方法的对象，找出适合的方法进行调用。</li>
+<li>invokespecial:用于调用一些需要特殊处理的实例方法，包括实例的初始化方法，私有方法和父类方法。</li>
+<li>invokestatic:用于调用类方法（static方法）</li>
+<li>invokedynamic:用于运行时动态解析出调用点限定符所应用的方法，并执行该方法。（前面的分派逻辑都固化在虚拟机内部，而该指令的分派逻辑是由用户自定义）。</li>
+<li>方法返回指令：ireture(返回类型是int,short,byte,char,boolean时),lreturn,freturn,dreturn,areturn,另外还有一条return供void方法、实例/类/接口的初始化方法使用。</li>
+</ul>
+<h4 id="异常处理指令"><a href="#异常处理指令" class="headerlink" title="异常处理指令"></a>异常处理指令</h4><p>显式抛出异常指令：athrow</p>
+<h4 id="同步指令"><a href="#同步指令" class="headerlink" title="同步指令"></a>同步指令</h4><ul>
+<li>monitorenter,monitorexit</li>
+</ul>
+<h4 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h4><p>我们拿Java里面比较经典的i++和++i问题来做个练习，熟悉下用字节码分析问题：<br>Test Case for ++i:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] argv )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>  value = <span class="number">0</span>;</div><div class="line">        value = ++value;</div><div class="line"></div><div class="line">        System.out.println(value);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：1。<br>对应部分字节码及分析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">       0: iconst_0                 //将0加载到栈顶</div><div class="line">       1: istore_1                 //将0存储到变量value</div><div class="line">       2: iinc          1, 1       //value在局部变量表自增为1,(此处为虚指令，真实的变量操作要靠load和store指令)</div><div class="line">       5: iload_1                  //将value的值加载到栈顶</div><div class="line">       6: istore_1                 //将栈顶的内容保存到变量value，value=1</div><div class="line">       7: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">      10: iload_1</div><div class="line">      11: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">      14: return</div></pre></td></tr></table></figure></p>
+<p>Test Case for i++:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] argv )</span></span></div><div class="line">    &#123;</div><div class="line">       <span class="keyword">int</span>  value = <span class="number">0</span>;</div><div class="line">       value = value++;</div><div class="line"></div><div class="line">        System.out.println(value);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：0<br>字节码及分析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">      0: iconst_0              //将0加载到栈顶</div><div class="line">      1: istore_1              //将0存储到变量value</div><div class="line">      2: iload_1               //将value的值加载到栈顶,栈顶为0</div><div class="line">      3: iinc          1, 1    //value在局部变量表自增为1</div><div class="line">      6: istore_1              //将栈顶的内容保存到变量value,value=0</div><div class="line">      7: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">     10: iload_1</div><div class="line">     11: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">     14: return</div></pre></td></tr></table></figure></p>
+<p>以上通过字节码分析对这个问题无疑有了更深层次的理解。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h4&gt;&lt;p&gt;众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘和类比两者之间的关系。&lt;br&gt;本着这样的思想，我们进行Java字节码指令的学习。JAVA字节码在JAVA虚拟机中的地位相当于实体机的机器码，一切在Java虚拟机上运行的程序都要被解释或编译成字节码，一切在实体机上运行的程序最后也都要编译成机器码。Java字节码指令可以对字节码进行操作，在实体机中对机器码进行操作的是汇编语言。所以Java字节码指令对应汇编语言，Java字节码指令集对应汇编指令集。&lt;/p&gt;
+&lt;h4 id=&quot;字节码简介&quot;&gt;&lt;a href=&quot;#字节码简介&quot; class=&quot;headerlink&quot; title=&quot;字节码简介&quot;&gt;&lt;/a&gt;字节码简介&lt;/h4&gt;&lt;p&gt;Java字节码指令由&lt;em&gt;一个&lt;/em&gt;字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="jvm" scheme="http://vzardlloo.github.io/tags/jvm/"/>
+    
+  </entry>
   
   <entry>
     <title>JVM内存模型</title>
