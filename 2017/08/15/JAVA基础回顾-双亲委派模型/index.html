@@ -1,0 +1,847 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jvm," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言“give it to your mother,she knows how to do it”,这是一张温馨又搞笑的图片，温馨在于展示了母亲的我们的关爱与呵护，搞笑是表现了很多人对衣物上的那些各种标识的含义一无所知的现状。但是我在看到这张图的时候想到的却不是这个，我想的是如果一个人遵从指示”give it to his/her mother”,然后mother又遵从指示”give it to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA基础回顾-双亲委派模型">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/15/JAVA基础回顾-双亲委派模型/index.html">
+<meta property="og:site_name" content="vzard's blog">
+<meta property="og:description" content="前言“give it to your mother,she knows how to do it”,这是一张温馨又搞笑的图片，温馨在于展示了母亲的我们的关爱与呵护，搞笑是表现了很多人对衣物上的那些各种标识的含义一无所知的现状。但是我在看到这张图的时候想到的却不是这个，我想的是如果一个人遵从指示”give it to his/her mother”,然后mother又遵从指示”give it to">
+<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/mother.jpg">
+<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/classloader.png">
+<meta property="og:updated_time" content="2017-08-15T12:55:43.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JAVA基础回顾-双亲委派模型">
+<meta name="twitter:description" content="前言“give it to your mother,she knows how to do it”,这是一张温馨又搞笑的图片，温馨在于展示了母亲的我们的关爱与呵护，搞笑是表现了很多人对衣物上的那些各种标识的含义一无所知的现状。但是我在看到这张图的时候想到的却不是这个，我想的是如果一个人遵从指示”give it to his/her mother”,然后mother又遵从指示”give it to">
+<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/mother.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/08/15/JAVA基础回顾-双亲委派模型/"/>
+
+
+
+
+
+  <title>JAVA基础回顾-双亲委派模型 | vzard's blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'true', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=true&web_id=true" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vzard's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">just do it</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/15/JAVA基础回顾-双亲委派模型/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vzardlloo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vzard's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JAVA基础回顾-双亲委派模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T10:49:02+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/15/JAVA基础回顾-双亲委派模型/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/15/JAVA基础回顾-双亲委派模型/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><img src="http://oo3aq3ac8.bkt.clouddn.com/mother.jpg" alt=""><br>“give it to your mother,she knows how to do it”,这是一张温馨又搞笑的图片，温馨在于展示了母亲的我们的关爱与呵护，搞笑是表现了很多人对衣物上的那些各种标识的含义一无所知的现状。但是我在看到这张图的时候想到的却不是这个，我想的是如果一个人遵从指示”give it to his/her mother”,然后mother又遵从指示”give it to her mother”(也就是给了奶奶)，如果奶奶又遵从指示”give it to her mother”…想到这我不禁感叹幸亏人类的寿命是有限的，不然这件衣服永远也洗不成:-),但是类似这样的事情在JAVA的世界里是真实存在的，那就是双亲委派模型。<br><a id="more"></a></p>
+<h4 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h4><p>在JAVA中对于任意一个类，都需要由加载他的类加载器和这个类本身来一同确定其在虚拟机中的唯一性，每一个类加载器都有一个独立的类名称空间。也就是说比较两个是否“相等”,只有在这个两个类是由同一个类加载器加载的前提下才有比较的意义，否则，就算这两个来源自同一个Class文件，被同一个虚拟机加载，只要不是被同一个类加载器加载，那这两个类就必然不相等。下面用代码举例说明：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> myutil;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStream;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by V-zar on 2017/8/15.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassLoaderTest</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line"></div><div class="line">        ClassLoader myClassLoader = <span class="keyword">new</span> ClassLoader() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="keyword">public</span> Class&lt;?&gt; loadClass(String name) <span class="keyword">throws</span> ClassNotFoundException &#123;</div><div class="line">               <span class="keyword">try</span>&#123;</div><div class="line">                   String fileName = name.substring(name.lastIndexOf(<span class="string">"."</span>)+<span class="number">1</span>)+<span class="string">".class"</span>;</div><div class="line">                   InputStream is = getClass().getResourceAsStream(fileName);</div><div class="line">                   <span class="keyword">if</span>(is == <span class="keyword">null</span>)&#123;</div><div class="line">                       <span class="keyword">return</span> <span class="keyword">super</span>.loadClass(name);</div><div class="line">                   &#125;</div><div class="line">                   <span class="keyword">byte</span>[] b = <span class="keyword">new</span> <span class="keyword">byte</span>[is.available()];</div><div class="line">                   is.read(b);</div><div class="line">                   <span class="keyword">return</span> defineClass(name,b,<span class="number">0</span>,b.length);</div><div class="line">               &#125;<span class="keyword">catch</span> (IOException e)&#123;</div><div class="line">                    <span class="keyword">throw</span> <span class="keyword">new</span> ClassNotFoundException(name);</div><div class="line">               &#125;</div><div class="line"></div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        Object obj = myClassLoader.loadClass(<span class="string">"myutil.ClassLoaderTest"</span>).newInstance();</div><div class="line">        System.out.println(obj.getClass());         <span class="comment">//#1</span></div><div class="line">        System.out.println(obj <span class="keyword">instanceof</span> myutil.ClassLoaderTest);  <span class="comment">//#2</span></div><div class="line">        System.out.println(myutil.ClassLoaderTest.class.getClassLoader());<span class="comment">//#3</span></div><div class="line">        System.out.println(obj.getClass().getClassLoader());    <span class="comment">//#4</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">class myutil.ClassLoaderTest</div><div class="line">false</div><div class="line">sun.misc.Launcher$AppClassLoader@18b4aac2</div><div class="line">myutil.ClassLoaderTest$1@6e0be858</div></pre></td></tr></table></figure></p>
+<p>在代码中我们构造了一个简单的类加载器，它可以加载与自己在同一路径下的Class文件。我们用这个类加载器来加载<code>myutil.ClassLoaderTest</code>这个类，并且实例化了这个类的对象obj。在代码#1处我们获取obj的Class对象，发现权限定名为<code>myutil.ClassLoaderTest</code>。下一步代码#2是将obj与权限定名为<code>myutil.ClassLoader</code>的类作instanceof比较，但是结果为false,这个结果看似很不合常理，因为在#1处已经获取obj的Class对象，权限定名就是<code>myutil.ClassLoaderTest</code>。接着看#3和#4,我们分别获取了obj和<code>myutil.ClassLoader</code>的类加载器并将其打印到控制台,从打印结果可以看出两者的加载器并不相同。这就是#2处程序执行结果为false的原因。</p>
+<h4 id="双亲委派模型"><a href="#双亲委派模型" class="headerlink" title="双亲委派模型"></a>双亲委派模型</h4><p>从上面的例子可以看出类加载器对于Java类的重要性，但是对于众多的类加载器必然需要用一种方式来组织它们不然势必会造成混乱。在Java中类加载器的组织模型就是双亲委派模型。双亲委派模型的工作过程是：如果一个类加载器收到了类加载请求，它首先不会自己去尝试加载这个类，而是把这个请求委派给父类加载器去完成(“give it to your mother:D”),然后每一层都是这样，因此所有的类加载器最终都应该传送到最顶层的类加载器中，当上层类加载器无法完成这个加载请求时(他的搜索范围中没有找到所需要的类)，子加载器才会尝试自己去加载。这样有个显而易见的好处就是Java类随着它的类加载器一起具备了一种层级关系，可以让最基础的、使用范围最广的一些类由最顶层的类加载器来加载，可以保证在任何类加载器环境下它都可以被正确的加载。比如java.lang.Object，如果不用双亲委派模型来加载的话，如果用户自行编写了一个称为java.lang.Object，并且放置在ClassPath中， 那系统中将会出现多个不同的Object类，那么JAVA类型体系中最基础的行为也就得不到保证。<br>在JAVA中双亲委派模型的实现代码主要在java.lang.ClassLoader的loadClass()方法中，源码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">protected</span> Class&lt;?&gt; loadClass(String name, <span class="keyword">boolean</span> resolve)</div><div class="line">        <span class="keyword">throws</span> ClassNotFoundException</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">synchronized</span> (getClassLoadingLock(name)) &#123;</div><div class="line">            <span class="comment">// First, check if the class has already been loaded</span></div><div class="line">            Class&lt;?&gt; c = findLoadedClass(name);</div><div class="line">            <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">long</span> t0 = System.nanoTime();</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    <span class="keyword">if</span> (parent != <span class="keyword">null</span>) &#123;</div><div class="line">                        c = parent.loadClass(name, <span class="keyword">false</span>);</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        c = findBootstrapClassOrNull(name);</div><div class="line">                    &#125;</div><div class="line">                &#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</div><div class="line">                    <span class="comment">// ClassNotFoundException thrown if class not found</span></div><div class="line">                    <span class="comment">// from the non-null parent class loader</span></div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (c == <span class="keyword">null</span>) &#123;</div><div class="line">                    <span class="comment">// If still not found, then invoke findClass in order</span></div><div class="line">                    <span class="comment">// to find the class.</span></div><div class="line">                    <span class="keyword">long</span> t1 = System.nanoTime();</div><div class="line">                    c = findClass(name);</div><div class="line"></div><div class="line">                    <span class="comment">// this is the defining class loader; record the stats</span></div><div class="line">                    sun.misc.PerfCounter.getParentDelegationTime().addTime(t1 - t0);</div><div class="line">                    sun.misc.PerfCounter.getFindClassTime().addElapsedTimeFrom(t1);</div><div class="line">                    sun.misc.PerfCounter.getFindClasses().increment();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (resolve) &#123;</div><div class="line">                resolveClass(c);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> c;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>分析：逻辑很简单粗暴，先检查有没有被加载过，如果没有则调用父类的loadClass()方法，若父加载器为空则默认使用JAVA中的顶级类加载器–Bootstrap ClassLoader作为父类加载器来尝试加载，如果父类加载失败则抛出ClassNotFoundException异常后，再调用自己的findClass。最后，这些过程都是同步的。<br>Java 中的类加载器大致可以分成两类，一类是系统提供的，另外一类则是由 Java 应用开发人员编写的。系统提供的类加载器主要有下面三个：</p>
+<ul>
+<li>引导类加载器（bootstrap class loader）：它用来加载 Java 的核心库，是用原生代码来实现的，并不继承自 java.lang.ClassLoader。</li>
+<li>扩展类加载器（extensions class loader）：它用来加载 Java 的扩展库。Java 虚拟机的实现会提供一个扩展库目录。该类加载器在此目录里面查找并加载 Java 类。</li>
+<li>系统类加载器（system class loader）：它根据 Java<br>应用的类路径（CLASSPATH）来加载 Java 类。一般来说，Java<br>应用的类都是由它来完成加载的。可以通过 ClassLoader.getSystemClassLoader()来获取它。<br>除了系统提供的类加载器以外，开发人员可以通过继承java.lang.ClassLoader类的方式实现自己的类加载器，以满足一些特殊的需求。<blockquote>
+<p>类加载器树状组织结构示意图<br><img src="http://oo3aq3ac8.bkt.clouddn.com/classloader.png" alt=""></p>
+</blockquote>
+</li>
+</ul>
+<p>另外值得一提的是JAVA的双亲委派模型不是一个强制性的约束模型，只是一种JAVA设计者推荐的类加载器实现方式，在有些时候还需要打破这种模式（例如利用Thread ConText ClassLoader 加载 SPI代码）和OSGi技术。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/10/JAVA基础回顾-字节码指令/" rel="next" title="JAVA基础回顾-字节码指令">
+                <i class="fa fa-chevron-left"></i> JAVA基础回顾-字节码指令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg"
+               alt="vzardlloo" />
+          <p class="site-author-name" itemprop="name">vzardlloo</p>
+           
+              <p class="site-description motion-element" itemprop="description">永远谦虚，永远学习</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/vzardlloo" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/dai-hao-er-ji-4/" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类加载器"><span class="nav-number">2.</span> <span class="nav-text">类加载器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双亲委派模型"><span class="nav-number">3.</span> <span class="nav-text">双亲委派模型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://vzardlloo.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://vzardlloo.github.io/2017/08/15/JAVA基础回顾-双亲委派模型/';
+          this.page.identifier = '2017/08/15/JAVA基础回顾-双亲委派模型/';
+          this.page.title = 'JAVA基础回顾-双亲委派模型';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://vzardlloo.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
