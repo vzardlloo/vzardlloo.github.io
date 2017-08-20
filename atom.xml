@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-08-20T12:32:12.946Z</updated>
+  <updated>2017-08-20T12:45:20.183Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"/>
     <id>http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/</id>
     <published>2017-08-20T08:23:52.000Z</published>
-    <updated>2017-08-20T12:32:12.946Z</updated>
+    <updated>2017-08-20T12:45:20.183Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：</p>
 <ul>
@@ -118,7 +118,7 @@
     <link href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/"/>
     <id>http://vzardlloo.github.io/2017/08/10/JAVA基础回顾-字节码指令/</id>
     <published>2017-08-10T08:34:19.000Z</published>
-    <updated>2017-08-12T14:24:04.085Z</updated>
+    <updated>2017-08-20T12:37:50.026Z</updated>
     
     <content type="html"><![CDATA[<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘和类比两者之间的关系。<br>本着这样的思想，我们进行Java字节码指令的学习。JAVA字节码在JAVA虚拟机中的地位相当于实体机的机器码，一切在Java虚拟机上运行的程序都要被解释或编译成字节码，一切在实体机上运行的程序最后也都要编译成机器码。Java字节码指令可以对字节码进行操作，在实体机中对机器码进行操作的是汇编语言。所以Java字节码指令对应汇编语言，Java字节码指令集对应汇编指令集。</p>
 <h4 id="字节码简介"><a href="#字节码简介" class="headerlink" title="字节码简介"></a>字节码简介</h4><p>Java字节码指令由<em>一个</em>字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。<br><a id="more"></a></p>
@@ -208,6 +208,8 @@
 &lt;h4 id=&quot;字节码简介&quot;&gt;&lt;a href=&quot;#字节码简介&quot; class=&quot;headerlink&quot; title=&quot;字节码简介&quot;&gt;&lt;/a&gt;字节码简介&lt;/h4&gt;&lt;p&gt;Java字节码指令由&lt;em&gt;一个&lt;/em&gt;字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。&lt;br&gt;
     
     </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
     
     
       <category term="jvm" scheme="http://vzardlloo.github.io/tags/jvm/"/>
