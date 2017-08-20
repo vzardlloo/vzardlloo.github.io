@@ -88,7 +88,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="jvm," />
 
 
 
@@ -106,28 +106,36 @@
 
 
 
-<meta name="description" content="当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:
+<meta name="description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：
 
-JAVA_HOME—&amp;gt;JDK安装根目录
-PATH增加%JAVA_HOME%\bin
-CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有这样的程序：1234567891011">
+1、那些内存需要回收？
+2、什么时候回收？
+3、如何回收？
+
+那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java命令行运行的一个小坑">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/index.html">
+<meta property="og:title" content="JAVA基础回顾-垃圾回收">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/index.html">
 <meta property="og:site_name" content="vzard's blog">
-<meta property="og:description" content="当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:
+<meta property="og:description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：
 
-JAVA_HOME—&amp;gt;JDK安装根目录
-PATH增加%JAVA_HOME%\bin
-CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有这样的程序：1234567891011">
-<meta property="og:updated_time" content="2017-06-04T09:58:13.899Z">
+1、那些内存需要回收？
+2、什么时候回收？
+3、如何回收？
+
+那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
+<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/GCtool.png">
+<meta property="og:updated_time" content="2017-08-20T12:32:12.946Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java命令行运行的一个小坑">
-<meta name="twitter:description" content="当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:
+<meta name="twitter:title" content="JAVA基础回顾-垃圾回收">
+<meta name="twitter:description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：
 
-JAVA_HOME—&amp;gt;JDK安装根目录
-PATH增加%JAVA_HOME%\bin
-CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有这样的程序：1234567891011">
+1、那些内存需要回收？
+2、什么时候回收？
+3、如何回收？
+
+那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
+<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/GCtool.png">
 
 
 
@@ -155,13 +163,13 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
 
 
 
-  <link rel="canonical" href="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/"/>
 
 
 
 
 
-  <title>Java命令行运行的一个小坑 | vzard's blog</title>
+  <title>JAVA基础回顾-垃圾回收 | vzard's blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -316,7 +324,7 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -333,7 +341,7 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java命令行运行的一个小坑</h1>
+          <h1 class="post-title" itemprop="name headline">JAVA基础回顾-垃圾回收</h1>
         
 
         <div class="post-meta">
@@ -345,8 +353,8 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-04T16:57:38+08:00">
-                2017-06-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-20T16:23:52+08:00">
+                2017-08-20
               </time>
             
 
@@ -386,9 +394,9 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/06/04/Java命令行运行的一个小坑/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/20/JAVA基础回顾-垃圾回收/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/06/04/Java命令行运行的一个小坑/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/20/JAVA基础回顾-垃圾回收/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -418,19 +426,35 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
       
 
       
-        <p>当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:</p>
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：</p>
 <ul>
-<li>JAVA_HOME—&gt;JDK安装根目录</li>
-<li>PATH增加%JAVA_HOME%\bin</li>
-<li>CLASS_PATH—&gt;%JAVA_HOME%\lib<br>但是这样是有问题的，比如你有这样的程序：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">package org.net;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by V-zar on 2017/5/22.</div><div class="line"> */</div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line"></div><div class="line">        System.out.print(&quot;HelloWorld&quot;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<li>1、那些内存需要回收？</li>
+<li>2、什么时候回收？</li>
+<li>3、如何回收？</li>
+</ul>
+<h4 id="那些内存需要回收"><a href="#那些内存需要回收？" class="headerlink" title="那些内存需要回收？"></a>那些内存需要回收？</h4><p>这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收的内存。<br>主要有两种算法：</p>
+<ul>
+<li><p>引用计数法：给对象添加一个引用计数器，每当有一个地方引用它时计数器就加1，引用失效时计数器就减1，当计数器的值为0时，该对象判为“死亡”。<br><code>优点</code>：实现简单，效率高<br><code>缺点</code>：不能解决循环引用的问题</p>
+</li>
+<li><p>可达性分析算法：选取一些对象作为“GC root”作为起始点，然后沿着引用开始向下搜索，当一个对象对于所有“GC root”都是不可达的，那么这个对象可以判为“死亡”。(主流虚拟机采用的方式)。</p>
+<a id="more"></a>
 </li>
 </ul>
-<p>当你在某个目录编译<code>javac Test.java</code>后，试图用java命令<code>java Test</code>运行的时候,会发现报错<code>找不到或无法加载主类</code>。这是因为按照很多资料那样来配置的时候CLASS_PATH是错误的，解决的办法有两个：</p>
-<ul>
-<li>运行时加入参数<code>java -cp . Test</code> (运行时指定classpath为当前路径)。</li>
-<li>在环境变量CLASS_PATH中加入<code>.</code>,表示当前路径，Java解释器将在当前路径搜索class<br>文件，如果CLASS_PATH中有多个路径值，建议将<code>.</code>置顶。（一劳永逸的方法）。</li>
+<h4 id="什么时候回收"><a href="#什么时候回收？" class="headerlink" title="什么时候回收？"></a>什么时候回收？</h4><ul>
+<li>从虚拟机的角度来说：GC又分为 minor GC 和 Full GC (也称为 Major GC )。Java 堆内存分为新生代和老年代，新生代中又分为1个 Eden 区域 和两个 Survivor 区域。<br>那么对于 Minor GC 的触发条件：大多数情况下，对象直接在 Eden 区中进行分配。如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC。对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话，那么就会进行一次 Full GC。<br>Ps：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：<br>在发生Minor GC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象的总空间。如果大于则进行Minor GC，如果小于则看HandlePromotionFailure设置是否允许担保失败（不允许则直接Full GC）。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于则尝试Minor GC（如果尝试失败也会触发Full GC），如果小于则进行Full GC。<br>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</li>
+<li>从对象的角度来说：当一个对象被标记为“死亡”时，并非立即执行死刑。要真正执行死刑要经历至少两次标记。一次是在被判为“死亡”的时候，然后会进行一次筛选，筛选的方法是看是否有必要执行finalize()方法，当finalize()方法没有被覆盖或者已经被调用了则认为“没有执行的必要”。如果对象被判为有必要执行则会被放到一个叫F-Queue的队列中，然后GC会对F-Queue中的对象进行标记，这是对象逃脱GC的最后一次机会，如果在此还未逃脱，那就真的要被回收了。</li>
 </ul>
-<p>另外，如果你是用Eclipse或者IDEA编辑程序的话，一般会在程序开头加入包的信息，如<br><code>package org.net;</code>,这同样会导致错误，所以如果是用Eclipse或者IDEA编辑程序并且试图在命令行运行程序的话，最好检查一下程序开头有没有包的信息，有的话需要删掉:-).</p>
+<h4 id="如何回收"><a href="#如何回收？" class="headerlink" title="如何回收？"></a>如何回收？</h4><ul>
+<li><p>标记-清除(Mark-Sweep)算法：首先标记所有需要回收的对象，在标记完成后统一回收所有被标记的对象。<br><code>优点</code>：实现简单<br><code>缺点</code>：效率低下，会产生大量的内存碎片</p>
+</li>
+<li><p>复制算法(Copying)：将内存按容量分成两块，当这一块内存快用完了，就将还活着的对象复制到另一块去，然后再将已使用过的内存空间一次清理掉。<br><code>优点</code>：实现简单，运行高效，不存在碎片问题<br><code>缺点</code>：内存利用率低</p>
+</li>
+<li><p>标记-整理(Mark-Compact)算法:首先标记所有需要回收的对象，在标记完成后统一整理，使其都向一端移动，然后直接清理端边界外的内存。<br><code>优点</code>：结合了Mark-Sweep和Copying的优点<br><code>缺点</code>：算法实现较为复杂</p>
+</li>
+<li><p>分代收集算法：根据对象生存周期的不同对内存进行划分。一般将Java堆划成新生代和老年代，这样就可以根据各个年代的特点采用最合适的垃圾收集算法。比如新生代对象”朝生夕死”的情况比较多，可以采用复制算法，老年代对象存活率高，可以采用标记-清除或标记-整理算法。</p>
+</li>
+</ul>
+<h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><p>这里不做过多讲解，放一JDK1.7Update14后的HotSpot虚拟机包含的Java虚拟机图示：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/GCtool.png" alt=""><br><em>其中注意G1收集器是当前收集器技术的最前沿成果之一</em></p>
 
       
     </div>
@@ -458,6 +482,12 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/jvm/" rel="tag"># jvm</a>
+          
+        </div>
+      
 
       
       
@@ -467,8 +497,8 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/15/Java类加载器小结/" rel="next" title="Java类加载器小结">
-                <i class="fa fa-chevron-left"></i> Java类加载器小结
+              <a href="/2017/08/15/JAVA基础回顾-双亲委派模型/" rel="next" title="JAVA基础回顾-双亲委派模型">
+                <i class="fa fa-chevron-left"></i> JAVA基础回顾-双亲委派模型
               </a>
             
           </div>
@@ -476,10 +506,6 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/28/springboot学习之HelloWorld篇/" rel="prev" title="springboot学习之HelloWorld篇">
-                springboot学习之HelloWorld篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -533,8 +559,17 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg"
@@ -623,6 +658,22 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#那些内存需要回收"><span class="nav-number">2.</span> <span class="nav-text">那些内存需要回收？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么时候回收"><span class="nav-number">3.</span> <span class="nav-text">什么时候回收？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何回收"><span class="nav-number">4.</span> <span class="nav-text">如何回收？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">5.</span> <span class="nav-text">垃圾回收器</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -787,9 +838,9 @@ CLASS_PATH—&amp;gt;%JAVA_HOME%\lib但是这样是有问题的，比如你有�
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/';
-          this.page.identifier = '2017/06/04/Java命令行运行的一个小坑/';
-          this.page.title = 'Java命令行运行的一个小坑';
+          this.page.url = 'http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/';
+          this.page.identifier = '2017/08/20/JAVA基础回顾-垃圾回收/';
+          this.page.title = 'JAVA基础回顾-垃圾回收';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://vzardlloo.disqus.com/embed.js';
