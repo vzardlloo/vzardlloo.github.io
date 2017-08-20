@@ -108,56 +108,38 @@
 
 <meta name="description" content="Bootstrap ClassLoader
 
-
-
 负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类
-
 
 Extension ClassLoader
 
-
-
 负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包
 
-
-App Cl">
+App ClassLoad">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java类加载器小结">
 <meta property="og:url" content="http://vzardlloo.github.io/2017/05/15/Java类加载器小结/index.html">
 <meta property="og:site_name" content="vzard's blog">
 <meta property="og:description" content="Bootstrap ClassLoader
 
-
-
 负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类
-
 
 Extension ClassLoader
 
-
-
 负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包
 
-
-App Cl">
-<meta property="og:updated_time" content="2017-08-20T12:53:56.394Z">
+App ClassLoad">
+<meta property="og:updated_time" content="2017-08-20T12:58:31.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java类加载器小结">
 <meta name="twitter:description" content="Bootstrap ClassLoader
 
-
-
 负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类
-
 
 Extension ClassLoader
 
-
-
 负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包
 
-
-App Cl">
+App ClassLoad">
 
 
 
@@ -448,33 +430,21 @@ App Cl">
       
 
       
-        <ul>
-<li><ol>
+        <ol>
 <li>Bootstrap ClassLoader</li>
 </ol>
-</li>
-</ul>
 <p>负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类</p>
-<ul>
-<li><ol>
+<ol>
 <li>Extension ClassLoader</li>
 </ol>
-</li>
-</ul>
 <p>负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包</p>
-<ul>
-<li><ol>
+<ol>
 <li>App ClassLoader</li>
 </ol>
-</li>
-</ul>
 <p>负责记载classpath中指定的jar包及目录中class</p>
-<ul>
-<li><ol>
+<ol>
 <li>Custom ClassLoader</li>
 </ol>
-</li>
-</ul>
 <p>属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader</p>
 <p>加载过程中会先检查类是否被已加载，检查顺序是自底向上，从Custom ClassLoader到BootStrap ClassLoader逐层检查，只要某个classloader已加载就视为已加载此类，保证此类只所有ClassLoader加载一次。而加载的顺序是自顶向下，也就是由上层来逐层尝试加载此类。</p>
 
