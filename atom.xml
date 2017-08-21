@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-08-20T12:45:20.183Z</updated>
+  <updated>2017-08-21T15:20:05.202Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Servlet小结</title>
+    <link href="http://vzardlloo.github.io/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/"/>
+    <id>http://vzardlloo.github.io/2017/08/21/Servlet小结/</id>
+    <published>2017-08-21T13:19:08.000Z</published>
+    <updated>2017-08-21T15:20:05.202Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Servlet是JAVA Web的底层技术，有着很重要的地位。下面分几点简单总结下：</p>
+<ul>
+<li>1、Servlet家族</li>
+<li>2、Servlet–HelloWorld!</li>
+<li>3、Servlet生命周期</li>
+</ul>
+<h4 id="servlet家族"><a href="#Servlet家族" class="headerlink" title="Servlet家族"></a>Servlet家族</h4><p><img src="http://oo3aq3ac8.bkt.clouddn.com/servletfamily.png" alt=""><br>上图是Servlet家族类图，其中可以看出HttpServlet继承自GenericServlet,GenericServlet继承自HttpServlet。它们的结构如下：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/servlet.png" alt="servlet" title="Servlet"><br><img src="http://oo3aq3ac8.bkt.clouddn.com/GenericServlet.png" alt="GenericsServlet" title="GenericsServlet"><br><img src="http://oo3aq3ac8.bkt.clouddn.com/httpservlet.png" alt="HttpServlet" title="HttpServlet"></p>
+<p>可以看出Servlet的结构非常简单，仅仅定义了<code>init()</code>、<code>service</code>、<code>desdroy</code>三个控制生命周期的方法，GenericServlet对Servlet<br>进行了一些拓展，增加了<code>log()</code>、<code>getInitParameter()</code>等方法，HttpServlet对GenericServlet又进行了拓展，增加了Http协议的相关方法。<br><a id="more"></a></p>
+<h4 id="servlethelloworld"><a href="#Servlet–HelloWorld" class="headerlink" title="Servlet–HelloWorld!"></a>Servlet–HelloWorld!</h4><ol>
+<li>在tomcat中新建一个web应用<code>hello</code>，在web应用中新建一个<code>WEB-INF/classes</code>目录。</li>
+<li>在<code>classes</code>目录新建一个<code>MyServlet</code>。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">import javax.servlet.ServletException;</div><div class="line">import javax.servlet.ServletRequest;</div><div class="line">import javax.servlet.ServletResponse;</div><div class="line">import javax.servlet.http.HttpServlet;</div><div class="line">import java.io.IOException;</div><div class="line">import java.io.OutputStream;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by V-zar on 2017/8/21.</div><div class="line"> */</div><div class="line">public class MyServlet extends HttpServlet &#123;</div><div class="line"></div><div class="line">    public  void service(ServletRequest request, ServletResponse response) throws ServletException,IOException&#123;</div><div class="line"></div><div class="line">        OutputStream op = response.getOutputStream();</div><div class="line">        op.write(&quot;HelloWorld!&quot;.getBytes());</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>编译，<code>javac -cp %CATALINA_HOME%/lib/servlet-api.jar -d . MyServlet.java</code>，参考<a href="http://www.iitshare.com/under-the-cmd-compile-the-java.html" target="_blank" rel="external">这篇博客</a></li>
+<li>在<code>WEB-INF</code>目录中新建一个<code>web.xml</code>文件，配置<code>servlet</code>的对外访问路径。</li>
+<li>启动tomcat访问。</li>
+</ol>
+<h4 id="servlet生命周期"><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h4><p>先上一张图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/javaweb_servlet-lifecycle.png" alt=""><br>解读：</p>
+<ol>
+<li>浏览器发送http请求到Servlet容器(假设为Tomcat)。</li>
+<li>Tomcat根据请求找到对应的Web应用。</li>
+<li><p>Web应用里的web.xml里的配置找到请求对应的Servlet,如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">servlet</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>mvc-dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></div><div class="line"></div><div class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>mvc-dispatcher<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>得到servlet.class的字符串内容。</p>
+</li>
+<li>Tomcat通过反射构造servlet对象。</li>
+<li>Tomcat调用servlet构造方法，servlet对象执行构造方法。</li>
+<li>Tomcat创建ServletConfig对象，并调用serv的init()方法，servlet执行init()方法。</li>
+<li>Tomcat创建request和response对象，并调用servlet的service()方法,servlet执行service()方法。</li>
+<li>servlet返回修改过的response给Tomcat。</li>
+<li>Tomcat将返回的response对象渲染成相应格式并发送给浏览器。</li>
+<li>servlet调用destroy方法，servlet被销毁。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt;Servlet是JAVA Web的底层技术，有着很重要的地位。下面分几点简单总结下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1、Servlet家族&lt;/li&gt;
+&lt;li&gt;2、Servlet–HelloWorld!&lt;/li&gt;
+&lt;li&gt;3、Servlet生命周期&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&quot;Servlet家族&quot;&gt;&lt;a href=&quot;#Servlet家族&quot; class=&quot;headerlink&quot; title=&quot;Servlet家族&quot;&gt;&lt;/a&gt;Servlet家族&lt;/h4&gt;&lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/servletfamily.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;上图是Servlet家族类图，其中可以看出HttpServlet继承自GenericServlet,GenericServlet继承自HttpServlet。它们的结构如下：&lt;br&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/servlet.png&quot; alt=&quot;servlet&quot; title=&quot;Servlet&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/GenericServlet.png&quot; alt=&quot;GenericsServlet&quot; title=&quot;GenericsServlet&quot;&gt;&lt;br&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/httpservlet.png&quot; alt=&quot;HttpServlet&quot; title=&quot;HttpServlet&quot;&gt;&lt;/p&gt;
+&lt;p&gt;可以看出Servlet的结构非常简单，仅仅定义了&lt;code&gt;init()&lt;/code&gt;、&lt;code&gt;service&lt;/code&gt;、&lt;code&gt;desdroy&lt;/code&gt;三个控制生命周期的方法，GenericServlet对Servlet&lt;br&gt;进行了一些拓展，增加了&lt;code&gt;log()&lt;/code&gt;、&lt;code&gt;getInitParameter()&lt;/code&gt;等方法，HttpServlet对GenericServlet又进行了拓展，增加了Http协议的相关方法。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="web Java" scheme="http://vzardlloo.github.io/tags/web-Java/"/>
+    
+  </entry>
   
   <entry>
     <title>JAVA基础回顾-垃圾回收</title>
