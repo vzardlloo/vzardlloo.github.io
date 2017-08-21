@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-08-21T15:20:05.202Z</updated>
+  <updated>2017-08-21T15:27:26.174Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://vzardlloo.github.io/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/"/>
     <id>http://vzardlloo.github.io/2017/08/21/Servlet小结/</id>
     <published>2017-08-21T13:19:08.000Z</published>
-    <updated>2017-08-21T15:20:05.202Z</updated>
+    <updated>2017-08-21T15:27:26.174Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Servlet是JAVA Web的底层技术，有着很重要的地位。下面分几点简单总结下：</p>
 <ul>
@@ -71,6 +71,8 @@
 &lt;p&gt;可以看出Servlet的结构非常简单，仅仅定义了&lt;code&gt;init()&lt;/code&gt;、&lt;code&gt;service&lt;/code&gt;、&lt;code&gt;desdroy&lt;/code&gt;三个控制生命周期的方法，GenericServlet对Servlet&lt;br&gt;进行了一些拓展，增加了&lt;code&gt;log()&lt;/code&gt;、&lt;code&gt;getInitParameter()&lt;/code&gt;等方法，HttpServlet对GenericServlet又进行了拓展，增加了Http协议的相关方法。&lt;br&gt;
     
     </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
     
     
       <category term="web Java" scheme="http://vzardlloo.github.io/tags/web-Java/"/>
