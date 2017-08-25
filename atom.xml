@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-08-25T08:45:51.204Z</updated>
+  <updated>2017-08-25T09:57:23.130Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>利用脚本提高效率</title>
+    <link href="http://vzardlloo.github.io/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/"/>
+    <id>http://vzardlloo.github.io/2017/08/25/利用脚本提高效率/</id>
+    <published>2017-08-25T08:51:04.000Z</published>
+    <updated>2017-08-25T09:57:23.130Z</updated>
+    
+    <content type="html"><![CDATA[<p>一直以来像SQL、shell脚本、DOS批处理等DSL和类DSL的东西都处于看了忘，忘了再看的无限循环中，在平时不怎么使用的情况要长久地记住这些东西从生理学上讲是不可能的。所以有两种方案：</p>
+<ol>
+<li>经常去使用它，比如完全使用Linux工作</li>
+<li>用到的时候，现场搜索，copy-paste大法好。<br>对于我来说1是我的追求，2是我的现状。</li>
+</ol>
+<p>命令行脚本对比于点鼠标有不少优势，比如可以一次把一些命令写在一个脚本里，然后执行，比起用鼠标每次都要点很多下效率要高的多，特别是当有很多台机器时用鼠标来操作无疑会是一场灾难更别提有的命令鼠标根本没法点，当然鼠标也有它的优势，当仅仅是个人电脑，并且一些操作用命令行无比冗长时，用鼠标只需点击一下便可完成操作此时鼠标更占优势。对于命令行还是鼠标的选择可能大致如下图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/script.png" alt=""><br><a id="more"></a><br>在我们日常生活中可能很多都是灰色区域的情况，为了达到效率最大化我们可以采取这样的策略：找到那些经常需要重复的、比较固定的步骤把它写成脚本，比如博客的预览和发布，每次都是执行一些固定的步骤，完全可以把它写成一个脚本，还有本地仓库与Github同步，我最近就写了一个脚本：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"********************"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"******开始提交******"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"********************"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [<span class="string">"<span class="variable">$1</span>"</span> == <span class="string">""</span>]</div><div class="line"><span class="keyword">then</span></div><div class="line">    <span class="built_in">set</span> <span class="string">"默认提交，无特殊信息"</span></div><div class="line"></div><div class="line"><span class="keyword">fi</span></div><div class="line"></div><div class="line">git status</div><div class="line">git add .</div><div class="line">git commit -m <span class="variable">$1</span></div><div class="line">git push </div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"**********************"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"*******提交成功*******"</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"**********************"</span></div></pre></td></tr></table></figure></p>
+<p>非常简单的一个脚本，但是大大地提高了效率。而对于那些偶发性比较高、重复性低的的操作就采用点鼠标的方式。这种思想其实非常类似于JAVA中的HotSpot虚拟机的工作方式，把热点代码编译成本地机器码，从而提高效率，我们是把“热点”操作“编译”成脚本，从而提高效率。高大上的虚拟机技术和日常生活小经验也有着异曲同工之妙！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;一直以来像SQL、shell脚本、DOS批处理等DSL和类DSL的东西都处于看了忘，忘了再看的无限循环中，在平时不怎么使用的情况要长久地记住这些东西从生理学上讲是不可能的。所以有两种方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;经常去使用它，比如完全使用Linux工作&lt;/li&gt;
+&lt;li&gt;用到的时候，现场搜索，copy-paste大法好。&lt;br&gt;对于我来说1是我的追求，2是我的现状。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;命令行脚本对比于点鼠标有不少优势，比如可以一次把一些命令写在一个脚本里，然后执行，比起用鼠标每次都要点很多下效率要高的多，特别是当有很多台机器时用鼠标来操作无疑会是一场灾难更别提有的命令鼠标根本没法点，当然鼠标也有它的优势，当仅仅是个人电脑，并且一些操作用命令行无比冗长时，用鼠标只需点击一下便可完成操作此时鼠标更占优势。对于命令行还是鼠标的选择可能大致如下图：&lt;br&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/script.png&quot; alt=&quot;&quot;&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://vzardlloo.github.io/categories/Linux/"/>
+    
+    
+      <category term="shell Linux" scheme="http://vzardlloo.github.io/tags/shell-Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringMVC工作流程和Demo示例</title>
