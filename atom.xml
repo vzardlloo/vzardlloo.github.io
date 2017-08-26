@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-08-25T10:41:00.265Z</updated>
+  <updated>2017-08-26T00:28:34.643Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -20,11 +20,11 @@
     <link href="http://vzardlloo.github.io/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/"/>
     <id>http://vzardlloo.github.io/2017/08/25/修复hexo博客的一个bug/</id>
     <published>2017-08-25T10:18:37.000Z</published>
-    <updated>2017-08-25T10:41:00.265Z</updated>
+    <updated>2017-08-26T00:28:34.643Z</updated>
     
     <content type="html"><![CDATA[<p>之前不小心把JAVA分类写成了java发布了，然后又改了回来，并且手动地在博客<code>public/categories/</code>和<code>.deploy_git/categories/</code>下的java文件夹改成JAVA重新发布，结果在点击JAVA分类时会报404。经过一番研究我发现虽然我本地都将java改成了JAVA,但是GitHub仓库里的文件夹名称还是java。对比“java”和“JAVA”我猜测可能是git大小写不敏感所以JAVA并没有覆盖掉java，谷歌一下果然如此。由于我把java改成了JAVA所以在网页点击”分类”时访问的是：<code>https://xxxxxxxx/JAVA/</code>,而GitHub仓库里依然是java，只能访问<code>https://xxxxxxxxxx/java/</code>，由于http协议对于URL是大小写敏感的，所以访问<code>https://xxxxxxxx/JAVA/</code>必然会报404。找到问题所在下面开始修复bug:</p>
 <ol>
-<li>进入.deploy_git文件夹，输入<code>git config core.ignorecase false</code>把忽略大小<br>关闭。(必须要进入.deploy_git执行命令，因为只有这个文件夹是git仓库，这里的文件才会推送到GitHub仓库)</li>
+<li>进入.deploy_git文件夹，输入<code>git config core.ignorecase false</code>把忽略大小写<br>关闭。(必须要进入.deploy_git执行命令，因为只有这个文件夹是git仓库，这里的文件才会推送到GitHub仓库)</li>
 <li>回到博客根目录，执行<code>hexo d</code>重新发布博客</li>
 </ol>
 <p>执行完毕，bug修复！</p>

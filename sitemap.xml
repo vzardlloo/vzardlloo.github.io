@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://vzardlloo.github.io/about/index.html</loc>
+    
+    <lastmod>2017-08-26T00:39:45.046Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://vzardlloo.github.io/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/</loc>
     
-    <lastmod>2017-08-25T10:41:00.265Z</lastmod>
+    <lastmod>2017-08-26T00:28:34.643Z</lastmod>
     
   </url>
   
@@ -61,13 +68,6 @@
     <loc>http://vzardlloo.github.io/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/</loc>
     
     <lastmod>2017-08-15T13:11:20.756Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://vzardlloo.github.io/about/index.html</loc>
-    
-    <lastmod>2017-08-14T02:42:51.879Z</lastmod>
     
   </url>
   
