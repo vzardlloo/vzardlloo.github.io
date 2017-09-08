@@ -88,7 +88,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Lock," />
 
 
 
@@ -106,19 +106,19 @@
 
 
 
-<meta name="description" content="这是我的个人博客里发布的第一篇博客，在过去的几天里我抽空采用GitHubPage+Hexo初步搭建了一个人博客。为什么要搭建一个个人博客呢？原因主要有下面几个：
-1.一些网站提供给用户的自由度太低，不能满足自己想随心所欲地折腾的愿望，在这里不会有发帖审查，不会有删帖，基本完全属于自己。2.感觉经常总结和保持向外输出是一种比较高效的学习方式，所以博客里会写一些平时学习的总结。3.老早就知道GitHu">
+<meta name="description" content="这篇博客主要讲一下Java中的各种各样五花八门的锁。这些五花八门的锁肯定不是工程师没事做闲着无聊倒腾出来的，他们都是为了在某些环境下的性能而对传统的锁做了些改造。
+公平锁和非公平锁公平锁是指当多个线程在等待同一锁时，必须按照申请锁的先后顺序排成一个等待队列依次来一次获得锁。非公平锁是指加锁时不用考虑排队等待问题，直接尝试获取锁，获取不到自动到队尾等待，是抢占式的。对比：非公平锁的性能比公平锁搞5~">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第一篇博客">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/03/07/第一篇博客/index.html">
+<meta property="og:title" content="Java中的锁">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/09/07/Java中的锁/index.html">
 <meta property="og:site_name" content="vzard's blog">
-<meta property="og:description" content="这是我的个人博客里发布的第一篇博客，在过去的几天里我抽空采用GitHubPage+Hexo初步搭建了一个人博客。为什么要搭建一个个人博客呢？原因主要有下面几个：
-1.一些网站提供给用户的自由度太低，不能满足自己想随心所欲地折腾的愿望，在这里不会有发帖审查，不会有删帖，基本完全属于自己。2.感觉经常总结和保持向外输出是一种比较高效的学习方式，所以博客里会写一些平时学习的总结。3.老早就知道GitHu">
-<meta property="og:updated_time" content="2017-03-12T09:25:21.648Z">
+<meta property="og:description" content="这篇博客主要讲一下Java中的各种各样五花八门的锁。这些五花八门的锁肯定不是工程师没事做闲着无聊倒腾出来的，他们都是为了在某些环境下的性能而对传统的锁做了些改造。
+公平锁和非公平锁公平锁是指当多个线程在等待同一锁时，必须按照申请锁的先后顺序排成一个等待队列依次来一次获得锁。非公平锁是指加锁时不用考虑排队等待问题，直接尝试获取锁，获取不到自动到队尾等待，是抢占式的。对比：非公平锁的性能比公平锁搞5~">
+<meta property="og:updated_time" content="2017-09-08T03:39:46.029Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="第一篇博客">
-<meta name="twitter:description" content="这是我的个人博客里发布的第一篇博客，在过去的几天里我抽空采用GitHubPage+Hexo初步搭建了一个人博客。为什么要搭建一个个人博客呢？原因主要有下面几个：
-1.一些网站提供给用户的自由度太低，不能满足自己想随心所欲地折腾的愿望，在这里不会有发帖审查，不会有删帖，基本完全属于自己。2.感觉经常总结和保持向外输出是一种比较高效的学习方式，所以博客里会写一些平时学习的总结。3.老早就知道GitHu">
+<meta name="twitter:title" content="Java中的锁">
+<meta name="twitter:description" content="这篇博客主要讲一下Java中的各种各样五花八门的锁。这些五花八门的锁肯定不是工程师没事做闲着无聊倒腾出来的，他们都是为了在某些环境下的性能而对传统的锁做了些改造。
+公平锁和非公平锁公平锁是指当多个线程在等待同一锁时，必须按照申请锁的先后顺序排成一个等待队列依次来一次获得锁。非公平锁是指加锁时不用考虑排队等待问题，直接尝试获取锁，获取不到自动到队尾等待，是抢占式的。对比：非公平锁的性能比公平锁搞5~">
 
 
 
@@ -146,13 +146,13 @@
 
 
 
-  <link rel="canonical" href="http://vzardlloo.github.io/2017/03/07/第一篇博客/"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/09/07/Java中的锁/"/>
 
 
 
 
 
-  <title>第一篇博客 | vzard's blog</title>
+  <title>Java中的锁 | vzard's blog</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -307,7 +307,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/03/07/第一篇博客/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/09/07/Java中的锁/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">第一篇博客</h1>
+          <h1 class="post-title" itemprop="name headline">Java中的锁</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-07T19:59:26+08:00">
-                2017-03-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T20:04:42+08:00">
+                2017-09-07
               </time>
             
 
@@ -359,8 +359,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂谈/" itemprop="url" rel="index">
-                    <span itemprop="name">杂谈</span>
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
                   </a>
                 </span>
 
@@ -377,9 +377,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/07/第一篇博客/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/07/Java中的锁/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/03/07/第一篇博客/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/09/07/Java中的锁/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -409,9 +409,16 @@
       
 
       
-        <p>这是我的个人博客里发布的第一篇博客，在过去的几天里我抽空采用GitHubPage+Hexo初步搭建了一个人博客。为什么要搭建一个个人博客呢？原因主要有下面几个：</p>
-<p>1.一些网站提供给用户的自由度太低，不能满足自己想随心所欲地折腾的愿望，在这里不会有发帖审查，不会有删帖，基本完全属于自己。<br>2.感觉经常总结和保持向外输出是一种比较高效的学习方式，所以博客里会写一些平时学习的总结。<br>3.老早就知道GitHub有提供这个平台，一直想尝试一下，同时也可以当做自己的一个名片或简历。<br>4.我就是爱折腾……</p>
-<p>博客以后还会不断完善，增加功能，欢迎大家关注捧场。有搭建个人博客意向但没有相关经验的同学可以私下交流，QQ:2942708438</p>
+        <p>这篇博客主要讲一下Java中的各种各样五花八门的锁。这些五花八门的锁肯定不是工程师没事做闲着无聊倒腾出来的，他们都是为了在某些环境下的性能而对传统的锁做了些改造。</p>
+<h4 id="公平锁和非公平锁"><a href="#公平锁和非公平锁" class="headerlink" title="公平锁和非公平锁"></a>公平锁和非公平锁</h4><p>公平锁是指当多个线程在等待同一锁时，必须按照申请锁的先后顺序排成一个等待队列依次来一次获得锁。<br>非公平锁是指加锁时不用考虑排队等待问题，直接尝试获取锁，获取不到自动到队尾等待，是抢占式的。<br>对比：非公平锁的性能比公平锁搞5~10倍，因为公平锁需要在多核的情况下维护一个队列。但是非公平锁有可能会导致饥饿问题。</p>
+<h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>由于Java的线程是映射到操作系统的原生线程上的，如果要阻塞一个线程或者唤醒一个线程，都需要操作系统来帮忙完成，需要操作系统从用户态转换到核心态。因此状态转换需要耗费很多处理器时间。同时虚拟机的开发团队注意到许多应用上共享数据的锁定状态只会持续很短的一段时间，如果一个线程只是很短暂的占用一个共享资源，当在它短暂占用这段资源的时候如果有别的线程试图占用这个资源的时候，后来的线程会因为该资源被占用而陷入阻塞状态，丢失对时间片的占用，这会导致资源的大量浪费。所以针对这种情况开发团队设计出了自旋锁，即如果物理机器有一个以上的处理器，可以让两个或两个以上的线程同时并行执行，我们就可以让后面的线程“稍等一下”，但是不放弃处理器的执行时间，看看持有锁的线程是否很快就会释放锁。为了让线程等待，我们只需让线程执行一个忙循环（自旋）,等待锁被释放。<br>但是自旋也不可以替代锁，自旋虽然避免了线程切换的开销，但是它是要占用处理器时间的，因此，如果锁被占用的时间很短，自旋等待的效果会非常好。如果锁被占用的时间很长。那么自旋只会白白占用处理器的资源。因此自旋等待时间必须要有一定限制，如果自旋超过一定次数（默认是10次，使用-XX:PreBlockSpin来更改）没有获得锁，就应该使用传统的方式去挂起线程了。需要注意的是自旋是在轻量级锁中使用的，在重量级锁中，线程不能用自旋锁。</p>
+<a id="more"></a>
+<h4 id="偏向锁"><a href="#偏向锁" class="headerlink" title="偏向锁"></a>偏向锁</h4><p>偏向锁是JDK6中引入的一项锁优化，它的目的是消除数据在无竞争情况下的同步原语，进一步提高程序的运行性能。</p>
+<p>偏向锁会偏向于第一个获得它的线程，如果在接下来的执行过程中，该锁没有被其他的线程获取，则持有偏向锁的线程将永远不需要同步。大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入了偏向锁。</p>
+<h4 id="悲观锁和乐观锁"><a href="#悲观锁和乐观锁" class="headerlink" title="悲观锁和乐观锁"></a>悲观锁和乐观锁</h4><p>悲观锁：假定会发生并发冲突，屏蔽一切可能违反数据完整性的操作。<br>乐观锁：假定不会发生并发冲突，只在提交操作时检测是否违反数据完整性。（使用版本号或者时间戳来配合实现）</p>
+<h4 id="共享锁和排它锁"><a href="#共享锁和排它锁" class="headerlink" title="共享锁和排它锁"></a>共享锁和排它锁</h4><p>共享锁：如果事务T对数据A加上共享锁后，则其他事务只能对A再加共享锁，不能加排它锁。获准共享锁的事务只能读数据，不能修改数据。<br>排它锁：如果事务T对数据A加上排它锁后，则其他事务不能再对A加任何类型的锁。获得排它锁的事务即能读数据又能修改数据</p>
+<h4 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h4><p>读写锁是一个资源能够被多个读线程访问，或者被一个写线程访问但不能同时存在读线程。Java当中的读写锁通过ReentrantReadWriteLock实现。</p>
+<p>还有其他的一些锁这里不一一列举。</p>
 
       
     </div>
@@ -439,6 +446,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Lock/" rel="tag"># Lock</a>
+          
+        </div>
+      
 
       
       
@@ -448,15 +461,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/08/29/关于volatile/" rel="next" title="关于volatile">
+                <i class="fa fa-chevron-left"></i> 关于volatile
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/15/新的任务/" rel="prev" title="新的任务">
-                新的任务 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -510,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg"
@@ -600,6 +622,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#公平锁和非公平锁"><span class="nav-number">1.</span> <span class="nav-text">公平锁和非公平锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自旋锁"><span class="nav-number">2.</span> <span class="nav-text">自旋锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#偏向锁"><span class="nav-number">3.</span> <span class="nav-text">偏向锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#悲观锁和乐观锁"><span class="nav-number">4.</span> <span class="nav-text">悲观锁和乐观锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享锁和排它锁"><span class="nav-number">5.</span> <span class="nav-text">共享锁和排它锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读写锁"><span class="nav-number">6.</span> <span class="nav-text">读写锁</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -764,9 +802,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://vzardlloo.github.io/2017/03/07/第一篇博客/';
-          this.page.identifier = '2017/03/07/第一篇博客/';
-          this.page.title = '第一篇博客';
+          this.page.url = 'http://vzardlloo.github.io/2017/09/07/Java中的锁/';
+          this.page.identifier = '2017/09/07/Java中的锁/';
+          this.page.title = 'Java中的锁';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://vzardlloo.disqus.com/embed.js';
