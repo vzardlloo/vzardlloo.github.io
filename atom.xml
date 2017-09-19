@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-09-09T07:04:59.920Z</updated>
+  <updated>2017-09-19T04:27:47.730Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -16,11 +16,106 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>JAVA虚拟机的类加载机制</title>
+    <link href="http://vzardlloo.github.io/2017/09/19/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
+    <id>http://vzardlloo.github.io/2017/09/19/JAVA虚拟机的类加载机制/</id>
+    <published>2017-09-19T02:27:43.000Z</published>
+    <updated>2017-09-19T04:27:47.730Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇博客讲一下JAVA虚拟机的类加载机制，一个类从被加载到虚拟机内存开始，到卸载处内存为止，它的整个生命周期包括:</p>
+<ol>
+<li>加载</li>
+<li>验证</li>
+<li>准备</li>
+<li>解析</li>
+<li>初始化</li>
+<li>使用</li>
+<li>卸载</li>
+</ol>
+<p>其中1，2，3，5，7这五个步骤的顺序是固定的，而解析却不一定，它可以在初始化之后再开始，这是为了支持JAVA语言的运行时绑定。下面开始逐一介绍每个步骤。<br><a id="more"></a></p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><h5 id="加载的时机"><a href="#加载的时机" class="headerlink" title="加载的时机"></a>加载的时机</h5><ul>
+<li>遇到<code>new</code>，<code>getstatic</code>,<code>putstatic</code>,<code>invokestatic</code>这四条字节码指令时，如果类没有经过初始化则进行初始化。</li>
+<li>使用`java.lang.reflect包的方法对类进行反射调用的时候，如果类没有经过初始化则进行初始化。</li>
+<li>当初始化该类的子类的时候若该类没有经过初始化则进行初始化。</li>
+<li>当虚拟机启动的时候，用户需要指定一个要执行的主类(包含main()方法的那个类)，虚拟机会初始化这个主类。</li>
+<li>使用JDK 1.7后的动态语言支持时，如果一个<code>java.lang.invoke.MethodHandle</code>实例最后的解析结果<code>REF_getStatic</code>,<code>REF_putStatic</code>,<code>REF_invokeStatic</code>的方法句柄，并且如果该句柄对应的类没有经过初始化，则需要先触发其初始化。</li>
+</ul>
+<h5 id="加载过程"><a href="#加载过程" class="headerlink" title="加载过程"></a>加载过程</h5><ol>
+<li>通过一个类的全限定名来获取定义此类的二进制字节流。</li>
+<li>将这个字节流所代表的静态储存结构转化为方法区的运行时数据结构。</li>
+<li>在内存中生成一个代表这个类的<code>java.lang.Class</code>对象，作为方法区这个类的各种数据的访问接口。</li>
+</ol>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><h5 id="文件格式验证"><a href="#文件格式验证" class="headerlink" title="文件格式验证"></a>文件格式验证</h5><p>验证字节流是否符合Class文件格式的规范，并且可以被当前版本的虚拟机处理。比如：</p>
+<ul>
+<li>验证是否以魔数0xCAFFBABE开头。</li>
+<li>验证主次版本号是否在当前虚拟机处理范围之内。<br>……</li>
+</ul>
+<h5 id="元数据验证"><a href="#元数据验证" class="headerlink" title="元数据验证"></a>元数据验证</h5><p>对字节码描述的信息进行语义分析，以保证其描述的信息符合Java语言规范的要求，比如：</p>
+<ul>
+<li>这个类是否有父类（除了<code>java.lang.Object</code>之外，所有的类都应该有父类）。</li>
+<li>这个类的父类是否继承了不允许被继承的类（被final修饰的类）。<br>……</li>
+</ul>
+<h5 id="字节码验证"><a href="#字节码验证" class="headerlink" title="字节码验证"></a>字节码验证</h5><p>这是整个验证过程中最为复杂的一个阶段，主要目的是通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的。比如：</p>
+<ul>
+<li>保证任意时刻操作数栈的数据类型与指令代码序列都可以配合工作，例如这样的情况：在操作数栈放置了一个<code>int</code>类型的数据，使用时却按照<code>long</code>类型来加载本地变量表中。</li>
+<li>保证跳转指令不会跳转到方法体以外的字节码指令上。<br>……</li>
+</ul>
+<h5 id="符号引用验证"><a href="#符号引用验证" class="headerlink" title="符号引用验证"></a>符号引用验证</h5><p>最后一个阶段的验证发生在虚拟机将符号引用转化为直接引用的时候，这个转化动作将在解析阶段发生。符号引用验证可以看做是对类自身以外（常量池中的各种符号引用连接）的信息进行匹配性效验，比如：</p>
+<ul>
+<li>符号引用中通过字符串描述的全限定名是否能找到对应的类。</li>
+<li>在指定类中是否存在符合方法的字段描述符以及简单名称所描述的方法和字段。<br>……</li>
+</ul>
+<h4 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h4><p>准备阶段是正式为类变量分配内存并且设置类变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。</p>
+<h4 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h4><p>解析过程是将常量池中的符号引用替换为直接引用的过程。<br>主要有：</p>
+<ul>
+<li>类/接口的解析</li>
+<li>字段解析</li>
+<li>类方法解析</li>
+<li>接口方法解析</li>
+</ul>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>初始化是类加载过程的最后一步，前面的类加载过程中，除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作完全由虚拟机主导和控制，到了初始化阶段才开始执行类中定义的Java川程序代码。<br>初始化顺序：</p>
+<ol>
+<li>父类静态代码块 （  java虚拟机加载类时，就会执行该块代码，故只执行一次）</li>
+<li>子类静态代码块 （  java虚拟机加载类时，就会执行该块代码，故只执行一次）</li>
+<li>父类属性对象初始化</li>
+<li>父类普通代码块（每次new,每次执行 ）</li>
+<li>父类构造函数（每次new,每次执行）</li>
+<li>子类属性对象初始化</li>
+<li>子类普通代码块（每次new,每次执行 ）</li>
+<li>子类构造函数（每次new,每次执行）</li>
+</ol>
+<p>初始化完成之后就是对类的使用，最后直到卸载。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt;这篇博客讲一下JAVA虚拟机的类加载机制，一个类从被加载到虚拟机内存开始，到卸载处内存为止，它的整个生命周期包括:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;加载&lt;/li&gt;
+&lt;li&gt;验证&lt;/li&gt;
+&lt;li&gt;准备&lt;/li&gt;
+&lt;li&gt;解析&lt;/li&gt;
+&lt;li&gt;初始化&lt;/li&gt;
+&lt;li&gt;使用&lt;/li&gt;
+&lt;li&gt;卸载&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;其中1，2，3，5，7这五个步骤的顺序是固定的，而解析却不一定，它可以在初始化之后再开始，这是为了支持JAVA语言的运行时绑定。下面开始逐一介绍每个步骤。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
+    
+    
+      <category term="JAVA" scheme="http://vzardlloo.github.io/tags/JAVA/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HashMap源码剖析</title>
     <link href="http://vzardlloo.github.io/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/"/>
     <id>http://vzardlloo.github.io/2017/09/08/HashMap源码剖析/</id>
     <published>2017-09-08T12:17:06.000Z</published>
-    <updated>2017-09-09T07:04:59.920Z</updated>
+    <updated>2017-09-09T14:05:25.736Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇博客讲一下JAVA集合类中的HashMap。HashMap底层是通过维护一个数组来保存元素。当创建HashMap实例的时候，会通过指定的数组大小以及负载因子等参数创建一个空的数组，当在容器中添加元素的时候，首先会通过hash算法求得key的hash值，再根据hash值确定元素在数组中对应的位置，最后将元素放入数组中的对应位置。这里我们需要考虑的一个问题是hash冲突问题，即两个元素key的hash值一样，这就要求我们一方面hash算法要足够”发散”来避免这种情况，另一方面我们也要采取措施来解决这种冲突，在HashMap中采取的方法是链地址法，即当两个元素的key的hash值是一样的，首先判断key值是否是一样的，如果是一样的则替换value值。如果key的值不一样，则把后面添加的元素链接到之前添加的值的后面，形成一个链表。所以HashMap的数据结构实际是：hash表+单向链表。通过链表的形式把所有冲突元素放到了数组同一个位置，但是又引出另一个问题就是当链表过长时会影响HashMap的存取效率，因为在数组长度固定的情况下，存储的数据越多，hash冲突是不可避免的，那么控制hash冲突可以通过扩容来解决，在HashMap中有个负载因子(loadFactor)的概念。HashMap允许实际存储的元素的个数size = loadFactor*数组长度，一旦容器元素超出了这个size，HashMap就会自动扩容，并对所有元素重新执行hash操作，重新调整位置。最后说明本文基于Oracle JDK 1.8。<br><a id="more"></a></p>
 <h4 id="node结构介绍"><a href="#Node结构介绍" class="headerlink" title="Node结构介绍"></a>Node结构介绍</h4><p>Node类是HashMap中的一个静态内部类。它实现了Map.Entry接口，是用于存放数据的实体，前面说的数组也指Node数组。Node的数据结构是一个单向链表，下面是它的源码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> hash;</div><div class="line">        <span class="keyword">final</span> K key;</div><div class="line">        V value;</div><div class="line">        Node&lt;K,V&gt; next;</div><div class="line"></div><div class="line">        Node(<span class="keyword">int</span> hash, K key, V value, Node&lt;K,V&gt; next) &#123;</div><div class="line">            <span class="keyword">this</span>.hash = hash;</div><div class="line">            <span class="keyword">this</span>.key = key;</div><div class="line">            <span class="keyword">this</span>.value = value;</div><div class="line">            <span class="keyword">this</span>.next = next;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> K <span class="title">getKey</span><span class="params">()</span>        </span>&#123; <span class="keyword">return</span> key; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">getValue</span><span class="params">()</span>      </span>&#123; <span class="keyword">return</span> value; &#125;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> key + <span class="string">"="</span> + value; &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> Objects.hashCode(key) ^ Objects.hashCode(value);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> V <span class="title">setValue</span><span class="params">(V newValue)</span> </span>&#123;</div><div class="line">            V oldValue = value;</div><div class="line">            value = newValue;</div><div class="line">            <span class="keyword">return</span> oldValue;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object o)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (o == <span class="keyword">this</span>)</div><div class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            <span class="keyword">if</span> (o <span class="keyword">instanceof</span> Map.Entry) &#123;</div><div class="line">                Map.Entry&lt;?,?&gt; e = (Map.Entry&lt;?,?&gt;)o;</div><div class="line">                <span class="keyword">if</span> (Objects.equals(key, e.getKey()) &amp;&amp;</div><div class="line">                    Objects.equals(value, e.getValue()))</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
@@ -987,109 +1082,6 @@
     </summary>
     
       <category term="jvm" scheme="http://vzardlloo.github.io/categories/jvm/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SQl学习（二）</title>
-    <link href="http://vzardlloo.github.io/2017/03/22/SQl%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
-    <id>http://vzardlloo.github.io/2017/03/22/SQl学习（二）/</id>
-    <published>2017-03-22T12:28:27.000Z</published>
-    <updated>2017-03-22T14:19:06.695Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇介绍数据库的基本数据类型和基本的增删改查：</p>
-<p>基本数据类型：（MySQL）</p>
-<ol>
-<li><p>整数类型：</p>
-<ul>
-<li><code>TINYINT</code> : 占用1个字节</li>
-<li><code>SMALLINT</code>　：占用2个字节</li>
-<li><code>MEDIUMINT</code> : 占用3个字节</li>
-<li><code>INT</code> : 占用4个字节</li>
-<li><code>BIGINT</code> :　占用８个字节</li>
-</ul>
-</li>
-<li><p>浮点类型：</p>
-<ul>
-<li><code>FLOAT</code> : 占用4个字节</li>
-<li><code>DOUBLE</code> : 占用8个字节</li>
-<li><code>DECIMAL(M,D)</code> :　M+2</li>
-</ul>
-</li>
-<li><p>日期与时间:</p>
-<ul>
-<li><code>YEAR</code> : 1901~2155    YYYY</li>
-<li><code>DATE</code> : 1000-01-01~9999—12-3     YYYY-MM-DD</li>
-<li><code>TIME</code> : -838:59:59~838:59:59     HH:MM:SS</li>
-<li><code>DATETIME</code> : 1000-01-01 00:00:00~9999-12-31 23:59:59  YYYY-MM-DD HH:MM:SS</li>
-<li><code>TIMESTAMP</code> :　1970-01-01 00:00:01~2038-01-19 03:14:07     YYYY-MM-DD </li>
-</ul>
-</li>
-<li><p>字符串&amp;二进制:</p>
-<ul>
-<li><code>CHAR</code> : 表示长度固定的字符串</li>
-<li><code>VARCHAR</code> :　表示可变长度的字符串</li>
-<li><code>BINARY</code> : 表示固定长度的二进制数据</li>
-<li><code>VARBINARY</code> :　表示可变长度的二进制数据</li>
-<li><code>BLOB</code> :　表示二进制大数据</li>
-<li><code>TEXT</code> :　用于表示大文本数据</li>
-<li><code>ENUM</code> :　用于枚举类型，只能存储一个枚举类型的值</li>
-<li><code>SET</code> : 表示字符串对象</li>
-<li><code>BIT</code> : 表示位字段类型</li>
-</ul>
-</li>
-</ol>
-<p>基本增删改查：</p>
-<ol>
-<li><p>INSERT（增）：</p>
-<ul>
-<li><p>插入一条记录：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INSERT INTO table_name ([column_1],[column_2],...[column_n])</div><div class="line">VALUES(values_1,values_2,...,values_n);</div></pre></td></tr></table></figure>
-<p>  需要注意[column_x] 与 values_x 的对应关系。可以省略<code>[column_x]</code>列表，<br>  但是此时必须将<code>values_x</code>写全并与表中的列对应。也可以省略部分，省略的列将由<code>NULL</code>填充。</p>
-</li>
-</ul>
-</li>
-<li><p>DELETE(删):</p>
-<ul>
-<li>删除表中全部数据：<code>DELETE FROM table_name</code>。</li>
-<li>删除表中指定数据：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">DELETE FROM table_name WHERE &quot;XXX&quot;=&quot;xxx&quot; [AND] &quot;YYY&quot; = &quot;yyy&quot; [OR]</div><div class="line">&quot;ZZZ&quot; = &quot;zzz&quot;;</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-</li>
-<li><p>UPDATE(改)：</p>
-<ul>
-<li><p>改变表中指定记录：</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UPDATE FROM table_name SET　&quot;XXX&quot; = &quot;xxx&quot;　WHERE &quot;XXX&quot; = &quot;yyy&quot; ;</div></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>同时改变多条记录：</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">UPDATE FROM table_name SET [column_1] = &apos;new_1&apos; , </div><div class="line">                           [column_2] = &apos;new_2&apos; ,</div><div class="line">                           ...</div><div class="line">                           [column_n] = &apos;new_3&apos; ;</div><div class="line">               WHERE [column_1] = &apos;old_1&apos; AND &apos;old_2&apos;...AND &apos;old_n&apos;;</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-</li>
-<li><p>SELECT(查)：</p>
-<ul>
-<li>查看表中所有数据：<code>SELECT * FROM　table_name;</code></li>
-<li>查看表中指定数据：<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">SELECT [column_1],[column_2]...[column_x] FROM table_name </div><div class="line">WHERE</div><div class="line">  [column_y] = &quot;something&quot; [AND] ... [OR] ...[BETWEEN]...</div></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇介绍数据库的基本数据类型和基本的增删改查：&lt;/p&gt;
-&lt;p&gt;基本数据类型：（MySQL）&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;整数类型：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;TINYINT&lt;/code&gt; : 占用1个字节&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;SMALLINT&lt;/c
-    
-    </summary>
-    
-      <category term="SQL" scheme="http://vzardlloo.github.io/categories/SQL/"/>
     
     
   </entry>
