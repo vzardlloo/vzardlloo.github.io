@@ -120,7 +120,7 @@ HTTP构建于TCP/IP协议之上，默认端口号是80
 HTTP是无连接无状态的
 
 HTTP报文Http协议是以ASCII码传输，建立在TCP/IP协议之上的应用层规范。规范把HTTP请求分为三个部分：状态行、请求头、消息主题。类似于下面这样：123456789101112GET /en-US/docs/Web/HTTP/Headers/Content-Disposition HTT">
-<meta property="og:updated_time" content="2017-09-19T09:19:16.790Z">
+<meta property="og:updated_time" content="2017-09-25T08:52:44.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Http协议杂谈">
 <meta name="twitter:description" content="HTTP的特性
@@ -423,6 +423,7 @@ HTTP报文Http协议是以ASCII码传输，建立在TCP/IP协议之上的应用�
 <li>HTTP是无连接无状态的</li>
 </ul>
 <h4 id="http报文"><a href="#HTTP报文" class="headerlink" title="HTTP报文"></a>HTTP报文</h4><p>Http协议是以ASCII码传输，建立在TCP/IP协议之上的应用层规范。规范把HTTP请求分为三个部分：状态行、请求头、消息主题。类似于下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">GET /en-US/docs/Web/HTTP/Headers/Content-Disposition HTTP/1.1</div><div class="line">Host: developer.mozilla.org</div><div class="line">Connection: keep-alive</div><div class="line">Cache-Control: max-age=0</div><div class="line">Upgrade-Insecure-Requests: 1</div><div class="line">User-Agent: Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Mobile Safari/537.36</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8</div><div class="line">Referer: https://hit-alibaba.github.io/interview/basic/network/HTTP.html</div><div class="line">Accept-Encoding: gzip, deflate, br</div><div class="line">Accept-Language: zh-CN,zh;q=0.8</div><div class="line">Cookie: csrftoken=0QVKqjybZR4MatNi0vCP03XIDrEWODO9; dwf_section_edit=True; dwf_sg_task_completion=False; _ga=GA1.2.817713072.1498834189; _gid=GA1.2.1652928103.1505806097</div><div class="line">If-None-Match: &quot;76da2643e0174c564b0a898793e76edda496498f&quot;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
 <p>HTTP定义了于服务器交互的不同方法，最基本的方法有4中，分别是<code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>。<code>URL</code>全称是资源描述符，我们可以这样认为：一个URL地址，它用于<br>描述一个网络上的资源，而HTTP中的<code>GET</code>,<code>POST</code>,<code>PUT</code>,<code>DELETE</code>就对应着对这个资源的查，增，改，删4个操作。</p>
 <ol>
 <li>GET用于信息获取，而且应该是安全的 和 幂等的。<br>所谓安全的意味着该操作用于获取信息而非修改信息。换句话说，GET 请求一般不应产生副作用。就是说，它仅仅是获取资源信息，就像数据库查询一样，不会修改，增加数据，不会影响资源的状态。<br>幂等的意味着对同一URL的多个请求应该返回同样的结果。</li>
@@ -446,6 +447,27 @@ HTTP报文Http协议是以ASCII码传输，建立在TCP/IP协议之上的应用�
 <p>application/x-www-form-urlencoded</p>
 </blockquote>
 <p>这是最常见的POST数据提交方式。浏览器的原生<form>表单，如果不设置entype属性，那么最终就会以<code>application/x-www-form-urlencoded</code>方式提交数据。上个小节当中的例子便是使用了这种提交方式。可以看到 body 当中的内容和 GET 请求是完全相同的。</form></p>
+<h4 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h4><p>HTTP 响应与 HTTP 请求相似，HTTP响应也由3个部分构成，分别是：</p>
+<ul>
+<li>状态行</li>
+<li>响应头</li>
+<li>响应正文</li>
+</ul>
+<p>状态行由协议版本、数字形式的状态代码、及相应的状态描述，各元素之间以空格分隔。</p>
+<p>常见的状态码有如下几种：</p>
+<ul>
+<li><code>200 OK</code> 客户端请求成功</li>
+<li><code>301 Moved permanently</code> 请求永久重定向</li>
+<li><code>302 Moved Temporarily</code> 请求临时重定向</li>
+<li><code>304 Not Modified</code> 文件未修改，可以直接使用缓存的文件</li>
+<li><code>400 Bad Request</code> 由于客户端请求有语法错误，不能被服务器所理解</li>
+<li><code>401 Unauthorized</code>请求未经授权。这个状态代码必须和WWW-Authenticate报头域一起使用</li>
+<li><code>403 Forbidden</code> 服务器收到请求，但是拒绝提供服务。服务器通常会在响应正文中给出不提供服务的原因</li>
+<li><code>404 Not Found</code> 请求的资源不存在，例如，输入了错误的URL</li>
+<li><code>500 Internal Server Error</code> 服务器发生不可预期的错误</li>
+<li><code>503 Server Unavailable</code> 服务器当前不能处理客户端的请求，一段时间后可能恢复正常</li>
+</ul>
+<p>下面是一个HTTP响应的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">HTTP/1.1 200 OK</div><div class="line"></div><div class="line">Server:Apache Tomcat/5.0.12</div><div class="line">Date:Mon,6Oct2003 13:23:42 GMT</div><div class="line">Content-Length:112</div><div class="line"></div><div class="line">&lt;html&gt;...</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -668,7 +690,7 @@ HTTP报文Http协议是以ASCII码传输，建立在TCP/IP协议之上的应用�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#http的特性"><span class="nav-number">1.</span> <span class="nav-text">HTTP的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http报文"><span class="nav-number">2.</span> <span class="nav-text">HTTP报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post提交数据的方式"><span class="nav-number">3.</span> <span class="nav-text">POST提交数据的方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#http的特性"><span class="nav-number">1.</span> <span class="nav-text">HTTP的特性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#http报文"><span class="nav-number">2.</span> <span class="nav-text">HTTP报文</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#post提交数据的方式"><span class="nav-number">3.</span> <span class="nav-text">POST提交数据的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#响应报文"><span class="nav-number">4.</span> <span class="nav-text">响应报文</span></a></li></ol></div>
             
 
           </div>
