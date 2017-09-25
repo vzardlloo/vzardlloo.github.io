@@ -305,6 +305,157 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/04/02/java垃圾回收算法小结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vzardlloo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vzard's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/04/02/java垃圾回收算法小结/" itemprop="url">java垃圾回收算法小结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-02T21:57:37+08:00">
+                2017-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/jvm/" itemprop="url" rel="index">
+                    <span itemprop="name">jvm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/02/java垃圾回收算法小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/02/java垃圾回收算法小结/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>两个最基本的java回收算法：复制算法和标记清理算法<br><code>复制算法</code>：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法<br><code>标记清理</code>：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出<br><code>标记-整理算法</code>：多了碎片整理，整理出更大的内存放更大的对象<br><code>两个概念</code>：新生代和年老代</p>
+<ul>
+<li>新生代：初始对象，生命周期短的</li>
+<li>永久代：长时间存在的对象</li>
+</ul>
+<p>整个java的垃圾回收是新生代和年老代的协作，这种叫做分代回收。</p>
+<p>P.S：Serial New收集器是针对新生代的收集器:采用的是复制算法<br>Parallel New（并行）收集器:新生代采用复制算法，老年代采用标记整理<br>Parallel Scavenge（并行）收集器:针对新生代，采用复制收集算法<br>Serial Old（串行）收集器:新生代采用复制，老年代采用标记整理<br>Parallel Old（并行）收集器:针对老年代，标记整理<br>CMS收集器:基于标记清理<br>G1收集器：整体上是基于标记 整理 ，局部采用复制</p>
+<h3 id="综上新生代基本采用复制算法老年代采用标记整理算法-cms采用标记清理"><a href="#综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。" class="headerlink" title="综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。"></a>综上：新生代基本采用复制算法，老年代采用标记整理算法。cms采用标记清理。</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/03/22/SQl学习（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1026,7 +1177,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
