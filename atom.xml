@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-09-25T08:52:44.846Z</updated>
+  <updated>2017-10-13T07:55:08.966Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>同步Github上的fork</title>
+    <link href="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/"/>
+    <id>http://vzardlloo.github.io/2017/10/13/同步Github上的fork/</id>
+    <published>2017-10-13T07:08:51.000Z</published>
+    <updated>2017-10-13T07:55:08.966Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。<br>这个问题我有两种解决的办法：<br>一种是在Github上操作，把自己仓库的项目设成<code>base</code>,把作者的的项目设成<code>head</code>,然后给自己提pr,最后在pull下来就行了。这种方法的缺点就是要开网页点来点去，如果你正在沉迷在命令行里无法自拔可能不太喜欢这种方法。<br><a id="more"></a><br>第二种方法是在把作者的项目添加为自己的远程分支，然后需要同步的时候<code>fetch</code>一下这个远程分支，然后切换的本地分支（如果不在的话），然后把远程仓库合并到本地分支。具体方法如下：</p>
+<ul>
+<li><p>先查看一下自己的远程分支：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git remote -v</div><div class="line"># origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line"># origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div></pre></td></tr></table></figure>
+</li>
+<li><p>如果作者的仓库不在远程分支中，则把他添加到远程分支：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>再次查看远程分支情况，确保已经加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote -v</div><div class="line"># origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line"># origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div><div class="line"># upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)</div><div class="line"># upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)</div></pre></td></tr></table></figure>
+</li>
+<li><p>从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git fetch upstream</div><div class="line"># remote: Counting objects: 75, done.</div><div class="line"># remote: Compressing objects: 100% (53/53), done.</div><div class="line"># remote: Total 62 (delta 27), reused 44 (delta 9)</div><div class="line"># Unpacking objects: 100% (62/62), done.</div><div class="line"># From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</div><div class="line">#  * [new branch]      master     -&gt; upstream/master</div></pre></td></tr></table></figure>
+</li>
+<li><p>切换到本地主分支(如果不在的话)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout master</div><div class="line"># Switched to branch &apos;master&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>把 upstream/master 分支合并到本地 master 上，这样就完成了同步，并且不会丢掉本地修改的内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git merge upstream/master</div><div class="line"># Updating a422352..5fdff0f</div><div class="line"># Fast-forward</div><div class="line">#  README                    |    9 -------</div><div class="line">#  README.md                 |    7 ++++++</div><div class="line">#  2 files changed, 7 insertions(+), 9 deletions(-)</div><div class="line">#  delete mode 100644 README</div><div class="line">#  create mode 100644 README.md</div></pre></td></tr></table></figure>
+</li>
+<li><p>同步到Github上的自己的项目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>OK,这个小问题都到此结束！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。&lt;br&gt;这个问题我有两种解决的办法：&lt;br&gt;一种是在Github上操作，把自己仓库的项目设成&lt;code&gt;base&lt;/code&gt;,把作者的的项目设成&lt;code&gt;head&lt;/code&gt;,然后给自己提pr,最后在pull下来就行了。这种方法的缺点就是要开网页点来点去，如果你正在沉迷在命令行里无法自拔可能不太喜欢这种方法。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Github" scheme="http://vzardlloo.github.io/categories/Github/"/>
+    
+    
+      <category term="Github" scheme="http://vzardlloo.github.io/tags/Github/"/>
+    
+  </entry>
   
   <entry>
     <title>Http协议杂谈</title>
@@ -1106,31 +1153,6 @@
     </summary>
     
       <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>图床测试</title>
-    <link href="http://vzardlloo.github.io/2017/04/08/%E5%9B%BE%E5%BA%8A%E6%B5%8B%E8%AF%95/"/>
-    <id>http://vzardlloo.github.io/2017/04/08/图床测试/</id>
-    <published>2017-04-08T12:07:20.000Z</published>
-    <updated>2017-04-08T12:19:13.532Z</updated>
-    
-    <content type="html"><![CDATA[<p>图床测试：这是一张图片</p>
-<p><img src="http://oo3aq3ac8.bkt.clouddn.com/58836065_p0.png" alt=""></p>
-<p><img src="http://oo3aq3ac8.bkt.clouddn.com/002.jpg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;图床测试：这是一张图片&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/58836065_p0.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/
-    
-    </summary>
-    
-      <category term="杂谈" scheme="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
     
     
   </entry>
