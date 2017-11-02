@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://vzardlloo.github.io/tags/index.html</loc>
+    
+    <lastmod>2017-11-02T05:33:53.128Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://vzardlloo.github.io/about/index.html</loc>
     
     <lastmod>2017-10-24T03:59:19.348Z</lastmod>
@@ -145,13 +152,6 @@
     <loc>http://vzardlloo.github.io/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</loc>
     
     <lastmod>2017-07-17T13:43:25.909Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://vzardlloo.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-07-03T12:46:06.034Z</lastmod>
     
   </url>
   
