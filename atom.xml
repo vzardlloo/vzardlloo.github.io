@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-11-07T10:57:34.139Z</updated>
+  <updated>2017-11-07T11:01:09.691Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://vzardlloo.github.io/2017/11/06/Js%E5%8E%9F%E5%9E%8B%E9%93%BE%E8%A7%A3%E8%AF%BB/"/>
     <id>http://vzardlloo.github.io/2017/11/06/Js原型链解读/</id>
     <published>2017-11-06T13:41:43.000Z</published>
-    <updated>2017-11-07T10:57:34.139Z</updated>
+    <updated>2017-11-07T11:01:09.691Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的实现，前者在动态语言中似乎十分常见，而后者主要在静态语言领域流行。下面是维基百科关于prototype_base模式的介绍：</p>
 <blockquote>
@@ -39,7 +39,7 @@
 <li><p><code>prototype</code>: 与<code>_proto_</code>不同,<code>prototype</code>是函数才有的属性。当你创建函数时，JS会为这个函数自动添加<code>prototype</code>属性，值是空对象。而一旦你把这个函数当作构造函数（<code>constructor</code>）调用（即通过<code>new</code>关键字调用），那么JS就会帮你创建该构造函数的实例，实例继承构造函数<code>prototype</code>的所有属性和方法（实例通过设置自己的<code>__proto__</code>指向承构造函数的<code>prototype</code>来实现这种继承）。它的存在主要是为了存放共享的数据和实现继承。</p>
 </li>
 </ul>
-<p>&amp;ensp&amp;ensp下面结合上面的图示来分析，我们可以看到<code>function Foo()</code>对应一个<code>Foo.prototype</code>的原型，那么<code>function Foo</code>和<code>Foo.prototype</code>之间的关系是什么尼？<br>图里其实已经展示得很清楚了，<code>functon Foo()</code>是<code>Foo.prototype</code>的构造函数，<code>Foo.prototype</code>是<code>function Foo()</code>的原型实例。当我们使用<code>new</code>关键字创建<code>var f1 = new Foo()</code>,<code>var f2 = new Foo()</code>后，<code>f1、f2</code>中会有一个<code>_proto_</code>字段指向<code>Foo.prototype</code>,这种<code>xxx._proto_._proto....</code>的指向就代表了原型链的结构（应该是个森林）。同时每个函数<code>function xxx()</code>其实都是通过<code>function Function()</code>来创造的，所以<code>function Foo()</code>的<code>_proto_</code>应该指向<code>Function.prototype</code>,并且<code>function Function()</code>自身的<code>_proto_</code>也指向<code>Function.prototype</code>。<br>事实上，所有<code>function xxx()</code>的<code>_proto_</code>最终都会指向<code>Function.prototype</code>，而所有的<code>xxx.prototype</code>最后都会指向<code>Object.prototype</code>,最终指向<code>null</code>。关于<code>function Object()</code>这个函数其实有点像Java中的Object对象，所有原型都会继承自它的原型。这里有个有意思的问题，<code>function Function()</code>也是个函数，所以<code>function Function()</code>的<code>_proto_</code>属性的值为<code>Function.prototype</code>，这也就意味着它自己创造了自己。这样的结果就是<code>function Object()._proto_ = Function.prototype</code>、而<code>function Function()._proto._proto_ = Object.prototype</code>,即<code>Object instanceof  Function == true</code>、<code>Function instanceof  Object == true</code>翻译过来就是<code>Object</code>是<code>Function</code>的实例，<code>Function</code>是<code>Object</code>的实例，这是一种类似先有鸡还是先有蛋的蜜汁尴尬局面。</p>
+<p>&ensp;&ensp;下面结合上面的图示来分析，我们可以看到<code>function Foo()</code>对应一个<code>Foo.prototype</code>的原型，那么<code>function Foo</code>和<code>Foo.prototype</code>之间的关系是什么尼？<br>&ensp;&ensp;图里其实已经展示得很清楚了，<code>functon Foo()</code>是<code>Foo.prototype</code>的构造函数，<code>Foo.prototype</code>是<code>function Foo()</code>的原型实例。当我们使用<code>new</code>关键字创建<code>var f1 = new Foo()</code>,<code>var f2 = new Foo()</code>后，<code>f1、f2</code>中会有一个<code>_proto_</code>字段指向<code>Foo.prototype</code>,这种<code>xxx._proto_._proto....</code>的指向就代表了原型链的结构（应该是个森林）。同时每个函数<code>function xxx()</code>其实都是通过<code>function Function()</code>来创造的，所以<code>function Foo()</code>的<code>_proto_</code>应该指向<code>Function.prototype</code>,并且<code>function Function()</code>自身的<code>_proto_</code>也指向<code>Function.prototype</code>。<br>&ensp;&ensp;事实上，所有<code>function xxx()</code>的<code>_proto_</code>最终都会指向<code>Function.prototype</code>，而所有的<code>xxx.prototype</code>最后都会指向<code>Object.prototype</code>,最终指向<code>null</code>。关于<code>function Object()</code>这个函数其实有点像Java中的Object对象，所有原型都会继承自它的原型。这里有个有意思的问题，<code>function Function()</code>也是个函数，所以<code>function Function()</code>的<code>_proto_</code>属性的值为<code>Function.prototype</code>，这也就意味着它自己创造了自己。这样的结果就是<code>function Object()._proto_ = Function.prototype</code>、而<code>function Function()._proto._proto_ = Object.prototype</code>,即<code>Object instanceof  Function == true</code>、<code>Function instanceof  Object == true</code>翻译过来就是<code>Object</code>是<code>Function</code>的实例，<code>Function</code>是<code>Object</code>的实例，这是一种类似先有鸡还是先有蛋的蜜汁尴尬局面。</p>
 <p>总结：</p>
 <ul>
 <li>所有对象的<code>_proto_</code>字段都指向创建它的构造函数的原型， 最终都指向<code>Object.prototype</code>,类似<code>xxx.prototype._proto_._proto_..._proto_ = Object.prototype = null</code>就是原型链。</li>
