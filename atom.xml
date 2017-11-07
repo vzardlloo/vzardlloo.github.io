@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-10-19T03:55:44.230Z</updated>
+  <updated>2017-11-07T10:38:03.374Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,61 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Js原型链解读</title>
+    <link href="http://vzardlloo.github.io/2017/11/06/Js%E5%8E%9F%E5%9E%8B%E9%93%BE%E8%A7%A3%E8%AF%BB/"/>
+    <id>http://vzardlloo.github.io/2017/11/06/Js原型链解读/</id>
+    <published>2017-11-06T13:41:43.000Z</published>
+    <updated>2017-11-07T10:38:03.374Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的实现，前者在动态语言中似乎十分常见，而后者主要在静态语言领域流行。下面是维基百科关于prototype_base模式的介绍：</p>
+<blockquote>
+<p>Prototype-based programming is a style of object-oriented programming in which behaviour reuse (known as inheritance) is performed via a process of reusing existing objects via delegation that serve as prototypes. This model can also be known as prototypal, prototype-oriented, classless, or instance-based programming. Delegation is the language feature that supports prototype-based programming.<br>Prototype object oriented programming uses generalized objects, which can then be cloned and extended. Using fruit as an example, a “fruit” object would represent the properties and functionality of fruit in general. A “banana” object would be cloned from the “fruit” object, and would also be extended to include general properties specific to bananas. Each individual “banana” object would be cloned from the generic “banana” object. Compare to the class-based paradigm, where a “fruit” class (not object) would be extended by a “banana” class</p>
+</blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Prototype-based_programming" target="_blank" rel="external">维基原文</a><br><a id="more"></a></p>
+<h3 id="如何理解原型链"><a href="#如何理解原型链" class="headerlink" title="如何理解原型链"></a>如何理解原型链</h3><p>我们以一个名字叫<code>Foo(）</code>的函数为例。我们定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function Foo()&#123;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后再<code>var f1 = new Foo()</code>,<code>var f2 = new Foo()</code>，这期间都有什么事情发生呢？我们通过一张图来看一下：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/proto.jpg" alt="prototype.jpg"></p>
+<p>先介绍两个概念：<code>_proto_</code>和<code>prototype</code>:</p>
+<ul>
+<li><p><code>_proto_</code>:引用《JavaScript权威指南》中的说明：</p>
+<blockquote>
+<p>Every JavaScript object has a second JavaScript object (or null ,<br>but this is rare) associated with it. This second object is known as a prototype, and the first<br>object inherits properties from the prototype.<br>就是说就是每个JS对象一定对应一个原型对象，并从原型对象继承属性和方法。既然有这么一个原型对象，那么对象怎么和它对应的？如何描述这种对应关系？答案就是通过<code>_proto_</code>,对象<code>__proto__</code>属性的值就是它所对应的原型对象。</p>
+</blockquote>
+</li>
+<li><p><code>prototype</code>: 与<code>_proto_</code>不同,<code>prototype</code>是函数才有的属性。当你创建函数时，JS会为这个函数自动添加<code>prototype</code>属性，值是空对象。而一旦你把这个函数当作构造函数（<code>constructor</code>）调用（即通过<code>new</code>关键字调用），那么JS就会帮你创建该构造函数的实例，实例继承构造函数<code>prototype</code>的所有属性和方法（实例通过设置自己的<code>__proto__</code>指向承构造函数的<code>prototype</code>来实现这种继承）。它的存在主要是为了存放共享的数据和实现继承。</p>
+</li>
+</ul>
+<p>下面结合图示来分析，我们可以看到<code>function Foo()</code>对应一个<code>Foo.prototype</code>的原型，那么<code>function Foo</code>和<code>Foo.prototype</code>之间的关系是什么尼？<br>图里其实已经展示得很清楚了，<code>functon Foo()</code>是<code>Foo.prototype</code>的构造函数，<code>Foo.prototype</code>是<code>function Foo()</code>的原型实例。当我们使用<code>new</code>关键字创建<code>var f1 = new Foo()</code>,<code>var f2 = new Foo()</code>后，<code>f1、f2</code>中会有一个<code>_proto_</code>字段指向<code>Foo.prototype</code>,这种<code>xxx._proto_._proto....</code>的指向就代表了原型链的结构（应该是个森林）。同时每个函数<code>function xxx()</code>其实都是通过<code>function Function()</code>来创造的，所以<code>function Foo()</code>的<code>_proto_</code>应该指向<code>Function.prototype</code>,并且<code>function Function()</code>自身的<code>_proto_</code>也指向<code>Function.prototype</code>。<br>事实上，所有<code>function xxx()</code>的<code>_proto_</code>最终都会指向<code>Function.prototype</code>，而所有的<code>xxx.prototype</code>最后都会指向<code>Object.prototype</code>,最终指向<code>null</code>。关于<code>function Object()</code>这个函数其实有点像Java中的Object对象，所有原型都会继承自它的原型。这里有个有意思的问题，<code>function Function()</code>也是个函数，所以<code>function Function()</code>的<code>_proto_</code>属性的值为<code>Function.prototype</code>，这也就意味着它自己创造了自己。这样的结果就是<code>function Object()._proto_ = Function.prototype</code>、而<code>function Function()._proto._proto_ = Object.prototype</code>,即<code>Object instanceof  Function == true</code>、<code>Function instanceof  Object == true</code>翻译过来就是<code>Object</code>是<code>Function</code>的实例，<code>Function</code>是<code>Object</code>的实例，这是一种类似先有鸡还是先有蛋的蜜汁尴尬局面。</p>
+<p>总结：</p>
+<ul>
+<li>所有对象的<code>_proto_</code>字段都指向创建它的构造函数的原型， 最终都指向<code>Object.prototype</code>,类似<code>xxx.prototype._proto_._proto_..._proto_ = Object.prototype = null</code>就是原型链。</li>
+<li>所有函数都由<code>function Function()</code>创建，所以所有函数的(包括它本身）<code>_proto_</code>字段都会指向<code>Function.prototype</code>，最后才指向<code>Object.prototype</code>。</li>
+</ul>
+<h3 id="使用原型链实现继承"><a href="#使用原型链实现继承" class="headerlink" title="使用原型链实现继承"></a>使用原型链实现继承</h3><p>定义父函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.age = <span class="string">"56"</span>; &#125;</div><div class="line"></div><div class="line">Father.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"my age is "</span>+<span class="keyword">this</span>.age); </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>定义子函数：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.age = <span class="string">'26'</span>;</div><div class="line">  <span class="keyword">this</span>.play = <span class="string">"football"</span>; &#125;</div><div class="line"></div><div class="line">Son.prototype.play = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"I like play "</span>+<span class="keyword">this</span>.play);</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
+<p>实现继承后的原型链应该是：<code>Son.prototype._proto_ = Father.prototype</code><br>实现方式：借用第三个函数过渡<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">extends</span>(<span class="params">Child,Father</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">	F.prototype = Father.prototype;</div><div class="line">	<span class="comment">//Child.prototype._proto_ = F.prototype = Father.prototype</span></div><div class="line">	Child.prototype = <span class="keyword">new</span> F();</div><div class="line">	<span class="comment">//原本Child.prototype.constructor = F,修改为Child</span></div><div class="line">	Child.prototype.constructor = Child;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>测试验证：<code>Son</code>的实例可以调用<code>say()</code>则说明继承成功。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Father</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="keyword">this</span>.age = <span class="string">"56"</span>; &#125;</div><div class="line"></div><div class="line">Father.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">   alert(<span class="string">"my age is "</span>+<span class="keyword">this</span>.age); &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Son</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   <span class="keyword">this</span>.age = <span class="string">'26'</span>;</div><div class="line"> 	<span class="keyword">this</span>.play = <span class="string">"football"</span>; &#125;</div><div class="line"></div><div class="line">Son.prototype.play = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">   alert(<span class="string">"I like play "</span>+<span class="keyword">this</span>.play); &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">excents</span>(<span class="params">Child,Father</span>) </span>&#123;</div><div class="line"></div><div class="line">   <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</div><div class="line">   F.prototype = Father.prototype;</div><div class="line"> 	Child.prototype = <span class="keyword">new</span> F();</div><div class="line"> 	Child.prototype.constructor = Child;   &#125;</div><div class="line"></div><div class="line">excents(Son,Father);  </div><div class="line"></div><div class="line">	<span class="keyword">var</span> son = <span class="keyword">new</span> Son(); </div><div class="line">son.say();</div></pre></td></tr></table></figure></p>
+<p>运行结果：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/%E5%BC%B9%E7%AA%97" alt=""></p>
+<p>继承成功！</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h3&gt;&lt;p&gt;在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的实现，前者在动态语言中似乎十分常见，而后者主要在静态语言领域流行。下面是维基百科关于prototype_base模式的介绍：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Prototype-based programming is a style of object-oriented programming in which behaviour reuse (known as inheritance) is performed via a process of reusing existing objects via delegation that serve as prototypes. This model can also be known as prototypal, prototype-oriented, classless, or instance-based programming. Delegation is the language feature that supports prototype-based programming.&lt;br&gt;Prototype object oriented programming uses generalized objects, which can then be cloned and extended. Using fruit as an example, a “fruit” object would represent the properties and functionality of fruit in general. A “banana” object would be cloned from the “fruit” object, and would also be extended to include general properties specific to bananas. Each individual “banana” object would be cloned from the generic “banana” object. Compare to the class-based paradigm, where a “fruit” class (not object) would be extended by a “banana” class&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Prototype-based_programming&quot;&gt;维基原文&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="前端" scheme="http://vzardlloo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+      <category term="前端" scheme="http://vzardlloo.github.io/tags/%E5%89%8D%E7%AB%AF/"/>
+    
+  </entry>
   
   <entry>
     <title>统计知识（1）</title>
@@ -1124,48 +1179,6 @@
 &lt;ul&gt;
 &lt;li&gt;JAVA_HOME—&amp;gt;JDK安装根目录&lt;/li&gt;
 &lt;li&gt;P
-    
-    </summary>
-    
-      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Java类加载器小结</title>
-    <link href="http://vzardlloo.github.io/2017/05/15/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%B0%8F%E7%BB%93/"/>
-    <id>http://vzardlloo.github.io/2017/05/15/Java类加载器小结/</id>
-    <published>2017-05-15T15:49:16.000Z</published>
-    <updated>2017-08-20T12:58:31.661Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li>Bootstrap ClassLoader</li>
-</ol>
-<p>负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类</p>
-<ol>
-<li>Extension ClassLoader</li>
-</ol>
-<p>负责加载java平台中扩展功能的一些jar包，包括$JAVA_HOME中jre/lib/*.jar或-Djava.ext.dirs指定目录下的jar包</p>
-<ol>
-<li>App ClassLoader</li>
-</ol>
-<p>负责记载classpath中指定的jar包及目录中class</p>
-<ol>
-<li>Custom ClassLoader</li>
-</ol>
-<p>属于应用程序根据自身需要自定义的ClassLoader，如tomcat、jboss都会根据j2ee规范自行实现ClassLoader</p>
-<p>加载过程中会先检查类是否被已加载，检查顺序是自底向上，从Custom ClassLoader到BootStrap ClassLoader逐层检查，只要某个classloader已加载就视为已加载此类，保证此类只所有ClassLoader加载一次。而加载的顺序是自顶向下，也就是由上层来逐层尝试加载此类。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;Bootstrap ClassLoader&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;负责加载$JAVA_HOME中jre/lib/rt.jar里所有的class，由C++实现，不是ClassLoader子类&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Extension ClassLoade
     
     </summary>
     
