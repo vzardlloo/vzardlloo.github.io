@@ -122,7 +122,7 @@
 永久代：长时间存在的对象
 
 整个java的垃圾回收是新生代和年老代的协">
-<meta property="og:updated_time" content="2017-04-02T14:05:34.268Z">
+<meta property="og:updated_time" content="2017-04-02T14:05:34.269Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java垃圾回收算法小结">
 <meta name="twitter:description" content="两个最基本的java回收算法：复制算法和标记清理算法复制算法：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法标记清理：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出标记-整理算法：多了碎片整理，整理出更大的内存放更大的对象两个概念：新生代和年老代
@@ -651,6 +651,10 @@
                   <a href="https://fangfang.ink/" title="方方的博客" target="_blank">方方的博客</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.itnao.cn/" title="AV熊" target="_blank">AV熊</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -893,6 +897,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

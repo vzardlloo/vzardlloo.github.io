@@ -112,7 +112,7 @@
 <meta property="og:url" content="http://vzardlloo.github.io/2017/08/25/修复hexo博客的一个bug/index.html">
 <meta property="og:site_name" content="vzard's blog">
 <meta property="og:description" content="之前不小心把JAVA分类写成了java发布了，然后又改了回来，并且手动地在博客public/categories/和.deploy_git/categories/下的java文件夹改成JAVA重新发布，结果在点击JAVA分类时会报404。经过一番研究我发现虽然我本地都将java改成了JAVA,但是GitHub仓库里的文件夹名称还是java。对比“java”和“JAVA”我猜测可能是git大小写不敏">
-<meta property="og:updated_time" content="2017-08-26T00:28:34.643Z">
+<meta property="og:updated_time" content="2017-08-26T00:28:34.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="修复hexo博客的一个bug">
 <meta name="twitter:description" content="之前不小心把JAVA分类写成了java发布了，然后又改了回来，并且手动地在博客public/categories/和.deploy_git/categories/下的java文件夹改成JAVA重新发布，结果在点击JAVA分类时会报404。经过一番研究我发现虽然我本地都将java改成了JAVA,但是GitHub仓库里的文件夹名称还是java。对比“java”和“JAVA”我猜测可能是git大小写不敏">
@@ -632,6 +632,10 @@
                   <a href="https://fangfang.ink/" title="方方的博客" target="_blank">方方的博客</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.itnao.cn/" title="AV熊" target="_blank">AV熊</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -858,6 +862,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

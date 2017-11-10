@@ -132,7 +132,7 @@
 卸载
 
 其中1，2，3，5，7这五个步骤的顺序是固定的，而解析却不一定，它可以在初始化之后再开始，这是为了支持JAVA语言的运行时绑定。下面开始逐一介绍每个步骤。">
-<meta property="og:updated_time" content="2017-09-19T04:27:47.730Z">
+<meta property="og:updated_time" content="2017-09-19T04:27:47.731Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JAVA虚拟机的类加载机制">
 <meta name="twitter:description" content="前言这篇博客讲一下JAVA虚拟机的类加载机制，一个类从被加载到虚拟机内存开始，到卸载处内存为止，它的整个生命周期包括:
@@ -728,6 +728,10 @@
                   <a href="https://fangfang.ink/" title="方方的博客" target="_blank">方方的博客</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.itnao.cn/" title="AV熊" target="_blank">AV熊</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -970,6 +974,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

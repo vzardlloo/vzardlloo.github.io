@@ -114,7 +114,7 @@
 <meta property="og:description" content="前言在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/proto.jpg">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/%E5%BC%B9%E7%AA%97">
-<meta property="og:updated_time" content="2017-11-07T11:01:09.691Z">
+<meta property="og:updated_time" content="2017-11-07T11:01:09.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Js原型链解读">
 <meta name="twitter:description" content="前言在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的">
@@ -663,6 +663,10 @@
                   <a href="https://fangfang.ink/" title="方方的博客" target="_blank">方方的博客</a>
                 </li>
               
+                <li class="links-of-blogroll-item">
+                  <a href="https://www.itnao.cn/" title="AV熊" target="_blank">AV熊</a>
+                </li>
+              
             </ul>
           </div>
         
@@ -905,6 +909,28 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 

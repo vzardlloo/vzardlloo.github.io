@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-11-07T11:01:09.691Z</updated>
+  <updated>2017-11-07T11:01:09.692Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://vzardlloo.github.io/2017/11/06/Js%E5%8E%9F%E5%9E%8B%E9%93%BE%E8%A7%A3%E8%AF%BB/"/>
     <id>http://vzardlloo.github.io/2017/11/06/Js原型链解读/</id>
     <published>2017-11-06T13:41:43.000Z</published>
-    <updated>2017-11-07T11:01:09.691Z</updated>
+    <updated>2017-11-07T11:01:09.692Z</updated>
     
     <content type="html"><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的实现，前者在动态语言中似乎十分常见，而后者主要在静态语言领域流行。下面是维基百科关于prototype_base模式的介绍：</p>
 <blockquote>
@@ -240,7 +240,7 @@
     <link href="http://vzardlloo.github.io/2017/09/19/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/"/>
     <id>http://vzardlloo.github.io/2017/09/19/JAVA虚拟机的类加载机制/</id>
     <published>2017-09-19T02:27:43.000Z</published>
-    <updated>2017-09-19T04:27:47.730Z</updated>
+    <updated>2017-09-19T04:27:47.731Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇博客讲一下JAVA虚拟机的类加载机制，一个类从被加载到虚拟机内存开始，到卸载处内存为止，它的整个生命周期包括:</p>
 <ol>
@@ -405,7 +405,7 @@
     <link href="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/"/>
     <id>http://vzardlloo.github.io/2017/08/29/关于volatile/</id>
     <published>2017-08-29T14:21:44.000Z</published>
-    <updated>2017-08-31T09:37:05.671Z</updated>
+    <updated>2017-08-31T09:37:05.672Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：</p>
 <ul>
@@ -468,7 +468,7 @@
     <link href="http://vzardlloo.github.io/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/"/>
     <id>http://vzardlloo.github.io/2017/08/25/修复hexo博客的一个bug/</id>
     <published>2017-08-25T10:18:37.000Z</published>
-    <updated>2017-08-26T00:28:34.643Z</updated>
+    <updated>2017-08-26T00:28:34.644Z</updated>
     
     <content type="html"><![CDATA[<p>之前不小心把JAVA分类写成了java发布了，然后又改了回来，并且手动地在博客<code>public/categories/</code>和<code>.deploy_git/categories/</code>下的java文件夹改成JAVA重新发布，结果在点击JAVA分类时会报404。经过一番研究我发现虽然我本地都将java改成了JAVA,但是GitHub仓库里的文件夹名称还是java。对比“java”和“JAVA”我猜测可能是git大小写不敏感所以JAVA并没有覆盖掉java，谷歌一下果然如此。由于我把java改成了JAVA所以在网页点击”分类”时访问的是：<code>https://xxxxxxxx/JAVA/</code>,而GitHub仓库里依然是java，只能访问<code>https://xxxxxxxxxx/java/</code>，由于http协议对于URL是大小写敏感的，所以访问<code>https://xxxxxxxx/JAVA/</code>必然会报404。找到问题所在下面开始修复bug:</p>
 <ol>
@@ -532,7 +532,7 @@
     <link href="http://vzardlloo.github.io/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/"/>
     <id>http://vzardlloo.github.io/2017/08/24/SpringMVC工作流程和Demo示例/</id>
     <published>2017-08-24T14:46:44.000Z</published>
-    <updated>2017-08-25T08:45:51.204Z</updated>
+    <updated>2017-08-25T08:45:51.205Z</updated>
     
     <content type="html"><![CDATA[<p>SpringMVC是Spring下的一个模块，与Spring自然无缝衔接，相比Structs2我更喜欢SpringMVC。这篇博客介绍一下SpringMVC的基本工作流程最后会附上一个小demo可供演示。<br>先上一张图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/SpringMVC.png" alt=""><br>这张图展示了SpringMVC大致的工作流程，下面开始逐步讲解：</p>
 <ol>
@@ -608,7 +608,7 @@
     <link href="http://vzardlloo.github.io/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/"/>
     <id>http://vzardlloo.github.io/2017/08/21/Servlet小结/</id>
     <published>2017-08-21T13:19:08.000Z</published>
-    <updated>2017-08-24T12:57:23.699Z</updated>
+    <updated>2017-08-24T12:57:23.700Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>Servlet是JAVA Web的底层技术，有着很重要的地位。下面分几点简单总结下：</p>
 <ul>
@@ -672,7 +672,7 @@
     <link href="http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"/>
     <id>http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/</id>
     <published>2017-08-20T08:23:52.000Z</published>
-    <updated>2017-08-20T12:45:20.183Z</updated>
+    <updated>2017-08-20T12:45:20.184Z</updated>
     
     <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：</p>
 <ul>
@@ -770,7 +770,7 @@
     <link href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/"/>
     <id>http://vzardlloo.github.io/2017/08/10/JAVA基础回顾-字节码指令/</id>
     <published>2017-08-10T08:34:19.000Z</published>
-    <updated>2017-08-20T12:37:50.026Z</updated>
+    <updated>2017-08-20T12:37:50.027Z</updated>
     
     <content type="html"><![CDATA[<h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘和类比两者之间的关系。<br>本着这样的思想，我们进行Java字节码指令的学习。JAVA字节码在JAVA虚拟机中的地位相当于实体机的机器码，一切在Java虚拟机上运行的程序都要被解释或编译成字节码，一切在实体机上运行的程序最后也都要编译成机器码。Java字节码指令可以对字节码进行操作，在实体机中对机器码进行操作的是汇编语言。所以Java字节码指令对应汇编语言，Java字节码指令集对应汇编指令集。</p>
 <h4 id="字节码简介"><a href="#字节码简介" class="headerlink" title="字节码简介"></a>字节码简介</h4><p>Java字节码指令由<em>一个</em>字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。<br><a id="more"></a></p>
@@ -948,7 +948,7 @@
     <link href="http://vzardlloo.github.io/2017/07/11/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
     <id>http://vzardlloo.github.io/2017/07/11/JAVA基础回顾-自定义注解/</id>
     <published>2017-07-11T12:18:00.000Z</published>
-    <updated>2017-07-17T13:46:38.377Z</updated>
+    <updated>2017-07-17T13:46:38.378Z</updated>
     
     <content type="html"><![CDATA[<p>这篇博客我们来回顾一下Java基础中的注解，主要通过来自定义一套注解来回顾一下这块的知识。</p>
 <blockquote>
@@ -1049,7 +1049,7 @@
     <link href="http://vzardlloo.github.io/2017/07/03/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BRESTful/"/>
     <id>http://vzardlloo.github.io/2017/07/03/springboot学习之RESTful/</id>
     <published>2017-07-03T11:09:56.000Z</published>
-    <updated>2017-07-17T13:46:33.309Z</updated>
+    <updated>2017-07-17T13:46:33.310Z</updated>
     
     <content type="html"><![CDATA[<p>在学习HelloWorld之后，我们来尝试构建一个RESTful工程。</p>
 <ul>
@@ -1123,7 +1123,7 @@
     <link href="http://vzardlloo.github.io/2017/06/28/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BHelloWorld%E7%AF%87/"/>
     <id>http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/</id>
     <published>2017-06-28T15:22:23.000Z</published>
-    <updated>2017-06-28T15:34:08.376Z</updated>
+    <updated>2017-06-28T15:34:08.377Z</updated>
     
     <content type="html"><![CDATA[<p>最近开始学习springboot,然后将在博客上记录和总结学习的过程。这篇主要是讲如何搭建springboot的开发环境，并且完成HelloWorld程序，使用的开发工具是IDEA.<br>  springboot官网上对springboot的介绍如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Spring Boot makes it easy to create stand-alone, production-grade Spring </div><div class="line">based Applications that you can &quot;just run&quot;. We take an opinionated view </div><div class="line">of the Spring platform and third-party libraries so you can get started </div><div class="line">withminimum fuss. Most Spring Boot applications need very little Spring </div><div class="line">configuration.</div></pre></td></tr></table></figure></p>
 <p>主要意思就是说springboot只需要很少的配置便可以创建可“运行”的独立的、生产级的基于Spring的应用程序。<br>springboot的主要特征为：</p>
