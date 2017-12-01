@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-11-07T11:01:09.692Z</updated>
+  <updated>2017-12-01T16:56:55.816Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>由三次握手想到的...</title>
+    <link href="http://vzardlloo.github.io/2017/12/01/%E7%94%B1%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%83%B3%E5%88%B0%E7%9A%84/"/>
+    <id>http://vzardlloo.github.io/2017/12/01/由三次握手想到的/</id>
+    <published>2017-12-01T14:44:31.000Z</published>
+    <updated>2017-12-01T16:56:55.816Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://oo3aq3ac8.bkt.clouddn.com/tcp.png" alt="tcp.png"><br>上面是一个tcp链接的过程，也就是俗称的三次握手，图上把每次握手做了什么也表示的比较清楚，不过这种表述的方式比较僵硬，没有自然而然的说明三次握手中“三次”的充分性和必要性。在建立可靠通信的准备过程中，客户端和服务端都要确认这样四件事：1、自己拥有发送信息的能力，2、自己拥有接受信息的能力，3、对方拥有发送信息的能力，4、对方拥有接受信息的能力。</p>
+<ul>
+<li>在第一次握手时（也就是客户端发送信息给服务端，服务端接受到信息那一刻），这个时候服务端明确了这样两件事，即对方（客户端）具有发送信息的能力，自己具有接受信息的能力。</li>
+<li>在第二次握手的时候（也就是服务端返回信息给客户端，客户端接受到信息那一刻），这个时候客户端可以明确这样四件事:由于自己之前发出的信息有了反馈，可以推断出自己之前的信息发送成功，即自己拥有发送信息的能力，对方接受到信息并给出反馈，说明对方具有接受信息和发送信息的能力，自己接受到反馈说明自己拥有接受信息的能力。</li>
+<li>在第三次握手的时候（服务端发送确认信息给服务端，服务端接受到信息那一刻），服务端可以明确这样两件事:由于自己发送的信息有了反馈可以推断出自己拥有发送信息的能力，对方具有接受信息的能力。</li>
+</ul>
+<p>这样通过三次握手双方都恰好完成了自己在建立可靠通信需要明确的四件事，所以可以进行可靠通信。那么可以做一下推广，三点，四点，乃至N点建立可靠通信需要握几次手呢？先看一下三点，三点就是在两点的基础上再加一点，那么对于第三点来说，对方（点一，点二）的接受和发送信息的能力均已经得到了验证，所以他只需验证自己的接受和发送信息的能力即可，那么验证自己的发送信息和接受信息的能力需要握几次手呢？答案是三次，因为接受信息的能力需要一次握手来验证，发送信息的能力需要两次握手来验证（先发送，等待反馈，接受到反馈说明具有接受发送信息的能力）。所以对于四点也是这样，只要通过三次握手确认自己的发送信息和接受信息的能力，就可以加入已有的三点可靠通信网络，推广一下就是N点可靠通信网络的建立需要[3*（n-1)]次握手，当N=2时，就是3次握手。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/tcp.png&quot; alt=&quot;tcp.png&quot;&gt;&lt;br&gt;上面是一个tcp链接的过程，也就是俗称的三次握手，图上把每次握手做了什么也表示的比较清楚，不过这种表述的方式比较僵硬，没有自然而然的说
+    
+    </summary>
+    
+      <category term="网络" scheme="http://vzardlloo.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="网络" scheme="http://vzardlloo.github.io/tags/%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
   
   <entry>
     <title>Js原型链解读</title>
@@ -1147,42 +1176,6 @@
     </summary>
     
       <category term="springboot" scheme="http://vzardlloo.github.io/categories/springboot/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Java命令行运行的一个小坑</title>
-    <link href="http://vzardlloo.github.io/2017/06/04/Java%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91/"/>
-    <id>http://vzardlloo.github.io/2017/06/04/Java命令行运行的一个小坑/</id>
-    <published>2017-06-04T08:57:38.000Z</published>
-    <updated>2017-06-04T09:58:13.899Z</updated>
-    
-    <content type="html"><![CDATA[<p>当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:</p>
-<ul>
-<li>JAVA_HOME—&gt;JDK安装根目录</li>
-<li>PATH增加%JAVA_HOME%\bin</li>
-<li>CLASS_PATH—&gt;%JAVA_HOME%\lib<br>但是这样是有问题的，比如你有这样的程序：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">package org.net;</div><div class="line"></div><div class="line">/**</div><div class="line"> * Created by V-zar on 2017/5/22.</div><div class="line"> */</div><div class="line">public class Test &#123;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line"></div><div class="line"></div><div class="line">        System.out.print(&quot;HelloWorld&quot;);</div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>当你在某个目录编译<code>javac Test.java</code>后，试图用java命令<code>java Test</code>运行的时候,会发现报错<code>找不到或无法加载主类</code>。这是因为按照很多资料那样来配置的时候CLASS_PATH是错误的，解决的办法有两个：</p>
-<ul>
-<li>运行时加入参数<code>java -cp . Test</code> (运行时指定classpath为当前路径)。</li>
-<li>在环境变量CLASS_PATH中加入<code>.</code>,表示当前路径，Java解释器将在当前路径搜索class<br>文件，如果CLASS_PATH中有多个路径值，建议将<code>.</code>置顶。（一劳永逸的方法）。</li>
-</ul>
-<p>另外，如果你是用Eclipse或者IDEA编辑程序的话，一般会在程序开头加入包的信息，如<br><code>package org.net;</code>,这同样会导致错误，所以如果是用Eclipse或者IDEA编辑程序并且试图在命令行运行程序的话，最好检查一下程序开头有没有包的信息，有的话需要删掉:-).</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当我们开始学习JAVA时，第一件事无疑是配置JAVA的开发环境，通常来说包含安装JDK和配置环境变量这两个步骤。安装JDK略过不提，在配置环境变量的时候，很多资料一般都是这么说的:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;JAVA_HOME—&amp;gt;JDK安装根目录&lt;/li&gt;
-&lt;li&gt;P
-    
-    </summary>
-    
-      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
     
     
   </entry>
