@@ -305,6 +305,165 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2018/02/10/实现一个简单的http服务器/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vzardlloo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vzard's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/10/实现一个简单的http服务器/" itemprop="url">实现一个简单的http服务器</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T20:38:49+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/10/实现一个简单的http服务器/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/10/实现一个简单的http服务器/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://oo3aq3ac8.bkt.clouddn.com/server.jpg" alt=""><br>这篇文章主要写一下如何实现一个简单的http服务器，并且借由这个问题讨论一下别的相关问题。首先实现一个http服务器是一件很难的事吗？这个问题不好回答，如果是一个demo级的http服务器，答案是：很简单，可以说是JAVA刚入门水平就可以做到的。如果是一个可供实际生产的、性能优良，架构优雅的服务器，答案是：很不容易，对大部分的人来说可能很难。不过不管是demo还是成熟的生产用的http服务器，他们核心的部分应该都是相似的，下面我们来分析一下服务器的工作过程：<br>    首先何谓“服务”？服务就是按照客户的要求来完成客户的需求。服务器更具体的表现形式是按照客户的的请求来执行某种操作，返回指定数据，这里的数据和请求更具体的表现形式通常是<em>字符串</em>。也就是说<em>客户端发给服务器一个包含客户端需求的字符串，服务端通过解析客户端发来的字符串，获取客户端的需求，然后完成需求</em>。那么问题来了，服务端如何解析客户端发来的字符串呢？他们之间可是素不相识的，每个客户端按何种组织方式来发送自己的需求对服务器来说完全是不可预期的。于是这就需要一个统一的规范来统一客户端的请求和服务端的返回，以及一些别的行为规范，于是http协议合情合理的出现了。现在事情就变成<em>客户端发给服务器一个满足http协议的、包含客户端需求的字符串，服务端根据http协议来解析客户端发来的字符串获取客户端的需求，然后完成需求，返回符合http协议的字符串给客户端</em>。再然后这里的“发送”，“返回”又具体是什么呢？它们就是客户端和服务器之间通过socket连接执行的一些IO操作。这样分析之后我们大概知道整个的工作流程：<em>客户端建立一个连接到服务端，执行IO操作，把满足http协议的字符串发送给服务器，服务器根据http协议来解析客户端发来的字符串的含义，然后执行对应操作，最后把作为返回结果的、满足http协议的字符串执行IO操作发送给客户端。</em><br>    通过上面简单的分析我们大概知道http服务器具体干了啥（实际比较复杂）以及我们需要哪些基础前置知识：</p>
+<ul>
+<li>http协议（编程语言无关,核心）：参见<a href="https://www.rfc-editor.org/rfc/rfc2616.txt" target="_blank" rel="external">RFC2616</a></li>
+<li>IO操作（编程语言有关）：各大编程语言的IO模块</li>
+<li>字符串操作：这就是各大公司考算法题的原因吧（望天==）</li>
+</ul>
+<p>后续当然还有：</p>
+<ul>
+<li>多线程并发优化处理</li>
+<li>设计模式</li>
+<li>……</li>
+</ul>
+<p>下面是我用JAVA实现一个HTTP服务器，我这个服务器不是简单的小demo(demo只需两个JAVA 类即可搞定==)，当然也不是可以生产用的（你可以把它写成可以生成用的），先导知识为Java NIO编程和Java 多线程编程，代码太长不贴，放在github。<em>代码地址：<a href="https://github.com/vzardlloo/crab" target="_blank" rel="external">Crab</a></em><br>项目截图：<br><img src="https://camo.githubusercontent.com/b5a6153196f06168813f24483056cbc054eb2944/687474703a2f2f6f6f336171336163382e626b742e636c6f7564646e2e636f6d2f637261622e706e67" alt=""></p>
+<p>项目的目的是什么呢？最重要的目的是希望可以写出规范化的、工程化的代码以及项目，特别是与入门者来说常常只写一些玩具式的demo，或者盲目的去看一下大型项目的源码，我觉得这样对自己水平的提升帮助有限，事实上我认为对一个人提升最大的是从最开始就接触某个项目或领域，从它萌芽的时候开始参与，一步步由项目和问题驱动着来学习，在遇到问题的时候可以想办法来解决它，想不出来可以去别的项目看看别人是如何解决的，这样既提高了自己的水平，也对别的项目有了更深的理解，知道别人为何这样做，而不是去记忆别人是怎么做的。这里引出的一个问题是：当我们在阅读源码时我认为至少要带着这样几个问题：1.这个东西是干什么的，解决了什么问题。2。这里作者这里为什么要这样做，他的目的是什么，他想干什么。3.我现在想要做的东西需要它吗？需要到什么程度（会用？会魔改？）？以项目驱动学习，把从书上，别人源码里的技巧立马用到自己的项目里，才可以让知识真的化为己用。</p>
+<h5 id="题外话当我们学习时我们通常实际上在学习什么"><a href="#题外话：当我们学习时我们通常实际上在学习什么？" class="headerlink" title="题外话：当我们学习时我们通常实际上在学习什么？"></a>题外话：当我们学习时我们通常实际上在学习什么？</h5><p>我的观点是我们在学习时通常实际上更多的在学习各种规范，比如JavaWeb其实通常就是Java语言规范+各种框架的使用规范+网络协议规范，因为计算机科学以及很多工程科学实际是一个人造的体系，支撑这个体系的就是各种规范，修补和发展这个体系也是依赖于各种规范，由于规范可以人造，因此规范可以说是学不完的，因为会不停的有新的规范出来，所以说学无止境。说起学无止境好像每门科学都是学无止境的，我认为科学大致可以分成两种，一直是研究的是基于一种人造的体系，一直是基于自然的体系（当然人造的最后也是基于自然的）。前者的学无止境是由于人类创造的无止境，不断地会有新的问题和规范被创造出来，后者的学无止境更多的是由于大自然的无止境，大到宇宙星辰，小到原子夸克，浩瀚无边地大自然的规范就在那里等待人们去发现。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/12/01/由三次握手想到的/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1666,156 +1825,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/25/修复hexo博客的一个bug/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vzardlloo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oo3aq3ac8.bkt.clouddn.com/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vzard's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/25/修复hexo博客的一个bug/" itemprop="url">修复hexo博客的一个bug</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-25T18:18:37+08:00">
-                2017-08-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/08/25/修复hexo博客的一个bug/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/25/修复hexo博客的一个bug/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前不小心把JAVA分类写成了java发布了，然后又改了回来，并且手动地在博客<code>public/categories/</code>和<code>.deploy_git/categories/</code>下的java文件夹改成JAVA重新发布，结果在点击JAVA分类时会报404。经过一番研究我发现虽然我本地都将java改成了JAVA,但是GitHub仓库里的文件夹名称还是java。对比“java”和“JAVA”我猜测可能是git大小写不敏感所以JAVA并没有覆盖掉java，谷歌一下果然如此。由于我把java改成了JAVA所以在网页点击”分类”时访问的是：<code>https://xxxxxxxx/JAVA/</code>,而GitHub仓库里依然是java，只能访问<code>https://xxxxxxxxxx/java/</code>，由于http协议对于URL是大小写敏感的，所以访问<code>https://xxxxxxxx/JAVA/</code>必然会报404。找到问题所在下面开始修复bug:</p>
-<ol>
-<li>进入.deploy_git文件夹，输入<code>git config core.ignorecase false</code>把忽略大小写<br>关闭。(必须要进入.deploy_git执行命令，因为只有这个文件夹是git仓库，这里的文件才会推送到GitHub仓库)</li>
-<li>回到博客根目录，执行<code>hexo d</code>重新发布博客</li>
-</ol>
-<p>执行完毕，bug修复！</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1865,7 +1874,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">30</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1887,7 +1896,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1995,7 +2004,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

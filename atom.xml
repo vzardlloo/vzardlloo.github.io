@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2017-12-01T16:56:55.816Z</updated>
+  <updated>2018-02-19T16:06:34.550Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,43 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>实现一个简单的http服务器</title>
+    <link href="http://vzardlloo.github.io/2018/02/10/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84http%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>http://vzardlloo.github.io/2018/02/10/实现一个简单的http服务器/</id>
+    <published>2018-02-10T12:38:49.000Z</published>
+    <updated>2018-02-19T16:06:34.550Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="http://oo3aq3ac8.bkt.clouddn.com/server.jpg" alt=""><br>这篇文章主要写一下如何实现一个简单的http服务器，并且借由这个问题讨论一下别的相关问题。首先实现一个http服务器是一件很难的事吗？这个问题不好回答，如果是一个demo级的http服务器，答案是：很简单，可以说是JAVA刚入门水平就可以做到的。如果是一个可供实际生产的、性能优良，架构优雅的服务器，答案是：很不容易，对大部分的人来说可能很难。不过不管是demo还是成熟的生产用的http服务器，他们核心的部分应该都是相似的，下面我们来分析一下服务器的工作过程：<br>    首先何谓“服务”？服务就是按照客户的要求来完成客户的需求。服务器更具体的表现形式是按照客户的的请求来执行某种操作，返回指定数据，这里的数据和请求更具体的表现形式通常是<em>字符串</em>。也就是说<em>客户端发给服务器一个包含客户端需求的字符串，服务端通过解析客户端发来的字符串，获取客户端的需求，然后完成需求</em>。那么问题来了，服务端如何解析客户端发来的字符串呢？他们之间可是素不相识的，每个客户端按何种组织方式来发送自己的需求对服务器来说完全是不可预期的。于是这就需要一个统一的规范来统一客户端的请求和服务端的返回，以及一些别的行为规范，于是http协议合情合理的出现了。现在事情就变成<em>客户端发给服务器一个满足http协议的、包含客户端需求的字符串，服务端根据http协议来解析客户端发来的字符串获取客户端的需求，然后完成需求，返回符合http协议的字符串给客户端</em>。再然后这里的“发送”，“返回”又具体是什么呢？它们就是客户端和服务器之间通过socket连接执行的一些IO操作。这样分析之后我们大概知道整个的工作流程：<em>客户端建立一个连接到服务端，执行IO操作，把满足http协议的字符串发送给服务器，服务器根据http协议来解析客户端发来的字符串的含义，然后执行对应操作，最后把作为返回结果的、满足http协议的字符串执行IO操作发送给客户端。</em><br>    通过上面简单的分析我们大概知道http服务器具体干了啥（实际比较复杂）以及我们需要哪些基础前置知识：</p>
+<ul>
+<li>http协议（编程语言无关,核心）：参见<a href="https://www.rfc-editor.org/rfc/rfc2616.txt" target="_blank" rel="external">RFC2616</a></li>
+<li>IO操作（编程语言有关）：各大编程语言的IO模块</li>
+<li>字符串操作：这就是各大公司考算法题的原因吧（望天==）</li>
+</ul>
+<p>后续当然还有：</p>
+<ul>
+<li>多线程并发优化处理</li>
+<li>设计模式</li>
+<li>……</li>
+</ul>
+<p>下面是我用JAVA实现一个HTTP服务器，我这个服务器不是简单的小demo(demo只需两个JAVA 类即可搞定==)，当然也不是可以生产用的（你可以把它写成可以生成用的），先导知识为Java NIO编程和Java 多线程编程，代码太长不贴，放在github。<em>代码地址：<a href="https://github.com/vzardlloo/crab" target="_blank" rel="external">Crab</a></em><br>项目截图：<br><img src="https://camo.githubusercontent.com/b5a6153196f06168813f24483056cbc054eb2944/687474703a2f2f6f6f336171336163382e626b742e636c6f7564646e2e636f6d2f637261622e706e67" alt=""></p>
+<p>项目的目的是什么呢？最重要的目的是希望可以写出规范化的、工程化的代码以及项目，特别是与入门者来说常常只写一些玩具式的demo，或者盲目的去看一下大型项目的源码，我觉得这样对自己水平的提升帮助有限，事实上我认为对一个人提升最大的是从最开始就接触某个项目或领域，从它萌芽的时候开始参与，一步步由项目和问题驱动着来学习，在遇到问题的时候可以想办法来解决它，想不出来可以去别的项目看看别人是如何解决的，这样既提高了自己的水平，也对别的项目有了更深的理解，知道别人为何这样做，而不是去记忆别人是怎么做的。这里引出的一个问题是：当我们在阅读源码时我认为至少要带着这样几个问题：1.这个东西是干什么的，解决了什么问题。2。这里作者这里为什么要这样做，他的目的是什么，他想干什么。3.我现在想要做的东西需要它吗？需要到什么程度（会用？会魔改？）？以项目驱动学习，把从书上，别人源码里的技巧立马用到自己的项目里，才可以让知识真的化为己用。</p>
+<h5 id="题外话当我们学习时我们通常实际上在学习什么"><a href="#题外话：当我们学习时我们通常实际上在学习什么？" class="headerlink" title="题外话：当我们学习时我们通常实际上在学习什么？"></a>题外话：当我们学习时我们通常实际上在学习什么？</h5><p>我的观点是我们在学习时通常实际上更多的在学习各种规范，比如JavaWeb其实通常就是Java语言规范+各种框架的使用规范+网络协议规范，因为计算机科学以及很多工程科学实际是一个人造的体系，支撑这个体系的就是各种规范，修补和发展这个体系也是依赖于各种规范，由于规范可以人造，因此规范可以说是学不完的，因为会不停的有新的规范出来，所以说学无止境。说起学无止境好像每门科学都是学无止境的，我认为科学大致可以分成两种，一直是研究的是基于一种人造的体系，一直是基于自然的体系（当然人造的最后也是基于自然的）。前者的学无止境是由于人类创造的无止境，不断地会有新的问题和规范被创造出来，后者的学无止境更多的是由于大自然的无止境，大到宇宙星辰，小到原子夸克，浩瀚无边地大自然的规范就在那里等待人们去发现。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/server.jpg&quot; alt=&quot;&quot;&gt;&lt;br&gt;这篇文章主要写一下如何实现一个简单的http服务器，并且借由这个问题讨论一下别的相关问题。首先实现一个http服务器是一件很难的事吗？这个问题
+    
+    </summary>
+    
+      <category term="网络" scheme="http://vzardlloo.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+      <category term="http java" scheme="http://vzardlloo.github.io/tags/http-java/"/>
+    
+  </entry>
   
   <entry>
     <title>由三次握手想到的...</title>
@@ -1139,39 +1176,6 @@
       &lt;p&gt;在学习HelloWorld之后，我们来尝试构建一个RESTful工程。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;什么是REST?&lt;br&gt;首先，REST是Web自身的架构风格。REST也是Web之所以取得成功的技术架构方面因素的总结。REST是世界上最成功的分布式应用架构风格（成功案例：Web，还不够吗？）。它是为 运行在互联网环境 的 分布式 超媒体系统量身定制的。互联网环境与企业内网环境有非常大的差别，最主要的差别是两个方面：&lt;br&gt;可伸缩性需求无法控制：并发访问量可能会暴涨，也可能会暴跌。&lt;br&gt;安全性需求无法控制：无法控制客户端发来的请求的格式，很可能会是恶意的请求。&lt;br&gt;而所谓的“超媒体系统”，即，使用了超文本的系统。可以把“超媒体”理解为超文本+媒体内容。&lt;br&gt;REST是HTTP/1.1协议等Web规范的设计指导原则，HTTP/1.1协议正是为实现REST风格的架构而设计的。新的Web规范，其设计必须符合REST的要求，否则整个Web的体系架构会因为引入严重矛盾而崩溃。这句话不是危言耸听，做个类比，假如苏州市政府同意在市区著名园林的附近大型土木，建造大量具有后现代风格的摩天大楼，那么不久之后世界闻名的苏州园林美景将不复存在。&lt;br&gt;上述这些关于“REST是什么”的描述，可以总结为一句话：REST是所有Web应用都应该遵守的架构设计指导原则。当然，REST并不是法律，违反了REST的指导原则，仍然能够实现应用的功能。但是违反了REST的指导原则，会付出很多代价，特别是对于大流量的网站而言。
-    
-    </summary>
-    
-      <category term="springboot" scheme="http://vzardlloo.github.io/categories/springboot/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>springboot学习之HelloWorld篇</title>
-    <link href="http://vzardlloo.github.io/2017/06/28/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BHelloWorld%E7%AF%87/"/>
-    <id>http://vzardlloo.github.io/2017/06/28/springboot学习之HelloWorld篇/</id>
-    <published>2017-06-28T15:22:23.000Z</published>
-    <updated>2017-06-28T15:34:08.377Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近开始学习springboot,然后将在博客上记录和总结学习的过程。这篇主要是讲如何搭建springboot的开发环境，并且完成HelloWorld程序，使用的开发工具是IDEA.<br>  springboot官网上对springboot的介绍如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Spring Boot makes it easy to create stand-alone, production-grade Spring </div><div class="line">based Applications that you can &quot;just run&quot;. We take an opinionated view </div><div class="line">of the Spring platform and third-party libraries so you can get started </div><div class="line">withminimum fuss. Most Spring Boot applications need very little Spring </div><div class="line">configuration.</div></pre></td></tr></table></figure></p>
-<p>主要意思就是说springboot只需要很少的配置便可以创建可“运行”的独立的、生产级的基于Spring的应用程序。<br>springboot的主要特征为：</p>
-<ul>
-<li>创建独立的Spring应用程序</li>
-<li>直接嵌入Tomcat，Jetty或Undertow（不需要部署WAR文件）</li>
-<li>提供有意思的“启动”POM来简化您的Maven配置</li>
-<li>尽可能自动配置</li>
-<li>提供生产就绪功能，如指标，运行状况检查和外部化配置</li>
-<li>绝对没有代码生成，也不需要XML配置</li>
-</ul>
-<p>下面我们开始写第一个springboot的HelloWorld程序：<br>一、新建一个Spring Initializr项目<br><img src="http://oo3aq3ac8.bkt.clouddn.com/001.png" alt="新建一个Spring Initializr项目"><br>二、填写Group和Artifact名称<br><img src="http://oo3aq3ac8.bkt.clouddn.com/002.png" alt="填写Group和Artifact名称"><br>三、在Dependensencise里勾选上Web<br>    在HelloWorld阶段只需勾选Web,之后还需增加别的依赖<br><img src="http://oo3aq3ac8.bkt.clouddn.com/003.png" alt="勾选上Web"><br>然后一直点下一步，会自动生成项目初始的结构，如下图所示：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/004.png" alt=""><br>然后新建一个包，可以命名为web,用来放置控制器，编写HelloWorldController，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> org.vzard.springboot.web;</div><div class="line"></div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</div><div class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by V-zar on 2017/6/28.</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="meta">@RestController</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorldController</span> </span>&#123;</div><div class="line">    <span class="meta">@RequestMapping</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">sayHello</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"HelloWorld"</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>最终结构如图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/005.png" alt=""><br>然后点击运行，等待运行成功，打开浏览器输入<code>http://localhost:8080</code>，如果看到如下图所示，即表明成功：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/006.png" alt=""></p>
-<p><em>注：如果失败，可以查看代码及依赖是否有误，和8080端口是否被占用，具体其他问题查看报错信息分析。</em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近开始学习springboot,然后将在博客上记录和总结学习的过程。这篇主要是讲如何搭建springboot的开发环境，并且完成HelloWorld程序，使用的开发工具是IDEA.&lt;br&gt;  springboot官网上对springboot的介绍如下：&lt;br&gt;&lt;figur
     
     </summary>
     
