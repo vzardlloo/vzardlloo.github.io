@@ -4,8 +4,23 @@
 
     
   <url>
+    <loc>http://vzardlloo.github.io/2019/03/24/Test/</loc>
+    <lastmod>2019-03-24T09:54:30.748Z</lastmod>
+    <data>
+        <display>
+        <title>Test</title>
+        <pubTime>2019-03-24T09:51:13.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://vzardlloo.github.io/2018/02/10/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84http%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2018-02-19T16:06:34.550Z</lastmod>
+    <lastmod>2018-02-19T16:16:38.801Z</lastmod>
     <data>
         <display>
         <title>实现一个简单的http服务器</title>
