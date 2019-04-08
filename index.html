@@ -305,6 +305,169 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2019/04/08/cron表达式小记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vzardlloo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://pov7m22x5.bkt.clouddn.com/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vzard's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/08/cron表达式小记/" itemprop="url">cron表达式小记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-08T14:58:43+08:00">
+                2019-04-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/08/cron表达式小记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/04/08/cron表达式小记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​    Cron表达式的作用是用来配置定时任务，它是一个字符串，由七个元素或者说叫域组成的，元素之间用空格来分割。</p>
+<p>​    组成Cron表达式的七个元素及其可能出现的值分别是:</p>
+<table>
+<thead>
+<tr>
+<th>元素</th>
+<th>Seconds</th>
+<th>Minutes</th>
+<th>Hours</th>
+<th>Day-of-Month</th>
+<th>Month</th>
+<th>Day-of-Week</th>
+<th>Year(可选)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值</td>
+<td>[, - * /]，[0-59]</td>
+<td>[, - * /]，[0-59]</td>
+<td>[, - * /]，[0-23]</td>
+<td>[, - * / ? L W C]，[1-31]</td>
+<td>[, - * /]，[1-12],[JAN-DEC]</td>
+<td>[, - * / ? L C #]，[1-7],[SUN-SAT]</td>
+<td>[, - * /]，[1970-2099]</td>
+</tr>
+</tbody>
+</table>
+<p>[^注]: Day-of-week: 1表示星期日，以此类推</p>
+<p>特殊符号意义：</p>
+<ol>
+<li><em>：匹配该域的任意值，假如在Minutes域使用 </em>，即表示每分钟都会触发事件。</li>
+<li>?：只可以用于Day-of-Month和Day-of-Week两个域,它实际上就是为了解决星期和天之间的冲突而产生的，因为”星期”并不在” 年月日”这种时间记法体系里面，如果设置成每个月一号同时设置每个星期一执行任务的话，任务便会不知道该哪天执行。具体用法是当Day-of-Month和Day-of-Week中其中有一个有值的话另一个就应该设置成”？”。</li>
+<li>-: 表示范围，例如在Minutes域使用5-20，表示从5分到20分钟每分钟触发一次 。</li>
+<li>/: 表示起始时间开始触发，然后每隔固定时间触发一次，例如在Minutes域使用5/20,则意味着5分钟触发一次，而25，45等分别触发一次。</li>
+<li>,: 表示列出枚举值值。例如：在Minutes域使用5,20，则意味着在5和20分每分钟触发一次。</li>
+<li>L: 表示最后，只能出现在DayofWeek和DayofMonth域，如果在DayofWeek域使用5L,意味着在最后的一个星期四触发。</li>
+<li>W:表示有效工作日(周一到周五),只能出现在DayofMonth域，系统将在离指定日期的最近的有效工作日触发事件。例如：在 DayofMonth使用5W，如果5日是星期六，则将在最近的工作日：星期五，即4日触发。如果5日是星期天，则在6日(周一)触发；如果5日在星期一到星期五中的一天，则就在5日触发。另外一点，W的最近寻找不会跨过月份</li>
+<li>LW:这两个字符可以连用，表示在某个月最后一个工作日，即最后一个星期五。</li>
+<li># :用于确定每个月第几个星期几，只能出现在DayofMonth域。例如在4#2，表示某月的第二个星期三。</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2019/03/28/计算广告核心问题总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1648,157 +1811,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/09/07/Java中的锁/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vzardlloo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://pov7m22x5.bkt.clouddn.com/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vzard's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/07/Java中的锁/" itemprop="url">Java中的锁</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T20:04:42+08:00">
-                2017-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/07/Java中的锁/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/07/Java中的锁/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body han-init-context" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这篇博客主要讲一下Java中的各种各样五花八门的锁。这些五花八门的锁肯定不是工程师没事做闲着无聊倒腾出来的，他们都是为了在某些环境下的性能而对传统的锁做了些改造。</p>
-<h4 id="公平锁和非公平锁"><a href="#公平锁和非公平锁" class="headerlink" title="公平锁和非公平锁"></a>公平锁和非公平锁</h4><p>公平锁是指当多个线程在等待同一锁时，必须按照申请锁的先后顺序排成一个等待队列依次来一次获得锁。<br>非公平锁是指加锁时不用考虑排队等待问题，直接尝试获取锁，获取不到自动到队尾等待，是抢占式的。<br>对比：非公平锁的性能比公平锁搞5~10倍，因为公平锁需要在多核的情况下维护一个队列。但是非公平锁有可能会导致饥饿问题。</p>
-<h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>由于Java的线程是映射到操作系统的原生线程上的，如果要阻塞一个线程或者唤醒一个线程，都需要操作系统来帮忙完成，需要操作系统从用户态转换到核心态。因此状态转换需要耗费很多处理器时间。同时虚拟机的开发团队注意到许多应用上共享数据的锁定状态只会持续很短的一段时间，如果一个线程只是很短暂的占用一个共享资源，当在它短暂占用这段资源的时候如果有别的线程试图占用这个资源的时候，后来的线程会因为该资源被占用而陷入阻塞状态，丢失对时间片的占用，这会导致资源的大量浪费。所以针对这种情况开发团队设计出了自旋锁，即如果物理机器有一个以上的处理器，可以让两个或两个以上的线程同时并行执行，我们就可以让后面的线程“稍等一下”，但是不放弃处理器的执行时间，看看持有锁的线程是否很快就会释放锁。为了让线程等待，我们只需让线程执行一个忙循环（自旋）,等待锁被释放。<br>但是自旋也不可以替代锁，自旋虽然避免了线程切换的开销，但是它是要占用处理器时间的，因此，如果锁被占用的时间很短，自旋等待的效果会非常好。如果锁被占用的时间很长。那么自旋只会白白占用处理器的资源。因此自旋等待时间必须要有一定限制，如果自旋超过一定次数（默认是10次，使用-XX:PreBlockSpin来更改）没有获得锁，就应该使用传统的方式去挂起线程了。需要注意的是自旋是在轻量级锁中使用的，在重量级锁中，线程不能用自旋锁。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/07/Java中的锁/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1848,7 +1860,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1870,7 +1882,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

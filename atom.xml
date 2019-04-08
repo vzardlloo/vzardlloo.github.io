@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2019-03-28T13:43:33.577Z</updated>
+  <updated>2019-04-08T08:08:47.383Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -14,6 +14,73 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>cron表达式小记</title>
+    <link href="http://vzardlloo.github.io/2019/04/08/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%AE%B0/"/>
+    <id>http://vzardlloo.github.io/2019/04/08/cron表达式小记/</id>
+    <published>2019-04-08T06:58:43.000Z</published>
+    <updated>2019-04-08T08:08:47.383Z</updated>
+    
+    <content type="html"><![CDATA[<p>​    Cron表达式的作用是用来配置定时任务，它是一个字符串，由七个元素或者说叫域组成的，元素之间用空格来分割。</p>
+<p>​    组成Cron表达式的七个元素及其可能出现的值分别是:</p>
+<table>
+<thead>
+<tr>
+<th>元素</th>
+<th>Seconds</th>
+<th>Minutes</th>
+<th>Hours</th>
+<th>Day-of-Month</th>
+<th>Month</th>
+<th>Day-of-Week</th>
+<th>Year(可选)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值</td>
+<td>[, - * /]，[0-59]</td>
+<td>[, - * /]，[0-59]</td>
+<td>[, - * /]，[0-23]</td>
+<td>[, - * / ? L W C]，[1-31]</td>
+<td>[, - * /]，[1-12],[JAN-DEC]</td>
+<td>[, - * / ? L C #]，[1-7],[SUN-SAT]</td>
+<td>[, - * /]，[1970-2099]</td>
+</tr>
+</tbody>
+</table>
+<p>[^注]: Day-of-week: 1表示星期日，以此类推</p>
+<p>特殊符号意义：</p>
+<ol>
+<li><em>：匹配该域的任意值，假如在Minutes域使用 </em>，即表示每分钟都会触发事件。</li>
+<li>?：只可以用于Day-of-Month和Day-of-Week两个域,它实际上就是为了解决星期和天之间的冲突而产生的，因为”星期”并不在” 年月日”这种时间记法体系里面，如果设置成每个月一号同时设置每个星期一执行任务的话，任务便会不知道该哪天执行。具体用法是当Day-of-Month和Day-of-Week中其中有一个有值的话另一个就应该设置成”？”。</li>
+<li>-: 表示范围，例如在Minutes域使用5-20，表示从5分到20分钟每分钟触发一次 。</li>
+<li>/: 表示起始时间开始触发，然后每隔固定时间触发一次，例如在Minutes域使用5/20,则意味着5分钟触发一次，而25，45等分别触发一次。</li>
+<li>,: 表示列出枚举值值。例如：在Minutes域使用5,20，则意味着在5和20分每分钟触发一次。</li>
+<li>L: 表示最后，只能出现在DayofWeek和DayofMonth域，如果在DayofWeek域使用5L,意味着在最后的一个星期四触发。</li>
+<li>W:表示有效工作日(周一到周五),只能出现在DayofMonth域，系统将在离指定日期的最近的有效工作日触发事件。例如：在 DayofMonth使用5W，如果5日是星期六，则将在最近的工作日：星期五，即4日触发。如果5日是星期天，则在6日(周一)触发；如果5日在星期一到星期五中的一天，则就在5日触发。另外一点，W的最近寻找不会跨过月份</li>
+<li>LW:这两个字符可以连用，表示在某个月最后一个工作日，即最后一个星期五。</li>
+<li># :用于确定每个月第几个星期几，只能出现在DayofMonth域。例如在4#2，表示某月的第二个星期三。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;​    Cron表达式的作用是用来配置定时任务，它是一个字符串，由七个元素或者说叫域组成的，元素之间用空格来分割。&lt;/p&gt;
+&lt;p&gt;​    组成Cron表达式的七个元素及其可能出现的值分别是:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;元素&lt;/th&gt;
+&lt;t
+    
+    </summary>
+    
+    
+      <category term="杂记" scheme="http://vzardlloo.github.io/tags/%E6%9D%82%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>计算广告核心问题总结</title>
@@ -1034,107 +1101,6 @@
     
     
       <category term="jvm" scheme="http://vzardlloo.github.io/tags/jvm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JAVA基础回顾-自定义注解</title>
-    <link href="http://vzardlloo.github.io/2017/07/11/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/"/>
-    <id>http://vzardlloo.github.io/2017/07/11/JAVA基础回顾-自定义注解/</id>
-    <published>2017-07-11T12:18:00.000Z</published>
-    <updated>2017-07-17T13:46:38.378Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇博客我们来回顾一下Java基础中的注解，主要通过来自定义一套注解来回顾一下这块的知识。</p>
-<blockquote>
-<p>下面先回顾一下基础知识：</p>
-</blockquote>
-<p>四个元注解：</p>
-<ul>
-<li>@Target</li>
-<li>@Retention</li>
-<li>@Documented</li>
-<li>@Inherited</li>
-</ul>
-<p><em>具体说明: </em>   </p>
-<ul>
-<li>@Target<br>@Target说明了Annotation所修饰的对象范围：Annotation可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）。在Annotation类型的声明中使用了target可更加明晰其修饰的目标。</li>
-</ul>
-<blockquote>
-<p>作用：用于描述注解的使用范围（即：被描述的注解可以用在什么地方）</p>
-</blockquote>
-<p>  取值(ElementType)有：<br>　　1. CONSTRUCTOR:用于描述构造器<br>　　2. FIELD:用于描述域<br>　　3. LOCAL_VARIABLE:用于描述局部变量<br>　　4. METHOD:用于描述方法<br>　　5. PACKAGE:用于描述包<br>　　6. PARAMETER:用于描述参数<br>　　7. TYPE:用于描述类、接口(包括注解类型) 或enum声明<br><a id="more"></a>　　　　</p>
-<ul>
-<li>@Retention<br>@Retention定义了该Annotation被保留的时间长短：某些Annotation仅出现在源代码中，而被编译器丢弃；而另一些却被编译在class文件中；编译在class文件中的Annotation可能会被虚拟机忽略，而另一些在class被装载时将被读取（请注意并不影响class的执行，因为Annotation与class在使用上是被分离的）。使用这个meta-Annotation可以对 Annotation的“生命周期”限制。</li>
-</ul>
-<blockquote>
-<p>作用：表示需要在什么级别保存该注释信息，用于描述注解的生命周期（即：被描述的注解在什么范围内有效）</p>
-</blockquote>
-<p>取值（RetentionPoicy）有：<br>　　1. SOURCE:在源文件中有效（即源文件保留）<br>　　2. CLASS:在class文件中有效（即class保留）<br>　　3. RUNTIME:在运行时有效（即运行时保留）</p>
-<ul>
-<li><p>@Docmented<br>@Documented用于描述其它类型的annotation应该被作为被标注的程序成员的公共API，因此可以被例如javadoc此类的工具文档化。Documented是一个标记注解，没有成员。</p>
-</li>
-<li><p>Inherited<br>@Inherited 元注解是一个标记注解，@Inherited阐述了某个被标注的类型是被继承的。如果一个使用了@Inherited修饰的annotation类型被用于一个class，则这个annotation将被用于该class的子类。<br>　　注意：@Inherited annotation类型是被标注过的class的子类所继承。类并不从它所实现的接口继承annotation，方法并不从它所重载的方法继承annotation。<br>　　当@Inherited annotation类型标注的annotation的Retention是RetentionPolicy.RUNTIME，则反射API增强了这种继承性。如果我们使用java.lang.reflect去查询一个@Inherited annotation类型的annotation时，反射代码检查将展开工作：检查class和其父类，直到发现指定的annotation类型被发现，或者到达类继承结构的顶层。</p>
-</li>
-</ul>
-<blockquote>
-<p>自定义一套注解：</p>
-</blockquote>
-<p>我们的目的是定义一套注解，可以通过注解来配置人的个人信息，包括姓名，性别，年龄。</p>
-<ul>
-<li>首先定义@Name，@Gender,@Age三个标签:</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义<span class="doctag">@Name</span>注解</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Name &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义<span class="doctag">@Gender</span>注解</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Inherited</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Gender &#123;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">enum</span> Sex&#123;MALE,FEMALE&#125;;</div><div class="line"></div><div class="line">    <span class="function">Sex <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> Sex.MALE</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.annotation.*;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义<span class="doctag">@Age</span>注解</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="meta">@Target</span>(ElementType.FIELD)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Documented</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Age &#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">value</span><span class="params">()</span> <span class="keyword">default</span> 0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>其次定义一个注解处理类，不然注解不会比注释更有用:-)</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="keyword">import</span> java.lang.reflect.Field;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义注解处理类</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonInfoUtil</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">getPersonInfo</span><span class="params">(Class&lt;?&gt; clazz)</span></span>&#123;</div><div class="line">        String strPersonName = <span class="string">"姓名："</span>;</div><div class="line">        String strPersonSex = <span class="string">"性别："</span>;</div><div class="line">        String strPersonAge = <span class="string">"年龄："</span>;</div><div class="line"></div><div class="line">        Field[] fileds = clazz.getDeclaredFields();</div><div class="line"></div><div class="line">        <span class="keyword">for</span> (Field filed : fileds)&#123;</div><div class="line">            <span class="keyword">if</span>(filed.isAnnotationPresent(Name.class))&#123;</div><div class="line">                Name name = (Name) filed.getAnnotation(Name.class);</div><div class="line">                System.out.println(strPersonName+name.value()+<span class="string">"\n"</span>);</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(filed.isAnnotationPresent(Gender.class))&#123;</div><div class="line">                Gender sex = (Gender) filed.getAnnotation(Gender.class);</div><div class="line">                System.out.println(strPersonSex+sex.value()+<span class="string">"\n"</span>);</div><div class="line"></div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(filed.isAnnotationPresent(Age.class))&#123;</div><div class="line">                Age age = (Age) filed.getAnnotation(Age.class);</div><div class="line">                System.out.println(strPersonAge+age.value()+<span class="string">"\n"</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line"></div><div class="line">        &#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>定义一个人物类来测试注解：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 定义人物类</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Name</span>(<span class="string">"Jack"</span>)</div><div class="line">    <span class="keyword">private</span> String Name;</div><div class="line">    <span class="meta">@Gender</span>(Gender.Sex.MALE)</div><div class="line">    <span class="keyword">private</span> String Sex;</div><div class="line">    <span class="meta">@Age</span>(<span class="number">23</span>)</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> Age;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>运行测试主函数：</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> annotation_learn;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 测试用主函数</div><div class="line"> * Created by V-zar on 2017/7/11.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Runner</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        PersonInfoUtil.getPersonInfo(Person.class);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ul>
-<li>运行结果：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">姓名：Jack</div><div class="line"></div><div class="line">性别：MALE</div><div class="line"></div><div class="line">年龄：23</div><div class="line"></div><div class="line"></div><div class="line">Process finished with exit code 0</div></pre></td></tr></table></figure>
-<blockquote>
-<p>自定义注解成功！</p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇博客我们来回顾一下Java基础中的注解，主要通过来自定义一套注解来回顾一下这块的知识。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;下面先回顾一下基础知识：&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;四个元注解：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;@Target&lt;/li&gt;
-&lt;li&gt;@Retention&lt;/li&gt;
-&lt;li&gt;@Documented&lt;/li&gt;
-&lt;li&gt;@Inherited&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;具体说明: &lt;/em&gt;   &lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;@Target&lt;br&gt;@Target说明了Annotation所修饰的对象范围：Annotation可被用于 packages、types（类、接口、枚举、Annotation类型）、类型成员（方法、构造方法、成员变量、枚举值）、方法参数和本地变量（如循环变量、catch参数）。在Annotation类型的声明中使用了target可更加明晰其修饰的目标。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;作用：用于描述注解的使用范围（即：被描述的注解可以用在什么地方）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;  取值(ElementType)有：&lt;br&gt;　　1. CONSTRUCTOR:用于描述构造器&lt;br&gt;　　2. FIELD:用于描述域&lt;br&gt;　　3. LOCAL_VARIABLE:用于描述局部变量&lt;br&gt;　　4. METHOD:用于描述方法&lt;br&gt;　　5. PACKAGE:用于描述包&lt;br&gt;　　6. PARAMETER:用于描述参数&lt;br&gt;　　7. TYPE:用于描述类、接口(包括注解类型) 或enum声明&lt;br&gt;
-    
-    </summary>
-    
-      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
-    
-    
-      <category term="JAVA" scheme="http://vzardlloo.github.io/tags/JAVA/"/>
     
   </entry>
   
