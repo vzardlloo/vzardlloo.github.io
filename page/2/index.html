@@ -93,6 +93,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
 
@@ -108,13 +110,12 @@
 
 <meta name="description" content="永远谦虚，永远学习">
 <meta property="og:type" content="website">
-<meta property="og:title" content="vzard's blog">
+<meta property="og:title" content="vzard&#39;s blog">
 <meta property="og:url" content="http://vzardlloo.github.io/page/2/index.html">
-<meta property="og:site_name" content="vzard's blog">
+<meta property="og:site_name" content="vzard&#39;s blog">
 <meta property="og:description" content="永远谦虚，永远学习">
+<meta property="article:author" content="vzardlloo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="vzard's blog">
-<meta name="twitter:description" content="永远谦虚，永远学习">
 
 
 
@@ -149,7 +150,7 @@
 
 
   <title>vzard's blog</title>
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -299,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/09/07/Java中的锁/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/09/07/Java%E4%B8%AD%E7%9A%84%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -318,7 +319,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/07/Java中的锁/" itemprop="url">Java中的锁</a></h1>
+                <a class="post-title-link" href="/2017/09/07/Java%E4%B8%AD%E7%9A%84%E9%94%81/" itemprop="url">Java中的锁</a></h1>
         
 
         <div class="post-meta">
@@ -371,7 +372,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/09/07/Java中的锁/#comments" itemprop="discussionUrl">
+                <a href="/2017/09/07/Java%E4%B8%AD%E7%9A%84%E9%94%81/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/09/07/Java中的锁/" itemprop="commentCount"></span>
                 </a>
@@ -404,7 +405,7 @@
 <h4 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h4><p>由于Java的线程是映射到操作系统的原生线程上的，如果要阻塞一个线程或者唤醒一个线程，都需要操作系统来帮忙完成，需要操作系统从用户态转换到核心态。因此状态转换需要耗费很多处理器时间。同时虚拟机的开发团队注意到许多应用上共享数据的锁定状态只会持续很短的一段时间，如果一个线程只是很短暂的占用一个共享资源，当在它短暂占用这段资源的时候如果有别的线程试图占用这个资源的时候，后来的线程会因为该资源被占用而陷入阻塞状态，丢失对时间片的占用，这会导致资源的大量浪费。所以针对这种情况开发团队设计出了自旋锁，即如果物理机器有一个以上的处理器，可以让两个或两个以上的线程同时并行执行，我们就可以让后面的线程“稍等一下”，但是不放弃处理器的执行时间，看看持有锁的线程是否很快就会释放锁。为了让线程等待，我们只需让线程执行一个忙循环（自旋）,等待锁被释放。<br>但是自旋也不可以替代锁，自旋虽然避免了线程切换的开销，但是它是要占用处理器时间的，因此，如果锁被占用的时间很短，自旋等待的效果会非常好。如果锁被占用的时间很长。那么自旋只会白白占用处理器的资源。因此自旋等待时间必须要有一定限制，如果自旋超过一定次数（默认是10次，使用-XX:PreBlockSpin来更改）没有获得锁，就应该使用传统的方式去挂起线程了。需要注意的是自旋是在轻量级锁中使用的，在重量级锁中，线程不能用自旋锁。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/09/07/Java中的锁/#more" rel="contents">
+            <a class="btn" href="/2017/09/07/Java%E4%B8%AD%E7%9A%84%E9%94%81/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -450,7 +451,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/29/关于volatile/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -469,7 +470,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/29/关于volatile/" itemprop="url">关于volatile</a></h1>
+                <a class="post-title-link" href="/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/" itemprop="url">关于volatile</a></h1>
         
 
         <div class="post-meta">
@@ -522,7 +523,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/29/关于volatile/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/29/关于volatile/" itemprop="commentCount"></span>
                 </a>
@@ -560,7 +561,7 @@
 <h4 id="JAVA内存模型简介"><a href="#JAVA内存模型简介" class="headerlink" title="JAVA内存模型简介"></a>JAVA内存模型简介</h4><p>这块知识必须要对JAVA内存模型有个基本的认识，所以先简单讲一下JAVA内存模型。<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jmm.png" alt=""><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/29/关于volatile/#more" rel="contents">
+            <a class="btn" href="/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -606,7 +607,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/25/修复hexo博客的一个bug/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -625,7 +626,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/25/修复hexo博客的一个bug/" itemprop="url">修复hexo博客的一个bug</a></h1>
+                <a class="post-title-link" href="/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/" itemprop="url">修复hexo博客的一个bug</a></h1>
         
 
         <div class="post-meta">
@@ -678,7 +679,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/25/修复hexo博客的一个bug/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/25/修复hexo博客的一个bug/" itemprop="commentCount"></span>
                 </a>
@@ -756,7 +757,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/25/利用脚本提高效率/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -775,7 +776,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/25/利用脚本提高效率/" itemprop="url">利用脚本提高效率</a></h1>
+                <a class="post-title-link" href="/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/" itemprop="url">利用脚本提高效率</a></h1>
         
 
         <div class="post-meta">
@@ -828,7 +829,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/25/利用脚本提高效率/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/25/利用脚本提高效率/" itemprop="commentCount"></span>
                 </a>
@@ -865,7 +866,7 @@
 <p>命令行脚本对比于点鼠标有不少优势，比如可以一次把一些命令写在一个脚本里，然后执行，比起用鼠标每次都要点很多下效率要高的多，特别是当有很多台机器时用鼠标来操作无疑会是一场灾难更别提有的命令鼠标根本没法点，当然鼠标也有它的优势，当仅仅是个人电脑，并且一些操作用命令行无比冗长时，用鼠标只需点击一下便可完成操作此时鼠标更占优势。对于命令行还是鼠标的选择可能大致如下图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/script.png" alt=""><br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/25/利用脚本提高效率/#more" rel="contents">
+            <a class="btn" href="/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -911,7 +912,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/24/SpringMVC工作流程和Demo示例/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -930,7 +931,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/24/SpringMVC工作流程和Demo示例/" itemprop="url">SpringMVC工作流程和Demo示例</a></h1>
+                <a class="post-title-link" href="/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/" itemprop="url">SpringMVC工作流程和Demo示例</a></h1>
         
 
         <div class="post-meta">
@@ -983,7 +984,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/24/SpringMVC工作流程和Demo示例/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/24/SpringMVC工作流程和Demo示例/" itemprop="commentCount"></span>
                 </a>
@@ -1025,7 +1026,7 @@
 <p>下面做一个demo来实践一下整个过程：<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/24/SpringMVC工作流程和Demo示例/#more" rel="contents">
+            <a class="btn" href="/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1071,7 +1072,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/21/Servlet小结/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -1090,7 +1091,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/21/Servlet小结/" itemprop="url">Servlet小结</a></h1>
+                <a class="post-title-link" href="/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/" itemprop="url">Servlet小结</a></h1>
         
 
         <div class="post-meta">
@@ -1143,7 +1144,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/21/Servlet小结/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/21/Servlet小结/" itemprop="commentCount"></span>
                 </a>
@@ -1181,7 +1182,7 @@
 <p>可以看出Servlet的结构非常简单，仅仅定义了<code>init()</code>、<code>service</code>、<code>desdroy</code>三个控制生命周期的方法，GenericServlet对Servlet<br>进行了一些拓展，增加了<code>log()</code>、<code>getInitParameter()</code>等方法，HttpServlet对GenericServlet又进行了拓展，增加了Http协议的相关方法。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/21/Servlet小结/#more" rel="contents">
+            <a class="btn" href="/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1227,7 +1228,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -1246,7 +1247,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/20/JAVA基础回顾-垃圾回收/" itemprop="url">JAVA基础回顾-垃圾回收</a></h1>
+                <a class="post-title-link" href="/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/" itemprop="url">JAVA基础回顾-垃圾回收</a></h1>
         
 
         <div class="post-meta">
@@ -1299,7 +1300,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/20/JAVA基础回顾-垃圾回收/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/20/JAVA基础回顾-垃圾回收/" itemprop="commentCount"></span>
                 </a>
@@ -1340,7 +1341,7 @@
 <li><p>可达性分析算法：选取一些对象作为“GC root”作为起始点，然后沿着引用开始向下搜索，当一个对象对于所有“GC root”都是不可达的，那么这个对象可以判为“死亡”。(主流虚拟机采用的方式)。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/20/JAVA基础回顾-垃圾回收/#more" rel="contents">
+            <a class="btn" href="/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1386,7 +1387,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/15/JAVA基础回顾-双亲委派模型/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -1405,7 +1406,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/15/JAVA基础回顾-双亲委派模型/" itemprop="url">JAVA基础回顾-双亲委派模型</a></h1>
+                <a class="post-title-link" href="/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/" itemprop="url">JAVA基础回顾-双亲委派模型</a></h1>
         
 
         <div class="post-meta">
@@ -1458,7 +1459,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/15/JAVA基础回顾-双亲委派模型/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/15/JAVA基础回顾-双亲委派模型/" itemprop="commentCount"></span>
                 </a>
@@ -1489,7 +1490,7 @@
           <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p><img src="http://oo3aq3ac8.bkt.clouddn.com/mother.jpg" alt=""><br>“give it to your mother,she knows how to do it”,这是一张温馨又搞笑的图片，温馨在于展示了母亲对我们的关爱与呵护，搞笑是表现了很多人对衣物上的那些各种标识的含义一无所知的现状。但是我在看到这张图的时候想到的却不是这个，我想的是如果一个人遵从指示”give it to his/her mother”,然后mother又遵从指示”give it to her mother”(也就是给了奶奶)，如果奶奶又遵从指示”give it to her mother”…想到这我不禁感叹幸亏人类的寿命是有限的，不然这件衣服永远也洗不成:-),但是类似这样的事情在JAVA的世界里是真实存在的，那就是双亲委派模型。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/15/JAVA基础回顾-双亲委派模型/#more" rel="contents">
+            <a class="btn" href="/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1535,7 +1536,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/10/JAVA基础回顾-字节码指令/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -1554,7 +1555,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/10/JAVA基础回顾-字节码指令/" itemprop="url">JAVA基础回顾-字节码指令</a></h1>
+                <a class="post-title-link" href="/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/" itemprop="url">JAVA基础回顾-字节码指令</a></h1>
         
 
         <div class="post-meta">
@@ -1607,7 +1608,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/10/JAVA基础回顾-字节码指令/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/10/JAVA基础回顾-字节码指令/" itemprop="commentCount"></span>
                 </a>
@@ -1639,7 +1640,7 @@
 <h4 id="字节码简介"><a href="#字节码简介" class="headerlink" title="字节码简介"></a>字节码简介</h4><p>Java字节码指令由<em>一个</em>字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/08/10/JAVA基础回顾-字节码指令/#more" rel="contents">
+            <a class="btn" href="/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1685,7 +1686,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/07/15/JVM内存模型/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -1704,7 +1705,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/15/JVM内存模型/" itemprop="url">JVM内存模型</a></h1>
+                <a class="post-title-link" href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" itemprop="url">JVM内存模型</a></h1>
         
 
         <div class="post-meta">
@@ -1757,7 +1758,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/07/15/JVM内存模型/#comments" itemprop="discussionUrl">
+                <a href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/07/15/JVM内存模型/" itemprop="commentCount"></span>
                 </a>
@@ -1795,7 +1796,7 @@
 <li><code>补充说明</code>：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/07/15/JVM内存模型/#more" rel="contents">
+            <a class="btn" href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1836,7 +1837,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/">&lt;i class&#x3D;&quot;fa fa-angle-left&quot;&gt;&lt;&#x2F;i&gt;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -2020,12 +2021,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -93,6 +93,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
 
@@ -106,35 +108,18 @@
 
 
 
-<meta name="description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：
-
-1、那些内存需要回收？
-2、什么时候回收？
-3、如何回收？
-
-那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
+<meta name="description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：  1、那些内存需要回收？ 2、什么时候回收？ 3、如何回收？  那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JAVA基础回顾-垃圾回收">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/index.html">
-<meta property="og:site_name" content="vzard's blog">
-<meta property="og:description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：
-
-1、那些内存需要回收？
-2、什么时候回收？
-3、如何回收？
-
-那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/index.html">
+<meta property="og:site_name" content="vzard&#39;s blog">
+<meta property="og:description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：  1、那些内存需要回收？ 2、什么时候回收？ 3、如何回收？  那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/GCtool.png">
-<meta property="og:updated_time" content="2017-08-20T12:45:20.184Z">
+<meta property="article:published_time" content="2017-08-20T08:23:52.000Z">
+<meta property="article:modified_time" content="2017-08-20T12:45:20.184Z">
+<meta property="article:author" content="vzardlloo">
+<meta property="article:tag" content="jvm">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JAVA基础回顾-垃圾回收">
-<meta name="twitter:description" content="前言开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：
-
-1、那些内存需要回收？
-2、什么时候回收？
-3、如何回收？
-
-那些内存需要回收？这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收">
 <meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/GCtool.png">
 
 
@@ -170,7 +155,7 @@
 
 
   <title>JAVA基础回顾-垃圾回收 | vzard's blog</title>
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -318,7 +303,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -388,7 +373,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/20/JAVA基础回顾-垃圾回收/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/20/JAVA基础回顾-垃圾回收/" itemprop="commentCount"></span>
                 </a>
@@ -491,7 +476,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/15/JAVA基础回顾-双亲委派模型/" rel="next" title="JAVA基础回顾-双亲委派模型">
+              <a href="/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/" rel="next" title="JAVA基础回顾-双亲委派模型">
                 <i class="fa fa-chevron-left"></i> JAVA基础回顾-双亲委派模型
               </a>
             
@@ -501,7 +486,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/21/Servlet小结/" rel="prev" title="Servlet小结">
+              <a href="/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/" rel="prev" title="Servlet小结">
                 Servlet小结 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -532,7 +517,7 @@
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
         </noscript>
       </div>
     
@@ -737,12 +722,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -876,7 +861,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://vzardlloo.github.io/2017/08/20/JAVA基础回顾-垃圾回收/';
+          this.page.url = 'http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/';
           this.page.identifier = '2017/08/20/JAVA基础回顾-垃圾回收/';
           this.page.title = 'JAVA基础回顾-垃圾回收';
         };

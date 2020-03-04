@@ -1,622 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-
-    
   <url>
     <loc>http://vzardlloo.github.io/2019/03/28/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2019-04-14T14:44:21.283Z</lastmod>
-    <data>
-        <display>
-        <title>计算广告核心问题总结</title>
-        <pubTime>2019-03-28T09:56:58.000Z</pubTime>
-        
-        <tag>计算广告</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2019-04-14</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2019/04/08/cron%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%AE%B0/</loc>
-    <lastmod>2019-04-09T16:33:16.946Z</lastmod>
-    <data>
-        <display>
-        <title>cron表达式小记</title>
-        <pubTime>2019-04-08T06:58:43.000Z</pubTime>
-        
-        <tag>杂记</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2019-04-09</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2018/02/10/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84http%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2019-03-29T03:15:48.480Z</lastmod>
-    <data>
-        <display>
-        <title>实现一个简单的http服务器</title>
-        <pubTime>2018-02-10T12:38:49.000Z</pubTime>
-        
-        <tag>http java</tag>
-         
-         
-           
-             
-              <breadCrumb title="网络" url="http://vzardlloo.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2019-03-29</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/12/01/%E7%94%B1%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%83%B3%E5%88%B0%E7%9A%84/</loc>
-    <lastmod>2017-12-01T16:56:55.816Z</lastmod>
-    <data>
-        <display>
-        <title>由三次握手想到的...</title>
-        <pubTime>2017-12-01T14:44:31.000Z</pubTime>
-        
-        <tag>网络</tag>
-         
-         
-           
-             
-              <breadCrumb title="网络" url="http://vzardlloo.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-12-01</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/11/06/Js%E5%8E%9F%E5%9E%8B%E9%93%BE%E8%A7%A3%E8%AF%BB/</loc>
-    <lastmod>2017-11-07T11:01:09.692Z</lastmod>
-    <data>
-        <display>
-        <title>Js原型链解读</title>
-        <pubTime>2017-11-06T13:41:43.000Z</pubTime>
-        
-        <tag>前端</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="http://vzardlloo.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-    
-  <url>
+    <lastmod>2017-11-07</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/</loc>
-    <lastmod>2017-10-19T03:55:44.230Z</lastmod>
-    <data>
-        <display>
-        <title>统计知识（1）</title>
-        <pubTime>2017-10-16T08:44:17.000Z</pubTime>
-        
-        <tag>统计</tag>
-         
-         
-           
-             
-              <breadCrumb title="统计" url="http://vzardlloo.github.io/categories/%E7%BB%9F%E8%AE%A1/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-10-19</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/</loc>
-    <lastmod>2017-10-13T07:55:08.966Z</lastmod>
-    <data>
-        <display>
-        <title>同步Github上的fork</title>
-        <pubTime>2017-10-13T07:08:51.000Z</pubTime>
-        
-        <tag>Github</tag>
-         
-         
-           
-             
-              <breadCrumb title="Github" url="http://vzardlloo.github.io/categories/Github/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-10-13</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/09/19/Http%E5%8D%8F%E8%AE%AE%E6%9D%82%E8%B0%88/</loc>
-    <lastmod>2017-09-25T08:52:44.846Z</lastmod>
-    <data>
-        <display>
-        <title>Http协议杂谈</title>
-        <pubTime>2017-09-19T08:42:49.000Z</pubTime>
-        
-        <tag>JAVA</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-09-25</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/09/19/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</loc>
-    <lastmod>2017-09-19T04:27:47.731Z</lastmod>
-    <data>
-        <display>
-        <title>JAVA虚拟机的类加载机制</title>
-        <pubTime>2017-09-19T02:27:43.000Z</pubTime>
-        
-        <tag>JAVA</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-09-19</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/</loc>
-    <lastmod>2017-09-09T14:05:25.736Z</lastmod>
-    <data>
-        <display>
-        <title>HashMap源码剖析</title>
-        <pubTime>2017-09-08T12:17:06.000Z</pubTime>
-        
-        <tag>JAVA</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-09-09</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/09/07/Java%E4%B8%AD%E7%9A%84%E9%94%81/</loc>
-    <lastmod>2017-09-08T03:39:46.029Z</lastmod>
-    <data>
-        <display>
-        <title>Java中的锁</title>
-        <pubTime>2017-09-07T12:04:42.000Z</pubTime>
-        
-        <tag>Lock</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-09-08</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/</loc>
-    <lastmod>2017-08-31T09:37:05.672Z</lastmod>
-    <data>
-        <display>
-        <title>关于volatile</title>
-        <pubTime>2017-08-29T14:21:44.000Z</pubTime>
-        
-        <tag>JAVA</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-31</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/</loc>
-    <lastmod>2017-08-26T00:28:34.644Z</lastmod>
-    <data>
-        <display>
-        <title>修复hexo博客的一个bug</title>
-        <pubTime>2017-08-25T10:18:37.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo" url="http://vzardlloo.github.io/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-26</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/</loc>
-    <lastmod>2017-08-25T10:00:03.798Z</lastmod>
-    <data>
-        <display>
-        <title>利用脚本提高效率</title>
-        <pubTime>2017-08-25T08:51:04.000Z</pubTime>
-        
-        <tag>shell Linux</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://vzardlloo.github.io/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-25</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/</loc>
-    <lastmod>2017-08-25T08:45:51.205Z</lastmod>
-    <data>
-        <display>
-        <title>SpringMVC工作流程和Demo示例</title>
-        <pubTime>2017-08-24T14:46:44.000Z</pubTime>
-        
-        <tag>web Java SpringMVC</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-25</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/</loc>
-    <lastmod>2017-08-24T12:57:23.700Z</lastmod>
-    <data>
-        <display>
-        <title>Servlet小结</title>
-        <pubTime>2017-08-21T13:19:08.000Z</pubTime>
-        
-        <tag>web Java</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-24</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/05/15/Java%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E5%B0%8F%E7%BB%93/</loc>
-    <lastmod>2017-08-20T12:58:31.662Z</lastmod>
-    <data>
-        <display>
-        <title>Java类加载器小结</title>
-        <pubTime>2017-05-15T15:49:16.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-20</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</loc>
-    <lastmod>2017-08-20T12:45:20.184Z</lastmod>
-    <data>
-        <display>
-        <title>JAVA基础回顾-垃圾回收</title>
-        <pubTime>2017-08-20T08:23:52.000Z</pubTime>
-        
-        <tag>jvm</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-08-20</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/</loc>
-    <lastmod>2017-08-20T12:37:50.027Z</lastmod>
-    <data>
-        <display>
-        <title>JAVA基础回顾-字节码指令</title>
-        <pubTime>2017-08-10T08:34:19.000Z</pubTime>
-        
-        <tag>jvm</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
+    <lastmod>2017-08-20</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2017-08-15T13:11:20.756Z</lastmod>
-    <data>
-        <display>
-        <title>JAVA基础回顾-双亲委派模型</title>
-        <pubTime>2017-08-15T02:49:02.000Z</pubTime>
-        
-        <tag>jvm</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
+    <lastmod>2017-08-15</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/07/11/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</loc>
-    <lastmod>2017-07-17T13:46:38.378Z</lastmod>
-    <data>
-        <display>
-        <title>JAVA基础回顾-自定义注解</title>
-        <pubTime>2017-07-11T12:18:00.000Z</pubTime>
-        
-        <tag>JAVA</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-07-17</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/07/03/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BRESTful/</loc>
-    <lastmod>2017-07-17T13:46:33.310Z</lastmod>
-    <data>
-        <display>
-        <title>springboot学习之RESTful</title>
-        <pubTime>2017-07-03T11:09:56.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="springboot" url="http://vzardlloo.github.io/categories/springboot/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-07-17</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</loc>
-    <lastmod>2017-07-17T13:43:25.909Z</lastmod>
-    <data>
-        <display>
-        <title>JVM内存模型</title>
-        <pubTime>2017-07-15T01:45:23.000Z</pubTime>
-        
-        <tag>jvm</tag>
-         
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-07-17</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/06/28/springboot%E5%AD%A6%E4%B9%A0%E4%B9%8BHelloWorld%E7%AF%87/</loc>
-    <lastmod>2017-06-28T15:34:08.377Z</lastmod>
-    <data>
-        <display>
-        <title>springboot学习之HelloWorld篇</title>
-        <pubTime>2017-06-28T15:22:23.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="springboot" url="http://vzardlloo.github.io/categories/springboot/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-06-28</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/05/09/Java%E7%9F%A5%E8%AF%86%E7%82%B9%E6%95%B4%E7%90%86%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
-    <lastmod>2017-06-09T14:38:19.685Z</lastmod>
-    <data>
-        <display>
-        <title>Java知识点整理（一）</title>
-        <pubTime>2017-05-09T15:33:56.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-06-09</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/06/04/Java%E5%91%BD%E4%BB%A4%E8%A1%8C%E8%BF%90%E8%A1%8C%E7%9A%84%E4%B8%80%E4%B8%AA%E5%B0%8F%E5%9D%91/</loc>
-    <lastmod>2017-06-04T09:58:13.899Z</lastmod>
-    <data>
-        <display>
-        <title>Java命令行运行的一个小坑</title>
-        <pubTime>2017-06-04T08:57:38.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="JAVA" url="http://vzardlloo.github.io/categories/JAVA/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-06-04</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/04/08/%E5%9B%BE%E5%BA%8A%E6%B5%8B%E8%AF%95/</loc>
-    <lastmod>2017-04-08T12:19:13.533Z</lastmod>
-    <data>
-        <display>
-        <title>图床测试</title>
-        <pubTime>2017-04-08T12:07:20.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="杂谈" url="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-    
-  <url>
+    <lastmod>2017-04-08</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/04/02/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93/</loc>
-    <lastmod>2017-04-02T14:05:34.269Z</lastmod>
-    <data>
-        <display>
-        <title>java垃圾回收算法小结</title>
-        <pubTime>2017-04-02T13:57:37.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="jvm" url="http://vzardlloo.github.io/categories/jvm/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-04-02</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/03/22/SQl%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
-    <lastmod>2017-03-22T14:19:06.696Z</lastmod>
-    <data>
-        <display>
-        <title>SQl学习（二）</title>
-        <pubTime>2017-03-22T12:28:27.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="SQL" url="http://vzardlloo.github.io/categories/SQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-03-22</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/03/20/SQL%E5%85%A5%E9%97%A8%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
-    <lastmod>2017-03-20T14:53:30.312Z</lastmod>
-    <data>
-        <display>
-        <title>SQL入门（一）</title>
-        <pubTime>2017-03-20T14:33:27.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="SQL" url="http://vzardlloo.github.io/categories/SQL/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-03-20</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/03/15/%E6%96%B0%E7%9A%84%E4%BB%BB%E5%8A%A1/</loc>
-    <lastmod>2017-03-15T14:41:24.681Z</lastmod>
-    <data>
-        <display>
-        <title>新的任务</title>
-        <pubTime>2017-03-15T14:21:39.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="杂谈" url="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
+    <lastmod>2017-03-15</lastmod>
+  </url>  <url>
     <loc>http://vzardlloo.github.io/2017/03/07/%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2017-03-12T09:25:21.648Z</lastmod>
-    <data>
-        <display>
-        <title>第一篇博客</title>
-        <pubTime>2017-03-07T11:59:26.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="杂谈" url="http://vzardlloo.github.io/categories/%E6%9D%82%E8%B0%88/"/>
-          
-        </display>
-    </data>
-    </url>
-
+    <lastmod>2017-03-12</lastmod>
+  </url>
 </urlset>

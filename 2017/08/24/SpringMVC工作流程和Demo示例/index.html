@@ -93,6 +93,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
 
@@ -106,29 +108,21 @@
 
 
 
-<meta name="description" content="SpringMVC是Spring下的一个模块，与Spring自然无缝衔接，相比Structs2我更喜欢SpringMVC。这篇博客介绍一下SpringMVC的基本工作流程最后会附上一个小demo可供演示。先上一张图：这张图展示了SpringMVC大致的工作流程，下面开始逐步讲解：
-
-用户通过浏览器发送一个Http给Web应用。
-如果该请求与web.xml中DisPatcherServlet的配置匹">
+<meta name="description" content="SpringMVC是Spring下的一个模块，与Spring自然无缝衔接，相比Structs2我更喜欢SpringMVC。这篇博客介绍一下SpringMVC的基本工作流程最后会附上一个小demo可供演示。先上一张图：这张图展示了SpringMVC大致的工作流程，下面开始逐步讲解：  用户通过浏览器发送一个Http给Web应用。 如果该请求与web.xml中DisPatcherServlet的配置匹">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringMVC工作流程和Demo示例">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/08/24/SpringMVC工作流程和Demo示例/index.html">
-<meta property="og:site_name" content="vzard's blog">
-<meta property="og:description" content="SpringMVC是Spring下的一个模块，与Spring自然无缝衔接，相比Structs2我更喜欢SpringMVC。这篇博客介绍一下SpringMVC的基本工作流程最后会附上一个小demo可供演示。先上一张图：这张图展示了SpringMVC大致的工作流程，下面开始逐步讲解：
-
-用户通过浏览器发送一个Http给Web应用。
-如果该请求与web.xml中DisPatcherServlet的配置匹">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/index.html">
+<meta property="og:site_name" content="vzard&#39;s blog">
+<meta property="og:description" content="SpringMVC是Spring下的一个模块，与Spring自然无缝衔接，相比Structs2我更喜欢SpringMVC。这篇博客介绍一下SpringMVC的基本工作流程最后会附上一个小demo可供演示。先上一张图：这张图展示了SpringMVC大致的工作流程，下面开始逐步讲解：  用户通过浏览器发送一个Http给Web应用。 如果该请求与web.xml中DisPatcherServlet的配置匹">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/SpringMVC.png">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/spmvc01.png">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/spmvc02.png">
 <meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/spmvc03.png">
-<meta property="og:updated_time" content="2017-08-25T08:45:51.205Z">
+<meta property="article:published_time" content="2017-08-24T14:46:44.000Z">
+<meta property="article:modified_time" content="2017-08-25T08:45:51.205Z">
+<meta property="article:author" content="vzardlloo">
+<meta property="article:tag" content="web Java SpringMVC">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SpringMVC工作流程和Demo示例">
-<meta name="twitter:description" content="SpringMVC是Spring下的一个模块，与Spring自然无缝衔接，相比Structs2我更喜欢SpringMVC。这篇博客介绍一下SpringMVC的基本工作流程最后会附上一个小demo可供演示。先上一张图：这张图展示了SpringMVC大致的工作流程，下面开始逐步讲解：
-
-用户通过浏览器发送一个Http给Web应用。
-如果该请求与web.xml中DisPatcherServlet的配置匹">
 <meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/SpringMVC.png">
 
 
@@ -164,7 +158,7 @@
 
 
   <title>SpringMVC工作流程和Demo示例 | vzard's blog</title>
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -312,7 +306,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/24/SpringMVC工作流程和Demo示例/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -382,7 +376,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/24/SpringMVC工作流程和Demo示例/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/08/24/SpringMVC工作流程和Demo示例/" itemprop="commentCount"></span>
                 </a>
@@ -499,7 +493,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/21/Servlet小结/" rel="next" title="Servlet小结">
+              <a href="/2017/08/21/Servlet%E5%B0%8F%E7%BB%93/" rel="next" title="Servlet小结">
                 <i class="fa fa-chevron-left"></i> Servlet小结
               </a>
             
@@ -509,7 +503,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/25/利用脚本提高效率/" rel="prev" title="利用脚本提高效率">
+              <a href="/2017/08/25/%E5%88%A9%E7%94%A8%E8%84%9A%E6%9C%AC%E6%8F%90%E9%AB%98%E6%95%88%E7%8E%87/" rel="prev" title="利用脚本提高效率">
                 利用脚本提高效率 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -540,7 +534,7 @@
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
         </noscript>
       </div>
     
@@ -720,12 +714,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -859,7 +853,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://vzardlloo.github.io/2017/08/24/SpringMVC工作流程和Demo示例/';
+          this.page.url = 'http://vzardlloo.github.io/2017/08/24/SpringMVC%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%92%8CDemo%E7%A4%BA%E4%BE%8B/';
           this.page.identifier = '2017/08/24/SpringMVC工作流程和Demo示例/';
           this.page.title = 'SpringMVC工作流程和Demo示例';
         };

@@ -93,6 +93,8 @@
 
 
 
+  
+
 
   <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
 
@@ -106,31 +108,16 @@
 
 
 
-<meta name="description" content="两个最基本的java回收算法：复制算法和标记清理算法复制算法：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法标记清理：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出标记-整理算法：多了碎片整理，整理出更大的内存放更大的对象两个概念：新生代和年老代
-
-新生代：初始对象，生命周期短的
-永久代：长时间存在的对象
-
-整个java的垃圾回收是新生代和年老代的协">
+<meta name="description" content="两个最基本的java回收算法：复制算法和标记清理算法复制算法：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法标记清理：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出标记-整理算法：多了碎片整理，整理出更大的内存放更大的对象两个概念：新生代和年老代  新生代：初始对象，生命周期短的 永久代：长时间存在的对象  整个java的垃圾回收是新生代和年老代的协">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java垃圾回收算法小结">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/04/02/java垃圾回收算法小结/index.html">
-<meta property="og:site_name" content="vzard's blog">
-<meta property="og:description" content="两个最基本的java回收算法：复制算法和标记清理算法复制算法：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法标记清理：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出标记-整理算法：多了碎片整理，整理出更大的内存放更大的对象两个概念：新生代和年老代
-
-新生代：初始对象，生命周期短的
-永久代：长时间存在的对象
-
-整个java的垃圾回收是新生代和年老代的协">
-<meta property="og:updated_time" content="2017-04-02T14:05:34.269Z">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/04/02/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93/index.html">
+<meta property="og:site_name" content="vzard&#39;s blog">
+<meta property="og:description" content="两个最基本的java回收算法：复制算法和标记清理算法复制算法：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法标记清理：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出标记-整理算法：多了碎片整理，整理出更大的内存放更大的对象两个概念：新生代和年老代  新生代：初始对象，生命周期短的 永久代：长时间存在的对象  整个java的垃圾回收是新生代和年老代的协">
+<meta property="article:published_time" content="2017-04-02T13:57:37.000Z">
+<meta property="article:modified_time" content="2017-04-02T14:05:34.269Z">
+<meta property="article:author" content="vzardlloo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java垃圾回收算法小结">
-<meta name="twitter:description" content="两个最基本的java回收算法：复制算法和标记清理算法复制算法：两个区域A和B，初始对象在A，继续存活的对象被转移到B。此为新生代最常用的算法标记清理：一块区域，标记要回收的对象，然后回收，一定会出现碎片，那么引出标记-整理算法：多了碎片整理，整理出更大的内存放更大的对象两个概念：新生代和年老代
-
-新生代：初始对象，生命周期短的
-永久代：长时间存在的对象
-
-整个java的垃圾回收是新生代和年老代的协">
 
 
 
@@ -165,7 +152,7 @@
 
 
   <title>java垃圾回收算法小结 | vzard's blog</title>
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
@@ -313,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/04/02/java垃圾回收算法小结/">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/04/02/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="vzardlloo">
@@ -383,7 +370,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/04/02/java垃圾回收算法小结/#comments" itemprop="discussionUrl">
+                <a href="/2017/04/02/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
                         data-disqus-identifier="2017/04/02/java垃圾回收算法小结/" itemprop="commentCount"></span>
                 </a>
@@ -458,7 +445,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/22/SQl学习（二）/" rel="next" title="SQl学习（二）">
+              <a href="/2017/03/22/SQl%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" rel="next" title="SQl学习（二）">
                 <i class="fa fa-chevron-left"></i> SQl学习（二）
               </a>
             
@@ -468,7 +455,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/08/图床测试/" rel="prev" title="图床测试">
+              <a href="/2017/04/08/%E5%9B%BE%E5%BA%8A%E6%B5%8B%E8%AF%95/" rel="prev" title="图床测试">
                 图床测试 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -499,7 +486,7 @@
       <div id="disqus_thread">
         <noscript>
           Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
         </noscript>
       </div>
     
@@ -704,12 +691,12 @@
 
 
 <div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
 </div>
 
 <div class="theme-info">
   主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
     NexT.Pisces
   </a>
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -843,7 +830,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://vzardlloo.github.io/2017/04/02/java垃圾回收算法小结/';
+          this.page.url = 'http://vzardlloo.github.io/2017/04/02/java%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E5%B0%8F%E7%BB%93/';
           this.page.identifier = '2017/04/02/java垃圾回收算法小结/';
           this.page.title = 'java垃圾回收算法小结';
         };
