@@ -1,16 +1,16 @@
-<<<<<<< Updated upstream
 <!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <<<<<<< Updated upstream
-<meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="">
+<meta name="theme-color" content="#222">
 
 
 
@@ -38,19 +38,31 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
 
 
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -89,138 +101,36 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    version: '',
-    sidebar: "",
-    fancybox: ,
-    tabs: ,
-    motion: "",
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
-      hits: "",
-      labels: ""
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
-
-
-=======
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/10/16/统计知识（1）/"/>
 
 
 
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="统计," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-
-
-
-<meta name="description" content="前言最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过">
-<meta property="og:type" content="article">
-<meta property="og:title" content="统计知识（1）">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="前言最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过">
-<meta property="article:published_time" content="2017-10-16T08:44:17.000Z">
-<meta property="article:modified_time" content="2017-10-19T03:55:44.230Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="统计">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
->>>>>>> Stashed changes
 
   <title>统计知识（1） | vzard's blog</title>
-  <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
+  
 
 
 
@@ -228,26 +138,6 @@
 
 
 
-=======
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 <meta name="generator" content="Hexo 4.2.0"></head>
 
@@ -255,13 +145,14 @@
 
   
   
+    
+  
 
-  <div class="container  page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><<<<<<< Updated upstream
-<div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -290,41 +181,31 @@
   
 
   
-
-  
-</nav>
-
-
-
-=======
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
+    <ul id="menu" class="menu">
       
-        <p class="site-subtitle">just do it</p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
-  </div>
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
+      
+    </ul>
   
 
   
@@ -332,7 +213,6 @@
 
 
 
->>>>>>> Stashed changes
  </div>
     </header>
 
@@ -351,7 +231,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,12 +259,44 @@
         <div class="post-meta">
           <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T16:44:17+08:00">
+                2017-10-16
+              </time>
+            
 
             
 
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%9F%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">统计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -400,6 +316,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -429,69 +348,15 @@
 
       
     </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
-    <div></div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Dona</span>
-  </button>
-  <div id="QR" style="display: none;">
-
+    
+    
     
 
     
 
     
 
-  </div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Autore:</strong>
-    vzardlloo
-  </li>
-  <li class="post-copyright-link">
-    <strong>Link:</strong>
-    <a href="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/" title="统计知识（1）">http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright: </strong>
-    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
-  </li>
-</ul>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -531,6 +396,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -545,19 +414,11 @@
           
 
 
-          <<<<<<< Updated upstream
-
+          
 
   
 
 
-=======
-
-  <div class="comments" id="comments">
-    
-  </div>
-
->>>>>>> Stashed changes
 
         </div>
         
@@ -572,81 +433,109 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
-               alt="vzardlloo" />
-          <p class="site-author-name" itemprop="name">vzardlloo</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
+                alt="vzardlloo" />
+            
+              <p class="site-author-name" itemprop="name">vzardlloo</p>
               <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categorie</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
           </div>
-        
 
-        <div class="links-of-author motion-element">
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述集中趋势的计量"><span class="nav-number">2.</span> <span class="nav-text">描述集中趋势的计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#算数平均数"><span class="nav-number">2.1.</span> <span class="nav-text">算数平均数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中位数"><span class="nav-number">2.2.</span> <span class="nav-text">中位数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#众数"><span class="nav-number">2.3.</span> <span class="nav-text">众数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三者的关系"><span class="nav-number">2.4.</span> <span class="nav-text">三者的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他测度"><span class="nav-number">2.5.</span> <span class="nav-text">其他测度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述离中趋势的计量"><span class="nav-number">3.</span> <span class="nav-text">描述离中趋势的计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#极差"><span class="nav-number">3.1.</span> <span class="nav-text">极差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平均差"><span class="nav-number">3.2.</span> <span class="nav-text">平均差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方差"><span class="nav-number">3.3.</span> <span class="nav-text">方差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准差"><span class="nav-number">3.4.</span> <span class="nav-text">标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chebishev定理"><span class="nav-number">3.5.</span> <span class="nav-text">Chebishev定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四分位差"><span class="nav-number">3.6.</span> <span class="nav-text">四分位差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异众比率"><span class="nav-number">3.7.</span> <span class="nav-text">异众比率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平均差系数"><span class="nav-number">3.8.</span> <span class="nav-text">平均差系数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -661,10 +550,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <<<<<<< Updated upstream
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">vzardlloo</span>
 
@@ -672,25 +560,18 @@
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
 
 
-=======
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
->>>>>>> Stashed changes
+
 
         
 
@@ -715,8 +596,7 @@
 
   </div>
 
-  <<<<<<< Updated upstream
-
+  
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -732,6 +612,8 @@
 
 
 
+  
+
 
 
 
@@ -745,108 +627,61 @@
 
   
   
-    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-=======
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
->>>>>>> Stashed changes
 
   
 
 
-  <script type="text/javascript" src="//src/utils.js?v="></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="//src/motion.js?v="></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
   
 
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
-
   
-  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
-<script type="text/javascript" src="//src/post-details.js?v="></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
-  <<<<<<< Updated upstream
-
+  
 
 
   
@@ -854,35 +689,7 @@
 
 
 
-<<<<<<< Updated upstream
 
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-=======
 
 
 
@@ -893,45 +700,19 @@
 
 
 
-<<<<<<< Updated upstream
 
-=======
 
->>>>>>> Stashed changes
 
-<<<<<<< Updated upstream
+
 
 
   
 
 
-=======
+
 
 
   
-
-
->>>>>>> Stashed changes
-
-
-
->>>>>>> Stashed changes
-
-  
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-  <<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
 
   
 
@@ -948,942 +729,3 @@
 
 </body>
 </html>
-=======
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
-<head>
-  <<<<<<< Updated upstream
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-
-
-  <meta name="keywords" content="统计," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="前言最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过">
-<meta property="og:type" content="article">
-<meta property="og:title" content="统计知识（1）">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="前言最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过">
-<meta property="article:published_time" content="2017-10-16T08:44:17.000Z">
-<meta property="article:modified_time" content="2017-10-19T03:55:44.230Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="统计">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '',
-    sidebar: "",
-    fancybox: ,
-    tabs: ,
-    motion: "",
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
-=======
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="统计," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-
-
-
-<meta name="description" content="前言最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过">
-<meta property="og:type" content="article">
-<meta property="og:title" content="统计知识（1）">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="前言最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过">
-<meta property="article:published_time" content="2017-10-16T08:44:17.000Z">
-<meta property="article:modified_time" content="2017-10-19T03:55:44.230Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="统计">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-  <title>统计知识（1） | vzard's blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-=======
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-
-  
-  
-
-  <div class="container  page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><<<<<<< Updated upstream
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">just do it</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-
-  
-</nav>
-
-
-
-=======
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">just do it</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-
-  
-</nav>
-
-
-
->>>>>>> Stashed changes
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vzardlloo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vzard's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">统计知识（1）</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近为了参加一个数据分析比赛，在复习统计这块的知识。首先什么是统计呢？我采用北京大学出版社出版的《应用经济统计学》中的定义：统计学是一门对群体现象数量特征进行计量描述和分析推论的科学。从定义可以看出统计学主要干两件事一个是对群体现象特征进行计量描述，第二个是对群体数量进行分析得出推论。那我们一件一件事来，先来讲一下统计学干的第一件事：对群体现象特征进行计量描述。本文主要理一下脉络，对于细节不过多纠结（主要是Markdown打公式太麻烦……）<br><a id="more"></a></p>
-<h2 id="描述集中趋势的计量"><a href="#描述集中趋势的计量" class="headerlink" title="描述集中趋势的计量"></a>描述集中趋势的计量</h2><h3 id="算数平均数"><a href="#算数平均数" class="headerlink" title="算数平均数"></a>算数平均数</h3><ul>
-<li>简单算数平均数<br>简单算数平均数就是一组数据N个数值的和除以N。</li>
-<li>加权算数平均数<br>每个数值的权重乘以数值的和除以数据个数。</li>
-</ul>
-<p>缺点：容易受极端值影响</p>
-<h3 id="中位数"><a href="#中位数" class="headerlink" title="中位数"></a>中位数</h3><p>将一组数据排序，处在数据中点位置的数值就是中位数。（位置平均数）</p>
-<p>优点：稳健，不收极端值影响<br>缺点：缺乏敏感性，不适合代数运算</p>
-<h3 id="众数"><a href="#众数" class="headerlink" title="众数"></a>众数</h3><p>一组数据中出现次数最多的数值。</p>
-<p>优缺点：和中位数一样</p>
-<h3 id="三者的关系"><a href="#三者的关系" class="headerlink" title="三者的关系"></a>三者的关系</h3><p>我们知道如果一直增加观察项数，同时又缩小组距，那么分布的直方图就接近一条光滑的曲线。按这条曲线来解释的话，均值是数据分布的平衡点或者说是中心，中位数把这个分布划分为两半，众数<br>正好是分布顶端的数值。并且在对称分布中三个测度重合，斜分布中三个测度分离。</p>
-<h3 id="其他测度"><a href="#其他测度" class="headerlink" title="其他测度"></a>其他测度</h3><p>1.分位数<br>中位数的推广，中位数可以看做二分位数，同样也有四分位数，十分位数，N分位数…<br>2.几何平均数<br>变量X的n项观察值x_1,x_2,x_3…x_n的乘积的n次根。<br>3.调和平均数<br>一组观测值的倒数的算数平均数的倒数。</p>
-<h2 id="描述离中趋势的计量"><a href="#描述离中趋势的计量" class="headerlink" title="描述离中趋势的计量"></a>描述离中趋势的计量</h2><h3 id="极差"><a href="#极差" class="headerlink" title="极差"></a>极差</h3><p>一组观测数据中最大值与最小值的差。表现数据的变动范围。</p>
-<h3 id="平均差"><a href="#平均差" class="headerlink" title="平均差"></a>平均差</h3><p>一组数据值与其均值之差的绝对值的和的平均值。</p>
-<h3 id="方差"><a href="#方差" class="headerlink" title="方差"></a>方差</h3><p>一组资料中各数值与其算数平均数离差平方的平均数。</p>
-<h3 id="标准差"><a href="#标准差" class="headerlink" title="标准差"></a>标准差</h3><p>标准差的平方就是方差</p>
-<h3 id="chebishev定理"><a href="#Chebishev定理" class="headerlink" title="Chebishev定理"></a>Chebishev定理</h3><p>对于任何一组资料，观测值落于均值左右k个标准差的区间内的比例至少为(1-1/k^2).</p>
-<h3 id="四分位差"><a href="#四分位差" class="headerlink" title="四分位差"></a>四分位差</h3><p>四分位差是第三个四分位值于第一个四分位值之差的二分之一。实际就是一组资料中间一半观测值的极差。</p>
-<h3 id="异众比率"><a href="#异众比率" class="headerlink" title="异众比率"></a>异众比率</h3><p>非众数值的次数之和占总次数之比重。</p>
-<h3 id="平均差系数"><a href="#平均差系数" class="headerlink" title="平均差系数"></a>平均差系数</h3><p>平均差于均值之比。</p>
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
-    <div></div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Dona</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-
-    
-
-    
-
-  </div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Autore:</strong>
-    vzardlloo
-  </li>
-  <li class="post-copyright-link">
-    <strong>Link:</strong>
-    <a href="http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/" title="统计知识（1）">http://vzardlloo.github.io/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright: </strong>
-    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
-  </li>
-</ul>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/%E7%BB%9F%E8%AE%A1/" rel="tag"># 统计</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/" rel="next" title="同步Github上的fork">
-                <i class="fa fa-chevron-left"></i> 同步Github上的fork
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/11/06/Js%E5%8E%9F%E5%9E%8B%E9%93%BE%E8%A7%A3%E8%AF%BB/" rel="prev" title="Js原型链解读">
-                Js原型链解读 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          <<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-  <div class="comments" id="comments">
-    
-  </div>
-
->>>>>>> Stashed changes
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
-               alt="vzardlloo" />
-          <p class="site-author-name" itemprop="name">vzardlloo</p>
-           
-              <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categorie</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <<<<<<< Updated upstream
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-=======
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-</div>
-
-
->>>>>>> Stashed changes
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  <<<<<<< Updated upstream
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-=======
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
->>>>>>> Stashed changes
-
-  
-
-
-  <script type="text/javascript" src="//src/utils.js?v="></script>
-
-  <script type="text/javascript" src="//src/motion.js?v="></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
-
-  
-  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
-<script type="text/javascript" src="//src/post-details.js?v="></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
-
-
-
-  <<<<<<< Updated upstream
-
-
-
-  
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-=======
-
-
-
-  
-
-
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
->>>>>>> Stashed changes
-
-  
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-  <<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
->>>>>>> Stashed changes

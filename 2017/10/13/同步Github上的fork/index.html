@@ -1,16 +1,16 @@
-<<<<<<< Updated upstream
 <!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <<<<<<< Updated upstream
-<meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="">
+<meta name="theme-color" content="#222">
 
 
 
@@ -38,19 +38,31 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
 
 
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -89,138 +101,36 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    version: '',
-    sidebar: "",
-    fancybox: ,
-    tabs: ,
-    motion: "",
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
-      hits: "",
-      labels: ""
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
-
-
-=======
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/10/13/同步Github上的fork/"/>
 
 
 
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Github," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-
-
-
-<meta name="description" content="我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。这个问题我有两种解决的办法：一种是在Github上操作，把自己仓库的项目设成base,把作者的的项目设成head,然后给自己提pr,最后在pull下来就行了。这种方">
-<meta property="og:type" content="article">
-<meta property="og:title" content="同步Github上的fork">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。这个问题我有两种解决的办法：一种是在Github上操作，把自己仓库的项目设成base,把作者的的项目设成head,然后给自己提pr,最后在pull下来就行了。这种方">
-<meta property="article:published_time" content="2017-10-13T07:08:51.000Z">
-<meta property="article:modified_time" content="2017-10-13T07:55:08.966Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="Github">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
->>>>>>> Stashed changes
 
   <title>同步Github上的fork | vzard's blog</title>
-  <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
+  
 
 
 
@@ -228,26 +138,6 @@
 
 
 
-=======
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 <meta name="generator" content="Hexo 4.2.0"></head>
 
@@ -255,13 +145,14 @@
 
   
   
+    
+  
 
-  <div class="container  page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><<<<<<< Updated upstream
-<div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -290,41 +181,31 @@
   
 
   
-
-  
-</nav>
-
-
-
-=======
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
+    <ul id="menu" class="menu">
       
-        <p class="site-subtitle">just do it</p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
-  </div>
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
+      
+    </ul>
   
 
   
@@ -332,7 +213,6 @@
 
 
 
->>>>>>> Stashed changes
  </div>
     </header>
 
@@ -351,7 +231,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -375,12 +259,44 @@
         <div class="post-meta">
           <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T15:08:51+08:00">
+                2017-10-13
+              </time>
+            
 
             
 
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Github/" itemprop="url" rel="index">
+                    <span itemprop="name">Github</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -400,6 +316,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -434,69 +353,15 @@
 
       
     </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
-    <div></div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Dona</span>
-  </button>
-  <div id="QR" style="display: none;">
-
+    
+    
     
 
     
 
     
 
-  </div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Autore:</strong>
-    vzardlloo
-  </li>
-  <li class="post-copyright-link">
-    <strong>Link:</strong>
-    <a href="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/" title="同步Github上的fork">http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright: </strong>
-    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
-  </li>
-</ul>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -536,6 +401,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -550,19 +419,11 @@
           
 
 
-          <<<<<<< Updated upstream
-
+          
 
   
 
 
-=======
-
-  <div class="comments" id="comments">
-    
-  </div>
-
->>>>>>> Stashed changes
 
         </div>
         
@@ -577,79 +438,82 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
-               alt="vzardlloo" />
-          <p class="site-author-name" itemprop="name">vzardlloo</p>
-           
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
+                alt="vzardlloo" />
+            
+              <p class="site-author-name" itemprop="name">vzardlloo</p>
               <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categorie</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
           </div>
-        
 
-        <div class="links-of-author motion-element">
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -666,10 +530,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <<<<<<< Updated upstream
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">vzardlloo</span>
 
@@ -677,25 +540,18 @@
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
 
 
-=======
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
->>>>>>> Stashed changes
+
 
         
 
@@ -720,8 +576,7 @@
 
   </div>
 
-  <<<<<<< Updated upstream
-
+  
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -737,6 +592,8 @@
 
 
 
+  
+
 
 
 
@@ -750,108 +607,61 @@
 
   
   
-    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-=======
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
->>>>>>> Stashed changes
 
   
 
 
-  <script type="text/javascript" src="//src/utils.js?v="></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="//src/motion.js?v="></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
   
 
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
-
   
-  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
-<script type="text/javascript" src="//src/post-details.js?v="></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
-  <<<<<<< Updated upstream
-
+  
 
 
   
@@ -859,35 +669,7 @@
 
 
 
-<<<<<<< Updated upstream
 
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-=======
 
 
 
@@ -898,45 +680,19 @@
 
 
 
-<<<<<<< Updated upstream
 
-=======
 
->>>>>>> Stashed changes
 
-<<<<<<< Updated upstream
+
 
 
   
 
 
-=======
+
 
 
   
-
-
->>>>>>> Stashed changes
-
-
-
->>>>>>> Stashed changes
-
-  
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-  <<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
 
   
 
@@ -953,947 +709,3 @@
 
 </body>
 </html>
-=======
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
-<head>
-  <<<<<<< Updated upstream
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-
-
-  <meta name="keywords" content="Github," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。这个问题我有两种解决的办法：一种是在Github上操作，把自己仓库的项目设成base,把作者的的项目设成head,然后给自己提pr,最后在pull下来就行了。这种方">
-<meta property="og:type" content="article">
-<meta property="og:title" content="同步Github上的fork">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。这个问题我有两种解决的办法：一种是在Github上操作，把自己仓库的项目设成base,把作者的的项目设成head,然后给自己提pr,最后在pull下来就行了。这种方">
-<meta property="article:published_time" content="2017-10-13T07:08:51.000Z">
-<meta property="article:modified_time" content="2017-10-13T07:55:08.966Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="Github">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '',
-    sidebar: "",
-    fancybox: ,
-    tabs: ,
-    motion: "",
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
-=======
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Github," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-
-
-
-<meta name="description" content="我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。这个问题我有两种解决的办法：一种是在Github上操作，把自己仓库的项目设成base,把作者的的项目设成head,然后给自己提pr,最后在pull下来就行了。这种方">
-<meta property="og:type" content="article">
-<meta property="og:title" content="同步Github上的fork">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。这个问题我有两种解决的办法：一种是在Github上操作，把自己仓库的项目设成base,把作者的的项目设成head,然后给自己提pr,最后在pull下来就行了。这种方">
-<meta property="article:published_time" content="2017-10-13T07:08:51.000Z">
-<meta property="article:modified_time" content="2017-10-13T07:55:08.966Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="Github">
-<meta name="twitter:card" content="summary">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-  <title>同步Github上的fork | vzard's blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-=======
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-
-  
-  
-
-  <div class="container  page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><<<<<<< Updated upstream
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">just do it</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-
-  
-</nav>
-
-
-
-=======
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">just do it</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-
-  
-</nav>
-
-
-
->>>>>>> Stashed changes
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vzardlloo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vzard's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">同步Github上的fork</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>我们有时候会在Github上fork一个我们感兴趣的项目到自己的仓库，等一段时间过后这个项目已经更新了，但是自己仓库里还停留在刚fork时的状态，那么我们如何把自己fork到仓库的项目同步到作者的进度呢？这篇博客主要就是讲一下这个问题。<br>这个问题我有两种解决的办法：<br>一种是在Github上操作，把自己仓库的项目设成<code>base</code>,把作者的的项目设成<code>head</code>,然后给自己提pr,最后在pull下来就行了。这种方法的缺点就是要开网页点来点去，如果你正在沉迷在命令行里无法自拔可能不太喜欢这种方法。<br><a id="more"></a><br>第二种方法是在把作者的项目添加为自己的远程分支，然后需要同步的时候<code>fetch</code>一下这个远程分支，然后切换的本地分支（如果不在的话），然后把远程仓库合并到本地分支。具体方法如下：</p>
-<ul>
-<li><p>先查看一下自己的远程分支：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git remote -v</div><div class="line"># origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line"># origin  https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div></pre></td></tr></table></figure>
-</li>
-<li><p>如果作者的仓库不在远程分支中，则把他添加到远程分支：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git</div></pre></td></tr></table></figure>
-</li>
-<li><p>再次查看远程分支情况，确保已经加入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">git remote -v</div><div class="line"># origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)</div><div class="line"># origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)</div><div class="line"># upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)</div><div class="line"># upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)</div></pre></td></tr></table></figure>
-</li>
-<li><p>从上游仓库 fetch 分支和提交点，传送到本地，并会被存储在一个本地分支 upstream/master</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git fetch upstream</div><div class="line"># remote: Counting objects: 75, done.</div><div class="line"># remote: Compressing objects: 100% (53/53), done.</div><div class="line"># remote: Total 62 (delta 27), reused 44 (delta 9)</div><div class="line"># Unpacking objects: 100% (62/62), done.</div><div class="line"># From https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY</div><div class="line">#  * [new branch]      master     -&gt; upstream/master</div></pre></td></tr></table></figure>
-</li>
-<li><p>切换到本地主分支(如果不在的话)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git checkout master</div><div class="line"># Switched to branch &apos;master&apos;</div></pre></td></tr></table></figure>
-</li>
-<li><p>把 upstream/master 分支合并到本地 master 上，这样就完成了同步，并且不会丢掉本地修改的内容。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git merge upstream/master</div><div class="line"># Updating a422352..5fdff0f</div><div class="line"># Fast-forward</div><div class="line">#  README                    |    9 -------</div><div class="line">#  README.md                 |    7 ++++++</div><div class="line">#  2 files changed, 7 insertions(+), 9 deletions(-)</div><div class="line">#  delete mode 100644 README</div><div class="line">#  create mode 100644 README.md</div></pre></td></tr></table></figure>
-</li>
-<li><p>同步到Github上的自己的项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git push origin master</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>OK,这个小问题都到此结束！</p>
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
-    <div></div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Dona</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-
-    
-
-    
-
-  </div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Autore:</strong>
-    vzardlloo
-  </li>
-  <li class="post-copyright-link">
-    <strong>Link:</strong>
-    <a href="http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/" title="同步Github上的fork">http://vzardlloo.github.io/2017/10/13/%E5%90%8C%E6%AD%A5Github%E4%B8%8A%E7%9A%84fork/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright: </strong>
-    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
-  </li>
-</ul>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Github/" rel="tag"># Github</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/09/19/Http%E5%8D%8F%E8%AE%AE%E6%9D%82%E8%B0%88/" rel="next" title="Http协议杂谈">
-                <i class="fa fa-chevron-left"></i> Http协议杂谈
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/16/%E7%BB%9F%E8%AE%A1%E7%9F%A5%E8%AF%86%EF%BC%881%EF%BC%89/" rel="prev" title="统计知识（1）">
-                统计知识（1） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          <<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-  <div class="comments" id="comments">
-    
-  </div>
-
->>>>>>> Stashed changes
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
-               alt="vzardlloo" />
-          <p class="site-author-name" itemprop="name">vzardlloo</p>
-           
-              <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categorie</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <<<<<<< Updated upstream
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-=======
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-</div>
-
-
->>>>>>> Stashed changes
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  <<<<<<< Updated upstream
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-=======
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
->>>>>>> Stashed changes
-
-  
-
-
-  <script type="text/javascript" src="//src/utils.js?v="></script>
-
-  <script type="text/javascript" src="//src/motion.js?v="></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
-
-  
-  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
-<script type="text/javascript" src="//src/post-details.js?v="></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
-
-
-
-  <<<<<<< Updated upstream
-
-
-
-  
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-=======
-
-
-
-  
-
-
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
->>>>>>> Stashed changes
-
-  
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-  <<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
->>>>>>> Stashed changes

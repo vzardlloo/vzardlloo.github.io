@@ -1,16 +1,16 @@
-<<<<<<< Updated upstream
 <!DOCTYPE html>
 
 
 
+  
 
-<html class="theme-next pisces" lang="zh-Hans">
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <<<<<<< Updated upstream
-<meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="">
+<meta name="theme-color" content="#222">
 
 
 
@@ -38,19 +38,31 @@
 
 
 
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
 
 
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
 
 
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
 
 
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
 
 
 
@@ -91,140 +103,36 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
-    version: '',
-    sidebar: "",
-    fancybox: ,
-    tabs: ,
-    motion: "",
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
+      userId: '0',
+      author: '博主'
     },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
-      hits: "",
-      labels: ""
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
-
-
-=======
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <link rel="canonical" href="http://vzardlloo.github.io/2017/08/10/JAVA基础回顾-字节码指令/"/>
 
 
 
 
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="jvm," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-
-
-
-<meta name="description" content="引言众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JAVA基础回顾-字节码指令">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="引言众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘">
-<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG">
-<meta property="article:published_time" content="2017-08-10T08:34:19.000Z">
-<meta property="article:modified_time" content="2017-08-20T12:37:50.027Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="jvm">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
->>>>>>> Stashed changes
 
   <title>JAVA基础回顾-字节码指令 | vzard's blog</title>
-  <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
+  
 
 
 
@@ -232,26 +140,6 @@
 
 
 
-=======
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
 
 <meta name="generator" content="Hexo 4.2.0"></head>
 
@@ -259,13 +147,14 @@
 
   
   
+    
+  
 
-  <div class="container  page-post-detail">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><<<<<<< Updated upstream
-<div class="site-brand-wrapper">
+      <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -294,41 +183,31 @@
   
 
   
-
-  
-</nav>
-
-
-
-=======
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
+    <ul id="menu" class="menu">
       
-        <p class="site-subtitle">just do it</p>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
-  </div>
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
+      
+    </ul>
   
 
   
@@ -336,7 +215,6 @@
 
 
 
->>>>>>> Stashed changes
  </div>
     </header>
 
@@ -355,7 +233,11 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -379,12 +261,44 @@
         <div class="post-meta">
           <span class="post-time">
             
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T16:34:19+08:00">
+                2017-08-10
+              </time>
+            
 
             
 
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JAVA/" itemprop="url" rel="index">
+                    <span itemprop="name">JAVA</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -404,6 +318,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -493,69 +410,15 @@
 
       
     </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
-    <div></div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Dona</span>
-  </button>
-  <div id="QR" style="display: none;">
-
+    
+    
     
 
     
 
     
 
-  </div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Autore:</strong>
-    vzardlloo
-  </li>
-  <li class="post-copyright-link">
-    <strong>Link:</strong>
-    <a href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/" title="JAVA基础回顾-字节码指令">http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright: </strong>
-    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
-  </li>
-</ul>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -595,6 +458,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -609,19 +476,11 @@
           
 
 
-          <<<<<<< Updated upstream
-
+          
 
   
 
 
-=======
-
-  <div class="comments" id="comments">
-    
-  </div>
-
->>>>>>> Stashed changes
 
         </div>
         
@@ -636,81 +495,109 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
-               alt="vzardlloo" />
-          <p class="site-author-name" itemprop="name">vzardlloo</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
+                alt="vzardlloo" />
+            
+              <p class="site-author-name" itemprop="name">vzardlloo</p>
               <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categorie</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
           </div>
-        
 
-        <div class="links-of-author motion-element">
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
           
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字节码简介"><span class="nav-number">2.</span> <span class="nav-text">字节码简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字节码与数据类型"><span class="nav-number">3.</span> <span class="nav-text">字节码与数据类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#加载和存储指令"><span class="nav-number">4.</span> <span class="nav-text">加载和存储指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运算指令"><span class="nav-number">5.</span> <span class="nav-text">运算指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型转换指令"><span class="nav-number">6.</span> <span class="nav-text">类型转换指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象创建与访问指令"><span class="nav-number">7.</span> <span class="nav-text">对象创建与访问指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#操作数栈管理指令"><span class="nav-number">8.</span> <span class="nav-text">操作数栈管理指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#控制转移指令"><span class="nav-number">9.</span> <span class="nav-text">控制转移指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法调用和返回指令"><span class="nav-number">10.</span> <span class="nav-text">方法调用和返回指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异常处理指令"><span class="nav-number">11.</span> <span class="nav-text">异常处理指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同步指令"><span class="nav-number">12.</span> <span class="nav-text">同步指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小练习"><span class="nav-number">13.</span> <span class="nav-text">小练习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -725,10 +612,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <<<<<<< Updated upstream
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">vzardlloo</span>
 
@@ -736,25 +622,18 @@
 </div>
 
 
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
 
 
-=======
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
->>>>>>> Stashed changes
+
 
         
 
@@ -779,8 +658,7 @@
 
   </div>
 
-  <<<<<<< Updated upstream
-
+  
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -796,6 +674,8 @@
 
 
 
+  
+
 
 
 
@@ -809,108 +689,61 @@
 
   
   
-    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
   
-    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
   
 
   
   
-    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
   
 
   
   
-    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   
 
   
   
-    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
   
 
-=======
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
->>>>>>> Stashed changes
 
   
 
 
-  <script type="text/javascript" src="//src/utils.js?v="></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
 
-  <script type="text/javascript" src="//src/motion.js?v="></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
 
 
 
   
   
 
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
-
   
-  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
-<script type="text/javascript" src="//src/post-details.js?v="></script>
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
-  <<<<<<< Updated upstream
-
+  
 
 
   
@@ -918,35 +751,7 @@
 
 
 
-<<<<<<< Updated upstream
 
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-=======
 
 
 
@@ -957,45 +762,19 @@
 
 
 
-<<<<<<< Updated upstream
 
-=======
 
->>>>>>> Stashed changes
 
-<<<<<<< Updated upstream
+
 
 
   
 
 
-=======
+
 
 
   
-
-
->>>>>>> Stashed changes
-
-
-
->>>>>>> Stashed changes
-
-  
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-  <<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
 
   
 
@@ -1012,1006 +791,3 @@
 
 </body>
 </html>
-=======
-<!doctype html>
-
-
-
-
-<html class="theme-next pisces" lang="zh-Hans">
-<head>
-  <<<<<<< Updated upstream
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-
-
-  <meta name="keywords" content="jvm," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="引言众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JAVA基础回顾-字节码指令">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="引言众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘">
-<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG">
-<meta property="article:published_time" content="2017-08-10T08:34:19.000Z">
-<meta property="article:modified_time" content="2017-08-20T12:37:50.027Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="jvm">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    version: '',
-    sidebar: "",
-    fancybox: ,
-    tabs: ,
-    motion: "",
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
-=======
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="//main.css?v=" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="jvm," />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-
-
-
-
-
-<meta name="description" content="引言众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JAVA基础回顾-字节码指令">
-<meta property="og:url" content="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/index.html">
-<meta property="og:site_name" content="vzard&#39;s blog">
-<meta property="og:description" content="引言众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘">
-<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG">
-<meta property="article:published_time" content="2017-08-10T08:34:19.000Z">
-<meta property="article:modified_time" content="2017-08-20T12:37:50.027Z">
-<meta property="article:author" content="vzardlloo">
-<meta property="article:tag" content="jvm">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Pisces',
-    sidebar: "",
-    fancybox: ,
-    motion: ,
-    duoshuo: {
-      userId: 'undefined',
-      author: 'Autore'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: "",
-      labels: ""
-    }
-  };
-</script>
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-  <title>JAVA基础回顾-字节码指令 | vzard's blog</title>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  <<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-=======
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> Stashed changes
-
-
-  
-  
-
-  <div class="container  page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><<<<<<< Updated upstream
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">just do it</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-
-  
-</nav>
-
-
-
-=======
-<div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">vzard's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <p class="site-subtitle">just do it</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-
-  
-</nav>
-
-
-
->>>>>>> Stashed changes
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="vzardlloo">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="vzard's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">JAVA基础回顾-字节码指令</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h4 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h4><p>众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘和类比两者之间的关系。<br>本着这样的思想，我们进行Java字节码指令的学习。JAVA字节码在JAVA虚拟机中的地位相当于实体机的机器码，一切在Java虚拟机上运行的程序都要被解释或编译成字节码，一切在实体机上运行的程序最后也都要编译成机器码。Java字节码指令可以对字节码进行操作，在实体机中对机器码进行操作的是汇编语言。所以Java字节码指令对应汇编语言，Java字节码指令集对应汇编指令集。</p>
-<h4 id="字节码简介"><a href="#字节码简介" class="headerlink" title="字节码简介"></a>字节码简介</h4><p>Java字节码指令由<em>一个</em>字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。<br><a id="more"></a></p>
-<h4 id="字节码与数据类型"><a href="#字节码与数据类型" class="headerlink" title="字节码与数据类型"></a>字节码与数据类型</h4><p>在字节码指令集中，大多数指令都对应的其操作所对应的数据类型信息，比如iload表示从局部变量表中加载int型的数据到操作栈中，fload从局部变量表中加载float型的数据到操作栈中…但是由于Java字节码的操作码只有一个字节（即0~255），这意味着指令集的操作码总数不可能超过256条。所以如果要求Java运行时所有的数据类型都有对应的与数据类型相关的指令去支持的话，操作码的总数将超过256条。所以JAVA字节码指令集被设计为Not Orthogonal（非完全独立）,即并非每种数据类型和每种操作都有对应的指令，有一些指令可以在必要的时候将一些不被支持的数据类型转换为被支持的数据类型。我们可以以数据类型为列，操作指令为行制作一张表，其中为空的项即说明虚拟机不支持对这种数据类型进行这项操作。<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jvmcode.PNG" alt=""></p>
-<h4 id="加载和存储指令"><a href="#加载和存储指令" class="headerlink" title="加载和存储指令"></a>加载和存储指令</h4><p>加载和存储指令用于将数据在帧栈中的局部变量表和操作数栈之间传输。</p>
-<ul>
-<li>将一个局部变量表加载到操作数栈：<br>iload、<code>iload_&lt;n&gt;</code>、lload、lload<em><n>、fload、fload</n></em><n>、dload、<code>dload_&lt;n&gt;</code>、aload、<code>aload_&lt;n&gt;</code>。</n></li>
-<li>将一个数值从操作数栈储存到局部变量表：<br>istore,<code>istore_&lt;n&gt;</code>,lstore,<code>lstore_&lt;n&gt;</code>,fstore,<code>fstore_&lt;n&gt;</code>,dstore,<code>dstore_&lt;n&gt;</code>,astore,<code>astore_&lt;n&gt;</code>。</li>
-<li><p>将一个常量加载到操作数栈：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bipush,sipush,lde,lde_w,ldc2_w,aconst_null,iconst_ml,iconst_&lt;i&gt;,lconst_&lt;i&gt;,fconst_&lt;i&gt;,dconst_&lt;i&gt;。</div></pre></td></tr></table></figure>
-</li>
-<li><p>拓充局部变量表的访问引索的指令：wide</p>
-</li>
-</ul>
-<h4 id="运算指令"><a href="#运算指令" class="headerlink" title="运算指令"></a>运算指令</h4><p>运算指令用于对操作数栈上的值进行某种特定的运算。</p>
-<ul>
-<li>加法运算：iadd,ladd,fadd,dadd。</li>
-<li>减法运算：isub,lsub,fsub,dsub。</li>
-<li>乘法运算：imul,lmul,fmul,dmul。</li>
-<li>除法运算：idiv,ldiv,fdiv,ddiv。</li>
-<li>求余指令：irem,lrem,frem,drem。</li>
-<li>取反指令：imeg,lmeg,fmeg,dmeg。</li>
-<li>位移指令：ishl,ishr,iushr,lshl,lshr,lushr。</li>
-<li>按位或指令：ior,lor。</li>
-<li>按位与指令：iand,land。</li>
-<li>按位异或指令：ixor,lxor。</li>
-<li>局部变量自增指令：iinc。</li>
-<li>比较指令：dcmpg,dcmpl,fcmpg,fcmpl,lcmp。<br><em>注：只有在除法指令（idiv,ldiv)和求余指令（irem,lrem)当出现除数为零时会导致虚拟机抛出AirtmeticException异常，其余整形和浮点型运算场景都不会抛出异常</em></li>
-</ul>
-<h4 id="类型转换指令"><a href="#类型转换指令" class="headerlink" title="类型转换指令"></a>类型转换指令</h4><p>类型转换指令可以将两种不同数值类型进行相互转换。<br>Java虚拟机天然支持基本数据类型的宽化类型转换，例如int到long、flost、double等。<br>对于窄化数据类型转化则必须用显示的转换指令：</p>
-<ul>
-<li>i2b(int -&gt; boolean)</li>
-<li>i2c(int -&gt; char)</li>
-<li>i2s(int -&gt; short)</li>
-<li>l2i(long -&gt; int)</li>
-<li>f2i(float -&gt; int)</li>
-<li>f2l(float -&gt; long)</li>
-<li>d2i(double -&gt; int)</li>
-<li>d2l(double -&gt; long)</li>
-<li>d2f(double -&gt; float)<br><em>几点说明：</em></li>
-<li>int/long 类型窄化转换为整数类型T时，转换过程为丢弃除最低位N（T的数据类型长度）个字节以外的内容。</li>
-<li>浮点值窄化转换为整数类型T（int/long)时：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">if(浮点值==NaN)&#123;</div><div class="line">    result = 0;</div><div class="line">&#125;else&#123;</div><div class="line">    value = [浮点值];  //向下取整</div><div class="line">    if(T.min &lt;= value &lt;= T.max)&#123;    //value在T的表示范围内</div><div class="line">        result = value;</div><div class="line">    &#125;else&#123;</div><div class="line">        if(value &gt; 0) result = T.max;</div><div class="line">        if(value &lt; 0) result = T.min;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="对象创建与访问指令"><a href="#对象创建与访问指令" class="headerlink" title="对象创建与访问指令"></a>对象创建与访问指令</h4><ul>
-<li>创建类实例的指令：new</li>
-<li>创建数组的指令：newarray,anewarray,multianewarray</li>
-<li>访问类字段（static字段）和实例字段（非static字段）的指令：getfield,putfield,getstatic,putstatic</li>
-<li>将一个数组元素加载到操作数栈的指令:<br>baload,caload,saload,iaload,faload,daload,aaload</li>
-<li>将一个操作数栈的值存储到数组元素中的指令：<br>bastore,castore,iastore,sastore,fastore,fastore,dastore,aastore</li>
-<li>取数组长度的指令：arraylength</li>
-<li>检查类实例类型的指令：instanceof,checkcast</li>
-</ul>
-<h4 id="操作数栈管理指令"><a href="#操作数栈管理指令" class="headerlink" title="操作数栈管理指令"></a>操作数栈管理指令</h4><ul>
-<li>将一个操作数栈的栈顶一个或两个元素出栈：pop、pop2。</li>
-<li>复制栈顶一个或两个数值并将复制值或双份的复制值重新压入栈顶：dup、dup2、dup_x1,dup2_x1,dup_x2,dup2_x2。</li>
-<li>将栈顶端的两个数值交换：swap。</li>
-</ul>
-<h4 id="控制转移指令"><a href="#控制转移指令" class="headerlink" title="控制转移指令"></a>控制转移指令</h4><p>控制转移指令可以让Java虚拟机有条件或者无条件的从指定的位置而不是控制转移指令的下一条指令继续执行程序。</p>
-<ul>
-<li>条件分支：<br>ifeq,ifit,ifle,ifgt,ifnull,ifnonnull,if_icmpeq,if_icmpne,if_icmplt,if_icmpgt,if_icmple,if_icmpge,if_acmpeq,if_acmpne。</li>
-<li>复合条件分支：tableswitch,lookupswitch。</li>
-<li>无条件分支：gosto,goto_w,jsr,jsr_w,ret。</li>
-</ul>
-<h4 id="方法调用和返回指令"><a href="#方法调用和返回指令" class="headerlink" title="方法调用和返回指令"></a>方法调用和返回指令</h4><ul>
-<li>invokevirtual:用于调用对象的实例方法，根据对象的实际类型进行分派（虚方法分派）。</li>
-<li>invokeinterface:用于调用接口方法，它在运行时搜索一个实现了这个接口方法的对象，找出适合的方法进行调用。</li>
-<li>invokespecial:用于调用一些需要特殊处理的实例方法，包括实例的初始化方法，私有方法和父类方法。</li>
-<li>invokestatic:用于调用类方法（static方法）</li>
-<li>invokedynamic:用于运行时动态解析出调用点限定符所应用的方法，并执行该方法。（前面的分派逻辑都固化在虚拟机内部，而该指令的分派逻辑是由用户自定义）。</li>
-<li>方法返回指令：ireture(返回类型是int,short,byte,char,boolean时),lreturn,freturn,dreturn,areturn,另外还有一条return供void方法、实例/类/接口的初始化方法使用。</li>
-</ul>
-<h4 id="异常处理指令"><a href="#异常处理指令" class="headerlink" title="异常处理指令"></a>异常处理指令</h4><p>显式抛出异常指令：athrow</p>
-<h4 id="同步指令"><a href="#同步指令" class="headerlink" title="同步指令"></a>同步指令</h4><ul>
-<li>monitorenter,monitorexit</li>
-</ul>
-<h4 id="小练习"><a href="#小练习" class="headerlink" title="小练习"></a>小练习</h4><p>我们拿Java里面比较经典的i++和++i问题来做个练习，熟悉下用字节码分析问题：<br>Test Case for ++i:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_1</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] argv )</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span>  value = <span class="number">0</span>;</div><div class="line">        value = ++value;</div><div class="line"></div><div class="line">        System.out.println(value);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果：1。<br>对应部分字节码及分析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">       0: iconst_0                 //将0加载到栈顶</div><div class="line">       1: istore_1                 //将0存储到变量value</div><div class="line">       2: iinc          1, 1       //value在局部变量表自增为1,(此处为虚指令，真实的变量操作要靠load和store指令)</div><div class="line">       5: iload_1                  //将value的值加载到栈顶</div><div class="line">       6: istore_1                 //将栈顶的内容保存到变量value，value=1</div><div class="line">       7: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">      10: iload_1</div><div class="line">      11: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">      14: return</div></pre></td></tr></table></figure></p>
-<p>Test Case for i++:<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] argv )</span></span></div><div class="line">    &#123;</div><div class="line">       <span class="keyword">int</span>  value = <span class="number">0</span>;</div><div class="line">       value = value++;</div><div class="line"></div><div class="line">        System.out.println(value);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>运行结果：0<br>字节码及分析：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">Code:</div><div class="line">      0: iconst_0              //将0加载到栈顶</div><div class="line">      1: istore_1              //将0存储到变量value</div><div class="line">      2: iload_1               //将value的值加载到栈顶,栈顶为0</div><div class="line">      3: iinc          1, 1    //value在局部变量表自增为1</div><div class="line">      6: istore_1              //将栈顶的内容保存到变量value,value=0</div><div class="line">      7: getstatic     #2                  // Field java/lang/System.out:Ljava/io/PrintStream;</div><div class="line">     10: iload_1</div><div class="line">     11: invokevirtual #3                  // Method java/io/PrintStream.println:(I)V</div><div class="line">     14: return</div></pre></td></tr></table></figure></p>
-<p>以上通过字节码分析对这个问题无疑有了更深层次的理解。</p>
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
-    <div></div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>Dona</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-
-    
-
-    
-
-  </div>
-</div>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <div>
-      
-        <<<<<<< Updated upstream
-<ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>Autore:</strong>
-    vzardlloo
-  </li>
-  <li class="post-copyright-link">
-    <strong>Link:</strong>
-    <a href="http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/" title="JAVA基础回顾-字节码指令">http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>Copyright: </strong>
-    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
-  </li>
-</ul>
-=======
-
->>>>>>> Stashed changes
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/jvm/" rel="tag"># jvm</a>
-          
-        </div>
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="next" title="JVM内存模型">
-                <i class="fa fa-chevron-left"></i> JVM内存模型
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/15/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B/" rel="prev" title="JAVA基础回顾-双亲委派模型">
-                JAVA基础回顾-双亲委派模型 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          <<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-  <div class="comments" id="comments">
-    
-  </div>
-
->>>>>>> Stashed changes
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
-               alt="vzardlloo" />
-          <p class="site-author-name" itemprop="name">vzardlloo</p>
-           
-              <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
-          
-        </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/">
-                <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">posts</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              <a href="/categories/index.html">
-                <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">categorie</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">tags</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
-        
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <<<<<<< Updated upstream
-<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-
-  
-</div>
-
-
-
-
-
-
-
-
-=======
-<div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
-</div>
-
-
->>>>>>> Stashed changes
-
-        
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-  </div>
-
-  <<<<<<< Updated upstream
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-=======
-
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
-
->>>>>>> Stashed changes
-
-  
-
-
-  <script type="text/javascript" src="//src/utils.js?v="></script>
-
-  <script type="text/javascript" src="//src/motion.js?v="></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="//src/affix.js?v="></script>
-
-  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
-
-
-
-  
-  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
-<script type="text/javascript" src="//src/post-details.js?v="></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
-
-
-
-  <<<<<<< Updated upstream
-
-
-
-  
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
-
-
-
-
-
-
-=======
-
-
-
-  
-
-
-
-
-
-
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-<<<<<<< Updated upstream
-
-
-  
-
-
-=======
-
-
-  
-
-
->>>>>>> Stashed changes
-
-
-
->>>>>>> Stashed changes
-
-  
-<<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-
-
-
-  <<<<<<< Updated upstream
-
-=======
-
->>>>>>> Stashed changes
-
-  
-
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
->>>>>>> Stashed changes
