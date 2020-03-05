@@ -1,31 +1,21 @@
-<!doctype html>
+<<<<<<< Updated upstream
+<!DOCTYPE html>
 
 
 
-  
 
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next pisces" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <<<<<<< Updated upstream
+<meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-  
-  
-    
-    
-  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+<meta name="theme-color" content="">
 
 
 
 
-  
-  
-  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
 
 
 
@@ -47,45 +37,23 @@
 
 
 
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
 
 
   <meta name="keywords" content="JAVA," />
@@ -97,11 +65,6 @@
 
 
   <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -129,81 +92,180 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":true,"scrollpercent":true},
-    fancybox: true,
-    motion: true,
+    version: '',
+    sidebar: "",
+    fancybox: ,
+    tabs: ,
+    motion: "",
     duoshuo: {
-      userId: '0',
-      author: '博主'
+      userId: 'undefined',
+      author: 'Autore'
     },
     algolia: {
       applicationID: '',
       apiKey: '',
       indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+      hits: "",
+      labels: ""
     }
   };
 </script>
 
 
 
-  <link rel="canonical" href="http://vzardlloo.github.io/2017/08/29/关于volatile/"/>
+
+
+
+=======
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 
 
 
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JAVA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：  JAVA内存模型简介 volatile的语义：可见性、禁止重排序。 为什么volatile不能保证一致性。 volatile的应用场景举例。  JAVA内存模型简介这块知识必须要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于volatile">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/index.html">
+<meta property="og:site_name" content="vzard&#39;s blog">
+<meta property="og:description" content="前言volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：  JAVA内存模型简介 volatile的语义：可见性、禁止重排序。 为什么volatile不能保证一致性。 volatile的应用场景举例。  JAVA内存模型简介这块知识必须要">
+<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/jmm.png">
+<meta property="article:published_time" content="2017-08-29T14:21:44.000Z">
+<meta property="article:modified_time" content="2017-08-31T09:37:05.672Z">
+<meta property="article:author" content="vzardlloo">
+<meta property="article:tag" content="JAVA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/jmm.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: "",
+    fancybox: ,
+    motion: ,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Autore'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
   <title>关于volatile | vzard's blog</title>
+  <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+
+
+
+
+
+
+=======
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
+
 <meta name="generator" content="Hexo 4.2.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
-
-
-
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-  ga('create', 'true', 'auto');
-  ga('send', 'pageview');
-</script>
-
-
-  <script type="text/javascript">
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container  page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
+      <div class="header-inner"><<<<<<< Updated upstream
+<div class="site-brand-wrapper">
   <div class="site-meta ">
     
 
@@ -215,7 +277,7 @@
       </a>
     </div>
       
-        <h1 class="site-subtitle" itemprop="description">just do it</h1>
+        <p class="site-subtitle">just do it</p>
       
   </div>
 
@@ -232,102 +294,49 @@
   
 
   
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
 
-      
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
-            
-            搜索
-          </a>
-        </li>
-      
-    </ul>
-  
-
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
 
 
+=======
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vzard's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">just do it</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+
+  
+</nav>
+
+
+
+>>>>>>> Stashed changes
  </div>
     </header>
 
@@ -364,63 +373,19 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">关于volatile</h2>
+          <h1 class="post-title" itemprop="name headline">关于volatile</h1>
         
 
         <div class="post-meta">
           <span class="post-time">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-29T22:21:44+08:00">
-                2017-08-29
-              </time>
-            
 
             
-              <span class="post-meta-divider">|</span>
-            
 
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-31T17:37:05+08:00">
-                2017-08-31
-              </time>
             
           </span>
 
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JAVA/" itemprop="url" rel="index">
-                    <span itemprop="name">JAVA</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
@@ -431,25 +396,6 @@
 
           
 
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-
-              
-            </div>
           
 
           
@@ -458,7 +404,7 @@
       </header>
     
 
-    <div class="post-body han-init-context" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -504,21 +450,63 @@
 
     <div>
       
-        
+        <<<<<<< Updated upstream
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
+    <div></div>
+</div>
+=======
+
+>>>>>>> Stashed changes
 
       
     </div>
 
     <div>
       
-        
+        <<<<<<< Updated upstream
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Dona</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+
+    
+
+  </div>
+</div>
+=======
+
+>>>>>>> Stashed changes
 
       
     </div>
 
     <div>
       
-        
+        <<<<<<< Updated upstream
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Autore:</strong>
+    vzardlloo
+  </li>
+  <li class="post-copyright-link">
+    <strong>Link:</strong>
+    <a href="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/" title="关于volatile">http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright: </strong>
+    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
+  </li>
+</ul>
+=======
+
+>>>>>>> Stashed changes
 
       
     </div>
@@ -575,18 +563,19 @@
           
 
 
-          
+          <<<<<<< Updated upstream
+
+
+  
+
+
+=======
+
   <div class="comments" id="comments">
-    
-      <div id="disqus_thread">
-        <noscript>
-          Please enable JavaScript to view the
-          <a href="https://disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a>
-        </noscript>
-      </div>
     
   </div>
 
+>>>>>>> Stashed changes
 
         </div>
         
@@ -606,33 +595,24 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
                alt="vzardlloo" />
           <p class="site-author-name" itemprop="name">vzardlloo</p>
            
-              <p class="site-description motion-element" itemprop="description"></p>
-           
+              <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
+          
         </div>
         <nav class="site-state motion-element">
 
           
             <div class="site-state-item site-state-posts">
-              <a href="/archives/">
+              <a href="/">
                 <span class="site-state-item-count">32</span>
-                <span class="site-state-item-name">日志</span>
+                <span class="site-state-item-name">posts</span>
               </a>
             </div>
           
@@ -643,7 +623,7 @@
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
                 <span class="site-state-item-count">11</span>
-                <span class="site-state-item-name">分类</span>
+                <span class="site-state-item-name">categorie</span>
               </a>
             </div>
           
@@ -654,7 +634,7 @@
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
                 <span class="site-state-item-count">14</span>
-                <span class="site-state-item-name">标签</span>
+                <span class="site-state-item-name">tags</span>
               </a>
             </div>
           
@@ -672,71 +652,12 @@
 
         <div class="links-of-author motion-element">
           
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/vzardlloo" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://twitter.com/vzardloo" target="_blank" title="Twitter">
-                  
-                    <i class="fa fa-fw fa-twitter"></i>
-                  
-                  Twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://www.jianshu.com/u/c0583a4f92b5" target="_blank" title="jianshu">
-                  
-                    <i class="fa fa-fw fa-book"></i>
-                  
-                  jianshu
-                </a>
-              </span>
-            
-          
         </div>
 
         
         
 
         
-        
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-link"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://biezhi.me/" title="王爵nice" target="_blank">王爵nice</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://yubutong.cn/" title="于不同" target="_blank">于不同</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://fangfang.ink/" title="方方的博客" target="_blank">方方的博客</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="https://www.itnao.cn/" title="AV熊" target="_blank">AV熊</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://blog.how2u.cn/" title="How2U" target="_blank">How2U</a>
-                </li>
-              
-            </ul>
-          </div>
         
 
         
@@ -745,30 +666,7 @@
       </section>
 
       
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
 
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java内存模型简介"><span class="nav-number">2.</span> <span class="nav-text">JAVA内存模型简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile的语义"><span class="nav-number">3.</span> <span class="nav-text">volatile的语义</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可见性"><span class="nav-number">3.1.</span> <span class="nav-text">可见性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#禁止重排序"><span class="nav-number">3.2.</span> <span class="nav-text">禁止重排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为什么volatile不能保证一致性"><span class="nav-number">4.</span> <span class="nav-text">为什么volatile不能保证一致性？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#volatile的应用场景举例"><span class="nav-number">5.</span> <span class="nav-text">volatile的应用场景举例</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
-      
-
-      
-        <div class="back-to-top">
-          <i class="fa fa-arrow-up"></i>
-          
-            <span id="scrollpercent"><span>0</span>%</span>
-          
-        </div>
       
 
     </div>
@@ -781,41 +679,62 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <<<<<<< Updated upstream
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
+
   
-  &copy;  2017 - 
+</div>
+
+
+
+
+
+
+
+
+=======
+<div class="copyright" >
+  
+  &copy; 
   <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">vzardlloo</span>
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="noopener">
-    NexT.Pisces
-  </a>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-</div>
-
+>>>>>>> Stashed changes
 
         
+
+
+
+
+
+
 
         
       </div>
     </footer>
 
     
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
 
   </div>
 
-  
+  <<<<<<< Updated upstream
+
 
 <script type="text/javascript">
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
@@ -831,94 +750,6 @@
 
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-    
-
-    
-      <script type="text/javascript">
-        var disqus_config = function () {
-          this.page.url = 'http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/';
-          this.page.identifier = '2017/08/29/关于volatile/';
-          this.page.title = '关于volatile';
-        };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://vzardlloo.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
-      </script>
-    
-
-  
-
-
 
 
 
@@ -931,372 +762,203 @@
 
 
   
-
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (search_path.endsWith("json")) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
-
-
-
-
+  
+    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
   
 
   
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
+  
+    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+=======
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+>>>>>>> Stashed changes
+
+  
+
+
+  <script type="text/javascript" src="//src/utils.js?v="></script>
+
+  <script type="text/javascript" src="//src/motion.js?v="></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="//src/affix.js?v="></script>
+
+  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
+
+
+
+  
+  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
+<script type="text/javascript" src="//src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
+
+
+
+  <<<<<<< Updated upstream
+
+
+
+  
+
+
+
+
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+<<<<<<< Updated upstream
+
+
+  
+
+
+=======
+
+
+  
+
+
+>>>>>>> Stashed changes
+
+
+
+
+
+
+
+
+
+=======
+
+
+
+  
+
+
+
+
+
+
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+<<<<<<< Updated upstream
+
+
+  
+
+
+=======
+
+
+  
+
+
+>>>>>>> Stashed changes
+
+
+
+>>>>>>> Stashed changes
+
+  
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+
+
+
+  <<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+  
+
   
 
   
   
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
-
 
   
 
@@ -1304,3 +966,960 @@
 
 </body>
 </html>
+=======
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <<<<<<< Updated upstream
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+
+
+  <meta name="keywords" content="JAVA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：  JAVA内存模型简介 volatile的语义：可见性、禁止重排序。 为什么volatile不能保证一致性。 volatile的应用场景举例。  JAVA内存模型简介这块知识必须要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于volatile">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/index.html">
+<meta property="og:site_name" content="vzard&#39;s blog">
+<meta property="og:description" content="前言volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：  JAVA内存模型简介 volatile的语义：可见性、禁止重排序。 为什么volatile不能保证一致性。 volatile的应用场景举例。  JAVA内存模型简介这块知识必须要">
+<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/jmm.png">
+<meta property="article:published_time" content="2017-08-29T14:21:44.000Z">
+<meta property="article:modified_time" content="2017-08-31T09:37:05.672Z">
+<meta property="article:author" content="vzardlloo">
+<meta property="article:tag" content="JAVA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/jmm.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '',
+    sidebar: "",
+    fancybox: ,
+    tabs: ,
+    motion: "",
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Autore'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+
+
+
+=======
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="//main.css?v=" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JAVA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml" />
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：  JAVA内存模型简介 volatile的语义：可见性、禁止重排序。 为什么volatile不能保证一致性。 volatile的应用场景举例。  JAVA内存模型简介这块知识必须要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于volatile">
+<meta property="og:url" content="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/index.html">
+<meta property="og:site_name" content="vzard&#39;s blog">
+<meta property="og:description" content="前言volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：  JAVA内存模型简介 volatile的语义：可见性、禁止重排序。 为什么volatile不能保证一致性。 volatile的应用场景举例。  JAVA内存模型简介这块知识必须要">
+<meta property="og:image" content="http://oo3aq3ac8.bkt.clouddn.com/jmm.png">
+<meta property="article:published_time" content="2017-08-29T14:21:44.000Z">
+<meta property="article:modified_time" content="2017-08-31T09:37:05.672Z">
+<meta property="article:author" content="vzardlloo">
+<meta property="article:tag" content="JAVA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oo3aq3ac8.bkt.clouddn.com/jmm.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: "",
+    fancybox: ,
+    motion: ,
+    duoshuo: {
+      userId: 'undefined',
+      author: 'Autore'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: "",
+      labels: ""
+    }
+  };
+</script>
+
+
+
+
+
+
+>>>>>>> Stashed changes
+
+  <title>关于volatile | vzard's blog</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+
+
+
+
+
+
+=======
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
+
+
+  
+  
+
+  <div class="container  page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><<<<<<< Updated upstream
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vzard's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">just do it</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+
+  
+</nav>
+
+
+
+=======
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vzard's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">just do it</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+
+  
+</nav>
+
+
+
+>>>>>>> Stashed changes
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="vzardlloo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vzard's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于volatile</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>volatile关键字可以说是JAVA比较难理解的一个关键字了，很多书感觉讲的都不太清楚。这篇博客主要梳理一下它的含义,是对自己学习的一个总结，参考了不少资料和博客，希望可以到帮助别人。本文的主要讲一下下面几件事：</p>
+<ul>
+<li>JAVA内存模型简介</li>
+<li>volatile的语义：<code>可见性</code>、<code>禁止重排序</code>。</li>
+<li>为什么volatile不能保证一致性。</li>
+<li>volatile的应用场景举例。</li>
+</ul>
+<h4 id="java内存模型简介"><a href="#JAVA内存模型简介" class="headerlink" title="JAVA内存模型简介"></a>JAVA内存模型简介</h4><p>这块知识必须要对JAVA内存模型有个基本的认识，所以先简单讲一下JAVA内存模型。<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jmm.png" alt=""><br><a id="more"></a><br>Java内存模型规定了所有的变量都存储在主内存中。每条线程中还有自己的工作内存，线程的工作内存中保存了被该线程所使用到的变量（从主内存中拷贝而来）。线程对变量的所有操作（读取，赋值）都必须在工作内存中进行。不同线程之间也无法直接访问对方工作内存中的变量，线程间变量值的传递均需要通过主内存来完成。由于这种内存模型结构，在多线程情况下会产生很多问题。比如执行如下代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i = 8</div></pre></td></tr></table></figure></p>
+<p>程序必须先在自己的工作内存中把i进行赋值，然后再将i的值写入到主存中。在这个过程中如果有两个线程A,B均对i进行自增操作，期望得到的值是10，在没有同步机制的情况下可能会有如下的情形发生：A和B同时从主存中读取i,然后分别在自己的工作内存中进行自增操作，然后先后写回主存，则此时主存中的值为9，与我们预期不符。</p>
+<h4 id="volatile的语义"><a href="#volatile的语义" class="headerlink" title="volatile的语义"></a>volatile的语义</h4><h5 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h5><p>可见性的含义是指：一个线程修改了某个变量的值，这新值对其他线程来说是立即可见的。还是之前那个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i = 8</div></pre></td></tr></table></figure></p>
+<p>如果i用volatile修饰的话，当有一个线程在主存中读取i,并在自己的工作内存中进行修改的时候，修改后的值会立即强制同步到主存中，并且其他线程中这个值的缓存也都无效。相比之下普通共享变量被修改之后，什么时候被写入主存是不确定的，当其他线程去读取时，此时内存中可能还是原来的旧值，因此无法保证可见性。<br>原理：如果对声明了volatile变量进行写操作时，JVM会向处理器发送一条Lock前缀的指令，将这个变量所在缓存行的数据写会到系统内存。 这一步确保了如果有其他线程对声明了volatile变量进行修改，则立即更新主内存中数据。<br>但这时候其他处理器的缓存还是旧的，所以在多处理器环境下，为了保证各个处理器缓存一致，每个处理会通过嗅探在总线上传播的数据来检查 自己的缓存是否过期，当处理器发现自己缓存行对应的内存地址被修改了，就会将当前处理器的缓存行设置成无效状态，当处理器要对这个数据进行修改操作时，会强制重新从系统内存把数据读到处理器缓存里。 这一步确保了其他线程获得的声明了volatile变量都是从主内存中获取最新的。</p>
+<h5 id="禁止重排序"><a href="#禁止重排序" class="headerlink" title="禁止重排序"></a>禁止重排序</h5><p>重排序的含义是：处理器为了提高程序运行效率，可能会对输入代码进行优化，它不保证程序中各个语句的执行先后顺序同代码中的顺序一致，但是它会保证程序最终执行结果和代码顺序执行的结果是一致的。这样听着比较拗口，举个例子吧：比如我们要计算<code>23+36+17+44</code>的值，灵活一点的人肯定会这么算<code>(23+17)+(36+44)--&gt;40+80 = 120</code>,而不会按照顺序来算，应为这样进行重排序之后更加便于人脑计算，并且变换顺序之后最终的结果和顺序计算的结果是一致的。总之，重排序就是在保证最后结果一样的情况下，为了处理器的运行效率而对代码执行顺序进行优化的一种操作。<br>volatile禁止指令重排序的含义：</p>
+<ul>
+<li>当程序执行到volatile变量的读操作或者写操作时，在其前面的操作的更改肯定全部已经进行，且结果已经对后面的操作可见；在其后面的操作肯定还没有进行</li>
+<li><p>在进行指令优化时，不能将在对volatile变量的读操作或者写操作的语句放在其后面执行，也不能把volatile变量后面的语句放到其前面执行。<br>举例说明：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//x,y为普通变量</span></div><div class="line"><span class="comment">//volflag被volatile修饰</span></div><div class="line"></div><div class="line"></div><div class="line">x = <span class="number">10</span>;          <span class="comment">//语句1</span></div><div class="line">y = <span class="number">3</span>;           <span class="comment">//语句2</span></div><div class="line">volflag = <span class="keyword">true</span>;  <span class="comment">//语句3</span></div><div class="line">x= <span class="number">5</span>;           <span class="comment">//语句4</span></div><div class="line">y = <span class="number">9</span>;           <span class="comment">//语句5</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这个例子中，由于volflag被volatile修饰，所以语句3不会被重排到语句1、语句2前面，也不会被重排到语句4、语句5的后面，但语句1、2和语句4、5的顺序是不能保证的。<br>另外volatile可以保证在执行到语句3的时候语句1、2是执行完毕的，语句4、5是没有执行的，并且语句1、2的执行结果是对语句4、5是可见的。<br>原理：Lock前缀指令实际上相当于一个内存屏障（也成内存栅栏），它确保指令重排序时不会把其后面的指令排到内存屏障之前的位置，也不会把前面的指令排到内存屏障的后面；即在执行到内存屏障这句指令时，在它前面的操作已经全部完成。</p>
+<h4 id="为什么volatile不能保证一致性"><a href="#为什么volatile不能保证一致性？" class="headerlink" title="为什么volatile不能保证一致性？"></a>为什么volatile不能保证一致性？</h4><p>首先，我们要知道保证一致性要满足三个条件：原子性，有序性，可见性。</p>
+<ul>
+<li>原子性：即一个操作或者多个操作要么全部执行并且执行的过程不会被任何因素打断，要么就都不执行。</li>
+<li>可见性：可见性是指当多个线程访问同一个变量时，一个线程修改了这个变量的值，其他线程能够立即看得到修改的值。</li>
+<li>有序性：即程序执行的顺序按照代码的先后顺序执行。<br>前面已经讲了volatile的可见性和有序性，但它不能保证原子性。下面设想一个情景：<br>假如某个时刻变量i的值为10</li>
+</ul>
+<p>线程1对变量进行自增操作，线程1先读取了变量i的原始值，然后线程1被阻塞了；<br>然后线程2对变量进行自增操作，线程2也去读取变量i的原始值，由于线程1只是对变量i进行读取操作，而没有对变量进行修改操作，所以不会导致线程2的工作内存中缓存变量i的缓存行无效，也不会导致主存中的值刷新，所以线程2会直接去主存读取inc的值，发现i的值时10，然后进行加1操作，并把11写入工作内存，最后写入主存。<br>然后线程1接着进行加1操作，由于已经读取了i的值，注意此时在线程1的工作内存中inc的值仍然为10，所以线程1对inc进行加1操作后i的值为11，然后将11写入工作内存，最后写入主存。<br>那么两个线程分别进行了一次自增操作后，i只增加了1。</p>
+<p>可以看出，volatile变量是比锁弱一级的同步机制。当一个线程获取锁之后，别的线程就不能对其进行读取，修改等任何操作，但是获取一个volatile变量之后，只会让该线程对改变量的任何修改对其他线程都可见，但无法阻止其他线程对该变量的执行读取、修改等操作。锁和volatile的对比就好比中国和联合国，有人想干涉中国内政，中国可以发表声明并且同时使用武装力量强制抵挡入侵，但如果是联合国遇到干涉内政的问题就只能发表发表声明了。</p>
+<h4 id="volatile的应用场景举例"><a href="#volatile的应用场景举例" class="headerlink" title="volatile的应用场景举例"></a>volatile的应用场景举例</h4><p>单例模式中的double check：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Singleton</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">static</span> Singleton instance = <span class="keyword">null</span>;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</div><div class="line"> </div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(instance==<span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (Singleton.class) &#123;</div><div class="line">                <span class="keyword">if</span>(instance==<span class="keyword">null</span>)</div><div class="line">                    instance = <span class="keyword">new</span> Singleton();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>为什么要使用volatile 修饰instance？<br>主要在于instance = new Singleton()这句，这并非是一个原子操作，事实上在 JVM 中这句话大概做了下面 3 件事情:</p>
+<p>1.给 instance 分配内存</p>
+<p>2.调用 Singleton 的构造函数来初始化成员变量</p>
+<p>3.将instance对象指向分配的内存空间（执行完这步 instance 就为非 null 了）。</p>
+<p>但是在 JVM 的即时编译器中存在指令重排序的优化。也就是说上面的第二步和第三步的顺序是不能保证的，最终的执行顺序可能是 1-2-3 也可能是 1-3-2。如果是后者，则在 3 执行完毕、2 未执行之前，被线程二抢占了，这时 instance 已经是非 null 了（但却没有初始化），所以线程二会直接返回instance，然后使用，然后理所当然地报错。</p>
+<p><a href="https://vcfvct.wordpress.com/2017/04/10/java-volatile-%E5%8F%AF%E8%A7%81%E8%A1%8Cvisibility%EF%BC%8C%E5%8E%9F%E5%AD%90%E6%80%A7atomicity%EF%BC%8C%E6%9C%89%E5%BA%8F%E6%80%A7ordering/#comment-1824" target="_blank" rel="external">参考资料</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        <<<<<<< Updated upstream
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="" alt="vzardlloo wechat" style="width: 200px; max-width: 100%;"/>
+    <div></div>
+</div>
+=======
+
+>>>>>>> Stashed changes
+
+      
+    </div>
+
+    <div>
+      
+        <<<<<<< Updated upstream
+<div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Dona</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+
+    
+
+  </div>
+</div>
+=======
+
+>>>>>>> Stashed changes
+
+      
+    </div>
+
+    <div>
+      
+        <<<<<<< Updated upstream
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>Autore:</strong>
+    vzardlloo
+  </li>
+  <li class="post-copyright-link">
+    <strong>Link:</strong>
+    <a href="http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/" title="关于volatile">http://vzardlloo.github.io/2017/08/29/%E5%85%B3%E4%BA%8Evolatile/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>Copyright: </strong>
+    Tutti gli articoli in questo sito sono sotto licenza <a href="" rel="external nofollow" target="_blank"></a> salvo disposizione contraria.
+  </li>
+</ul>
+=======
+
+>>>>>>> Stashed changes
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JAVA/" rel="tag"># JAVA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/25/%E4%BF%AE%E5%A4%8Dhexo%E5%8D%9A%E5%AE%A2%E7%9A%84%E4%B8%80%E4%B8%AAbug/" rel="next" title="修复hexo博客的一个bug">
+                <i class="fa fa-chevron-left"></i> 修复hexo博客的一个bug
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/07/Java%E4%B8%AD%E7%9A%84%E9%94%81/" rel="prev" title="Java中的锁">
+                Java中的锁 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          <<<<<<< Updated upstream
+
+
+  
+
+
+=======
+
+  <div class="comments" id="comments">
+    
+  </div>
+
+>>>>>>> Stashed changes
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg"
+               alt="vzardlloo" />
+          <p class="site-author-name" itemprop="name">vzardlloo</p>
+           
+              <p class="site-description motion-element" itemprop="description">认真生活,快乐工作</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">32</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">categorie</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <<<<<<< Updated upstream
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+=======
+<div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vzardlloo</span>
+</div>
+
+
+>>>>>>> Stashed changes
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  <<<<<<< Updated upstream
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+=======
+
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="//fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="//jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="//velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="//velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+>>>>>>> Stashed changes
+
+  
+
+
+  <script type="text/javascript" src="//src/utils.js?v="></script>
+
+  <script type="text/javascript" src="//src/motion.js?v="></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="//src/affix.js?v="></script>
+
+  <script type="text/javascript" src="//src/schemes/pisces.js?v="></script>
+
+
+
+  
+  <script type="text/javascript" src="//src/scrollspy.js?v="></script>
+<script type="text/javascript" src="//src/post-details.js?v="></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="//src/bootstrap.js?v="></script>
+
+
+
+  <<<<<<< Updated upstream
+
+
+
+  
+
+
+
+
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+<<<<<<< Updated upstream
+
+
+  
+
+
+=======
+
+
+  
+
+
+>>>>>>> Stashed changes
+
+
+
+
+
+
+
+
+
+=======
+
+
+
+  
+
+
+
+
+
+
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+<<<<<<< Updated upstream
+
+
+  
+
+
+=======
+
+
+  
+
+
+>>>>>>> Stashed changes
+
+
+
+>>>>>>> Stashed changes
+
+  
+<<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+
+
+
+  <<<<<<< Updated upstream
+
+=======
+
+>>>>>>> Stashed changes
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+>>>>>>> Stashed changes
