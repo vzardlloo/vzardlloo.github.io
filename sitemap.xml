@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://vzardlloo.github.io/categories/index.html</loc>
+    
+    <lastmod>2020-03-05T12:06:19.693Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://vzardlloo.github.io/tags/index.html</loc>
+    
+    <lastmod>2020-03-05T12:05:36.361Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://vzardlloo.github.io/2019/03/28/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/</loc>
     
     <lastmod>2019-04-14T14:44:21.283Z</lastmod>
@@ -33,13 +47,6 @@
     <loc>http://vzardlloo.github.io/2017/11/06/Js%E5%8E%9F%E5%9E%8B%E9%93%BE%E8%A7%A3%E8%AF%BB/</loc>
     
     <lastmod>2017-11-07T11:01:09.692Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://vzardlloo.github.io/tags/index.html</loc>
-    
-    <lastmod>2017-11-02T05:33:53.129Z</lastmod>
     
   </url>
   
@@ -145,13 +152,6 @@
     <loc>http://vzardlloo.github.io/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/</loc>
     
     <lastmod>2017-08-20T12:37:50.027Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://vzardlloo.github.io/categories/index.html</loc>
-    
-    <lastmod>2017-08-20T12:37:16.646Z</lastmod>
     
   </url>
   
