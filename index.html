@@ -83,6 +83,131 @@ var _hmt = _hmt || [];
     
     
     
+    <article id="post-XPath线索追踪技术" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/03/05/XPath%E7%BA%BF%E7%B4%A2%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF/"
+    >XPath线索追踪技术</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/03/05/XPath%E7%BA%BF%E7%B4%A2%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF/" class="article-date">
+  <time datetime="2020-03-05T14:33:23.000Z" itemprop="datePublished">2020-03-05</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/">计算广告</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h3><span id="什么是xpath">什么是XPath</span></h3><p>​       XPath全称XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的计算机语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。举例来说:<br>​        我们有网页A,他的页面代码为：<br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/xpath_1.jpg" alt="code.jpg"></p>
+<p>它对应的domtree为<br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/domtree.png" alt="domtree.jpg"><br>  每个网页的页面结构都可以解析为一颗domtree,每个页面元素都是这棵树的一个节点，那如何唯一的表示每一个节点呢？很自然的由于每个节点到根节点的路径都是不同的，所以可以用节点到根路径的路径来表示，比如meta元素可以用/html/head/meta来表示，这样的话有个问题，比如最右和皮皮搞笑这个两个元素都可以表示成/html/head/h1,这样岂不是乱了套,所以对于这样的情况可以用/html/head/h1[0],/html/head/h1[1]来表示，至于谁是h1[0]谁是h1[1]取决于具体实现。这样用路径表达式唯一标识一个页面元素的方法就叫做XPath。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p>
+<h3><span id="为什么要做xpath线索追踪">为什么要做XPath线索追踪</span></h3><p>​       为什么要做XPath线索追踪?这其实可以分解为两个问题：1、为什么要做线索追踪 2、为什么要选择XPath做线索追踪。<br>​      首先是问题一，为什么要做线索追踪？这个答案很简单，因为我们要做oCPX,需要根据转化情况（像提交的表单、咨询工具等），系统自动优化转化效果。它的第一步就是转化数据收集，目前我们只对于App下载类有转化数据的收集，而对于网页线索类特别是对第三方网页的线索收集是一片空白，如果无法收集到这些信息,那么对于这些类型广告的oCPX将无从做起，所以我们有必要对于这些类型的广告做线索追踪。这是做XPath线索追踪的必要性。<br>      其次是问题二，为什么选择选择XPath做线索追踪。对于线索追踪目前主要有:js布码、api回传、XPath，这三种做法。其中js布码和api回传都需要平台方面和广告主侧投入较大的技术支持,而XPath只需要平台侧提供对应功能，投放时广告主可以自主选择线索绑定,不需要投入技术支持,较为方便和易于推广。另外因为业内有已经有应用的比较好的先例，可以省去一些调研选型的时间，还有完整的产品形态可以参考，对于最终可以达到的效果也有个预期。这是做XPath线索追踪的充分性。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p>
+<h3><span id="xpath线索追踪技术实现">XPath线索追踪技术实现</span></h3><ol>
+<li><p><strong>服务端domtree和截图技术选型</strong><br>通过调研可供我们选择的有三种方案：1、基于PhantomJS的方案，2、基于ChromeDP的方案，3、基于Puppeteer的方案。<br>经过尝试调研后总结他们的优缺点对比如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">优点</th>
+<th align="center">缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">phantomjs</td>
+<td align="center">有过使用经验，学习成本低，二进制文件部署简单</td>
+<td align="center">已经停止维护,web引擎实现不一定和现在主流一致</td>
+</tr>
+<tr>
+<td align="center">chromedp</td>
+<td align="center">go语言实现，底层使用Chrome(我们服务端主要语言是go)</td>
+<td align="center">性能不稳定，社区不活跃，资料不多</td>
+</tr>
+<tr>
+<td align="center">puppeteer</td>
+<td align="center">Chrome官方推荐，社区活跃</td>
+<td align="center">需要在服务器搭建对应环境，同时有一些学习成本</td>
+</tr>
+</tbody></table>
+<p><strong>经过实际的尝试我们最终选择使用Puppeter作为服务端domtree解析和服务端截图的工具。</strong></p>
+</li>
+<li><p><strong>页面domtree json和页面截图匹配</strong><br>domtree json是一串描述元素位置信息和其XPath表达式的json,它通过服务器模拟访问页面,然后遍历页面的domtree生成,例如: </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">           <span class="string">"height"</span>: <span class="number">200</span>,</span><br><span class="line">           <span class="string">"left"</span>: <span class="number">400</span>,</span><br><span class="line">           <span class="string">"top"</span>: <span class="number">500</span>,</span><br><span class="line">           <span class="string">"width"</span>: <span class="number">300</span>,</span><br><span class="line">           <span class="string">"xpath"</span>: <span class="string">"/html/body/div[1]"</span></span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>的含义是: xpath表达式为/html/body/div[1]的元素，它的左上角距离视窗左上角右偏400像素, 下偏500像素，同时该元素高200像素，宽300像素。根据这些信息我们可以在截图的对应区域进行框选，如果在截图上框选到的这块区域刚好是路径表达式/html/body/div[1]表示的区域，那么这个元素即匹配成功。</p>
+<p><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/rect.png" alt="rect.png"></p>
+<p>下面主要介绍两种较难匹配的元素的解决： <strong>一、固定浮动元素  二、重叠元素</strong>   </p>
+<ol>
+<li><p><strong>固定浮动元素的匹配</strong><br>固定浮动元素指的是网页上一些不随着页面滑动而移动的元素，它们与页面其他元素的相对位置是不固定的，比如一些悬浮球，底部栏之类的元素，这类元素的位置完全取决于你的设备型号，一个悬浮球在小屏幕设备上可能位于屏幕中部，换成大屏幕后它可能就位于屏幕靠下的位置了，而且在服务端截图的时候，对于一些需要滑动的页面截得是展开的长图。所以此时如果模拟移动设备去访问页面解析domtree的话，浮动元素的domtree json必然与截图无法匹配。对于这个问题摸索出的解决方案为: 放弃chrome模拟移动设备的方法，手动设置ua,然后截图之后，在解析domtree之前，获取页面高度，然后设置模拟访问的页面视图打开高度为页面高度，对应不同动态的设置视图高度，由于这样的视图高度和页面高度一致，所以在这样的视图下打开的页面不存在滑动的情况，所以完美解决浮动元素的问题。</p>
+</li>
+<li><p><strong>重叠元素的匹配</strong><br>domtree json只表示了元素之间二维的位置关系，但是对于三维上的重叠等情况没有描述，所以当一个位置出现两个元素，到底应该框选谁变成了问题。这个问题解决最容易想到的就是给domtree json加上三维信息的描述，并且元素确实有z-index这个属性表示层级关系,但是实际中发现z-index属性有许多的坑，不是很靠谱，比如父标签 position属性为relative，标签无position属性，标签含有浮动(float)属性等都会导致z-index失效(根本原因是css属性间作用不正交)，同时发现巨量引擎也并没有使用z-index属性来进行匹配。后来我们观察了一些页面，发现其实大部分页面都存在着小元素在在大元素上层的规律，于是我们决定按照元素面积来做层级的判断,即面积小的元素默认在面积大的上层，这样还意外的解决了一些有蒙层的弹窗元素导致整个页面被蒙层遮盖无法选择的问题，并且在测试一些页面后在使用上已经达到类似工具的同等的水平。同时我们好奇是否同行也是使用同样的手法来解决这个问题，于是我们制作了一个特殊的页面，一个600<em>400的元素在上层，两个600</em>200的元素在下层，上下层边缘轮廓完全重合，这样按照面积小的元素默认在上的实现方式会导致实际在上层的大元素无法选中，我们拿着这个页面去类型工具尝试，发现果然上层的大元素无法选中，这说明了大家用的手法都是一致的！<br>至此，我们的XPath工具已经达到业内类似工具的使用水平，然后在此基础上对一些业内工具支持不太好的地方进行了优化，主要是：</p>
+<ol>
+<li><p>对重定向页面的支持，技术选项使用puppeteer自动解决</p>
+</li>
+<li><p>对于懒加载页面的优化，截图解析之前服务器模拟对页面进行滑动，使得页面完全加载 </p>
+<p><em>最终元素选择效果:</em><br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/effect.png" alt="effect.png"></p>
+</li>
+</ol>
+<p><strong>END: 更完整详细技术及产品实现细节在:<a href="https://download.csdn.net/download/qq_33446401/12233649" target="_blank" rel="noopener">内部分享PPT</a></strong></p>
+</li>
+</ol>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E7%B4%A2%E8%BF%BD%E8%B8%AA/" rel="tag">线索追踪</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-cron表达式小记" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -809,81 +934,6 @@ var _hmt = _hmt || [];
 <p>其中1，2，3，5，7这五个步骤的顺序是固定的，而解析却不一定，它可以在初始化之后再开始，这是为了支持JAVA语言的运行时绑定。下面开始逐一介绍每个步骤。<br>
       
       <a class="article-more-link" href="/2017/09/19/JAVA%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%9A%84%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-HashMap源码剖析" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/"
-    >HashMap源码剖析</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="article-date">
-  <time datetime="2017-09-08T12:17:06.000Z" itemprop="datePublished">2017-09-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇博客讲一下JAVA集合类中的HashMap。HashMap底层是通过维护一个数组来保存元素。当创建HashMap实例的时候，会通过指定的数组大小以及负载因子等参数创建一个空的数组，当在容器中添加元素的时候，首先会通过hash算法求得key的hash值，再根据hash值确定元素在数组中对应的位置，最后将元素放入数组中的对应位置。这里我们需要考虑的一个问题是hash冲突问题，即两个元素key的hash值一样，这就要求我们一方面hash算法要足够”发散”来避免这种情况，另一方面我们也要采取措施来解决这种冲突，在HashMap中采取的方法是链地址法，即当两个元素的key的hash值是一样的，首先判断key值是否是一样的，如果是一样的则替换value值。如果key的值不一样，则把后面添加的元素链接到之前添加的值的后面，形成一个链表。所以HashMap的数据结构实际是：hash表+单向链表。通过链表的形式把所有冲突元素放到了数组同一个位置，但是又引出另一个问题就是当链表过长时会影响HashMap的存取效率，因为在数组长度固定的情况下，存储的数据越多，hash冲突是不可避免的，那么控制hash冲突可以通过扩容来解决，在HashMap中有个负载因子(loadFactor)的概念。HashMap允许实际存储的元素的个数size = loadFactor*数组长度，一旦容器元素超出了这个size，HashMap就会自动扩容，并对所有元素重新执行hash操作，重新调整位置。最后说明本文基于Oracle JDK 1.8。<br>
-      
-      <a class="article-more-link" href="/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">阅读更多...</a>
       
       
       <!-- reward -->

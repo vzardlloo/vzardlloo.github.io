@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2019-04-09T16:33:16.946Z</updated>
+  <updated>2020-03-07T14:09:49.832Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>XPath线索追踪技术</title>
+    <link href="http://vzardlloo.github.io/2020/03/05/XPath%E7%BA%BF%E7%B4%A2%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF/"/>
+    <id>http://vzardlloo.github.io/2020/03/05/XPath%E7%BA%BF%E7%B4%A2%E8%BF%BD%E8%B8%AA%E6%8A%80%E6%9C%AF/</id>
+    <published>2020-03-05T14:33:23.000Z</published>
+    <updated>2020-03-07T14:09:49.832Z</updated>
+    
+    <content type="html"><![CDATA[<h3><span id="什么是xpath">什么是XPath</span></h3><p>​       XPath全称XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的计算机语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。举例来说:<br>​        我们有网页A,他的页面代码为：<br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/xpath_1.jpg" alt="code.jpg"></p><p>它对应的domtree为<br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/domtree.png" alt="domtree.jpg"><br>  每个网页的页面结构都可以解析为一颗domtree,每个页面元素都是这棵树的一个节点，那如何唯一的表示每一个节点呢？很自然的由于每个节点到根节点的路径都是不同的，所以可以用节点到根路径的路径来表示，比如meta元素可以用/html/head/meta来表示，这样的话有个问题，比如最右和皮皮搞笑这个两个元素都可以表示成/html/head/h1,这样岂不是乱了套,所以对于这样的情况可以用/html/head/h1[0],/html/head/h1[1]来表示，至于谁是h1[0]谁是h1[1]取决于具体实现。这样用路径表达式唯一标识一个页面元素的方法就叫做XPath。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p><h3><span id="为什么要做xpath线索追踪">为什么要做XPath线索追踪</span></h3><p>​       为什么要做XPath线索追踪?这其实可以分解为两个问题：1、为什么要做线索追踪 2、为什么要选择XPath做线索追踪。<br>​      首先是问题一，为什么要做线索追踪？这个答案很简单，因为我们要做oCPX,需要根据转化情况（像提交的表单、咨询工具等），系统自动优化转化效果。它的第一步就是转化数据收集，目前我们只对于App下载类有转化数据的收集，而对于网页线索类特别是对第三方网页的线索收集是一片空白，如果无法收集到这些信息,那么对于这些类型广告的oCPX将无从做起，所以我们有必要对于这些类型的广告做线索追踪。这是做XPath线索追踪的必要性。<br>      其次是问题二，为什么选择选择XPath做线索追踪。对于线索追踪目前主要有:js布码、api回传、XPath，这三种做法。其中js布码和api回传都需要平台方面和广告主侧投入较大的技术支持,而XPath只需要平台侧提供对应功能，投放时广告主可以自主选择线索绑定,不需要投入技术支持,较为方便和易于推广。另外因为业内有已经有应用的比较好的先例，可以省去一些调研选型的时间，还有完整的产品形态可以参考，对于最终可以达到的效果也有个预期。这是做XPath线索追踪的充分性。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p><h3><span id="xpath线索追踪技术实现">XPath线索追踪技术实现</span></h3><ol><li><p><strong>服务端domtree和截图技术选型</strong><br>通过调研可供我们选择的有三种方案：1、基于PhantomJS的方案，2、基于ChromeDP的方案，3、基于Puppeteer的方案。<br>经过尝试调研后总结他们的优缺点对比如下：</p><table><thead><tr><th align="center"></th><th align="center">优点</th><th align="center">缺点</th></tr></thead><tbody><tr><td align="center">phantomjs</td><td align="center">有过使用经验，学习成本低，二进制文件部署简单</td><td align="center">已经停止维护,web引擎实现不一定和现在主流一致</td></tr><tr><td align="center">chromedp</td><td align="center">go语言实现，底层使用Chrome(我们服务端主要语言是go)</td><td align="center">性能不稳定，社区不活跃，资料不多</td></tr><tr><td align="center">puppeteer</td><td align="center">Chrome官方推荐，社区活跃</td><td align="center">需要在服务器搭建对应环境，同时有一些学习成本</td></tr></tbody></table><p><strong>经过实际的尝试我们最终选择使用Puppeter作为服务端domtree解析和服务端截图的工具。</strong></p></li><li><p><strong>页面domtree json和页面截图匹配</strong><br>domtree json是一串描述元素位置信息和其XPath表达式的json,它通过服务器模拟访问页面,然后遍历页面的domtree生成,例如: </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">           <span class="string">"height"</span>: <span class="number">200</span>,</span><br><span class="line">           <span class="string">"left"</span>: <span class="number">400</span>,</span><br><span class="line">           <span class="string">"top"</span>: <span class="number">500</span>,</span><br><span class="line">           <span class="string">"width"</span>: <span class="number">300</span>,</span><br><span class="line">           <span class="string">"xpath"</span>: <span class="string">"/html/body/div[1]"</span></span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure></li></ol><p>的含义是: xpath表达式为/html/body/div[1]的元素，它的左上角距离视窗左上角右偏400像素, 下偏500像素，同时该元素高200像素，宽300像素。根据这些信息我们可以在截图的对应区域进行框选，如果在截图上框选到的这块区域刚好是路径表达式/html/body/div[1]表示的区域，那么这个元素即匹配成功。</p><p><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/rect.png" alt="rect.png"></p><p>下面主要介绍两种较难匹配的元素的解决： <strong>一、固定浮动元素  二、重叠元素</strong>   </p><ol><li><p><strong>固定浮动元素的匹配</strong><br>固定浮动元素指的是网页上一些不随着页面滑动而移动的元素，它们与页面其他元素的相对位置是不固定的，比如一些悬浮球，底部栏之类的元素，这类元素的位置完全取决于你的设备型号，一个悬浮球在小屏幕设备上可能位于屏幕中部，换成大屏幕后它可能就位于屏幕靠下的位置了，而且在服务端截图的时候，对于一些需要滑动的页面截得是展开的长图。所以此时如果模拟移动设备去访问页面解析domtree的话，浮动元素的domtree json必然与截图无法匹配。对于这个问题摸索出的解决方案为: 放弃chrome模拟移动设备的方法，手动设置ua,然后截图之后，在解析domtree之前，获取页面高度，然后设置模拟访问的页面视图打开高度为页面高度，对应不同动态的设置视图高度，由于这样的视图高度和页面高度一致，所以在这样的视图下打开的页面不存在滑动的情况，所以完美解决浮动元素的问题。</p></li><li><p><strong>重叠元素的匹配</strong><br>domtree json只表示了元素之间二维的位置关系，但是对于三维上的重叠等情况没有描述，所以当一个位置出现两个元素，到底应该框选谁变成了问题。这个问题解决最容易想到的就是给domtree json加上三维信息的描述，并且元素确实有z-index这个属性表示层级关系,但是实际中发现z-index属性有许多的坑，不是很靠谱，比如父标签 position属性为relative，标签无position属性，标签含有浮动(float)属性等都会导致z-index失效(根本原因是css属性间作用不正交)，同时发现巨量引擎也并没有使用z-index属性来进行匹配。后来我们观察了一些页面，发现其实大部分页面都存在着小元素在在大元素上层的规律，于是我们决定按照元素面积来做层级的判断,即面积小的元素默认在面积大的上层，这样还意外的解决了一些有蒙层的弹窗元素导致整个页面被蒙层遮盖无法选择的问题，并且在测试一些页面后在使用上已经达到类似工具的同等的水平。同时我们好奇是否同行也是使用同样的手法来解决这个问题，于是我们制作了一个特殊的页面，一个600<em>400的元素在上层，两个600</em>200的元素在下层，上下层边缘轮廓完全重合，这样按照面积小的元素默认在上的实现方式会导致实际在上层的大元素无法选中，我们拿着这个页面去类型工具尝试，发现果然上层的大元素无法选中，这说明了大家用的手法都是一致的！<br>至此，我们的XPath工具已经达到业内类似工具的使用水平，然后在此基础上对一些业内工具支持不太好的地方进行了优化，主要是：</p><ol><li><p>对重定向页面的支持，技术选项使用puppeteer自动解决</p></li><li><p>对于懒加载页面的优化，截图解析之前服务器模拟对页面进行滑动，使得页面完全加载 </p><p><em>最终元素选择效果:</em><br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/effect.png" alt="effect.png"></p></li></ol><p><strong>END: 更完整详细技术及产品实现细节在:<a href="https://download.csdn.net/download/qq_33446401/12233649" target="_blank" rel="noopener">内部分享PPT</a></strong></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3&gt;&lt;span id=&quot;什么是xpath&quot;&gt;什么是XPath&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;​       XPath全称XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的计算机语言。XPath基于XML的树状结构，提供在数据结构树中
+      
+    
+    </summary>
+    
+    
+      <category term="计算广告" scheme="http://vzardlloo.github.io/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+    
+    
+      <category term="线索追踪" scheme="http://vzardlloo.github.io/tags/%E7%BA%BF%E7%B4%A2%E8%BF%BD%E8%B8%AA/"/>
+    
+  </entry>
   
   <entry>
     <title>cron表达式小记</title>
@@ -516,36 +542,6 @@
     
       &lt;h4 id=&quot;引言&quot;&gt;&lt;a href=&quot;#引言&quot; class=&quot;headerlink&quot; title=&quot;引言&quot;&gt;&lt;/a&gt;引言&lt;/h4&gt;&lt;p&gt;众所周知，Java程序是运行在Java虚拟机上的，而这里的“虚拟”是对什么东西进行虚拟呢？答案当然就是对“实体”机进行虚拟啦，虚拟机可以看做是对实体机进行了进一步的封装和抽象，隐藏了不同实体机之间的差别，从而达成“Write Once,Run AnyWhere”的目标。既然虚拟机是对实体机的虚拟，所以我认为虚拟机和实体机在结构和功能上必然存在某种程度上的对应与关联。因此我们在学习时应该注意发掘和类比两者之间的关系。&lt;br&gt;本着这样的思想，我们进行Java字节码指令的学习。JAVA字节码在JAVA虚拟机中的地位相当于实体机的机器码，一切在Java虚拟机上运行的程序都要被解释或编译成字节码，一切在实体机上运行的程序最后也都要编译成机器码。Java字节码指令可以对字节码进行操作，在实体机中对机器码进行操作的是汇编语言。所以Java字节码指令对应汇编语言，Java字节码指令集对应汇编指令集。&lt;/p&gt;
 &lt;h4 id=&quot;字节码简介&quot;&gt;&lt;a href=&quot;#字节码简介&quot; class=&quot;headerlink&quot; title=&quot;字节码简介&quot;&gt;&lt;/a&gt;字节码简介&lt;/h4&gt;&lt;p&gt;Java字节码指令由&lt;em&gt;一个&lt;/em&gt;字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
-    
-    
-      <category term="jvm" scheme="http://vzardlloo.github.io/tags/jvm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JVM内存模型</title>
-    <link href="http://vzardlloo.github.io/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://vzardlloo.github.io/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/</id>
-    <published>2017-07-15T01:45:23.000Z</published>
-    <updated>2017-07-17T13:43:25.909Z</updated>
-    
-    <content type="html"><![CDATA[<p>这篇博客主要讲一下JVM的内存模型。话不多说先上一张概览图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jvm.png" alt="JVM内存模型"><br>下面我们主要通过<code>作用</code>、<code>线程私有情况</code>、<code>异常情况</code>、<code>补充说明</code>这四个情况来介绍和说明各个内存区域的情况。</p><blockquote><p>1、程序计数器：</p><ul><li><code>作用</code>：程序计数器可以当做当前线程执行的字节码指示器，记录当前执行到那一条指令字节码解释器在工作时就是通过改变这个计数器的值选取下一条需要执行的字节码指令，分支、循环、跳转等基础功能都需要依靠这个计数器来完成。</li><li><code>线程私有情况</code>：线程私有，因为Java虚拟机的多线程机制是通过抢占时间片的形式来实现的，就是说在一个确定的时刻，一个处理器只会处理一个线程，那么这就涉及到线程恢复的问题，比如某个线程的执行完第n条指令后，失去了对处理的占用，为了在它抢占到处理器时可以恢复到正确的执行位置（即第n+1条指令处），每个线程必须维护一个独立的程序计数器，不允许被其他线程篡改。所以程序计数器必须是线程私有的。</li><li><code>异常情况</code>：它是JAVA虚拟机规范中唯一一个没有规定任何OutOfMemoryError情况的区域</li><li><code>补充说明</code>：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。<a id="more"></a></li></ul><p>2、Java虚拟机栈</p><ul><li><code>作用</code>：在每个方法执行的时候会创建一个帧栈用于存储局部变量表、操作数栈、动态链接、方法出口等信息。每一个方法从调用的执行结束的过程就对应一个帧栈在虚拟机栈中入栈到出栈的过程。</li><li><code>线程私有情况</code>：线程私有。</li><li><code>异常情况</code>：有两种异常：1、当线程请求的栈的深度大于虚拟机栈所允许的深度，将会抛出StackOverflowError异常。2、如果虚拟机栈可以动态拓展，如果在动态拓展时无法申请到足够的内存时会抛出OutOfMemoryError异常。</li><li><code>补充说明</code>：局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法所需要的内存大小是完全确定的。在方法运行期间不会改变局部变量表的大小。</li></ul><p>3、Java堆</p><ul><li><code>作用</code>：存放对象实例。</li><li><code>线程私有情况</code>：线程共享。因为所有线程创建的对象实例几乎都在Java堆上分配内存，所以必然要线程共享。</li><li><code>异常情况</code>：Java堆可以通过-Xms和-Xmx来分配Java堆的大小，当堆中没有内存完成实例分配，而且堆中也无法拓展时，将会抛出OutOfMemoryError异常。</li><li><code>补充说明</code>：随着JIT编译器的发展与逃逸分析技术逐渐成熟，栈上分配、标量替换优化技术将导致一些变化的发生，将不会把所有的对象都分配在对象上了。</li></ul><p>4、方法区</p><ul><li><code>作用</code>：用于存储已经被虚拟机加载的类信息、常量、静态变量、即时编译器后的代码等数据。</li><li><code>线程私有情况</code>：线程共享。</li><li><code>异常情况</code>：当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。</li><li><code>补充说明</code>：Java虚拟机对方法区的实现要求比较宽松，可以实现垃圾回收也可以不实现垃圾回收，因为这里垃圾回收的效率非常低，但有些事实表明这里实现垃圾回收是十分必要的。</li></ul><p>5、运行时常量池</p><ul><li><code>作用</code>：运行时常量池时方法区的一部分，在Class文件中有专门一个字段来描述这个部分，用于存放编译区生成的各种字面量和符号引用。</li><li><code>线程私有情况</code>：线程共享</li><li><code>异常情况</code>：常量池无法申请到内存时抛出OutOfMemoryError异常。</li><li><code>补充说明</code>：常量池中常量不一定只在编译器产生，运行期也可以将新的常量加入常量池中。典型的例子的是：String类的intern()方法。</li></ul><p>6、直接内存</p><ul><li><code>作用</code>：从某种程度上说这并不是JVM的内存区域。但是Java程序可以使用Native函数库直接分配堆外内存，然后通过一个存储在Java堆里的DirectByteBuffer对象作为这块内存的引用进行操作。=，可以避免在Java堆和Native堆中来回数据，可以显著提高性能。</li><li><code>线程私有情况</code>：虚拟机外内存，线程共享。</li><li><code>异常情况</code>：受到本机物理内存的限制，当无法满足内存分配需求的时候会抛出OutOfMemoryError异常。</li><li><code>补充说明</code>：直接内存不是Java虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但这部分内存也被频繁的使用。</li></ul></blockquote>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这篇博客主要讲一下JVM的内存模型。话不多说先上一张概览图：&lt;br&gt;&lt;img src=&quot;http://oo3aq3ac8.bkt.clouddn.com/jvm.png&quot; alt=&quot;JVM内存模型&quot;&gt;&lt;br&gt;下面我们主要通过&lt;code&gt;作用&lt;/code&gt;、&lt;code&gt;线程私有情况&lt;/code&gt;、&lt;code&gt;异常情况&lt;/code&gt;、&lt;code&gt;补充说明&lt;/code&gt;这四个情况来介绍和说明各个内存区域的情况。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;1、程序计数器：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;作用&lt;/code&gt;：程序计数器可以当做当前线程执行的字节码指示器，记录当前执行到那一条指令字节码解释器在工作时就是通过改变这个计数器的值选取下一条需要执行的字节码指令，分支、循环、跳转等基础功能都需要依靠这个计数器来完成。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;线程私有情况&lt;/code&gt;：线程私有，因为Java虚拟机的多线程机制是通过抢占时间片的形式来实现的，就是说在一个确定的时刻，一个处理器只会处理一个线程，那么这就涉及到线程恢复的问题，比如某个线程的执行完第n条指令后，失去了对处理的占用，为了在它抢占到处理器时可以恢复到正确的执行位置（即第n+1条指令处），每个线程必须维护一个独立的程序计数器，不允许被其他线程篡改。所以程序计数器必须是线程私有的。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;异常情况&lt;/code&gt;：它是JAVA虚拟机规范中唯一一个没有规定任何OutOfMemoryError情况的区域&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;补充说明&lt;/code&gt;：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。
     
     </summary>
     

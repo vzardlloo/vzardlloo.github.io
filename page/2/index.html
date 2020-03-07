@@ -83,6 +83,81 @@ var _hmt = _hmt || [];
     
     
     
+    <article id="post-HashMap源码剖析" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/"
+    >HashMap源码剖析</a
+  >
+</h2>
+  
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/" class="article-date">
+  <time datetime="2017-09-08T12:17:06.000Z" itemprop="datePublished">2017-09-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+
+
+      
+
+      
+      <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>这篇博客讲一下JAVA集合类中的HashMap。HashMap底层是通过维护一个数组来保存元素。当创建HashMap实例的时候，会通过指定的数组大小以及负载因子等参数创建一个空的数组，当在容器中添加元素的时候，首先会通过hash算法求得key的hash值，再根据hash值确定元素在数组中对应的位置，最后将元素放入数组中的对应位置。这里我们需要考虑的一个问题是hash冲突问题，即两个元素key的hash值一样，这就要求我们一方面hash算法要足够”发散”来避免这种情况，另一方面我们也要采取措施来解决这种冲突，在HashMap中采取的方法是链地址法，即当两个元素的key的hash值是一样的，首先判断key值是否是一样的，如果是一样的则替换value值。如果key的值不一样，则把后面添加的元素链接到之前添加的值的后面，形成一个链表。所以HashMap的数据结构实际是：hash表+单向链表。通过链表的形式把所有冲突元素放到了数组同一个位置，但是又引出另一个问题就是当链表过长时会影响HashMap的存取效率，因为在数组长度固定的情况下，存储的数据越多，hash冲突是不可避免的，那么控制hash冲突可以通过扩容来解决，在HashMap中有个负载因子(loadFactor)的概念。HashMap允许实际存储的元素的个数size = loadFactor*数组长度，一旦容器元素超出了这个size，HashMap就会自动扩容，并对所有元素重新执行hash操作，重新调整位置。最后说明本文基于Oracle JDK 1.8。<br>
+      
+      <a class="article-more-link" href="/2017/09/08/HashMap%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAVA/" rel="tag">JAVA</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Java中的锁" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -776,88 +851,6 @@ var _hmt = _hmt || [];
 <h4 id="字节码简介"><a href="#字节码简介" class="headerlink" title="字节码简介"></a>字节码简介</h4><p>Java字节码指令由<em>一个</em>字节长度的，代表某种特定操作含义的数字（操作码）以及其后的零至多个代表此操作所需参数（操作数）。此外字节码指令是面向操作数栈的，这里操作数栈在功能上对应实体机的寄存器但是结构上有所区别。<br>
       
       <a class="article-more-link" href="/2017/08/10/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%AD%97%E8%8A%82%E7%A0%81%E6%8C%87%E4%BB%A4/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jvm/" rel="tag">jvm</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-JVM内存模型" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/"
-    >JVM内存模型</a
-  >
-</h2>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="article-date">
-  <time datetime="2017-07-15T01:45:23.000Z" itemprop="datePublished">2017-07-15</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JAVA/">JAVA</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-
-      
-
-      
-      <p>这篇博客主要讲一下JVM的内存模型。话不多说先上一张概览图：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/jvm.png" alt="JVM内存模型"><br>下面我们主要通过<code>作用</code>、<code>线程私有情况</code>、<code>异常情况</code>、<code>补充说明</code>这四个情况来介绍和说明各个内存区域的情况。</p>
-<blockquote>
-<p>1、程序计数器：</p>
-<ul>
-<li><code>作用</code>：程序计数器可以当做当前线程执行的字节码指示器，记录当前执行到那一条指令字节码解释器在工作时就是通过改变这个计数器的值选取下一条需要执行的字节码指令，分支、循环、跳转等基础功能都需要依靠这个计数器来完成。</li>
-<li><code>线程私有情况</code>：线程私有，因为Java虚拟机的多线程机制是通过抢占时间片的形式来实现的，就是说在一个确定的时刻，一个处理器只会处理一个线程，那么这就涉及到线程恢复的问题，比如某个线程的执行完第n条指令后，失去了对处理的占用，为了在它抢占到处理器时可以恢复到正确的执行位置（即第n+1条指令处），每个线程必须维护一个独立的程序计数器，不允许被其他线程篡改。所以程序计数器必须是线程私有的。</li>
-<li><code>异常情况</code>：它是JAVA虚拟机规范中唯一一个没有规定任何OutOfMemoryError情况的区域</li>
-<li><code>补充说明</code>：如果当前线程执行的是一个Java方法，这个计数器记录的是正在执行的虚拟机字节码指令的地址；如果是执行一个Native(本地)方法，这个计数器则为空（Undefind)。
-      
-      <a class="article-more-link" href="/2017/07/15/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">阅读更多...</a>
       
       
       <!-- reward -->
