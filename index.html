@@ -126,8 +126,8 @@ var _hmt = _hmt || [];
       
 
       
-      <h3><span id="什么是xpath">什么是XPath</span></h3><p>​       XPath全称XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的计算机语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。举例来说:<br>​        我们有网页A,他的页面代码为：<br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/xpath_1.jpg" alt="code.jpg"></p>
-<p>它对应的domtree为<br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/domtree.png" alt="domtree.jpg"><br>  每个网页的页面结构都可以解析为一颗domtree,每个页面元素都是这棵树的一个节点，那如何唯一的表示每一个节点呢？很自然的由于每个节点到根节点的路径都是不同的，所以可以用节点到根路径的路径来表示，比如meta元素可以用/html/head/meta来表示，这样的话有个问题，比如最右和皮皮搞笑这个两个元素都可以表示成/html/head/h1,这样岂不是乱了套,所以对于这样的情况可以用/html/head/h1[0],/html/head/h1[1]来表示，至于谁是h1[0]谁是h1[1]取决于具体实现。这样用路径表达式唯一标识一个页面元素的方法就叫做XPath。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p>
+      <h3><span id="什么是xpath">什么是XPath</span></h3><p>​       XPath全称XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的计算机语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。举例来说:<br>​        我们有网页A,他的页面代码为：<br><img src="https://tva1.sinaimg.cn/large/00831rSTly1gclqy3wbaej30wc0lsabl.jpg" alt="code.jpg"></p>
+<p>它对应的domtree为<br><img src="https://tva1.sinaimg.cn/large/00831rSTly1gclqxj0iixj30t60gi0tf.jpg" alt="domtree.jpg"><br>  每个网页的页面结构都可以解析为一颗domtree,每个页面元素都是这棵树的一个节点，那如何唯一的表示每一个节点呢？很自然的由于每个节点到根节点的路径都是不同的，所以可以用节点到根路径的路径来表示，比如meta元素可以用/html/head/meta来表示，这样的话有个问题，比如最右和皮皮搞笑这个两个元素都可以表示成/html/head/h1,这样岂不是乱了套,所以对于这样的情况可以用/html/head/h1[0],/html/head/h1[1]来表示，至于谁是h1[0]谁是h1[1]取决于具体实现。这样用路径表达式唯一标识一个页面元素的方法就叫做XPath。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p>
 <h3><span id="为什么要做xpath线索追踪">为什么要做XPath线索追踪</span></h3><p>​       为什么要做XPath线索追踪?这其实可以分解为两个问题：1、为什么要做线索追踪 2、为什么要选择XPath做线索追踪。<br>​      首先是问题一，为什么要做线索追踪？这个答案很简单，因为我们要做oCPX,需要根据转化情况（像提交的表单、咨询工具等），系统自动优化转化效果。它的第一步就是转化数据收集，目前我们只对于App下载类有转化数据的收集，而对于网页线索类特别是对第三方网页的线索收集是一片空白，如果无法收集到这些信息,那么对于这些类型广告的oCPX将无从做起，所以我们有必要对于这些类型的广告做线索追踪。这是做XPath线索追踪的必要性。<br>      其次是问题二，为什么选择选择XPath做线索追踪。对于线索追踪目前主要有:js布码、api回传、XPath，这三种做法。其中js布码和api回传都需要平台方面和广告主侧投入较大的技术支持,而XPath只需要平台侧提供对应功能，投放时广告主可以自主选择线索绑定,不需要投入技术支持,较为方便和易于推广。另外因为业内有已经有应用的比较好的先例，可以省去一些调研选型的时间，还有完整的产品形态可以参考，对于最终可以达到的效果也有个预期。这是做XPath线索追踪的充分性。<br>  <strong>总结：通过问题一,二的讨论，我们知道我们有充分且必要的理由做XPath线索追踪这件事。</strong></p>
 <h3><span id="xpath线索追踪技术实现">XPath线索追踪技术实现</span></h3><ol>
 <li><p><strong>服务端domtree和截图技术选型</strong><br>通过调研可供我们选择的有三种方案：1、基于PhantomJS的方案，2、基于ChromeDP的方案，3、基于Puppeteer的方案。<br>经过尝试调研后总结他们的优缺点对比如下：</p>
@@ -163,7 +163,7 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <p>的含义是: xpath表达式为/html/body/div[1]的元素，它的左上角距离视窗左上角右偏400像素, 下偏500像素，同时该元素高200像素，宽300像素。根据这些信息我们可以在截图的对应区域进行框选，如果在截图上框选到的这块区域刚好是路径表达式/html/body/div[1]表示的区域，那么这个元素即匹配成功。</p>
-<p><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/rect.png" alt="rect.png"></p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gclqum5elgj30dw0dwt94.jpg" alt="rect.png"></p>
 <p>下面主要介绍两种较难匹配的元素的解决： <strong>一、固定浮动元素  二、重叠元素</strong>   </p>
 <ol>
 <li><p><strong>固定浮动元素的匹配</strong><br>固定浮动元素指的是网页上一些不随着页面滑动而移动的元素，它们与页面其他元素的相对位置是不固定的，比如一些悬浮球，底部栏之类的元素，这类元素的位置完全取决于你的设备型号，一个悬浮球在小屏幕设备上可能位于屏幕中部，换成大屏幕后它可能就位于屏幕靠下的位置了，而且在服务端截图的时候，对于一些需要滑动的页面截得是展开的长图。所以此时如果模拟移动设备去访问页面解析domtree的话，浮动元素的domtree json必然与截图无法匹配。对于这个问题摸索出的解决方案为: 放弃chrome模拟移动设备的方法，手动设置ua,然后截图之后，在解析domtree之前，获取页面高度，然后设置模拟访问的页面视图打开高度为页面高度，对应不同动态的设置视图高度，由于这样的视图高度和页面高度一致，所以在这样的视图下打开的页面不存在滑动的情况，所以完美解决浮动元素的问题。</p>
@@ -173,7 +173,7 @@ var _hmt = _hmt || [];
 <li><p>对重定向页面的支持，技术选项使用puppeteer自动解决</p>
 </li>
 <li><p>对于懒加载页面的优化，截图解析之前服务器模拟对页面进行滑动，使得页面完全加载 </p>
-<p><em>最终元素选择效果:</em><br><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/effect.png" alt="effect.png"></p>
+<p><em>最终元素选择效果:</em><br><img src="https://tva1.sinaimg.cn/large/00831rSTly1gclqwsm2lgj30la0v2k3t.jpg" alt="effect.png"></p>
 </li>
 </ol>
 <p><strong>END: 更完整详细技术及产品实现细节在:<a href="https://download.csdn.net/download/qq_33446401/12233649" target="_blank" rel="noopener">内部分享PPT</a></strong></p>
