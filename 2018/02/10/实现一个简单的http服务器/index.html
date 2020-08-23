@@ -1,118 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
+  <!DOCTYPE html>
+<html lang="zh-Hans">
 <head>
-  <meta charset="utf-8" />
-    
-  <meta name="description" content="认真生活,快乐工作" />
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>
-    实现一个简单的http服务器 |  vzard&#39;s blog
-  </title>
-  <meta name="generator" content="hexo-theme-yilia-plus">
+  <title>实现一个简单的http服务器 - vzard&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   
-  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="keywords" content=http java>
+  
+    <meta name="description" content="认真生活,快乐工作">
   
   
-<link rel="stylesheet" href="/css/main.css">
-
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.02">
   
-<script src="/js/pace.min.js"></script>
-
-
+  
+    <link rel="alternate" href="/atom.xml " title="vzard&#39;s blog" type="application/atom+xml">
   
 
   
-<script>
-var _hmt = _hmt || [];
-(function() {
-	var hm = document.createElement("script");
-	hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
-	var s = document.getElementsByTagName("script")[0]; 
-	s.parentNode.insertBefore(hm, s);
-})();
-</script>
+<link rel="stylesheet" href="/css/style.css">
 
-
-<link rel="alternate" href="/atom.xml" title="vzard's blog" type="application/atom+xml">
-</head>
-
-</html>
-
-<body>
-  <div id="app">
-    <main class="content">
-      <section class="outer">
-  <article id="post-实现一个简单的http服务器" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  实现一个简单的http服务器
-</h1>
-  
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2018/02/10/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84http%E6%9C%8D%E5%8A%A1%E5%99%A8/" class="article-date">
-  <time datetime="2018-02-10T12:38:49.000Z" itemprop="datePublished">2018-02-10</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a>
+<meta name="generator" content="Hexo 4.2.0"></head>
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">vzard&#39;s blog</a>
+    <div class="subtitle">just do it</div>
   </div>
-
+  <nav class="navbar">
+    <ul class="menu">
       
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
       
-<div class="word_count">
-    <span class="post-time">
-        <span class="post-meta-item-icon">
-            <i class="ri-quill-pen-line"></i>
-            <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.6k字</span>
-        </span>
-    </span>
-
-    <span class="post-time">
-        &nbsp; | &nbsp;
-        <span class="post-meta-item-icon">
-            <i class="ri-book-open-line"></i>
-            <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">5分钟</span>
-        </span>
-    </span>
-</div>
-
+        <li class="menu-item">
+          <a href="/archives/" class="menu-item-link">Archives</a>
+        </li>
       
-    </div>
-    
-
-    
-    
-    <div class="tocbot"></div>
-
-
-
-
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
+        <li class="menu-item">
+          <a href="/tags/" class="menu-item-link">Tags</a>
+        </li>
       
-
-
+        <li class="menu-item">
+          <a href="/categories/" class="menu-item-link">Categories</a>
+        </li>
       
-
+        <li class="menu-item">
+          <a href="/about/" class="menu-item-link">About</a>
+        </li>
       
-      <p><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg" alt=""><br>这篇文章主要写一下如何实现一个简单的http服务器，并且借由这个问题讨论一下别的相关问题。首先实现一个http服务器是一件很难的事吗？这个问题不好回答，如果是一个demo级的http服务器，答案是：很简单，可以说是JAVA刚入门水平就可以做到的。如果是一个可供实际生产的、性能优良，架构优雅的服务器，答案是：很不容易，对大部分的人来说可能很难。不过不管是demo还是成熟的生产用的http服务器，他们核心的部分应该都是相似的，下面我们来分析一下服务器的工作过程：</p>
+    </ul>
+  </nav>
+</header>
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">实现一个简单的http服务器</h1>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2018-02-10</span>
+  </div>
+  <div class="post-content">
+    <p><img src="https://raw.githubusercontent.com/vzardlloo/imageHub/master/avatar.jpg" alt=""><br>这篇文章主要写一下如何实现一个简单的http服务器，并且借由这个问题讨论一下别的相关问题。首先实现一个http服务器是一件很难的事吗？这个问题不好回答，如果是一个demo级的http服务器，答案是：很简单，可以说是JAVA刚入门水平就可以做到的。如果是一个可供实际生产的、性能优良，架构优雅的服务器，答案是：很不容易，对大部分的人来说可能很难。不过不管是demo还是成熟的生产用的http服务器，他们核心的部分应该都是相似的，下面我们来分析一下服务器的工作过程：</p>
 <p>首先何谓“服务”？服务就是按照客户的要求来完成客户的需求。服务器更具体的表现形式是按照客户的的请求来执行某种操作，返回指定数据，这里的数据和请求更具体的表现形式通常是<em>字符串</em>。也就是说<em>客户端发给服务器一个包含客户端需求的字符串，服务端通过解析客户端发来的字符串，获取客户端的需求，然后完成需求</em>。那么问题来了，服务端如何解析客户端发来的字符串呢？他们之间可是素不相识的，每个客户端按何种组织方式来发送自己的需求对服务器来说完全是不可预期的。于是这就需要一个统一的规范来统一客户端的请求和服务端的返回，以及一些别的行为规范，于是http协议合情合理的出现了。现在事情就变成<em>客户端发给服务器一个满足http协议的、包含客户端需求的字符串，服务端根据http协议来解析客户端发来的字符串获取客户端的需求，然后完成需求，返回符合http协议的字符串给客户端</em>。再然后这里的“发送”，“返回”又具体是什么呢？它们就是客户端和服务器之间通过socket连接执行的一些IO操作。这样分析之后我们大概知道整个的工作流程：<em>客户端建立一个连接到服务端，执行IO操作，把满足http协议的字符串发送给服务器，服务器根据http协议来解析客户端发来的字符串的含义，然后执行对应操作，最后把作为返回结果的、满足http协议的字符串执行IO操作发送给客户端。</em>    </p>
 <p>通过上面简单的分析我们大概知道http服务器具体干了啥（实际比较复杂）以及我们需要哪些基础前置知识：</p>
 <ul>
@@ -130,521 +83,22 @@ var _hmt = _hmt || [];
 <p>项目的目的是什么呢？最重要的目的是希望可以写出规范化的、工程化的代码以及项目，特别是与入门者来说常常只写一些玩具式的demo，或者盲目的去看一下大型项目的源码，我觉得这样对自己水平的提升帮助有限，事实上我认为对一个人提升最大的是从最开始就接触某个项目或领域，从它萌芽的时候开始参与，一步步由项目和问题驱动着来学习，在遇到问题的时候可以想办法来解决它，想不出来可以去别的项目看看别人是如何解决的，这样既提高了自己的水平，也对别的项目有了更深的理解，知道别人为何这样做，而不是去记忆别人是怎么做的。这里引出的一个问题是：当我们在阅读源码时我认为至少要带着这样几个问题：1.这个东西是干什么的，解决了什么问题。2。这里作者这里为什么要这样做，他的目的是什么，他想干什么。3.我现在想要做的东西需要它吗？需要到什么程度（会用？会魔改？）？以项目驱动学习，把从书上，别人源码里的技巧立马用到自己的项目里，才可以让知识真的化为己用。</p>
 <h5 id="题外话当我们学习时我们通常实际上在学习什么"><a href="#题外话：当我们学习时我们通常实际上在学习什么？" class="headerlink" title="题外话：当我们学习时我们通常实际上在学习什么？"></a>题外话：当我们学习时我们通常实际上在学习什么？</h5><p>我的观点是我们在学习时通常实际上更多的在学习各种规范，比如JavaWeb其实通常就是Java语言规范+各种框架的使用规范+网络协议规范，因为计算机科学以及很多工程科学实际是一个人造的体系，支撑这个体系的就是各种规范，修补和发展这个体系也是依赖于各种规范，由于规范可以人造，因此规范可以说是学不完的，因为会不停的有新的规范出来，所以说学无止境。说起学无止境好像每门科学都是学无止境的，我认为科学大致可以分成两种，一直是研究的是基于一种人造的体系，一直是基于自然的体系（当然人造的最后也是基于自然的）。前者的学无止境是由于人类创造的无止境，不断地会有新的问题和规范被创造出来，后者的学无止境更多的是由于大自然的无止境，大到宇宙星辰，小到原子夸克，浩瀚无边地大自然的规范就在那里等待人们去发现。</p>
 
-      
-      <!-- reward -->
-      
-      <div id="reward-btn">
-        打赏
-      </div>
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-        <div class="declare">
-          <ul class="post-copyright">
-            <li>
-              <i class="ri-copyright-line"></i>
-              <strong>版权声明： </strong s>
-              本博客所有文章除特别声明外，均采用 <a href="https://www.apache.org/licenses/LICENSE-2.0.html" rel="external nofollow"
-                target="_blank">Apache License 2.0</a> 许可协议。转载请注明出处！
-            </li>
-          </ul>
-        </div>
-        
-    <footer class="article-footer">
-      
-          
-<div class="share-btn">
-      <span class="share-sns share-outer">
-        <i class="ri-share-forward-line"></i>
-        分享
-      </span>
-      <div class="share-wrap">
-        <i class="arrow"></i>
-        <div class="share-icons">
-          
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="ri-weibo-fill"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="ri-wechat-fill"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="ri-qq-fill"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="ri-douban-line"></i>
-          </a>
-          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a> -->
-          
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="ri-facebook-circle-fill"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="ri-twitter-fill"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="ri-google-fill"></i>
-          </a>
-        </div>
-      </div>
-</div>
-
-<div class="wx-share-modal">
-    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://vzardlloo.github.io/2018/02/10/%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84http%E6%9C%8D%E5%8A%A1%E5%99%A8/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div id="share-mask"></div>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http-java/" rel="tag">http java</a></li></ul>
-
-
-    </footer>
-
   </div>
-
-  
-  
-  <nav class="article-nav">
+  <div class="post-footer">
     
-      <a href="/2019/03/28/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            计算广告核心问题总结
-          
-        </div>
-      </a>
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/http-java/" rel="tag">http java</a></li></ul>
     
-    
-      <a href="/2017/12/01/%E7%94%B1%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E6%83%B3%E5%88%B0%E7%9A%84/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">由三次握手想到的...</div>
-      </a>
-    
-  </nav>
 
-
-  
-
-  
-  
-<!-- valine评论 -->
-<div id="vcomments-box">
-    <div id="vcomments">
-    </div>
-</div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
-<script>
-    new Valine({
-        el: '#vcomments',
-        app_id: 'IN8ztbbEz4nWSyMTBGq1tyhy-gzGzoHsz',
-        app_key: 'WNuCKwiBhfIEVu0jjOxHMsIp',
-        path: window.location.pathname,
-        notify: 'false',
-        verify: 'false',
-        avatar: 'mp',
-        placeholder: '给我的文章加点评论吧~',
-        recordIP: true
-    });
-    const infoEle = document.querySelector('#vcomments .info');
-    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
-        infoEle.childNodes.forEach(function (item) {
-            item.parentNode.removeChild(item);
-        });
-    }
-</script>
-<style>
-    #vcomments-box {
-        padding: 5px 30px;
-    }
-
-    @media screen and (max-width: 800px) {
-        #vcomments-box {
-            padding: 5px 0px;
-        }
-    }
-
-    #vcomments-box #vcomments {
-        background-color: #fff;
-    }
-
-    .v .vlist .vcard .vh {
-        padding-right: 20px;
-    }
-
-    .v .vlist .vcard {
-        padding-left: 10px;
-    }
-</style>
-
-  
-
-  
-  
-  
-
+    <a href="#top" class="top">Back to Top</a>
+  </div>
 </article>
-</section>
-      <footer class="footer">
-  <div class="outer">
-    <ul class="list-inline">
-      <li>
-        &copy;
-        2017-2020
-        vzardlloo
-      </li>
-      <li>
-        
-        Powered by
-        
-        
-        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
-        
-      </li>
-    </ul>
-    <ul class="list-inline">
-      <li>
-        
-        
-        <span>
-  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
-  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
-</span>
-        
-      </li>
-      
-      <li>
-        <a href="https://beian.aliyun.com/" target="_black">京ICP备19039595号-1</a>
-      </li>
-      
-      <li>
-        <!-- cnzz统计 -->
-        
-      </li>
-    </ul>
-  </div>
+<footer>
+  &copy; 2017 - 2020
+  <span class="author">
+    vzardlloo
+  </span>
 </footer>
-      <div class="to_top">
-        <div class="totop" id="totop">
-  <i class="ri-arrow-up-line"></i>
-</div>
-      </div>
-    </main>
-    <aside class="sidebar">
-      <button class="navbar-toggle"></button>
-<nav class="navbar">
-  
-  <div class="logo">
-    <a href="/"><img src="/images/avatar.jpg" alt="vzard&#39;s blog"></a>
-  </div>
-  
-  <ul class="nav nav-main">
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/">主页</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/archives">归档</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/categories">分类</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/tags">标签</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/about">关于我</a>
-    </li>
-    
-  </ul>
-</nav>
-<nav class="navbar navbar-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      
-      <a class="nav-item-link nav-item-search"  title="Search">
-        <i class="ri-search-line"></i>
-      </a>
-      
-      
-      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
-        <i class="ri-rss-line"></i>
-      </a>
-      
-    </li>
-  </ul>
-</nav>
-<div class="search-form-wrap">
-  <div class="local-search local-search-plugin">
-  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
-  <div id="local-search-result" class="local-search-result"></div>
-</div>
-</div>
-    </aside>
-    <div id="mask"></div>
-
-<!-- #reward -->
-<div id="reward">
-  <span class="close"><i class="ri-close-line"></i></span>
-  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯可乐吧~</p>
-  <div class="reward-box">
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/alipay.jpg">
-      <span class="reward-type">支付宝</span>
-    </div>
-    
-    
-    <div class="reward-item">
-      <img class="reward-img" src="/images/wechat.png">
-      <span class="reward-type">微信</span>
-    </div>
-    
-  </div>
-</div>
-    
-<script src="/js/jquery-2.0.3.min.js"></script>
-
-
-<script src="/js/jquery.justifiedGallery.min.js"></script>
-
-
-<script src="/js/lazyload.min.js"></script>
-
-
-<script src="/js/busuanzi-2.3.pure.min.js"></script>
-
-
-<script src="/js/share.js"></script>
-
-
-
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script>
-  try {
-    var typed = new Typed("#subtitle", {
-    strings: ['面朝大海，春暖花开','愿你一生努力，一生被爱','想要的都拥有，得不到的都释怀'],
-    startDelay: 0,
-    typeSpeed: 200,
-    loop: true,
-    backSpeed: 100,
-    showCursor: true
-    });
-  } catch (err) {
-  }
-  
-</script>
-
-
-
-
-<script src="/js/tocbot.min.js"></script>
-
-<script>
-  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
-  tocbot.init({
-    tocSelector: '.tocbot',
-    contentSelector: '.article-entry',
-    headingSelector: 'h1, h2, h3, h4, h5, h6',
-    hasInnerContainers: true,
-    scrollSmooth: true,
-    scrollContainer:'main',
-    positionFixedSelector: '.tocbot',
-    positionFixedClass: 'is-position-fixed',
-    fixedSidebarOffset: 'auto',
-    onClick: (e) => {
-      $('.toc-link').removeClass('is-active-link');
-      $(`a[href=${e.target.hash}]`).addClass('is-active-link');
-      $(e.target.hash).scrollIntoView();
-      return false;
-    }
-  });
-</script>
-
-
-<script>
-  var ayerConfig = {
-    mathjax: true
-  }
-</script>
-
-
-<script src="/js/ayer.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
-
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-
-            <div class="pswp__top-bar">
-
-                <!--  Controls are self-explanatory. Order can be changed. -->
-
-                <div class="pswp__counter"></div>
-
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
-
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                        <div class="pswp__preloader__cut">
-                            <div class="pswp__preloader__donut"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div>
-            </div>
-
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-
-        </div>
 
     </div>
-
-</div>
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
-
-<script>
-    function viewer_init() {
-        let pswpElement = document.querySelectorAll('.pswp')[0];
-        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
-
-        $imgArr.forEach(($em, i) => {
-            $em.onclick = () => {
-                // slider展开状态
-                // todo: 这样不好，后面改成状态
-                if (document.querySelector('.left-col.show')) return
-                let items = []
-                $imgArr.forEach(($em2, i2) => {
-                    let img = $em2.getAttribute('data-idx', i2)
-                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
-                    let title = $em2.getAttribute('alt')
-                    // 获得原图尺寸
-                    const image = new Image()
-                    image.src = src
-                    items.push({
-                        src: src,
-                        w: image.width || $em2.width,
-                        h: image.height || $em2.height,
-                        title: title
-                    })
-                })
-                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
-                    index: parseInt(i)
-                });
-                gallery.init()
-            }
-        })
-    }
-    viewer_init()
-</script>
-
-
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-  });
-
-  MathJax.Hub.Queue(function() {
-      var all = MathJax.Hub.getAllJax(), i;
-      for(i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-      }
-  });
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-
-<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
-
-    
-    <div id="music">
-    
-    
-    
-    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
-        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
-</div>
-
-<style>
-    #music {
-        position: fixed;
-        right: 15px;
-        bottom: 0;
-        z-index: 998;
-    }
-</style>
-    
-  </div>
-</body>
-
+  </body>
 </html>
