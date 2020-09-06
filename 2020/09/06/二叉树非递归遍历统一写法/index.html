@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <!DOCTYPE html>
+<html lang="zh-Hans">
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  
+  <title>二叉树非递归遍历统一写法 - vzard&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  
+  <meta name="keywords" content=算法>
+  
+    <meta name="description" content="认真生活,快乐工作">
+  
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.02">
+  
+  
+    <link rel="alternate" href="/atom.xml " title="vzard&#39;s blog" type="application/atom+xml">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">vzard&#39;s blog</a>
+    <div class="subtitle">just do it</div>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives/" class="menu-item-link">Archives</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/tags/" class="menu-item-link">Tags</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/categories/" class="menu-item-link">Categories</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-item-link">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">二叉树非递归遍历统一写法</h1>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2020-09-06</span>
+  </div>
+  <div class="post-content">
+    <h2><span id="前言">前言</span></h2><p>​       二叉树的遍历，从编程方式上来说主要有两种写法，一种是递归的写法，一种是非递归的写法，其中递归的写法很容易，在<code>leetcode</code>上都是属于<code>easy</code>级别的题目，风格也非常一致，学会了前序遍历，调整一下代码顺序，几秒之内中序、后序遍历就都可以写出来了。但是非递归的写法则不然，市面上包括很多教科书上二叉树前、中、后序的非递归遍历的写法都不一样，在<code>leetcode</code>上非递归的写法也基本都是属于<code>medium</code>级别的，其中后序遍历属于<code>hard</code>级别的，本文主要是介绍一种二叉树非递归遍历的统一写法，可以帮助你像写递归遍历那样，只要调整一下代码顺序就可以很快写好前、中、后序非递归遍历。</p>
+<h2><span id="二叉树非递归遍历的一种统一写法">二叉树非递归遍历的一种统一写法</span></h2><p>首先定义二叉树结构</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TreeNode <span class="keyword">struct</span> &#123;</span><br><span class="line">     Val <span class="keyword">int</span></span><br><span class="line">     Left *TreeNode</span><br><span class="line">     Right *TreeNode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后对二叉树节点进行一次Wrapper, 增加一个字段标示这个节点的访问状态，这个方法我也叫它为节点标记法（雾</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TreeNodeWrapper <span class="keyword">struct</span> &#123;</span><br><span class="line">	Node *TreeNode</span><br><span class="line">	Visited <span class="keyword">bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后先写最难的后序遍历</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">postorderTraversal</span><span class="params">(root *TreeNode)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">	res := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> res</span><br><span class="line">	&#125;</span><br><span class="line">	stack := <span class="built_in">make</span>([]*TreeNodeWrapper,<span class="number">0</span>)</span><br><span class="line">	stack = <span class="built_in">append</span>(stack,&amp;TreeNodeWrapper&#123;root,<span class="literal">false</span>&#125;)</span><br><span class="line">	<span class="keyword">for</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		node := stack[<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">		stack = stack[:<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">		<span class="keyword">if</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> !node.Visited &#123;</span><br><span class="line">				node.Visited = <span class="literal">true</span></span><br><span class="line">				stack = <span class="built_in">append</span>(stack, node) <span class="comment">// 1</span></span><br><span class="line">				<span class="keyword">if</span> node.Node.Right != <span class="literal">nil</span> &#123;</span><br><span class="line">					stack = <span class="built_in">append</span>(stack, &amp;TreeNodeWrapper&#123;node.Node.Right, <span class="literal">false</span>&#125;) <span class="comment">// 2</span></span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> node.Node.Left != <span class="literal">nil</span> &#123;</span><br><span class="line">					stack = <span class="built_in">append</span>(stack, &amp;TreeNodeWrapper&#123;node.Node.Left, <span class="literal">false</span>&#125;) <span class="comment">// 3</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				res = <span class="built_in">append</span>(res,node.Node.Val)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>主要需要关注的就是注释1、2、3的地方,由于后序遍历的顺序是左-右-根，所以入栈的顺序就是根-右-左。以此类推，前序遍历的非递归写法调整对应代码的顺序就是2-3-1，中序则是2-1-3，完整代码如下：</p>
+<ul>
+<li><p>前序遍历</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">preorderTraversal</span><span class="params">(root *TreeNode)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">	res := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> res</span><br><span class="line">	&#125;</span><br><span class="line">	stack := <span class="built_in">make</span>([]*TreeNodeWrapper,<span class="number">0</span>)</span><br><span class="line">	stack = <span class="built_in">append</span>(stack,&amp;TreeNodeWrapper&#123;root,<span class="literal">false</span>&#125;)</span><br><span class="line">	<span class="keyword">for</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		node := stack[<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">		stack = stack[:<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">		<span class="keyword">if</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> !node.Visited &#123;</span><br><span class="line">				<span class="keyword">if</span> node.Node.Right != <span class="literal">nil</span> &#123;</span><br><span class="line">					stack = <span class="built_in">append</span>(stack, &amp;TreeNodeWrapper&#123;node.Node.Right, <span class="literal">false</span>&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span> node.Node.Left != <span class="literal">nil</span> &#123;</span><br><span class="line">					stack = <span class="built_in">append</span>(stack, &amp;TreeNodeWrapper&#123;node.Node.Left, <span class="literal">false</span>&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">        node.Visited = <span class="literal">true</span></span><br><span class="line">				stack = <span class="built_in">append</span>(stack, node)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				res = <span class="built_in">append</span>(res,node.Node.Val)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>中序遍历</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">inorderTraversal</span><span class="params">(root *TreeNode)</span> []<span class="title">int</span></span> &#123;</span><br><span class="line">	res := <span class="built_in">make</span>([]<span class="keyword">int</span>,<span class="number">0</span>)</span><br><span class="line">	<span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> res</span><br><span class="line">	&#125;</span><br><span class="line">	stack := <span class="built_in">make</span>([]*TreeNodeWrapper,<span class="number">0</span>)</span><br><span class="line">	stack = <span class="built_in">append</span>(stack,&amp;TreeNodeWrapper&#123;root,<span class="literal">false</span>&#125;)</span><br><span class="line">	<span class="keyword">for</span> <span class="built_in">len</span>(stack) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		node := stack[<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">		stack = stack[:<span class="built_in">len</span>(stack)<span class="number">-1</span>]</span><br><span class="line">		<span class="keyword">if</span> node != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">if</span> !node.Visited &#123;</span><br><span class="line">				<span class="keyword">if</span> node.Node.Right != <span class="literal">nil</span> &#123;</span><br><span class="line">					stack = <span class="built_in">append</span>(stack, &amp;TreeNodeWrapper&#123;node.Node.Right, <span class="literal">false</span>&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">        node.Visited = <span class="literal">true</span></span><br><span class="line">				stack = <span class="built_in">append</span>(stack, node)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> node.Node.Left != <span class="literal">nil</span> &#123;</span><br><span class="line">					stack = <span class="built_in">append</span>(stack, &amp;TreeNodeWrapper&#123;node.Node.Left, <span class="literal">false</span>&#125;)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				res = <span class="built_in">append</span>(res,node.Node.Val)</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+</li>
+</ul>
+
+  </div>
+  <div class="post-footer">
+    
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+    
+
+    <a href="#top" class="top">Back to Top</a>
+  </div>
+</article>
+<footer>
+  &copy; 2017 - 2020
+  <span class="author">
+    vzardlloo
+  </span>
+</footer>
+
+    </div>
+  </body>
+</html>
