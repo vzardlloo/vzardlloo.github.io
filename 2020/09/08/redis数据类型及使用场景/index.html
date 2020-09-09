@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <!DOCTYPE html>
+<html lang="zh-Hans">
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  
+  <title>redis数据类型及使用场景 - vzard&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  
+  <meta name="keywords" content=redis>
+  
+    <meta name="description" content="认真生活,快乐工作">
+  
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.02">
+  
+  
+    <link rel="alternate" href="/atom.xml " title="vzard&#39;s blog" type="application/atom+xml">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">vzard&#39;s blog</a>
+    <div class="subtitle">just do it</div>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives/" class="menu-item-link">Archives</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/tags/" class="menu-item-link">Tags</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/categories/" class="menu-item-link">Categories</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-item-link">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">redis数据类型及使用场景</h1>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2020-09-08</span>
+  </div>
+  <div class="post-content">
+    <h2><span id="redis的数据类型">Redis的数据类型</span></h2><h4><span id="数据类型对应编码方式">数据类型对应编码方式</span></h4><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">编码方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">String</td>
+<td align="center"><code>raw</code>、<code>embstr</code>、<code>int</code></td>
+</tr>
+<tr>
+<td align="center">Hash</td>
+<td align="center"><code>hashtable</code>、<code>ziplist</code></td>
+</tr>
+<tr>
+<td align="center">List</td>
+<td align="center"><code>linkedlist</code>、<code>ziplist</code>、<code>quicklist</code></td>
+</tr>
+<tr>
+<td align="center">Set</td>
+<td align="center"><code>hashtable</code>、<code>intset</code></td>
+</tr>
+<tr>
+<td align="center">Zset</td>
+<td align="center"><code>skiplist</code>、<code>ziplist</code></td>
+</tr>
+</tbody></table>
+<h4><span id="编码类型对应数据结构">编码类型对应数据结构</span></h4><table>
+<thead>
+<tr>
+<th align="center">编码方式</th>
+<th align="center">数据结构</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>raw</code></td>
+<td align="center">动态字符串编码</td>
+</tr>
+<tr>
+<td align="center"><code>embstr</code></td>
+<td align="center">优化内存分配饿字符串分配</td>
+</tr>
+<tr>
+<td align="center"><code>int</code></td>
+<td align="center">整数编码</td>
+</tr>
+<tr>
+<td align="center"><code>hashtable</code></td>
+<td align="center">散列表编码</td>
+</tr>
+<tr>
+<td align="center"><code>ziplist</code></td>
+<td align="center">压缩列表编码</td>
+</tr>
+<tr>
+<td align="center"><code>linkedlist</code></td>
+<td align="center">双向链表编码</td>
+</tr>
+<tr>
+<td align="center"><code>quicklist</code></td>
+<td align="center">快速列表编码</td>
+</tr>
+<tr>
+<td align="center"><code>intset</code></td>
+<td align="center">整数集合编码</td>
+</tr>
+<tr>
+<td align="center"><code>skiplist</code></td>
+<td align="center">跳跃表编码</td>
+</tr>
+</tbody></table>
+<h2><span id="使用场景">使用场景</span></h2><table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">使用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">String</td>
+<td align="center">普通的k-v缓存,分布式锁</td>
+</tr>
+<tr>
+<td align="center">Hash</td>
+<td align="center">字典结构，比如缓存一个创意的消耗信息,创意id对应曝光数、点击数等多个subkey</td>
+</tr>
+<tr>
+<td align="center">List</td>
+<td align="center">关注列表,简单的队列</td>
+</tr>
+<tr>
+<td align="center">Set</td>
+<td align="center">去重器，集合运算</td>
+</tr>
+<tr>
+<td align="center">Zset</td>
+<td align="center">排行榜,优先级队列</td>
+</tr>
+</tbody></table>
+
+  </div>
+  <div class="post-footer">
+    
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+    
+
+    <a href="#top" class="top">Back to Top</a>
+  </div>
+</article>
+<footer>
+  &copy; 2017 - 2020
+  <span class="author">
+    vzardlloo
+  </span>
+</footer>
+
+    </div>
+  </body>
+</html>

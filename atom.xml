@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://vzardlloo.github.io/"/>
-  <updated>2020-09-06T15:13:55.640Z</updated>
+  <updated>2020-09-09T16:33:11.050Z</updated>
   <id>http://vzardlloo.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis数据类型及使用场景</title>
+    <link href="http://vzardlloo.github.io/2020/09/08/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"/>
+    <id>http://vzardlloo.github.io/2020/09/08/redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</id>
+    <published>2020-09-07T16:46:44.000Z</published>
+    <updated>2020-09-09T16:33:11.050Z</updated>
+    
+    <content type="html"><![CDATA[<h2><span id="redis的数据类型">Redis的数据类型</span></h2><h4><span id="数据类型对应编码方式">数据类型对应编码方式</span></h4><table><thead><tr><th align="center">数据类型</th><th align="center">编码方式</th></tr></thead><tbody><tr><td align="center">String</td><td align="center"><code>raw</code>、<code>embstr</code>、<code>int</code></td></tr><tr><td align="center">Hash</td><td align="center"><code>hashtable</code>、<code>ziplist</code></td></tr><tr><td align="center">List</td><td align="center"><code>linkedlist</code>、<code>ziplist</code>、<code>quicklist</code></td></tr><tr><td align="center">Set</td><td align="center"><code>hashtable</code>、<code>intset</code></td></tr><tr><td align="center">Zset</td><td align="center"><code>skiplist</code>、<code>ziplist</code></td></tr></tbody></table><h4><span id="编码类型对应数据结构">编码类型对应数据结构</span></h4><table><thead><tr><th align="center">编码方式</th><th align="center">数据结构</th></tr></thead><tbody><tr><td align="center"><code>raw</code></td><td align="center">动态字符串编码</td></tr><tr><td align="center"><code>embstr</code></td><td align="center">优化内存分配饿字符串分配</td></tr><tr><td align="center"><code>int</code></td><td align="center">整数编码</td></tr><tr><td align="center"><code>hashtable</code></td><td align="center">散列表编码</td></tr><tr><td align="center"><code>ziplist</code></td><td align="center">压缩列表编码</td></tr><tr><td align="center"><code>linkedlist</code></td><td align="center">双向链表编码</td></tr><tr><td align="center"><code>quicklist</code></td><td align="center">快速列表编码</td></tr><tr><td align="center"><code>intset</code></td><td align="center">整数集合编码</td></tr><tr><td align="center"><code>skiplist</code></td><td align="center">跳跃表编码</td></tr></tbody></table><h2><span id="使用场景">使用场景</span></h2><table><thead><tr><th align="center">数据类型</th><th align="center">使用场景</th></tr></thead><tbody><tr><td align="center">String</td><td align="center">普通的k-v缓存,分布式锁</td></tr><tr><td align="center">Hash</td><td align="center">字典结构，比如缓存一个创意的消耗信息,创意id对应曝光数、点击数等多个subkey</td></tr><tr><td align="center">List</td><td align="center">关注列表,简单的队列</td></tr><tr><td align="center">Set</td><td align="center">去重器，集合运算</td></tr><tr><td align="center">Zset</td><td align="center">排行榜,优先级队列</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2&gt;&lt;span id=&quot;redis的数据类型&quot;&gt;Redis的数据类型&lt;/span&gt;&lt;/h2&gt;&lt;h4&gt;&lt;span id=&quot;数据类型对应编码方式&quot;&gt;数据类型对应编码方式&lt;/span&gt;&lt;/h4&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align=&quot;center&quot;&gt;数据类型
+      
+    
+    </summary>
+    
+    
+      <category term="redis" scheme="http://vzardlloo.github.io/categories/redis/"/>
+    
+    
+      <category term="redis" scheme="http://vzardlloo.github.io/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>二叉树非递归遍历统一写法</title>
@@ -527,39 +556,6 @@
     
     
       <category term="web Java" scheme="http://vzardlloo.github.io/tags/web-Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JAVA基础回顾-垃圾回收</title>
-    <link href="http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/"/>
-    <id>http://vzardlloo.github.io/2017/08/20/JAVA%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</id>
-    <published>2017-08-20T08:23:52.000Z</published>
-    <updated>2017-08-20T12:45:20.184Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：</p><ul><li>1、那些内存需要回收？</li><li>2、什么时候回收？</li><li>3、如何回收？</li></ul><h4 id="那些内存需要回收"><a href="#那些内存需要回收？" class="headerlink" title="那些内存需要回收？"></a>那些内存需要回收？</h4><p>这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收的内存。<br>主要有两种算法：</p><ul><li><p>引用计数法：给对象添加一个引用计数器，每当有一个地方引用它时计数器就加1，引用失效时计数器就减1，当计数器的值为0时，该对象判为“死亡”。<br><code>优点</code>：实现简单，效率高<br><code>缺点</code>：不能解决循环引用的问题</p></li><li><p>可达性分析算法：选取一些对象作为“GC root”作为起始点，然后沿着引用开始向下搜索，当一个对象对于所有“GC root”都是不可达的，那么这个对象可以判为“死亡”。(主流虚拟机采用的方式)。</p><a id="more"></a></li></ul><h4 id="什么时候回收"><a href="#什么时候回收？" class="headerlink" title="什么时候回收？"></a>什么时候回收？</h4><ul><li>从虚拟机的角度来说：GC又分为 minor GC 和 Full GC (也称为 Major GC )。Java 堆内存分为新生代和老年代，新生代中又分为1个 Eden 区域 和两个 Survivor 区域。<br>那么对于 Minor GC 的触发条件：大多数情况下，对象直接在 Eden 区中进行分配。如果 Eden区域没有足够的空间，那么就会发起一次 Minor GC。对于 Full GC（Major GC）的触发条件：也是如果老年代没有足够空间的话，那么就会进行一次 Full GC。<br>Ps：上面所说的只是一般情况下，实际上，需要考虑一个空间分配担保的问题：<br>在发生Minor GC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象的总空间。如果大于则进行Minor GC，如果小于则看HandlePromotionFailure设置是否允许担保失败（不允许则直接Full GC）。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于则尝试Minor GC（如果尝试失败也会触发Full GC），如果小于则进行Full GC。<br>但是，具体到什么时刻执行，这个是由系统来进行决定，是无法预测的。</li><li>从对象的角度来说：当一个对象被标记为“死亡”时，并非立即执行死刑。要真正执行死刑要经历至少两次标记。一次是在被判为“死亡”的时候，然后会进行一次筛选，筛选的方法是看是否有必要执行finalize()方法，当finalize()方法没有被覆盖或者已经被调用了则认为“没有执行的必要”。如果对象被判为有必要执行则会被放到一个叫F-Queue的队列中，然后GC会对F-Queue中的对象进行标记，这是对象逃脱GC的最后一次机会，如果在此还未逃脱，那就真的要被回收了。</li></ul><h4 id="如何回收"><a href="#如何回收？" class="headerlink" title="如何回收？"></a>如何回收？</h4><ul><li><p>标记-清除(Mark-Sweep)算法：首先标记所有需要回收的对象，在标记完成后统一回收所有被标记的对象。<br><code>优点</code>：实现简单<br><code>缺点</code>：效率低下，会产生大量的内存碎片</p></li><li><p>复制算法(Copying)：将内存按容量分成两块，当这一块内存快用完了，就将还活着的对象复制到另一块去，然后再将已使用过的内存空间一次清理掉。<br><code>优点</code>：实现简单，运行高效，不存在碎片问题<br><code>缺点</code>：内存利用率低</p></li><li><p>标记-整理(Mark-Compact)算法:首先标记所有需要回收的对象，在标记完成后统一整理，使其都向一端移动，然后直接清理端边界外的内存。<br><code>优点</code>：结合了Mark-Sweep和Copying的优点<br><code>缺点</code>：算法实现较为复杂</p></li><li><p>分代收集算法：根据对象生存周期的不同对内存进行划分。一般将Java堆划成新生代和老年代，这样就可以根据各个年代的特点采用最合适的垃圾收集算法。比如新生代对象”朝生夕死”的情况比较多，可以采用复制算法，老年代对象存活率高，可以采用标记-清除或标记-整理算法。</p></li></ul><h4 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h4><p>这里不做过多讲解，放一JDK1.7Update14后的HotSpot虚拟机包含的Java虚拟机图示：<br><img src="http://oo3aq3ac8.bkt.clouddn.com/GCtool.png" alt=""><br><em>其中注意G1收集器是当前收集器技术的最前沿成果之一</em></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h4&gt;&lt;p&gt;开始跳过这节没有写，因为不太知道怎么写才条理清晰。现在整理了一下思路，在宏观上有了点脉络。垃圾回收（Garbage Collection),以下简称GC,长久以来人们一直研究的GC需要完成3件事情：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1、那些内存需要回收？&lt;/li&gt;
-&lt;li&gt;2、什么时候回收？&lt;/li&gt;
-&lt;li&gt;3、如何回收？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&quot;那些内存需要回收？&quot;&gt;&lt;a href=&quot;#那些内存需要回收？&quot; class=&quot;headerlink&quot; title=&quot;那些内存需要回收？&quot;&gt;&lt;/a&gt;那些内存需要回收？&lt;/h4&gt;&lt;p&gt;这一块在JAVA中的基本可以转化为判断堆和方法区上哪些对象已经死去(不被任何途径使用)，那些死去的对象就是需要回收的内存。&lt;br&gt;主要有两种算法：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;引用计数法：给对象添加一个引用计数器，每当有一个地方引用它时计数器就加1，引用失效时计数器就减1，当计数器的值为0时，该对象判为“死亡”。&lt;br&gt;&lt;code&gt;优点&lt;/code&gt;：实现简单，效率高&lt;br&gt;&lt;code&gt;缺点&lt;/code&gt;：不能解决循环引用的问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;可达性分析算法：选取一些对象作为“GC root”作为起始点，然后沿着引用开始向下搜索，当一个对象对于所有“GC root”都是不可达的，那么这个对象可以判为“死亡”。(主流虚拟机采用的方式)。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="JAVA" scheme="http://vzardlloo.github.io/categories/JAVA/"/>
-    
-    
-      <category term="jvm" scheme="http://vzardlloo.github.io/tags/jvm/"/>
     
   </entry>
   
