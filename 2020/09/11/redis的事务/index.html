@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <!DOCTYPE html>
+<html lang="zh-Hans">
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  
+  <title>redis的事务 - vzard&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  
+  <meta name="keywords" content=redis>
+  
+    <meta name="description" content="认真生活,快乐工作">
+  
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.02">
+  
+  
+    <link rel="alternate" href="/atom.xml " title="vzard&#39;s blog" type="application/atom+xml">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">vzard&#39;s blog</a>
+    <div class="subtitle">just do it</div>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives/" class="menu-item-link">Archives</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/tags/" class="menu-item-link">Tags</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/categories/" class="menu-item-link">Categories</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-item-link">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">redis的事务</h1>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2020-09-11</span>
+  </div>
+  <div class="post-content">
+    <h2><span id="什么是事务">什么是事务</span></h2><p>事务是<a href="https://zh.wikipedia.org/wiki/数据库管理系统" target="_blank" rel="noopener">数据库管理系统</a>执行过程中的一个逻辑单位，由一个有限的<a href="https://zh.wikipedia.org/wiki/数据库" target="_blank" rel="noopener">数据库</a>操作序列构成。它有4个特性：</p>
+<ul>
+<li><strong>原子性（Atomicity）</strong>：事务作为一个整体被执行，包含在其中的对数据库的操作要么全部被执行，要么都不执行<a href="https://zh.wikipedia.org/wiki/数据库事务#cite_note-acid-3" target="_blank" rel="noopener">[3]</a>。</li>
+<li><strong>一致性（Consistency）</strong>：事务应确保数据库的状态从一个一致状态转变为另一个一致状态。<em>一致状态</em>的含义是数据库中的数据应满足完整性约束<a href="https://zh.wikipedia.org/wiki/数据库事务#cite_note-acid-3" target="_blank" rel="noopener">[3]</a></li>
+<li><strong>隔离性（Isolation）</strong>：多个事务并发执行时，一个事务的执行不应影响其他事务的执行<a href="https://zh.wikipedia.org/wiki/数据库事务#cite_note-acid-3" target="_blank" rel="noopener">[3]</a>。</li>
+<li><strong>持久性（Durability）</strong>：已被提交的事务对数据库的修改应该永久保存在数据库中<a href="https://zh.wikipedia.org/wiki/数据库事务#cite_note-acid-3" target="_blank" rel="noopener">[3]</a>。</li>
+</ul>
+<h2><span id="redis的事务">Redis的事务</span></h2><h4><span id="redis如何开启事务">Redis如何开启事务</span></h4><p>redis开启事务主要有如下4个命令：<code>MULTI</code>、<code>EXEC</code>、<code>DISCARD</code>、 <code>WATCH</code>。</p>
+<table>
+<thead>
+<tr>
+<th align="center">命令</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>MULTI</code></td>
+<td align="center">显式的开启事务，之后的命令将被缓存在命令队列里面，入队的时候会对命令进行检查，命令错误就入队失败，直到使用<code>EXEC</code>命令才一起执行，</td>
+</tr>
+<tr>
+<td align="center"><code>EXEC</code></td>
+<td align="center">执行事务中的<code>commands</code>队列，恢复连接状态。如果在<code>watch</code>之前被调用，只有监测中的<code>Keys</code>没有被修改，命令才会被执行，否则停止执行</td>
+</tr>
+<tr>
+<td align="center"><code>DISCARD</code></td>
+<td align="center">清空事务中的<code>commands</code>队列,恢复连接状态，如果有使用<code>watch</code>命令监控<code>key</code>的话，监控状态将被取消</td>
+</tr>
+<tr>
+<td align="center"><code>WATCH</code></td>
+<td align="center">将给出的<code>Keys</code>标记为<code>监测态</code>，作为事务执行的条件，一旦一个被监控的键被改了，事务将执行失败</td>
+</tr>
+</tbody></table>
+<h4><span id="redis事务是真正的事务么满足acid么">Redis事务是真正的事务么？满足ACID么？</span></h4><ul>
+<li><p>原子性：redis通过<code>commands</code>队列的实现，要么队列里面的全部执行要么全部不执行，这个满足原子性。值得注意的是，redis在执行队列里面的命令在执行的时候有某一条发生错误的时候，redis并不会进行回滚(rollback)，官方解释是：</p>
+<ul>
+<li>Redis 命令只会因为错误的语法而失败（并且这些问题不能在入队时发现），或是命令用在了错误类型的键上面：这也就是说，从实用性的角度来说，失败的命令是由编程错误造成的，而这些错误应该在开发的过程中被发现，而不应该出现在生产环境中。</li>
+<li>因为不需要对回滚进行支持，所以 Redis 的内部可以保持简单且快速。</li>
+</ul>
+<p>鉴于没有任何机制能避免程序员自己造成的错误， 并且这类错误通常不会在生产环境中出现， 所以 Redis 选择了更简单、更快速的无回滚方式来处理事务。</p>
+</li>
+<li><p>一致性：redis有三个地方有可能执行事务出错，redis都进行了妥善的处理保证其一致性。</p>
+<ul>
+<li><p>入队错误：在命令进入<code>commands</code>队列的时候，会检查命令的合法性,发现错误，不允许入队列，命令不会执行，所以不会导致一致性问题。</p>
+</li>
+<li><p>执行错误：命令执行期间报错的时候，错误的命令不会对数据库进行任何改动，所以不会导致一致性问题。</p>
+</li>
+<li><p>服务器挂了：没有开启持久化，重启后是个空的数据库，可以达到一个新的一致的状态；开了RDB或者AOF持久化，可以将数据库恢复到一个一致性的状态。</p>
+</li>
+</ul>
+</li>
+<li><p>隔离性：redis服务器总是单线程执行事务并且不会被中断，即事务总是串行执行的，A事务执行完才会执行B事务，所以没有隔离性的问题。</p>
+</li>
+<li><p>持久性：redis的事务只是简单的将一堆redis命令打包到一个队列里面，没有任何额外的持久化保证，所以redis事务的持久化要依赖redis使用的持久化机制。</p>
+<ul>
+<li><p>未开启持久化：redis没法进行持久化，不能保证持久性</p>
+</li>
+<li><p>RDB模式: RDB模式要在某种触发条件下才会进行持久化操作，所以没法保证持久化。</p>
+</li>
+<li><p>AOF模式：需要看<code>appendfsync</code>参数具体的值，如果是alway 则每次执行命令都会进行持久化操作，那么可以保证持久化，在<code>everysec</code>和<code>no</code>的情况下没法保证持久化。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>​         黑魔法: 事务里面最后一句加个<code>save</code>命令可以保证持久性，但是效率比较低下</p>
+<h2><span id="总结">总结</span></h2><p>redis支持事务，在一定的配置下满足事务的ACID四个特性，但是又和传统关系性数据库的事务有所区别。</p>
+<p>​</p>
+
+  </div>
+  <div class="post-footer">
+    
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/redis/" rel="tag">redis</a></li></ul>
+    
+
+    <a href="#top" class="top">Back to Top</a>
+  </div>
+</article>
+<footer>
+  &copy; 2017 - 2020
+  <span class="author">
+    vzardlloo
+  </span>
+</footer>
+
+    </div>
+  </body>
+</html>
