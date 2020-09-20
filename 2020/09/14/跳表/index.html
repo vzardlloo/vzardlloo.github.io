@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <!DOCTYPE html>
+<html lang="zh-Hans">
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  
+  <title>跳表 - vzard&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  
+  <meta name="keywords" content=数据结构>
+  
+    <meta name="description" content="认真生活,快乐工作">
+  
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.02">
+  
+  
+    <link rel="alternate" href="/atom.xml " title="vzard&#39;s blog" type="application/atom+xml">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">vzard&#39;s blog</a>
+    <div class="subtitle">just do it</div>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives/" class="menu-item-link">Archives</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/tags/" class="menu-item-link">Tags</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/categories/" class="menu-item-link">Categories</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-item-link">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">跳表</h1>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2020-09-14</span>
+  </div>
+  <div class="post-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+      </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+    <h2><span id="跳表为解决什么问题而诞生">跳表为解决什么问题而诞生</span></h2><p>​       跳表本质上是一个查找结构，为了解决算法里面的查找问题而诞生。就是根据给定的key快速找到它所在的位置或者value。跳表基于一个有序链表，有序链表的查询时间复杂度是<code>O(n)</code>,跳表可以将其优化到<code>O(log n)</code>。跳表经常和平衡树放在一起比较。</p>
+<h2><span id="跳表的实现">跳表的实现</span></h2><h4><span id="数据结构">数据结构</span></h4><p>跳表是基于有序列表实现的，先看一下有序列表的结构：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gix83b8adzj318g056jrt.jpg" alt="有序链表"></p>
+<p>在这样一个有序链表中，如果我们要查找某个数据，那么需要从头开始逐个遍历进行比较，直到找到包含数据的那个节点。为了减少遍历次数我们可以给有序链表加一层索引：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gix87fjvkdj319606qwf5.jpg" alt="跳表1"></p>
+<p>增加的一层索引实际上也是一个有序链表，查找数据的时候可以先沿着这个索引进行查找，遇到比待查数据大的节点时在“跳”到原始的节点进行查找。 比如打算查找23,查找的路径就是是沿着下图中标红的指针所指向的方向进行。</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gix8eegc1ij31aa07wmy6.jpg" alt="跳表2"></p>
+<p>在这个查找过程中，由于新增加的索引，我们不再需要与链表中每个节点逐个进行比较了。需要比较的节点数大概只有原来的一半。</p>
+<p>利用同样的方式，我们还可以在上层新产生的链表上，继续为每相邻的两个节点增加一个指针，从而产生第三层链表。如下图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/007S8ZIlly1gix8pzdabfj30y206c3yx.jpg" alt="跳表3"></p>
+<p>在这个新的三层链表结构上，如果我们还是查找23，那么沿着最上层链表首先要比较的是19，发现23比19大，接下来我们就知道只需要到19的后面去继续查找，从而一下子跳过了19前面的所有节点。可以想象，当链表足够长的时候，这种多层链表的查找方式能让我们跳过很多下层节点，大大加快查找的速度。</p>
+<h4><span id="层的随机生成">层的随机生成</span></h4><p>   上面讨论的都是一个静态的结构，但是实际中数据不会是静态的，一定是会伴随着增、删、改等操作的。那么一个问题就来了，当新增一个节点的时候这个节点应该出现在第几层索引上，换句话就是如何给他分配层数。跳表采用的是一种随机的方式生产层数，具体如下：</p>
+<ul>
+<li><p>每个节点都肯定在第一层链表里面，即每个节点的层数&gt;= 1。</p>
+</li>
+<li><p>如果一个节点有第 <code>i</code> 层指针（即节点在第1~<code>i</code> 层），那么这个节点有第<code>i+1</code> 层指针的概率为p。</p>
+</li>
+<li><p>节点的最大层数不允许超过一个最大值，记为<code>MaxLevel</code>。</p>
+</li>
+</ul>
+<p>这个计算随机层数的伪码如下所示：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">randomLevel()</span><br><span class="line">    level := <span class="number">1</span></span><br><span class="line">    <span class="comment">// random()返回一个[0...1)的随机数</span></span><br><span class="line">    <span class="keyword">while</span> <span class="built_in">random</span>() &lt; p <span class="keyword">and</span> level &lt; MaxLevel <span class="keyword">do</span></span><br><span class="line">        level := level + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> level</span><br></pre></td></tr></table></figure></p>
+<h2><span id="复杂度分析">复杂度分析</span></h2><h4><span id="空间复杂度">空间复杂度</span></h4><p>我们先来计算一下每个节点所包含的平均指针数目（概率期望）。节点包含的指针数目，相当于这个算法在空间上的额外开销(overhead)，可以用来度量空间复杂度。<br>根据前面randomLevel()的伪码，我们很容易看出，产生越高的节点层数，概率越低。定量的分析如下：</p>
+<ul>
+<li><p>节点层数至少为1。而大于1的节点层数，满足一个概率分布。</p>
+</li>
+<li><p>节点层数恰好等于1的概率为1-p。</p>
+</li>
+<li><p>节点层数大于等于2的概率为p，而节点层数恰好等于2的概率为p(1-p)。</p>
+</li>
+<li><p>节点层数大于等于3的概率为p2，而节点层数恰好等于3的概率为p^2*(1-p)。</p>
+</li>
+<li><p>节点层数大于等于4的概率为p3，而节点层数恰好等于4的概率为p^3*(1-p)。</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+<p>因此，一个节点的平均层数（也即包含的平均指针数目），计算如下：</p>
+<script type="math/tex; mode=display">
+1*（1-p）+ 2*p（1-p)+ 3*p^2(1-p) = (1-p)\sum\limits_{k=1}^{\infty}kp^{k-1}=(1-p)*1/(1-p)^2 = 1/(1-p)</script><p>现在很容易计算出：</p>
+<ul>
+<li>当p=1/2时，每个节点所包含的平均指针数目为2；</li>
+<li>当p=1/4时，每个节点所包含的平均指针数目为1.33。这也是Redis里的skiplist实现在空间上的开销。</li>
+</ul>
+<p>相比有序链表的额外开销是 <code>p/（1-p）</code>，复杂度为<code>O(n)</code></p>
+<h4><span id="时间复杂度">时间复杂度</span></h4><p> 为了计算查找长度，我们可以将查找过程倒过来看，从右下方第1层上最后到达的那个节点开始，沿着查找路径向左向上回溯，类似于爬楼梯的过程。</p>
+<p>现在假设我们从一个层数为i的节点x出发，需要向左向上攀爬k层。这时我们有两种可能：</p>
+<ul>
+<li><p>如果节点x有第(i+1)层指针，那么我们需要向上走。这种情况概率为p。</p>
+</li>
+<li><p>如果节点x没有第(i+1)层指针，那么我们需要向左走。这种情况概率为(1-p)。</p>
+</li>
+</ul>
+<p>用C(k)表示向上攀爬k个层级所需要走过的平均查找路径长度（概率期望），那么：</p>
+<script type="math/tex; mode=display">
+\left\{
+\begin{aligned}
+C(0)= 0\\
+C(k) = (1-p)*(C(k)+1) + p*(C(k-1)+1) \\
+\end{aligned}
+\right.
+
+\Longrightarrow C(k) = C(k-1)/p
+\Longrightarrow C(k) = k/p  (k为总层数-1)</script><p>下面需要估算k的值，即分析一下当跳表中有n个节点的时候，它的总层数的概率均值是多少。这个问题直观上比较好理解。根据节点的层数随机算法，容易得出：</p>
+<ul>
+<li><p>第1层链表固定有n个节点，k = 0；</p>
+</li>
+<li><p>第2层链表平均有n*p个节点，k = 1;</p>
+</li>
+<li><p>第3层链表平均有n*p^2个节点,k = 2；</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+k = \log_p (\frac{1}{n})</script><p>  那么： </p>
+<script type="math/tex; mode=display">
+C(k) = \frac{k}{p} =\frac{\log_p (\frac{1}{n})}{p}</script><p>所以时间平均复杂度为<code>O(log n)</code></p>
+<h4><span id="小结">小结</span></h4><ul>
+<li>各种搜索结构提高效率的方式都是通过空间换时间得到的。</li>
+<li>跳表最终形成的结构和搜索树很相似。</li>
+<li>跳表通过随机的方式来决定新插入节点来决定索引的层数。</li>
+<li>跳表搜索的时间复杂度是 O(logn)，插入/删除也是，空间复杂度为<code>O(n)</code></li>
+</ul>
+<h2><span id="实际应用">实际应用</span></h2><ul>
+<li>redis 的有序集合</li>
+<li>leveldb</li>
+</ul>
+
+  </div>
+  <div class="post-footer">
+    
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+    
+
+    <a href="#top" class="top">Back to Top</a>
+  </div>
+</article>
+<footer>
+  &copy; 2017 - 2020
+  <span class="author">
+    vzardlloo
+  </span>
+</footer>
+
+    </div>
+  </body>
+</html>

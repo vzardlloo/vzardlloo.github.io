@@ -75,6 +75,7 @@
     <span class="post-time">2017-11-06</span>
   </div>
   <div class="post-content">
+    
     <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>在JavaScript中没”子类”和“父类”的概念，进一步地也没有“类”和“实例”的的区分。它靠一种看上去十分古怪的”原型链“（prototype chain）模式来实现继承。学过JAVA等编程语言的人可能会认为这是对Java等语言的继承实现方式的一种拙劣并且失败的模仿，然而事实并非如此，原型链模式和我们常见的Class模式分别是两种编程范式prototype_base和class_base的实现，前者在动态语言中似乎十分常见，而后者主要在静态语言领域流行。下面是维基百科关于prototype_base模式的介绍：</p>
 <blockquote>
 <p>Prototype-based programming is a style of object-oriented programming in which behaviour reuse (known as inheritance) is performed via a process of reusing existing objects via delegation that serve as prototypes. This model can also be known as prototypal, prototype-oriented, classless, or instance-based programming. Delegation is the language feature that supports prototype-based programming.<br>Prototype object oriented programming uses generalized objects, which can then be cloned and extended. Using fruit as an example, a “fruit” object would represent the properties and functionality of fruit in general. A “banana” object would be cloned from the “fruit” object, and would also be extended to include general properties specific to bananas. Each individual “banana” object would be cloned from the generic “banana” object. Compare to the class-based paradigm, where a “fruit” class (not object) would be extended by a “banana” class</p>

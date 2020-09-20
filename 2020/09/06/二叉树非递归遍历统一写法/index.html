@@ -75,6 +75,7 @@
     <span class="post-time">2020-09-06</span>
   </div>
   <div class="post-content">
+    
     <h2><span id="前言">前言</span></h2><p>​       二叉树的遍历，从编程方式上来说主要有两种写法，一种是递归的写法，一种是非递归的写法，其中递归的写法很容易，在<code>leetcode</code>上都是属于<code>easy</code>级别的题目，风格也非常一致，学会了前序遍历，调整一下代码顺序，几秒之内中序、后序遍历就都可以写出来了。但是非递归的写法则不然，市面上包括很多教科书上二叉树前、中、后序的非递归遍历的写法都不一样，在<code>leetcode</code>上非递归的写法也基本都是属于<code>medium</code>级别的，其中后序遍历属于<code>hard</code>级别的，本文主要是介绍一种二叉树非递归遍历的统一写法，可以帮助你像写递归遍历那样，只要调整一下代码顺序就可以很快写好前、中、后序非递归遍历。</p>
 <h2><span id="二叉树非递归遍历的一种统一写法">二叉树非递归遍历的一种统一写法</span></h2><p>首先定义二叉树结构</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> TreeNode <span class="keyword">struct</span> &#123;</span><br><span class="line">     Val <span class="keyword">int</span></span><br><span class="line">     Left *TreeNode</span><br><span class="line">     Right *TreeNode</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
