@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <!DOCTYPE html>
+<html lang="zh-Hans">
+<script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?e6f2823e25c76ed531befabd4471f6fb";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  
+  <title>二叉搜索树的一些性质 - vzard&#39;s blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  
+  <meta name="keywords" content=数据结构>
+  
+    <meta name="description" content="认真生活,快乐工作">
+  
+  
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.02">
+  
+  
+    <link rel="alternate" href="/atom.xml " title="vzard&#39;s blog" type="application/atom+xml">
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+  <div class="blog-title">
+    <a href="/" class="logo">vzard&#39;s blog</a>
+    <div class="subtitle">just do it</div>
+  </div>
+  <nav class="navbar">
+    <ul class="menu">
+      
+        <li class="menu-item">
+          <a href="/" class="menu-item-link">Home</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/archives/" class="menu-item-link">Archives</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/tags/" class="menu-item-link">Tags</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/categories/" class="menu-item-link">Categories</a>
+        </li>
+      
+        <li class="menu-item">
+          <a href="/about/" class="menu-item-link">About</a>
+        </li>
+      
+    </ul>
+  </nav>
+</header>
+<article class="post">
+  <div class="post-title">
+    <h1 class="article-title">二叉搜索树的一些性质</h1>
+  </div>
+   <div class="post-meta">
+    <span class="post-time">2020-09-22</span>
+  </div>
+  <div class="post-content">
+    
+      
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            processEscapes: true
+          }
+        });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+            tex2jax: {
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+          });
+      </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+              var all = MathJax.Hub.getAllJax(), i;
+              for(i=0; i < all.length; i += 1) {
+                  all[i].SourceElement().parentNode.className += ' has-jax';
+              }
+          });
+      </script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+    <h4><span id="二叉搜索树的中序遍历的结果序列是一个递增排序的序列">二叉搜索树的中序遍历的结果序列是一个递增排序的序列。</span></h4><blockquote>
+<p>中序遍历的顺序是：左节点 - 根节点 - 右节点</p>
+</blockquote>
+<p>示例代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">result := <span class="built_in">make</span>([]*Node,<span class="number">0</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">inorder</span><span class="params">(root *Node)</span></span> &#123;</span><br><span class="line">  <span class="keyword">if</span> root == <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  inorder(root.Left)</span><br><span class="line">  result = <span class="built_in">append</span>(result,root)</span><br><span class="line">  inorder(root.Right)</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="二叉搜索树的后继节点">二叉搜索树的后继节点</span></h4><blockquote>
+<p>即比当前节点大的最小节点，主要思路：取改节点的右节点，然后一直取左节点直到左节点为空，最后指向的就是该节点的后继节点</p>
+</blockquote>
+<p>示例代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Successor</span><span class="params">(node *Node)</span> *<span class="title">Node</span></span> &#123;</span><br><span class="line">  succ := node.Right</span><br><span class="line">  <span class="keyword">for</span> succ.Left != <span class="literal">nil</span> &#123;</span><br><span class="line">    succ = node.Left</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> succ</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4><span id="二叉搜索树的前驱节点">二叉搜索树的前驱节点</span></h4><blockquote>
+<p>即比当前节点小的最大节点，主要思路：取改节点的左节点，然后一直取右节点直到右节点为空，最后指向的就是该节点的前驱节点</p>
+</blockquote>
+<p>示例代码：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Predecessor</span><span class="params">(node *Node)</span> *<span class="title">Node</span></span> &#123;</span><br><span class="line">  pre := node.Left</span><br><span class="line">  <span class="keyword">for</span> pre.Right != <span class="literal">nil</span> &#123;</span><br><span class="line">    pre = pre.Right</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> pre</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+  </div>
+  <div class="post-footer">
+    
+      <ul class="post-tag-list" itemprop="keywords"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li></ul>
+    
+
+    <a href="#top" class="top">Back to Top</a>
+  </div>
+</article>
+<footer>
+  &copy; 2017 - 2020
+  <span class="author">
+    vzardlloo
+  </span>
+</footer>
+
+    </div>
+  </body>
+</html>
